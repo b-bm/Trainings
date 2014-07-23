@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\FactorialExpression\bin\Debug\FactorialExpression.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\FactorialExpression\obj\Debug\5.FactorialExpression.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\FactorialExpression\bin\Debug\FactorialExpression.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\FactorialExpression\bin\Debug\FactorialExpression.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\FactorialExpression\obj\Debug\FactorialExpression.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\FactorialExpression\obj\Debug\FactorialExpression.pdb

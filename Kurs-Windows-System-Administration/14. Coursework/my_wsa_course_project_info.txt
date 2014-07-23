@@ -1,0 +1,96 @@
+MY WSA Course Project info:
+ 
+1.  Machine - Windows Server 2008 R2 DC01:
+	VHD File: Windows Server 2008 R2 15GB_DC01.vdi
+	install from file -> 7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso
+
+	computer name: DC01
+	domain: boyan_BM.local
+	
+	user local and domain administrator: administrator / p@ssword1 
+	pass for AD backups DB - p@ssword1
+	all users pass: p@ssword1
+	user:  
+
+	*** OTHER INFO ***
+- How to get Domain SID of a domain:
+with PowerShell
+	Get-ADComputer -Filter "name -eq 'dc01'" -Properties sid | select name, sid |ft -autosize | Out-File C:\domainSID.txt
+
+	some output:
+	DC01:       
+	S-1-5-21-2081167993-2841590114-2322850287-1000
+
+or with cmd not with powershell
+	dsquery * -filter (name=boyan_BM) -attr ObjectSID
+
+	some output:
+	objectSid: 
+	S-1-5-21-2081167993-2841590114-2322850287
+	
+- How to add AD Recycle Bin Feature with AD module for Windows PowerShell:
+
+	Enable-ADOptionalFeature –Identity ‘CN=Recycle Bin Feature,CN=Optional Features,CN=Directory Service,CN=Windows NT,CN=Services,CN=Configuration, DC=yourdomain,DC=com’ –Scope ForestOrConfigurationSet –Target ‘yourdomain.com’
+
+- How to 
+	
+	
+
+- How to
+
+	
+
+======================================================================================
+2.  Machine - Windows Server 2008 R2 SRV01:
+	VHD File: Windows Server 2008 R2 30GB_SRV01.vdi
+	install from file -> 7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso
+
+	computer name: SRV01
+	domain: joined to boyan_BM.local
+	
+	user local administrator: administrator / p@ssword2 
+	user: 
+ 
+	*** OTHER INFO ***	
+- How to setup WDS (Windows Deployment Server) and create Capture Image (*.wim)
+
+	
+
+- How to
+
+- Виж безплатния пакет с тулове за автоматизация от MS -> Windows Automated Instalation Kit
+
+======================================================================================
+3.  Machine - Windows 7 Ultimate x64 SP1 CL01 :
+	VHD File: Windows 7 Ultimate 15GB_CL01.vdi
+	install from file -> X17-24395.iso
+
+	computer name: CL01
+	domain: joined to boyan_BM.local
+	
+	user local administrator: admin / p@ssword3 
+	user: 
+	
+	*** OTHER INFO ***
+- How to make sysprep -> tool is in C:\Windows\system32\sysprep : 
+
+	1. избира се опцията OOBE и Generalize, за да се затрият всички машинни данни и SID-ове + Shutdown опцията.
+	2. клонира се машината
+	3. след като се стартират sysprep-натата и клонираната машина преминават през Start Setup-a
+	4. join domain
+	
+- How to with cmd:  
+	1. update group policy -> gpupdate
+	2. restart -> shutdown -r -t 0 -f
+
+- How to
+
+	
+======================================================================================
+По т. 3 подсказката е, че трябва да си СИСПРЕПНЕШ Win7 машината и да я загасиш. 
+На SRV01 да зададеш да ти направи КЕПЧЪР след като стартираш Win7. 
+Т.е да имаш и подготвени Win7 файлове за отдалечена инсталация с дадените имена. 
+То направо си ти го обясних. Не е подсказка.
+ 
+ 
+ 

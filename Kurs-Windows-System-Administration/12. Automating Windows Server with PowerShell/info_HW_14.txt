@@ -1,0 +1,37 @@
+﻿8. Shares
+Write a script in PowerShell that provide the following details:
+
+- List all shares on a server and their location (e.g. D:\Shares\Profile)
+- Provide information for disk space usage and free space on the drive
+Note: Read about WMI technology.
+
+- get shares:
+$Share = gwmi Win32_Share | sort type, name | ft -autosize name, description, path
+
+- get free space:
+$Space = gwmi win32_volume -Filter 'drivetype = 3' | select driveletter, label, @{LABEL='GBfreespace';EXPRESSION={"{0:N2}" -f ($_.freespace/1GB)} }
+
+- Colect info:
+$Share,$Space | Out-File C:\Downloads\share_and_driveInfo_list.txt
+
+
+-------------------
+info:
+http://technet.microsoft.com/en-us/magazine/2007.10.powershell.aspx
+
+var.1.
+
+$Share = gwmi Win32_Share | sort type, name | ft -autosize name, description, path
+$Space = gwmi win32_volume -Filter 'drivetype = 3' | select driveletter, label, @{LABEL='GBfreespace';EXPRESSION={"{0:N2}" -f ($_.freespace/1GB)} } 
+$Share,$Space | Out-File C:\Downloads\share_and_driveInfo_list.txt
+
+var.2.
+
+gwmi win32_logicaldisk -filter "drivetype = 3" | % { $_.deviceid; $_.size/1GB; $_.freespace/1GB }
+$Space = gwmi win32_volume -Filter 'drivetype = 3' | select driveletter, label, @{LABEL='GBfreespace';EXPRESSION={"{0:N2}" -f ($_.freespace/1GB)} }, @{Name="Size(GB)";Expression={($_.size/1gb)}}
+
+Get-WmiObject Win32_logicaldisk -ComputerName LocalHost `
+| Format-Table DeviceID, MediaType, `
+@{Name="Size(GB)";Expression={[decimal]("{0:N0}" -f($_.size/1gb))}}, `
+@{Name="Free Space(GB)";Expression={[decimal]("{0:N0}" -f($_.freespace/1gb))}}, `
+-AutoSize

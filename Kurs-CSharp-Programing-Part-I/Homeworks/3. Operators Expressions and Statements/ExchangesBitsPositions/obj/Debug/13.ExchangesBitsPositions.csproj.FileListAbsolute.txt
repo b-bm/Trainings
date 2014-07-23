@@ -1,0 +1,12 @@
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\obj\Debug\13.ExchangesBitsPositions.csprojResolveAssemblyReference.cache
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\bin\Debug\ExchangesBitsPositions.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\bin\Debug\ExchangesBitsPositions.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\bin\Debug\ExchangesBitsPositions.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\obj\Debug\ExchangesBitsPositions.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\obj\Debug\ExchangesBitsPositions.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\bin\Debug\ExchangesBitsPositions.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\obj\Debug\ExchangesBitsPositions.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\obj\Debug\ExchangesBitsPositions.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\obj\Debug\13.ExchangesBitsPositions.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\bin\Debug\ExchangesBitsPositions.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\ExchangesBitsPositions\bin\Debug\ExchangesBitsPositions.pdb

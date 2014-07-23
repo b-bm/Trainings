@@ -1,0 +1,8 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MarketingFirm\bin\Release\MarketingFirm.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MarketingFirm\bin\Release\MarketingFirm.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MarketingFirm\bin\Release\MarketingFirm.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MarketingFirm\obj\Release\MarketingFirm.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MarketingFirm\obj\Release\MarketingFirm.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MarketingFirm\bin\Release\MarketingFirm.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MarketingFirm\obj\Release\MarketingFirm.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MarketingFirm\obj\Release\MarketingFirm.pdb

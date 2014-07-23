@@ -1,0 +1,20 @@
+﻿linux scripting webs info at -> http://forums.academy.telerik.com/112754/linux-scripting
+
+http://mywiki.wooledge.org/BashGuide
+
+http://www.tldp.org/LDP/Bash-Beginners-Guide/html/
+
+http://www.grymoire.com/Unix/Regular.html
+
+http://www.tldp.org/LDP/abs/html/
+
+http://www.grymoire.com/Unix/Awk.html#uh-0
+
+http://www.tldp.org/LDP/abs/html/mirrorsites.html
+
+http://www.ibm.com/developerworks/library/l-sed1/
+
+http://www.grymoire.com/Unix/Sed.html
+
+
+

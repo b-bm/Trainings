@@ -1,0 +1,4 @@
+﻿инфо за база данни:
+id: user
+pass: qwerty
+

@@ -1,0 +1,6 @@
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\CalculateSquareOfNumber\bin\Debug\CalculateSquareOfNumber.exe.config
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\CalculateSquareOfNumber\bin\Debug\CalculateSquareOfNumber.exe
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\CalculateSquareOfNumber\bin\Debug\CalculateSquareOfNumber.pdb
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\CalculateSquareOfNumber\obj\Debug\8. CalculateSquareOfNumber.csprojResolveAssemblyReference.cache
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\CalculateSquareOfNumber\obj\Debug\CalculateSquareOfNumber.exe
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\CalculateSquareOfNumber\obj\Debug\CalculateSquareOfNumber.pdb

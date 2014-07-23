@@ -1,0 +1,5 @@
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\PrintsHowManyNumbersExistV2\bin\Debug\PrintsHowManyNumbersExistV2.exe.config
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\PrintsHowManyNumbersExistV2\bin\Debug\PrintsHowManyNumbersExistV2.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\PrintsHowManyNumbersExistV2\bin\Debug\PrintsHowManyNumbersExistV2.pdb
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\PrintsHowManyNumbersExistV2\obj\Debug\PrintsHowManyNumbersExistV2.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\PrintsHowManyNumbersExistV2\obj\Debug\PrintsHowManyNumbersExistV2.pdb

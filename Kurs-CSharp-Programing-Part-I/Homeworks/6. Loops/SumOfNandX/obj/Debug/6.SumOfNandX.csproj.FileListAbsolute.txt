@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\SumOfNandX\bin\Debug\SumOfNandX.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\SumOfNandX\bin\Debug\SumOfNandX.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\SumOfNandX\bin\Debug\SumOfNandX.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\SumOfNandX\obj\Debug\6.SumOfNandX.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\SumOfNandX\obj\Debug\SumOfNandX.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\SumOfNandX\obj\Debug\SumOfNandX.pdb

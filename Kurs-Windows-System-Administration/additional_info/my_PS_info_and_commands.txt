@@ -1,0 +1,26 @@
+﻿Some my INFO for PowerShell - PS:
+
+-> в PS всичко е обект (командите) - пример: Get-Host, Get-Help, Copy-Item ...
+-> с $ се декларират променливи в PS - пример: $а = something
+
+
+Some my COMMANDS for PowerShell - PS:
+
+get-command -> извежда всички команди
+get-verb -> извежда всички глаголи (за команди)
+ft -autosize -> форматира текста на екрана
+get-help -> като man в linux
+get-member -> за даден обект от определен клас извежда информация какви properties и какви методи има - пример: $a | Get-Member
+
+
+clear -> изчиства екрана
+$a.GetType().fullname -> за дадена променлива 'а' извежда от какъв тип е - output: System.String
+$b.GetType().fullname -> за дадена променлива 'b' извежда от какъв тип е - output: Sistem.Int32
+
+
+
+
+
+
+
+

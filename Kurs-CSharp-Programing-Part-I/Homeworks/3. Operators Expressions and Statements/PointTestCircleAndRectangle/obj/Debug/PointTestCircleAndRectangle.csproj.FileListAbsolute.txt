@@ -1,0 +1,1 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointTestCircleAndRectangle\bin\Debug\PointTestCircleAndRectangle.exe.config

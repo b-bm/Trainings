@@ -1,0 +1,32 @@
+﻿Допълнително инфо на -> http://www.introprogramming.info/intro-csharp-book/read-online/glava1-vuvedenie-v-programiraneto/
+
+Как се компилира в конзолата на Windows до *.exe файл:
+
+изписва се пътя до файла *.cs -> C:\IntroCSharp
+изписва се командата -> C:\IntroCSharp\csc име_на_файла.cs (C:\IntroCSharp\csc HalloCSharp.cs),която компилира в дадената директория изпълним от всякъде *.exe файл.
+
+ако даде грешка в компилирането, то тогава трябва да се добави пътя до csc.exe на .NET Framework към Path пътя на Windows.
+
+-> Примерен път, но трябва да се провери какъв е: C:\Windows\Microsoft.NET\Framework\v4.0.21006\csc.exe
+
+Промяна на системните пътища в Windows: => Преди промяната ЗАДЪЛЖИТЕЛНО ДА СЕ НАПРАВИ SYSTEM RESTORE POINT !!!
+
+1.  Отиваме в контролния панел и избираме "System".
+2.  Избираме "Advanced System Settings". Появява се диалоговият прозорец "System Properties"
+3.  Натискаме бутона "Environment Variables" и се показва прозорец с всички променливи на средата
+4.  Избираме "Path" от списъка с променливите, натискаме бутона "Edit". Появява се малко прозорче, в което добавяме пътя до директорията, където е инсталиран .NET Framework
+Добавянето на допълнителен път към вече съществуващите пътища от променливата на средата Path се извършва, като новият път се долепи до съществуващите и за раздели­тел между тях се използва точка и запетая (;)
+
+-> C:\Program Files\PC Connectivity Solution\;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;\WINDOWS\Microsoft.NET\Framework\v4.0.30319
+
+=> Пътят се добавя в: 
+User variable for User -> Variable = Path и Value = пътя до .NET Framework (ако тук няма "Path" се създава) 
+System variables -> Variable = Path и Value = пътя до .NET Framework
+
+5.  Когато сме готови с пътя можем да се опитаме да извикаме csc.exe, без да посочваме пълния път до него. 
+За целта отваряме cmd.exe (Command Prompt) и пишем командата "csc".
+Би трябвало да се изпише версията на C# компилатора и съобщение, че не е зададен входен файл.
+
+
+
+

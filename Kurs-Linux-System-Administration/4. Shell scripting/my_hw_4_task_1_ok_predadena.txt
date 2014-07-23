@@ -1,0 +1,33 @@
+﻿HW - 4:
+1. Configure your command prompt in such a way, that you will always see the exit status of the previous command.
+
+[username@grizzly home]$ pwd
+/home
+[username@grizzly home]$ cd /home/username
+[username@grizzly ~]$ pwd
+/home/username
+[username@grizzly ~]$ echo $?
+0
+[username@grizzly ~]$ PS1="[\d \t \u@\h:\w ]:$ "
+[Tue Aug 06 23:58:36 username@grizzly:~ ]:$
+[Wed Aug 07 00:18:38 username@grizzly:~ ]:$ PS1="[\d \t \u@\h:\w ]:$ (echo \$?) "  # -> конфигурация, за да се показва статуса на предходната команда. 
+[Wed Aug 07 00:19:30 username@grizzly:~ ]:$ (echo 0) cd my_1
+[Wed Aug 07 00:19:38 username@grizzly:~/my_1 ]:$ (echo 0) cd my2                         
+-bash: cd: my2: No such file or directory
+[Wed Aug 07 00:19:49 username@grizzly:~/my_1 ]:$ (echo 1) cd my3
+-bash: cd: my3: No such file or directory
+[Wed Aug 07 00:20:02 username@grizzly:~/my_1 ]:$ (echo 1) cd my_1
+-bash: cd: my_1: No such file or directory
+[Wed Aug 07 00:20:12 username@grizzly:~/my_1 ]:$ (echo 1) cd
+[Wed Aug 07 00:20:16 username@grizzly:~ ]:$ (echo 0) ls -a
+.  ..  .bash_history  .bash_logout  .bash_profile  .bashrc  .lesshst  my_1  .ssh  .viminfo
+[Wed Aug 07 00:20:22 username@grizzly:~ ]:$ (echo 0) cd /root
+-bash: cd: /root: Permission denied
+[Wed Aug 07 00:20:43 username@grizzly:~ ]:$ (echo 1) ls -l /roor
+ls: cannot access /roor: No such file or directory
+[Wed Aug 07 00:20:59 username@grizzly:~ ]:$ (echo 2) ls -l /root
+ls: cannot open directory /root: Permission denied
+[Wed Aug 07 00:21:11 username@grizzly:~ ]:$ (echo 2) pwd
+/home/username
+[Wed Aug 07 00:21:17 username@grizzly:~ ]:$ (echo 0)
+

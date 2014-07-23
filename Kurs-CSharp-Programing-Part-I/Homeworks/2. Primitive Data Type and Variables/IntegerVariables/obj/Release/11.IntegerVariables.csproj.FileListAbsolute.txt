@@ -1,0 +1,9 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntegerVariables\bin\Release\IntegerVariables.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntegerVariables\bin\Release\IntegerVariables.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntegerVariables\bin\Release\IntegerVariables.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntegerVariables\obj\Release\11.IntegerVariables.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntegerVariables\obj\Release\IntegerVariables.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntegerVariables\obj\Release\IntegerVariables.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntegerVariables\bin\Release\IntegerVariables.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntegerVariables\obj\Release\IntegerVariables.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntegerVariables\obj\Release\IntegerVariables.pdb

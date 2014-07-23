@@ -1,0 +1,15 @@
+﻿Homework #6; Question #2
+	
+ Write a RedHat based configuration file(s) that will add the following two networks as static routes on eth1:
+	10.18.1.0/24
+	192.168.0.0/23
+
+
+We have to create or modify the following file: /etc/sysconfig/network-scripts/route-eth1 as follows:
+
+10.18.1.0/24 dev eth1
+192.168.0.0/23 dev eth1
+
+ЗАБЕЛЕЖКА:
+Добро домашно. Можеше да е даден и аутпут от командния ред.
+Успех.

@@ -1,0 +1,33 @@
+﻿homeworks-02:
+
+4. Write down at least 3 Linux file systems optimized especially for Flash drives(SD cards, USB Drives, SSD disks).
+
+F2FS –> Flash-Friendly File System. An open source Linux file system introduced by Samsung in 2012. 
+http://en.wikipedia.org/wiki/F2FS
+
+JFFS –> Original log structured Linux file system for NOR flash media
+http://en.wikipedia.org/wiki/JFFS
+
+JFFS2 –> Successor of JFFS, for NAND and NOR flash
+http://en.wikipedia.org/wiki/JFFS2
+
+LogFS –> Intended to replace JFFS2, better scalability. In early development.
+http://en.wikipedia.org/wiki/LogFS
+
+UBIFS –> Successor of JFFS2 optimized to utilize non-volatile DRAM
+http://en.wikipedia.org/wiki/UBIFS
+
+NILFS –> Linux implementation of a log-structured file system 
+NILFS is especially designed for flash memory drives, but does not really perform better than ext4 on benchmarks.
+http://en.wikipedia.org/wiki/NILFS
+
+Btrfs -> is still considered experimental -> https://wiki.archlinux.org/index.php/Btrfs
+
+EXT4, EXT4 + TRIM:
+Ext4 is the most common Linux filesystem (well maintained). 
+It provides good performance with SSD and supports the TRIM (and FITRIM) feature to keep good SSD performance over time (this clears unused memory blocks for quick later write access). 
+http://superuser.com/questions/228657/which-linux-filesystem-works-best-with-ssd
+
+Общ източник:
+http://en.wikipedia.org/wiki/List_of_file_systems
+

@@ -1,0 +1,18 @@
+﻿WSA - HW – 12 :
+
+5. Find and document as much as possible for Microsoft® RemoteFX™ technology.
+
+RemoteFX is a set of protocols for Microsoft's Remote Desktop Protocol (RDP) that are used to remotely deliver Windows virtual desktops over a local area network (LAN ). 
+The virtual desktops are hosted on a Windows server in the data center.
+RemoteFX technologies deliver a higher-quality user experience than RDP alone because they have advanced coding and graphics virtualization. 
+A virtual desktop delivered through RemoteFX allows the end user to work remotely in a Windows Aero desktop environment, watch videos and run 3-D applications with performance that is close to a native desktop experience.
+RemoteFX was delivered as part of Windows Server 2008 R2 Service Pack 1. 
+It can be compared to other virtual desktop protocols, such as VMware PC over IP (PCoIP) and Citrix HDX.
+
+more info:
+
+http://blogs.technet.com/b/virtualization/archive/2010/03/18/explaining-microsoft-remotefx.aspx
+http://technet.microsoft.com/en-us/library/ff817578%28v=ws.10%29.aspx
+http://en.wikipedia.org/wiki/RemoteFX
+
+

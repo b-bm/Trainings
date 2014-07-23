@@ -1,0 +1,3 @@
+2. Find a hardware device that can store more then 6 HDDs and can be directly attached to controller on a machine.
+
+That is SCSI.

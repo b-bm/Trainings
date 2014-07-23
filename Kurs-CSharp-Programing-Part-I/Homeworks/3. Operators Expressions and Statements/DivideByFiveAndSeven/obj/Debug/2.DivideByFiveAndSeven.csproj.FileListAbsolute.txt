@@ -1,0 +1,12 @@
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\bin\Debug\DivideByFiveAndSeven.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\bin\Debug\DivideByFiveAndSeven.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\bin\Debug\DivideByFiveAndSeven.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\obj\Debug\2.DivideByFiveAndSeven.csprojResolveAssemblyReference.cache
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\obj\Debug\DivideByFiveAndSeven.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\obj\Debug\DivideByFiveAndSeven.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\bin\Debug\DivideByFiveAndSeven.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\obj\Debug\DivideByFiveAndSeven.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\obj\Debug\DivideByFiveAndSeven.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\bin\Debug\DivideByFiveAndSeven.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\bin\Debug\DivideByFiveAndSeven.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\DivideByFiveAndSeven\obj\Debug\2.DivideByFiveAndSeven.csprojResolveAssemblyReference.cache

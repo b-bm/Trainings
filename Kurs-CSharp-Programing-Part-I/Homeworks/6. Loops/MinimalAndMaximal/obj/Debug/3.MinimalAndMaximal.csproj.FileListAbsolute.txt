@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\MinimalAndMaximal\bin\Debug\MinimalAndMaximal.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\MinimalAndMaximal\bin\Debug\MinimalAndMaximal.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\MinimalAndMaximal\bin\Debug\MinimalAndMaximal.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\MinimalAndMaximal\obj\Debug\MinimalAndMaximal.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\MinimalAndMaximal\obj\Debug\MinimalAndMaximal.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\MinimalAndMaximal\obj\Debug\3.MinimalAndMaximal.csprojResolveAssemblyReference.cache

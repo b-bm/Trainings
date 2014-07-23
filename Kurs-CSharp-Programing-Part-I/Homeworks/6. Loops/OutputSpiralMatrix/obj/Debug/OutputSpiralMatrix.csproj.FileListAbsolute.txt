@@ -1,0 +1,1 @@
+c:\users\ghost\documents\visual studio 2012\Projects\6. Loops\OutputSpiralMatrix\bin\Debug\OutputSpiralMatrix.exe.config

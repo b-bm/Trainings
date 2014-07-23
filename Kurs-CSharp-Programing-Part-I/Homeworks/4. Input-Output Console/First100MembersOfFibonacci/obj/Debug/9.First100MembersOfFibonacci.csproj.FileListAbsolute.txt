@@ -1,0 +1,6 @@
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\First100MembersOfFibonacci\bin\Debug\First100MembersOfFibonacci.exe.config
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\First100MembersOfFibonacci\bin\Debug\First100MembersOfFibonacci.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\First100MembersOfFibonacci\bin\Debug\First100MembersOfFibonacci.pdb
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\First100MembersOfFibonacci\obj\Debug\9.First100MembersOfFibonacci.csprojResolveAssemblyReference.cache
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\First100MembersOfFibonacci\obj\Debug\First100MembersOfFibonacci.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\First100MembersOfFibonacci\obj\Debug\First100MembersOfFibonacci.pdb

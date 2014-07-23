@@ -1,0 +1,20 @@
+﻿HW - 6:
+
+10. Configure static MAC to IP address mapping using iproute2.
+
+
+РОВЕРИ ДАЛИ Е ВЯРНО ЗА ПОСОЧЕНОТО УСЛОВИЕ !!!
+
+In some situations, static addressing assignments are useful (e.g., to make address spoofing more difficult). 
+Additionally, selectively preventing access to hosts with an intentionally incorrect link-layer address means a host cannot be addressed. 
+If you want to assign the IP address 10.1.1.1 to a fixed MAC address of 00:d0:a7:b1:c7:de on eth1, the following command will do the trick:
+
+~# ip neigh add 10.1.1.1 lladdr 00:d0:a7:b1:c7:de dev eth1 nud perm
+
+Here, nud stands for Neighbor Unreachability Detection, a mechanism that was introduced in IPv6 but that can also set the status of an entry in IPv4. 
+Conversely, an entry can also be removed using:
+
+~# ip neigh del 10.1.1.1 dev eth1
+
+Източник: http://www.admin-magazine.com/Articles/IPRoute2-arp-route-and-ifconfig-in-a-Single-Tool
+

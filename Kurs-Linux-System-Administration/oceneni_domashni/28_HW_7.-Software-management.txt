@@ -1,0 +1,104 @@
+﻿6. Describe the procedure for creating an Deb based repository.
+Хранилищата на Debian са съвкупност от пакети на Debian, организирани в специално директориино дърво, съдържащо и допълнителни  индексни файлове и такива с контролните суми на пакетите.
+Хранилищата се състоят от най-малко една директория с няколко .deb пакета в нея и 2 специални файла: Packages.gz и  Sources.gz. apt-get чете Packages.gz (за бинарни пакети и ключова дума deb) и Sources.gz (за пакети с изходен код и кл. дума deb-src).
+Packages.gz съдържа името, версията, размера, кратко и разширено описание и зависимостите на всеки пакет, както и допълнителна информация, която се чете и използва от пакетни мениджъри като dselect или aptitude.
+Sources.gz съдържа името, версията и зависимостите на всеки пакет, както и допълнителна информация, която се чете и използва от apt-get source и подобни инструменти.
+Хранилищата могат да бъдат online и offline (напр. на CD-ROM).
+Съществуват два вида хранилища от потребителска гледна точка:
+* официални архиви: "deb http://example.org/debian unstable main" със следната структура:
+(your repository root) 
+| 
++-dists
+ | 
+ |-stable
+ | |-main
+ | | |-binary-alpha 
+ | | |-binary-arm
+ | | |-binary-...
+ | | +-source 
+ | |-contrib
+ | | |-binary-alpha 
+ | | |-binary-arm
+ | | |-binary-...
+ | | +-source 
+ | +-non-free
+ |   |-binary-alpha
+ |   |-binary-arm
+ |   |-binary-...
+ |   +-source
+ |
+ |-testing 
+ | |-main
+ | | |-binary-alpha 
+ | | |-binary-arm
+ | | |-binary-...
+ | | +-source 
+ | |-contrib
+ | | |-binary-alpha 
+ | | |-binary-arm
+ | | |-binary-...
+ | | +-source 
+ | +-non-free
+ |   |-binary-alpha
+ |   |-binary-arm
+ |   |-binary-...
+ |   +-source
+ |
+ +-unstable 
+   |-main
+   | |-binary-alpha 
+   | |-binary-arm
+   | |-binary-...
+   | +-source 
+   |-contrib
+   | |-binary-alpha 
+   | |-binary-arm
+   | |-binary-...
+   | +-source 
+   +-non-free
+     |-binary-alpha
+     |-binary-arm
+     |-binary-...
+     +-source
+
+
+* обикновени архиви: "deb http://example.org/debian ./" със следната структура:
+(your repository root)
+|
+|-binary
++-source
+
+
+Тези архиви имат различна meta-data структура. и двата вида архиви могат да съхраняват актуални пакети.
+Архивитe, съхраняващи пълни пакети, напр. официалните, могат да бъдат създадени с помощта на:
+* dak
+* mini-dak
+Частните хранилища на пакети (PPA) могат да бъдат създадени на web сървър с шел акаунт с използването на:
+* reprepro
+* mini-dinstall
+И people.debian.org, и alioth.debian.org са инсталирани с използването на тези пакети. 
+Хранилищата от този тип могат да се създадат и ръчно:
+* на web сървъра създаваме директория /var/www/debs с поддиректории за архитектурите, напр. i386 и amd64;
+* поставяме в тях съответните пакети;
+* от /var/www/debs/ използваме „# dpkg-scanpackages i386 | gzip -9c > i386/Packages.gz“ за създаване на индексния файл за архитектурата;
+* добавяме в /etc/apt/sources.list ред от типа „deb http://localhost/debs/ i386/“;
+* След обновяването с „# apt-get update“ хранилището е достъпно за системата.
+PPA архивите, създадени по този начин, се препоръчва да се използват само за малки, необемни експериментални пакети. 
+
+
+Източници:
+HowToSetupADebianRepository (https://wiki.debian.org/HowToSetupADebianRepository)
+Debian Repository HOWTO (http://www.isotton.com/software/debian/docs/repository-howto/repository-howto.html)
+Debian/Ubuntu: Making a Package Repository on Your LAN (http://www.freesoftwaremagazine.com/articles/debianubuntu_making_package_repository_your_lan)
+Easy way to create a Debian package and local package repository (http://linuxconfig.org/easy-way-to-create-a-debian-package-and-local-package-repository)
+
+ЗАБЕЛЕЖКА:
+Добро домашно. Можеше да има и примерен инпут/аутпут от командния ред.
+Успех!
+
+Оценка: 9
+
+
+
+
+

@@ -1,0 +1,52 @@
+﻿2. Configure DHCPD to do remote dynamic dns updates.
+
+
+# Basic stuff to name the server and switch on updating
+server-identifier           server;
+ddns-updates                on;
+ddns-update-style           interim;
+ddns-domainname             "network.athome.";
+ddns-rev-domainname         "in-addr.arpa.";
+ignore                      client-updates;
+
+# This is the key so that DHCP can authenticate it's self to BIND9
+include                     "/etc/bind/rndc.key";
+
+# This is the communication zone
+zone network.athome. {
+    primary 127.0.0.1;
+    key rndc-key;
+}
+
+# Normal DHCP stuff
+option domain-name              "network.athome.";
+option domain-name-servers      192.168.0.60, 192.168.0.1;
+option ntp-servers              192.168.0.60;
+option ip-forwarding            off;
+
+default-lease-time              600;
+max-lease-time                  7200;
+authoritative;
+
+log-facility local7;
+
+subnet 192.168.0.0 netmask 255.255.255.0 {
+    range                       192.168.0.100 192.168.0.200;
+    option broadcast-address    192.168.0.255;
+    option routers              192.168.0.1;
+    allow                       unknown-clients;
+
+    zone    0.168.192.in-addr.arpa. {
+            primary 192.168.0.60;
+            key             "rndc-key";
+    }
+
+    zone    localdomain. {
+            primary 192.168.0.60;
+            key             "rndc-key";
+    }
+}
+
+
+Източници:
+http://www.debian-administration.org/article/343/Configuring_Dynamic_DNS__DHCP_on_Debian_Stable

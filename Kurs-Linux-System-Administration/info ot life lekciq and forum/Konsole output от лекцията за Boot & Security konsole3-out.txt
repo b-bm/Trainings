@@ -1,0 +1,781 @@
+﻿hackman@terion:/fedora/boot/grub2$ ls
+device.map  fonts/  grub.cfg  grub.cfg~  grubenv  i386-pc/  locale/  themes/
+hackman@terion:/fedora/boot/grub2$ ls i386-pc/
+acpi.mod             gcry_arcfour.mod     lzopio.mod           regexp.mod
+adler32.mod          gcry_blowfish.mod    mdraid09.mod         reiserfs.mod
+affs.mod             gcry_camellia.mod    mdraid09_be.mod      relocator.mod
+afs.mod              gcry_cast5.mod       mdraid1x.mod         romfs.mod
+ahci.mod             gcry_crc.mod         memdisk.mod          scsi.mod
+all_video.mod        gcry_des.mod         memrw.mod            search.mod
+aout.mod             gcry_md4.mod         minicmd.mod          search_fs_file.mod
+at_keyboard.mod      gcry_md5.mod         minix.mod            search_fs_uuid.mod
+ata.mod              gcry_rfc2268.mod     minix2.mod           search_label.mod
+backtrace.mod        gcry_rijndael.mod    minix2_be.mod        sendkey.mod
+bfs.mod              gcry_rmd160.mod      minix3.mod           serial.mod
+biosdisk.mod         gcry_seed.mod        minix3_be.mod        setjmp.mod
+bitmap.mod           gcry_serpent.mod     minix_be.mod         setpci.mod
+bitmap_scale.mod     gcry_sha1.mod        mmap.mod             sfs.mod
+blocklist.mod        gcry_sha256.mod      moddep.lst           sleep.mod
+boot.img             gcry_sha512.mod      msdospart.mod        squash4.mod
+boot.mod             gcry_tiger.mod       multiboot.mod        tar.mod
+bsd.mod              gcry_twofish.mod     multiboot2.mod       terminal.lst
+btrfs.mod            gcry_whirlpool.mod   net.mod              terminal.mod
+bufio.mod            gdb.mod              newc.mod             terminfo.mod
+cat.mod              geli.mod             nilfs2.mod           test.mod
+cdboot.img           gettext.mod          normal.mod           test_blockarg.mod
+chain.mod            gfxmenu.mod          ntfs.mod             testload.mod
+cmostest.mod         gfxterm.mod          ntfscomp.mod         tftp.mod
+cmp.mod              gptsync.mod          ntldr.mod            tga.mod
+command.lst          gzio.mod             odc.mod              time.mod
+configfile.mod       halt.mod             ohci.mod             trig.mod
+core.img             hashsum.mod          part_acorn.mod       true.mod
+cpio.mod             hdparm.mod           part_amiga.mod       udf.mod
+cpio_be.mod          hello.mod            part_apple.mod       ufs1.mod
+cpuid.mod            help.mod             part_bsd.mod         ufs2.mod
+crc64.mod            hexdump.mod          part_dvh.mod         uhci.mod
+crypto.lst           hfs.mod              part_gpt.mod         usb.mod
+crypto.mod           hfsplus.mod          part_msdos.mod       usb_keyboard.mod
+cryptodisk.mod       http.mod             part_plan.mod        usbms.mod
+cs5536.mod           iorw.mod             part_sun.mod         usbserial_common.mod
+date.mod             iso9660.mod          part_sunpc.mod       usbserial_ftdi.mod
+datehook.mod         jfs.mod              partmap.lst          usbserial_pl2303.mod
+datetime.mod         jpeg.mod             parttool.lst         usbtest.mod
+diskboot.img         kernel.img           parttool.mod         vbe.mod
+diskfilter.mod       keylayouts.mod       password.mod         vga.mod
+dm_nv.mod            keystatus.mod        password_pbkdf2.mod  vga_text.mod
+drivemap.mod         ldm.mod              pata.mod             video.lst
+echo.mod             legacycfg.mod        pbkdf2.mod           video.mod
+efiemu.mod           linux.mod            pci.mod              video_bochs.mod
+ehci.mod             linux16.mod          plan9.mod            video_cirrus.mod
+elf.mod              lnxboot.img          play.mod             video_fb.mod
+exfat.mod            loadenv.mod          png.mod              videoinfo.mod
+exfctest.mod         loopback.mod         priority_queue.mod   videotest.mod
+ext2.mod             ls.mod               probe.mod            xfs.mod
+extcmd.mod           lsacpi.mod           pxe.mod              xnu.mod
+fat.mod              lsapm.mod            pxeboot.img          xnu_uuid.mod
+font.mod             lsmmap.mod           pxechain.mod         xzio.mod
+freedos.mod          lspci.mod            raid5rec.mod         zfs.mod
+fs.lst               luks.mod             raid6rec.mod         zfscrypt.mod
+fshelp.mod           lvm.mod              read.mod             zfsinfo.mod
+functional_test.mod  lzma_decompress.img  reboot.mod
+hackman@terion:/fedora/boot/grub2$ vi grub.cfg
+hackman@terion:/fedora/boot/grub2$ c^C        
+hackman@terion:/fedora/boot/grub2$ fedora
+root@terion:fed:/# cd /etc
+root@terion:fed:/etc# cd gr
+groff/     group      group-     group~     grub.d/    grub2.cfg  
+root@terion:fed:/etc# cd grub.d/
+root@terion:fed:/etc/grub.d# ls -l
+total 60
+-rwxr-xr-x 1 root root  7528 Dec 20  2012 00_header
+-rwxr-xr-x 1 root root  9623 Dec 20  2012 10_linux
+-rwxr-xr-x 1 root root 10074 Dec 20  2012 20_linux_xen
+-rwxr-xr-x 1 root root  2564 Dec 20  2012 20_ppc_terminfo
+-rwxr-xr-x 1 root root  9339 Dec 20  2012 30_os-prober
+-rwxr-xr-x 1 root root   214 Dec 20  2012 40_custom
+-rwxr-xr-x 1 root root   216 Dec 20  2012 41_custom
+-rw-r--r-- 1 root root   483 Dec 20  2012 README
+root@terion:fed:/etc/grub.d# cat 10_linux 
+#! /bin/sh
+set -e
+
+# grub-mkconfig helper script.
+# Copyright (C) 2006,2007,2008,2009,2010  Free Software Foundation, Inc.
+#
+# GRUB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# GRUB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+
+prefix="/usr"
+exec_prefix="/usr"
+datarootdir="${prefix}/share"
+
+. "/usr/share/grub/grub-mkconfig_lib"
+
+export TEXTDOMAIN=grub
+export TEXTDOMAINDIR="${datarootdir}/locale"
+
+CLASS="--class gnu-linux --class gnu --class os"
+
+if [ "x${GRUB_DISTRIBUTOR}" = "x" ] ; then
+  OS="$(sed 's, release .*$,,g' /etc/system-release)"
+else
+  OS="${GRUB_DISTRIBUTOR}"
+  CLASS="--class $(echo ${GRUB_DISTRIBUTOR} | tr 'A-Z' 'a-z' | cut -d' ' -f1) ${CLASS}"
+fi
+
+# loop-AES arranges things so that /dev/loop/X can be our root device, but
+# the initrds that Linux uses don't like that.
+case ${GRUB_DEVICE} in
+  /dev/loop/*|/dev/loop[0-9])
+    GRUB_DEVICE=`losetup ${GRUB_DEVICE} | sed -e "s/^[^(]*(\([^)]\+\)).*/\1/"`
+  ;;
+esac
+
+if [ "x${GRUB_DEVICE_UUID}" = "x" ] || [ "x${GRUB_DISABLE_LINUX_UUID}" = "xtrue" ] \
+    || ! test -e "/dev/disk/by-uuid/${GRUB_DEVICE_UUID}" \
+    || uses_abstraction "${GRUB_DEVICE}" lvm; then
+  LINUX_ROOT_DEVICE=${GRUB_DEVICE}
+else
+  LINUX_ROOT_DEVICE=UUID=${GRUB_DEVICE_UUID}
+fi
+
+GRUBFS="`${grub_probe} --device ${GRUB_DEVICE} --target=fs 2>/dev/null || true`"
+
+if [ x"$GRUBFS" = x ]; then
+    GRUBFS="$(stat -f --printf=%T / || true)"
+fi
+
+case x"$GRUBFS" in
+    xbtrfs)
+        rootsubvol="`make_system_path_relative_to_its_root /`"
+        rootsubvol="${rootsubvol#/}"
+        if [ "x${rootsubvol}" != x ]; then
+            GRUB_CMDLINE_LINUX="rootflags=subvol=${rootsubvol} ${GRUB_CMDLINE_LINUX}"
+        fi;;
+    xzfs)
+        rpool=`${grub_probe} --device ${GRUB_DEVICE} --target=fs_label 2>/dev/null || true`
+        bootfs="`make_system_path_relative_to_its_root / | sed -e "s,@$,,"`"
+        LINUX_ROOT_DEVICE="ZFS=${rpool}${bootfs}"
+        ;;
+esac
+
+title_correction_code=
+
+linux_entry ()
+{
+  os="$1"
+  version="$2"
+  type="$3"
+  args="$4"
+
+  if [ -z "$boot_device_id" ]; then
+      boot_device_id="$(grub_get_device_id "${GRUB_DEVICE}")"
+  fi
+  if [ x$type != xsimple ] ; then
+      case $type in
+          recovery)
+              title="$(gettext_printf "%s, with Linux %s (recovery mode)" "${os}" "${version}")" ;;
+          *)
+              title="$(gettext_printf "%s, with Linux %s" "${os}" "${version}")" ;;
+      esac
+      if [ x"$title" = x"$GRUB_ACTUAL_DEFAULT" ] || [ x"Previous Linux versions>$title" = x"$GRUB_ACTUAL_DEFAULT" ]; then
+          replacement_title="$(echo "Advanced options for ${OS}" | sed 's,>,>>,g')>$(echo "$title" | sed 's,>,>>,g')"
+          quoted="$(echo "$GRUB_ACTUAL_DEFAULT" | grub_quote)"
+          title_correction_code="${title_correction_code}if [ \"x\$default\" = '$quoted' ]; then default='$(echo "$replacement_title" | grub_quote)'; fi;"
+          grub_warn "$(gettext_printf "Please don't use old title \`%s' for GRUB_DEFAULT, use \`%s' (for versions before 2.00) or \`%s' (for 2.00 or later)" "$GRUB_ACTUAL_DEFAULT" "$replacement_title" "gnulinux-advanced-$boot_device_id>gnulinux-$version-$type-$boot_device_id")"
+      fi
+      echo "menuentry '$(echo "$title" | grub_quote)' ${CLASS} \$menuentry_id_option 'gnulinux-$version-$type-$boot_device_id' {" | sed "s/^/$submenu_indentation/"
+  else
+      echo "menuentry '$(echo "$os" | grub_quote)' ${CLASS} \$menuentry_id_option 'gnulinux-simple-$boot_device_id' {" | sed "s/^/$submenu_indentation/"
+  fi      
+  if [ x$type != xrecovery ] ; then
+      save_default_entry | sed -e "s/^/\t/"
+  fi
+
+  # Use ELILO's generic "efifb" when it's known to be available.
+  # FIXME: We need an interface to select vesafb in case efifb can't be used.
+  if [ "x$GRUB_GFXPAYLOAD_LINUX" = x ]; then
+      echo "    load_video" | sed "s/^/$submenu_indentation/"
+      if grep -qx "CONFIG_FB_EFI=y" "${config}" 2> /dev/null \
+          && grep -qx "CONFIG_VT_HW_CONSOLE_BINDING=y" "${config}" 2> /dev/null; then
+          echo "        set gfxpayload=keep" | sed "s/^/$submenu_indentation/"
+      fi
+  else
+      if [ "x$GRUB_GFXPAYLOAD_LINUX" != xtext ]; then
+          echo "        load_video" | sed "s/^/$submenu_indentation/"
+      fi
+      echo "    set gfxpayload=$GRUB_GFXPAYLOAD_LINUX" | sed "s/^/$submenu_indentation/"
+  fi
+
+  echo "        insmod gzio" | sed "s/^/$submenu_indentation/"
+
+  if [ x$dirname = x/ ]; then
+    if [ -z "${prepare_root_cache}" ]; then
+      prepare_root_cache="$(prepare_grub_to_access_device ${GRUB_DEVICE} | sed -e "s/^/\t/")"
+    fi
+    printf '%s\n' "${prepare_root_cache}" | sed "s/^/$submenu_indentation/"
+  else
+    if [ -z "${prepare_boot_cache}" ]; then
+      prepare_boot_cache="$(prepare_grub_to_access_device ${GRUB_DEVICE_BOOT} | sed -e "s/^/\t/")"
+    fi
+    printf '%s\n' "${prepare_boot_cache}" | sed "s/^/$submenu_indentation/"
+  fi
+  message="$(gettext_printf "Loading Linux %s ..." ${version})"
+  if [ -d /sys/firmware/efi ]; then
+    sed "s/^/$submenu_indentation/" << EOF
+        echo    '$message'
+        linuxefi ${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
+EOF
+  else
+    sed "s/^/$submenu_indentation/" << EOF
+        echo    '$message'
+        linux   ${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
+EOF
+  fi
+  if test -n "${initrd}" ; then
+    # TRANSLATORS: ramdisk isn't identifier. Should be translated.
+    message="$(gettext_printf "Loading initial ramdisk ...")"
+    if [ -d /sys/firmware/efi ]; then
+      sed "s/^/$submenu_indentation/" << EOF
+        echo    '$message'
+        initrdefi ${rel_dirname}/${initrd}
+EOF
+    else
+      sed "s/^/$submenu_indentation/" << EOF
+        echo    '$message'
+        initrd  ${rel_dirname}/${initrd}
+EOF
+    fi
+  fi
+  sed "s/^/$submenu_indentation/" << EOF
+}
+EOF
+}
+
+machine=`uname -m`
+case "x$machine" in
+    xi?86 | xx86_64)
+        list=`for i in /boot/vmlinuz-* /vmlinuz-* /boot/kernel-* ; do
+                  if grub_file_is_not_garbage "$i" ; then echo -n "$i " ; fi
+              done` ;;
+    *) 
+        list=`for i in /boot/vmlinuz-* /boot/vmlinux-* /vmlinuz-* /vmlinux-* /boot/kernel-* ; do
+                  if grub_file_is_not_garbage "$i" ; then echo -n "$i " ; fi
+             done` ;;
+esac
+
+case "$machine" in
+    i?86) GENKERNEL_ARCH="x86" ;;
+    mips|mips64) GENKERNEL_ARCH="mips" ;;
+    mipsel|mips64el) GENKERNEL_ARCH="mipsel" ;;
+    arm*) GENKERNEL_ARCH="arm" ;;
+    *) GENKERNEL_ARCH="$machine" ;;
+esac
+
+prepare_boot_cache=
+prepare_root_cache=
+boot_device_id=
+title_correction_code=
+
+# Extra indentation to add to menu entries in a submenu. We're not in a submenu
+# yet, so it's empty. In a submenu it will be equal to '\t' (one tab).
+submenu_indentation=""
+
+is_first_entry=true
+while [ "x$list" != "x" ] ; do
+  linux=`version_find_latest $list`
+  gettext_printf "Found linux image: %s\n" "$linux" >&2
+  basename=`basename $linux`
+  dirname=`dirname $linux`
+  rel_dirname=`make_system_path_relative_to_its_root $dirname`
+  version=`echo $basename | sed -e "s,^[^0-9]*-,,g"`
+  alt_version=`echo $version | sed -e "s,\.old$,,g"`
+  linux_root_device_thisversion="${LINUX_ROOT_DEVICE}"
+
+  initrd=
+  for i in "initrd.img-${version}" "initrd-${version}.img" "initrd-${version}.gz" \
+           "initrd-${version}" "initramfs-${version}.img" \
+           "initrd.img-${alt_version}" "initrd-${alt_version}.img" \
+           "initrd-${alt_version}" "initramfs-${alt_version}.img" \
+           "initramfs-genkernel-${version}" \
+           "initramfs-genkernel-${alt_version}" \
+           "initramfs-genkernel-${GENKERNEL_ARCH}-${version}" \
+           "initramfs-genkernel-${GENKERNEL_ARCH}-${alt_version}"; do
+    if test -e "${dirname}/${i}" ; then
+      initrd="$i"
+      break
+    fi
+  done
+
+  config=
+  for i in "${dirname}/config-${version}" "${dirname}/config-${alt_version}" "/etc/kernels/kernel-config-${version}" ; do
+    if test -e "${i}" ; then
+      config="${i}"
+      break
+    fi
+  done
+
+  initramfs=
+  if test -n "${config}" ; then
+      initramfs=`grep CONFIG_INITRAMFS_SOURCE= "${config}" | cut -f2 -d= | tr -d \"`
+  fi
+
+  if test -n "${initrd}" ; then
+    gettext_printf "Found initrd image: %s\n" "${dirname}/${initrd}" >&2
+  elif test -z "${initramfs}" ; then
+    # "UUID=" and "ZFS=" magic is parsed by initrd or initramfs.  Since there's
+    # no initrd or builtin initramfs, it can't work here.
+    linux_root_device_thisversion=${GRUB_DEVICE}
+  fi
+
+  if [ "x$is_first_entry" = xtrue ]; then
+    linux_entry "${OS}" "${version}" simple \
+    "${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}"
+
+    submenu_indentation="\t"
+    
+    if [ -z "$boot_device_id" ]; then
+        boot_device_id="$(grub_get_device_id "${GRUB_DEVICE}")"
+    fi
+    # TRANSLATORS: %s is replaced with an OS name
+    echo "submenu '$(gettext_printf "Advanced options for %s" "${OS}" | grub_quote)' \$menuentry_id_option 'gnulinux-advanced-$boot_device_id' {"
+  fi
+
+  linux_entry "${OS}" "${version}" advanced \
+              "${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}"
+  if [ "x${GRUB_DISABLE_RECOVERY}" != "xtrue" ]; then
+    linux_entry "${OS}" "${version}" recovery \
+                "single ${GRUB_CMDLINE_LINUX}"
+  fi
+
+  list=`echo $list | tr ' ' '\n' | grep -vx $linux | tr '\n' ' '`
+  is_first_entry=false
+done
+
+# If at least one kernel was found, then we need to
+# add a closing '}' for the submenu command.
+if [ x"$is_first_entry" != xtrue ]; then
+  echo '}'
+fi
+
+echo "$title_correction_code"
+root@terion:fed:/etc/grub.d# ^C
+root@terion:fed:/etc/grub.d# cd /storage/tftpboot/
+root@terion:fed:/storage/tftpboot# ls -l
+total 31756
+-rwxrwxr-x.  1 hackman hackman     568 Jul  1 05:32 boot.msg
+-rwxrwxr-x.  1 hackman hackman 1862584 May 28  2008 bzImage-2.6.24.3-silla
+drwxrwxr-x. 11 hackman hackman    4096 Jul  1 05:32 centos
+drwxrwxr-x.  3 hackman hackman    4096 Mar 28  2011 debian
+-rwxrwxr-x.  2 hackman hackman 6760169 Mar 13  2011 dinitrd.gz
+-rwxrwxr-x.  2 hackman hackman 2418720 Mar 13  2011 dlinux
+drwxrwxr-x.  2 hackman hackman    4096 Feb  8  2009 doc
+drwxrwxr-x.  2 hackman hackman    4096 Feb 19  2009 dsl
+drwxrwxr-x.  3 hackman hackman    4096 May 28  2008 fedora
+-rwxrwxr-x.  1 hackman hackman      13 Mar  4  2007 help.msg
+-rwxrwxr-x.  1 hackman hackman 4194304 Apr 16  2006 initrd1.cpio
+-rwxrwxr-x.  1 hackman hackman 4194304 Mar 13  2008 initrd2.cpio
+-rwxrwxr-x.  1 hackman hackman 6858123 Oct  2  2009 initrd2.img
+-rwxrwxr-x.  1 hackman hackman  111864 Feb 21  2008 memtest86+-2.01
+-rwxrwxr-x.  1 hackman hackman   13320 Mar  4  2007 pxelinux.0
+drwxrwxr-x.  2 hackman hackman    4096 Jul  1 05:34 pxelinux.cfg
+drwxrwxr-x.  2 hackman hackman    4096 Feb 20  2009 rip
+-rwxrwxr-x.  1 hackman hackman 4190998 Apr 25  2006 vmlinuz1
+-rwxrwxr-x.  1 hackman hackman 1855924 Oct  2  2009 vmlinuz2
+root@terion:fed:/storage/tftpboot# cat help.msg
+Restore info
+root@terion:fed:/storage/tftpboot# cat boot.msg
+
+HackMan's PXE Boot 
+
+F1 for boot info
+F2 for more information
+
+Install or recovery:
+  fedora8 - for Fedora 8
+  fedora9 - for Fedora 9
+  centos5 - for CentOS 5.0
+  centos51 - for CentOS 5.1
+  centos54 - for CentOS 5.4
+  centos6 - for CentOS 6
+  centos63 - for CentOS 6.3 x86_64
+  centos63x86 - for CentOS 6.3 x86
+  centos64 - for CentOS 6.3 x86
+  debian   - Debian Squeeze (stable)
+
+Other options:
+  local - for localboot
+  rescue - for rescue system(currently unavailable)
+  memtest - for running memory tests
+  silla - Silla's default kernel bzImage-2.6.24.3-silla
+
+root@terion:fed:/storage/tftpboot# ls
+boot.msg                dinitrd.gz  fedora        initrd2.img      rip
+bzImage-2.6.24.3-silla  dlinux      help.msg      memtest86+-2.01  vmlinuz1
+centos                  doc         initrd1.cpio  pxelinux.0       vmlinuz2
+debian                  dsl         initrd2.cpio  pxelinux.cfg
+root@terion:fed:/storage/tftpboot# cd pxelinux.cfg
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# ls -la
+total 32
+drwxrwxr-x. 2 hackman hackman 4096 Jul  1 05:34 .
+drwxrwxr-x. 9 hackman hackman 4096 Jul  1 05:32 ..
+-rwxrwxr-x. 1 hackman hackman  818 May 29  2008 01-00-19-d1-b4-6e-ef
+-rwxrwxr-x. 1 hackman hackman  813 May 29  2008 01-00-19-d1-b4-6e-ef~
+-rwxrwxr-x. 1 hackman hackman 2154 Jul  1 05:33 default
+-rwxrwxr-x. 1 hackman hackman 1710 Feb 20  2009 default.rip
+-rwxrwxr-x. 1 hackman hackman  771 May 28  2008 default~
+-rwxrwxr-x. 1 hackman hackman  972 Feb 19  2009 mm-default
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# less default
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# 
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# less default
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# less default
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# cd
+root@terion:fed:~# cd /boot/
+root@terion:fed:/boot# ls
+System.map-3.7.3-101.fc17.i686
+System.map-3.7.6-201.fc18.i686
+System.map-3.7.7-201.fc18.i686
+System.map-3.8.0-0.rc5.git2.1.fc19.i686.PAE
+config-3.7.3-101.fc17.i686
+config-3.7.6-201.fc18.i686
+config-3.7.7-201.fc18.i686
+config-3.8.0-0.rc5.git2.1.fc19.i686.PAE
+extlinux
+grub
+grub2
+initramfs-3.6.7-4.fc16.i686.PAE.img.cpio.gz
+initramfs-3.7.3-101.fc17.i686.img
+initramfs-3.7.6-201.fc18.i686.img
+initramfs-3.7.7-201.fc18.i686.img
+initramfs-3.8.0-0.rc5.git2.1.fc19.i686.PAE.img
+initrd
+initrd-plymouth.img
+initrd.cpio
+lost+found
+vmlinuz-3.7.3-101.fc17.i686
+vmlinuz-3.7.6-201.fc18.i686
+vmlinuz-3.7.7-201.fc18.i686
+vmlinuz-3.8.0-0.rc5.git2.1.fc19.i686.PAE
+root@terion:fed:/boot# mc
+
+root@terion:fed:/boot# exit                                                                
+hackman@terion:/fedora/boot/grub2$ root                                                    
+root@terion:~# cd /etc/rc.d/                                                               
+root@terion:/etc/rc.d# ls -la                                                              
+total 396                                                                                  
+drwxr-xr-x 10 root root  4096 Mar  7 05:08 ./                                              
+drwxr-xr-x 91 root root 12288 Jul 11 19:09 ../
+drwxr-xr-x  2 root root  4096 Mar  6 21:17 init.d/
+lrwxrwxrwx  1 root root     4 Mar  3 11:43 rc.0 -> rc.6*
+-rwxr-xr-x  1 root root  1282 Mar 27  2007 rc.4*
+-rwxr-xr-x  1 root root  7695 Aug 15  2012 rc.6*
+-rwxr-xr-x  1 root root  2893 Apr 17  2011 rc.K*
+-rwxr-xr-x  1 root root 11868 Mar  7 04:52 rc.M*
+-rwxr-xr-x  1 root root 11863 Mar  5 05:15 rc.M~*
+-rwxr-xr-x  1 root root 14210 Sep 13  2012 rc.S*
+-rwxr-xr-x  1 root root   552 Apr  4  2012 rc.acpid*
+-rwxr-xr-x  1 root root  2771 Sep 11  2012 rc.alsa*
+-rw-r--r--  1 root root  2980 Sep 12  2012 rc.atalk
+-rw-r--r--  1 root root  2784 Mar  6  2010 rc.autofs
+-rw-r--r--  1 root root  3378 Jun 24  2010 rc.bind
+-rw-r--r--  1 root root   393 Sep  9  2012 rc.bluetooth
+-rw-r--r--  1 root root  4880 Jun 21  2012 rc.cgconfig
+-rw-r--r--  1 root root  3397 Jun 21  2012 rc.cgred
+-rwxr-xr-x  1 root root   572 Jul  8  2012 rc.consolekit*
+-rw-r--r--  1 root root  4308 Aug  8  2012 rc.cups
+-rw-r--r--  1 root root   512 Mar 16  2011 rc.dnsmasq
+-rw-r--r--  1 root root   119 Aug 21  2012 rc.font
+-rw-r--r--  1 root root  1893 Jan 31  2011 rc.fuse
+-rwxr-xr-x  1 root root  1156 Mar  3 12:03 rc.gpm-sample*
+-rw-r--r--  1 root root  1061 Mar  6 10:34 rc.httpd
+-rwxr-xr-x  1 root root 10634 Aug  5  2012 rc.inet1*
+-rw-------  1 root root  3883 Mar  3 12:04 rc.inet1.conf
+-rwxr-xr-x  1 root root  4845 Aug 15  2012 rc.inet2*
+-rw-r--r--  1 root root   497 Sep 12  2003 rc.inetd
+-rw-r--r--  1 root root  2684 Dec  4  2008 rc.ip_forward
+-rwxr-xr-x  1 root root   272 Aug 12  2006 rc.local*
+-rwxr-xr-x  1 root root   168 Apr 23  2011 rc.loop*
+-rwxr-xr-x  1 root root  1935 Oct  5  2010 rc.mcelog*
+-rwxr-xr-x  1 root root  1893 Aug 30  2012 rc.messagebus*
+lrwxrwxrwx  1 root root    21 Mar  3 11:42 rc.modules -> rc.modules-3.2.29-smp*
+-rwxr-xr-x  1 root root 35406 Sep 17  2012 rc.modules-3.2.29*
+-rwxr-xr-x  1 root root 35406 Sep 17  2012 rc.modules-3.2.29-smp*
+-rw-r--r--  1 root root  2585 Aug 29  2012 rc.mysqld
+-rwxr-xr-x  1 root root  1669 Aug 15  2012 rc.networkmanager*
+-rw-r--r--  1 root root  2449 Mar 22  2011 rc.nfsd
+-rw-r--r--  1 root root   804 Jul  4  2012 rc.ntpd
+-rw-r--r--  1 root root  1722 Mar 16  2007 rc.pcmcia
+-rw-r--r--  1 root root  2035 Sep 14  2012 rc.php-fpm
+-rwxr-xr-x  1 root root   862 Mar  6 11:35 rc.pulseaudio*
+-rw-r--r--  1 root root  1402 May 18  2007 rc.rpc
+-rw-r--r--  1 root root   791 Sep 18  2012 rc.samba
+-rw-r--r--  1 root root  1169 Jul  4  2012 rc.saslauthd
+-rw-r--r--  1 root root   687 Jun  5  2002 rc.sendmail
+-rw-r--r--  1 root root  2895 Aug 15  2012 rc.serial
+-rw-r--r--  1 root root   895 Jul 18  2012 rc.snmpd
+-rwx------  1 root root  1600 Aug 30  2012 rc.sshd*
+-rwxr-xr-x  1 root root   981 Oct 21  2010 rc.syslog*
+-rw-r--r--  1 root root  1016 Apr 26  2010 rc.sysstat
+-rwxr-xr-x  1 root root  1740 Sep 11  1999 rc.sysvinit*
+-rwxr-xr-x  1 root root  5882 Jul 25  2012 rc.udev*
+-rwxr-xr-x  1 root root 13316 Aug 20  2012 rc.wireless*
+-rw-------  1 root root  7320 Aug 20  2012 rc.wireless.conf
+-rw-r--r--  1 root root  3683 Aug 15  2012 rc.yp
+drwxr-xr-x  2 root root  4096 May 15  2007 rc0.d/
+drwxr-xr-x  2 root root  4096 May 15  2007 rc1.d/
+drwxr-xr-x  2 root root  4096 May 15  2007 rc2.d/
+drwxr-xr-x  2 root root  4096 May 15  2007 rc3.d/
+drwxr-xr-x  2 root root  4096 May 15  2007 rc4.d/
+drwxr-xr-x  2 root root  4096 May 15  2007 rc5.d/
+drwxr-xr-x  2 root root  4096 May 15  2007 rc6.d/
+root@terion:/etc/rc.d# ps axf
+  PID TTY      STAT   TIME COMMAND
+    2 ?        S      0:00 [kthreadd]
+    3 ?        S      0:00  \_ [ksoftirqd/0]
+    5 ?        S<     0:00  \_ [kworker/0:0H]
+    8 ?        S      0:00  \_ [migration/0]
+    9 ?        S      0:00  \_ [rcu_bh]
+   10 ?        S      0:12  \_ [rcu_sched]
+   11 ?        S      0:00  \_ [migration/1]
+   12 ?        S      0:00  \_ [ksoftirqd/1]
+   14 ?        S<     0:00  \_ [kworker/1:0H]
+   15 ?        S      0:00  \_ [migration/2]
+   16 ?        S      0:00  \_ [ksoftirqd/2]
+   18 ?        S<     0:00  \_ [kworker/2:0H]
+   19 ?        S      0:00  \_ [migration/3]
+   20 ?        S      0:00  \_ [ksoftirqd/3]
+   22 ?        S<     0:00  \_ [kworker/3:0H]
+   23 ?        S      0:00  \_ [migration/4]
+   24 ?        S      0:00  \_ [ksoftirqd/4]
+   26 ?        S<     0:00  \_ [kworker/4:0H]
+   27 ?        S      0:00  \_ [migration/5]
+   28 ?        S      0:00  \_ [ksoftirqd/5]
+   30 ?        S<     0:00  \_ [kworker/5:0H]
+   31 ?        S      0:00  \_ [migration/6]
+   32 ?        S      0:00  \_ [ksoftirqd/6]
+   34 ?        S<     0:00  \_ [kworker/6:0H]
+   35 ?        S      0:00  \_ [migration/7]
+   36 ?        S      0:00  \_ [ksoftirqd/7]
+   37 ?        S      0:00  \_ [kworker/7:0]
+   38 ?        S<     0:00  \_ [kworker/7:0H]
+   39 ?        S<     0:00  \_ [khelper]
+   40 ?        S      0:00  \_ [kdevtmpfs]
+   41 ?        S<     0:00  \_ [netns]
+  289 ?        S      0:00  \_ [bdi-default]
+  290 ?        S<     0:00  \_ [kblockd]
+  426 ?        S<     0:00  \_ [ata_sff]
+  434 ?        S      0:00  \_ [khubd]
+  442 ?        S<     0:00  \_ [md]
+  462 ?        S<     0:00  \_ [devfreq_wq]
+  470 ?        S<     0:00  \_ [cfg80211]
+  583 ?        S      0:02  \_ [kswapd0]
+  584 ?        SN     0:00  \_ [ksmd]
+  655 ?        SN     0:09  \_ [khugepaged]
+  656 ?        S      0:00  \_ [fsnotify_mark]
+  676 ?        S<     0:00  \_ [crypto]
+ 1276 ?        S      0:07  \_ [kworker/1:1]
+ 1277 ?        S      0:01  \_ [kworker/3:1]
+ 1278 ?        S      0:01  \_ [kworker/4:1]
+ 1281 ?        S      0:07  \_ [kworker/7:1]
+ 1301 ?        S      0:00  \_ [scsi_eh_0]
+ 1304 ?        S      0:00  \_ [scsi_eh_1]
+ 1307 ?        S      0:00  \_ [scsi_eh_2]
+ 1310 ?        S      0:00  \_ [scsi_eh_3]
+ 1313 ?        S      0:00  \_ [scsi_eh_4]
+ 1316 ?        S      0:00  \_ [scsi_eh_5]
+ 1347 ?        S<     0:00  \_ [kpsmoused]
+ 1365 ?        S<     0:00  \_ [kmemstick]
+ 1375 ?        S<     0:00  \_ [ktpacpid]
+ 1435 ?        S<     0:00  \_ [deferwq]
+ 1496 ?        S<     0:02  \_ [kworker/0:1H]
+ 1497 ?        S      0:04  \_ [jbd2/sda2-8]
+ 1498 ?        S<     0:00  \_ [ext4-dio-unwrit]
+ 1567 ?        S<     0:00  \_ [firewire]
+ 1589 ?        S      2:54  \_ [irq/42-iwlwifi]
+ 1590 ?        S      0:00  \_ [kworker/5:2]
+ 1613 ?        S<     0:00  \_ [iwlwifi]
+ 1614 ?        S<     0:00  \_ [kvm-irqfd-clean]
+ 1627 ?        S<     0:00  \_ [hd-audio0]
+ 1631 ?        S<     0:00  \_ [ttm_swap]
+ 1632 ?        S      0:00  \_ [kworker/3:2]
+ 1672 ?        S      0:00  \_ [jbd2/sdb6-8]
+ 1673 ?        S<     0:00  \_ [ext4-dio-unwrit]
+ 1939 ?        S      0:02  \_ [flush-8:0]
+ 2214 ?        S<     0:00  \_ [kworker/6:1H]
+ 2216 ?        S<     0:00  \_ [kworker/2:1H]
+ 3307 ?        S      0:00  \_ [kjournald]
+ 4093 ?        S<     0:00  \_ [kworker/1:1H]
+ 4094 ?        S<     0:00  \_ [kworker/7:1H]
+ 4125 ?        S<     0:00  \_ [kworker/5:1H]
+ 4728 ?        S<     0:00  \_ [kworker/4:1H]
+ 6914 ?        S<     0:00  \_ [kworker/3:1H]
+ 7088 ?        S      0:01  \_ [kworker/2:1]
+ 7096 ?        S<     0:00  \_ [krfcommd]
+ 7349 ?        S      0:00  \_ [kworker/5:0]
+ 7666 ?        S<     0:00  \_ [kworker/u:2H]
+ 7686 ?        S      0:00  \_ [kworker/6:1]
+ 7955 ?        S      0:00  \_ [kworker/1:0]
+ 9968 ?        S      0:03  \_ [kworker/0:0]
+10204 ?        S      0:00  \_ [kworker/2:2]
+10440 ?        S      0:00  \_ [kworker/4:0]
+10666 ?        S      0:00  \_ [kworker/6:0]
+10835 ?        S      0:00  \_ [kworker/u:9]
+10883 ?        S      0:00  \_ [kworker/u:57]
+10900 ?        S      0:00  \_ [kworker/0:1]
+11015 ?        S<     0:00  \_ [hci0]
+11016 ?        S<     0:00  \_ [hci0]
+11018 ?        S<     0:00  \_ [kworker/u:1H]
+13942 ?        S      0:00  \_ [flush-8:16]
+    1 ?        Ss     0:01 init [4]  
+ 1528 ?        Ss     0:00 /sbin/udevd --daemon
+10906 ?        S      0:00  \_ /sbin/udevd --daemon
+11579 ?        S      0:00  \_ /sbin/udevd --daemon
+ 1706 ?        Ss     0:00 /usr/sbin/syslogd
+ 1732 ?        Ss     0:00 /usr/sbin/klogd -c 3 -x
+ 1881 ?        Ss     0:00 /usr/sbin/crond -l notice
+ 1891 tty1     Ss+    0:00 /sbin/agetty --noclear 38400 tty1 linux
+ 1892 tty2     Ss+    0:00 /sbin/agetty 38400 tty2 linux
+ 1895 tty3     Ss+    0:00 /sbin/agetty 38400 tty3 linux
+ 1896 tty4     Ss+    0:00 /sbin/agetty 38400 tty4 linux
+ 1897 tty5     Ss+    0:00 /sbin/agetty 38400 tty5 linux
+ 1898 ?        Ss     0:00 /usr/sbin/acpid
+ 1899 tty6     Ss+    0:00 /sbin/agetty 38400 tty6 linux
+ 1900 ?        Ss     0:00 /usr/bin/kdm -nodaemon
+ 1916 tty7     Ss+   19:34  \_ /usr/bin/X -br -novtswitch -quiet :0 vt7 -nolisten tcp -auth
+ 1928 ?        S      0:00  \_ -:0                   
+ 2019 ?        Ss     0:00      \_ /bin/sh /etc/xdg/xfce4/xinitrc
+ 2101 ?        Sl     0:07          \_ xfce4-session
+ 2111 ?        S      0:27              \_ xfwm4 --display :0.0 --sm-client-id 2a7b3fc57-8b
+ 2113 ?        Sl     0:15              \_ Thunar --sm-client-id 2eec7fc56-8ac9-43bb-83e6-d
+ 2121 ?        Sl     1:04              \_ xfce4-panel --display :0.0 --sm-client-id 29dc52
+ 2160 ?        S      0:00              |   \_ /usr/lib/xfce4/panel-plugins/xfce4-brightnes
+ 2162 ?        S      0:00              |   \_ /usr/lib/xfce4/panel/wrapper /usr/lib/xfce4/
+ 2169 ?        Sl     0:00              |   \_ /usr/libexec/xfce4/panel-plugins/xfce4-mixer
+ 5077 ?        Sl    16:36              |   \_ firefox
+11163 ?        Sl     0:09              |   \_ kate -b
+ 2139 ?        S      0:06              \_ xfdesktop --display :0.0 --sm-client-id 2ba1bbc9
+ 2147 ?        S      2:34              \_ pidgin --session 2b8e8115e-c9c2-47ec-b860-4e9deb
+ 1917 ?        Ss     0:00 /usr/sbin/sshd
+ 1919 ?        Ss     0:05 /usr/bin/dbus-daemon --system
+ 1944 ?        Sl     0:00 /usr/sbin/console-kit-daemon --no-daemon
+ 2009 ?        Sl     0:00 /usr/libexec/polkitd --no-debug
+ 2051 ?        Ss     0:00 ssh-agent
+ 2104 ?        S      0:00 /usr/bin/dbus-launch --sh-syntax --exit-with-session xfce4-sessi
+ 2105 ?        Ss     0:17 /usr/bin/dbus-daemon --fork --print-pid 5 --print-address 7 --se
+ 2107 ?        S      0:00 /usr/lib/xfce4/xfconf/xfconfd
+ 2110 ?        Ss     0:02 /usr/bin/gpg-agent --sh --daemon --enable-ssh-support --write-en
+ 2115 ?        S      0:03 /usr/libexec/gvfsd
+ 2117 ?        Sl     0:00 /usr/libexec//gvfs-fuse-daemon -f /home/hackman/.gvfs
+ 2130 ?        Sl     0:00 /usr/libexec/gvfs-udisks2-volume-monitor
+ 2133 ?        Sl     0:00 /usr/lib/udisks2/udisksd --no-debug
+ 2137 ?        Ss     0:01 xfsettingsd --display :0.0 --sm-client-id 2aeeaeb92-8af3-4917-8c
+ 2142 ?        S      0:00 /usr/libexec/gvfs-gphoto2-volume-monitor
+ 2144 ?        S      0:00 /usr/libexec/gvfsd-trash --spawner :1.4 /org/gtk/gvfs/exec_spaw/
+ 2150 ?        Ssl    0:03 xfce4-power-manager --restart --sm-client-id 25807bb84-1d6c-4536
+ 2158 ?        Sl     3:51 yakuake -session 2d10af0ed-d82f-40fb-9ba0-572c18814633_137271584
+ 8726 pts/1    Ss     0:00  \_ /bin/bash
+11348 pts/1    S+     0:00  |   \_ /bin/bash ./twitch.tv.sh
+11350 pts/1    Sl+   34:06  |       \_ ffmpeg -f x11grab -s 1024x768 -r 24 -i :0.0 -f alsa
+11305 pts/3    Ss+    0:00  \_ /bin/bash
+ 2166 ?        Sl     0:05 /usr/libexec/upowerd
+ 2188 ?        S      0:00 /usr/libexec/gconfd-2
+ 2213 ?        Ss     0:00 kdeinit4: kdeinit4 Running...
+ 2218 ?        S      0:00  \_ kdeinit4: klauncher [kdeinit] --fd=8
+ 2255 ?        S      0:00 sudo hm-exec.sh xfce4-notes
+ 2258 ?        S      0:00  \_ /bin/bash /usr/local/bin/hm-exec.sh xfce4-notes
+ 2264 ?        S      0:00      \_ su - hackman -s /bin/bash -c xfce4-notes
+ 2305 ?        Ss     0:00          \_ xfce4-notes
+ 2259 ?        S      0:11 xscreensaver -no-splash
+ 2268 ?        S      0:02 kdeinit4: kded4 [kdeinit]  
+ 2272 ?        Ssl    0:00 xfce4-volumed
+ 2281 ?        Sl     0:30 /usr/bin/pulseaudio --start
+ 2332 ?        S      0:00  \_ /usr/libexec/pulse/gconf-helper
+ 2331 ?        S      0:00 /usr/libexec/gam_server
+ 2363 ?        S      0:01 kdeinit4: kglobalaccel [kdeinit]
+ 2390 ?        Sl     0:01 /usr/bin/knotify4
+ 2408 ?        Sl     0:00 /usr/libexec/udisks-daemon
+ 2409 ?        S      0:00  \_ /usr/libexec/udisks-daemon
+ 2416 ?        Ssl    0:11 /usr/sbin/NetworkManager
+11140 ?        S      0:00  \_ /sbin/dhcpcd -B -K -L -G -c /usr/libexec/nm-dhcp-client.acti
+ 2420 ?        S      0:00 /usr/sbin/modem-manager
+ 2423 ?        Ss     0:02 /usr/sbin/wpa_supplicant -B -u -f /var/log/wpa_supplicant.log -P
+ 2532 ?        S      0:00 /usr/libexec/gvfsd-metadata
+ 4300 ?        Ss     0:00 xfce4-appfinder --collapsed
+ 4303 ?        Sl     0:05 nm-applet
+ 7091 ?        Ss     0:00 /usr/sbin/bluetoothd --udev
+ 8409 ?        Sl     0:00 pcscd
+10245 ?        S      0:00 gvim -f /home/hackman/Desktop/sched-explained
+11190 ?        Sl     0:12 konsole -e $SHELL -l
+11192 pts/0    Ss     0:00  \_ /bin/bash -l
+11363 pts/0    S+     0:00  |   \_ ssh -p 14567 85.14.7.110
+11235 pts/2    Ss     0:00  \_ /bin/bash
+12431 pts/2    S+     0:00  |   \_ sudo vi grub.cfg
+12432 pts/2    S+     0:00  |       \_ vi grub.cfg
+12601 pts/5    Ss     0:00  \_ /bin/bash
+14620 pts/5    S      0:00  |   \_ sudo su -
+14621 pts/5    S      0:00  |       \_ -su
+14727 pts/5    R+     0:00  |           \_ ps axf
+13155 pts/6    Ss     0:00  \_ /bin/bash
+13193 pts/6    S+     0:00      \_ less /etc/lilo.conf
+11444 ?        Sl     0:00 libvirtd
+11492 ?        S      0:00 /sbin/dnsmasq --strict-order --local=// --domain-needed --pid-fi
+11634 ?        Ssl    0:01 python /usr/share/virt-manager/virt-manager.py
+11646 ?        Z      0:00  \_ [ssh] <defunct>
+root@terion:/etc/rc.d# reset
+root@terion:/etc/rc.d# 
+root@terion:/etc/rc.d# 
+root@terion:/etc/rc.d# login    
+
+terion login: hackman
+Password: 
+Linux 3.9.5-terion.
+Last login: Thu Jul 11 00:36:33 +0300 2013 on :0.
+No mail.
+hackman@terion:~$ logout
+root@terion:/etc/rc.d# less /etc/lilo.conf
+root@terion:/etc/rc.d# logout
+hackman@terion:/fedora/boot/grub2$ fedora
+root@terion:fed:/# cd /etc/system.d
+bash: cd: /etc/system.d: No such file or directory
+root@terion:fed:/# cd /etc/system  
+system-release      system-release-cpe  systemd/            
+root@terion:fed:/# cd /etc/systemd/
+root@terion:fed:/etc/systemd# ls
+journald.conf  logind.conf  system  system.conf  user  user.conf
+root@terion:fed:/etc/systemd# ls -l
+total 24
+-rw-r--r--  1 root root  749 Jan 12 01:53 journald.conf
+-rw-r--r--  1 root root  739 Feb 26 17:29 logind.conf
+drwxr-xr-x 10 root root 4096 Feb 10 21:56 system
+-rw-r--r--  1 root root 1036 Jan 12 01:53 system.conf
+drwxr-xr-x  2 root root 4096 Jan 12 01:53 user
+-rw-r--r--  1 root root  487 Jan 12 01:53 user.conf
+root@terion:fed:/etc/systemd# ls system
+basic.target.wants                           getty.target.wants
+bluetooth.target.wants                       multi-user.target.wants
+dbus-org.freedesktop.NetworkManager.service  sockets.target.wants
+default.target                               sysinit.target.wants
+default.target.wants                         syslog.service
+display-manager.service                      system-update.target.wants
+root@terion:fed:/etc/systemd# ls user  
+root@terion:fed:/etc/systemd# cat syslog.service
+cat: syslog.service: No such file or directory
+root@terion:fed:/etc/systemd# cat system/syslog.service 
+[Unit]
+Description=System Logging Service
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/rsyslog
+ExecStart=/sbin/rsyslogd -n $SYSLOGD_OPTIONS
+Sockets=syslog.socket
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target
+Alias=syslog.service
+root@terion:fed:/etc/systemd# 
+                                                                                             
+                                                                                               
+                                                                                               
+                                                                                                 
+                                                                                                   
+                                                                                                      
+                                                                                                        
+                                                                                                         
+                                                                                                           
+                                                                                                            
+                                                                                                                
+                                                                                                                  
+                                                                                                                    
+                                                                                                                      
+                                                                                                                         

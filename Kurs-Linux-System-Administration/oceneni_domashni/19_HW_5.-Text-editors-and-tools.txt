@@ -1,0 +1,73 @@
+1. Login on grizzly and get the home folders of the usernames that have numbers in them.
+
+С ls -la листваме  директориите в формата на колона 
+
+drwx------   3 4                   4                   4096 Aug 11 18:37 4
+drwx------   3 aangov              aangov              4096 Jul  7 14:28 aangov
+drwx------   6 a_boyanov           a_boyanov           4096 Aug 16 11:07 a_boyanov
+drwx------   4 admin               admin               4096 Jul  2 12:45 admin
+drwx------   3 adrum               adrum               4096 Jul  2 23:05 adrum
+drwx------   3 alexn               alexn               4096 Jul  3 19:47 alexn
+drwx------   3 anedelchev          anedelchev          4096 Aug 16 17:37 anedelchev
+drwx------   4 angeloff            angeloff            4096 Jul 21 10:49 angeloff
+drwx------   3 angie               angie               4096 Jul  2 11:33 angie
+drwx------   3 anton_dutsov        anton_dutsov        4096 Jul  5 12:34 anton_dutsov
+drwx------   3 antonyankov         antonyankov         4096 Aug 11 11:00 antonyankov
+....
+
+
+
+
+изпращаме изходът към awk {'print$9'} чрез което отделяме 9 -тата колона в която са папките 
+след което изпращаме отново изхода към grep '[0-9]' с което отделяме всички редове сдържащи символите от 0 до 9.
+
+
+[hristo@grizzly home]$ ls -la | awk {'print$9'} | grep '[0-9]'
+4
+blagovestie1
+dandreev1
+d.georgiev.91
+djordjo7
+fuzly2
+GiK986
+gogo74
+iordan93
+Ivan72
+kamen779
+kmalamov1
+loopback0
+m4rt00
+mage3
+martotko1
+nikolai.velkov1
+pacho10
+pacho19
+pe6ev
+pe6o
+petko9001
+plam40
+rossi87
+s0ny123
+stefito3
+svv1234
+tm206
+todor87
+user1
+val10
+Vali0
+veidar45
+vik16r
+VLD62
+vtodorov2
+ze3rax
+[hristo@grizzly home]$ 
+
+Коментар, точки и проба:
+точки: 10
+
+Има и по просто решение: $ ls /home/ |grep -h '[0-9]'
+
+и още по просто: ls -l /home/*[0-9]*
+
+Успех!
+

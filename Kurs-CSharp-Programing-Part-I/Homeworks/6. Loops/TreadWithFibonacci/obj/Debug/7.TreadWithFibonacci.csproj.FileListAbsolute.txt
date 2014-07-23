@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\TreadWithFibonacci\bin\Debug\TreadWithFibonacci.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\TreadWithFibonacci\bin\Debug\TreadWithFibonacci.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\TreadWithFibonacci\bin\Debug\TreadWithFibonacci.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\TreadWithFibonacci\obj\Debug\7.TreadWithFibonacci.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\TreadWithFibonacci\obj\Debug\TreadWithFibonacci.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\TreadWithFibonacci\obj\Debug\TreadWithFibonacci.pdb

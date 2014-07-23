@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\Factorial\bin\Debug\Factorial.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\Factorial\bin\Debug\Factorial.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\Factorial\bin\Debug\Factorial.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\Factorial\obj\Debug\4.Factorial.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\Factorial\obj\Debug\Factorial.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\Factorial\obj\Debug\Factorial.pdb

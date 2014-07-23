@@ -1,0 +1,12 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\bin\Release\DeclaireTwoStrings.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\bin\Release\DeclaireTwoStrings.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\bin\Release\DeclaireTwoStrings.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\obj\Release\8.DeclaireTwoStrings.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\obj\Release\DeclaireTwoStrings.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\obj\Release\DeclaireTwoStrings.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\bin\Release\DeclaireTwoStrings.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\obj\Release\DeclaireTwoStrings.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\obj\Release\DeclaireTwoStrings.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\bin\Release\DeclaireTwoStrings.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\bin\Release\DeclaireTwoStrings.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\DeclaireTwoStrings\obj\Release\8.DeclaireTwoStrings.csprojResolveAssemblyReference.cache

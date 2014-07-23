@@ -1,0 +1,44 @@
+﻿5. Describe the contents of the following files from the proc file system swaps, stat, schedstat.
+
+/proc/swaps file contains data about the swap areas in use. Output of my system is: 
+
+[root@localhost proc]# cat swaps
+Filename                                Type            Size        Used    Priority
+/dev/dm-1                               partition       1048568     0       -1
+
+The swap size and its utilization is measured. The Priority column is useful when mustiple swap files are in use. The lower the priority, the more likely the swap file is to be used.
+
+
+/proc/stat file keeps track of different statistics about the system since it was last restarted. The content usually looks like:
+
+[root@localhost proc]# cat stat
+cpu  632 23 4986 1053243 4221 373 44 0 0
+cpu0 632 23 4986 1053243 4221 373 44 0 0
+intr 316004 139 236 0 0 0 10791 0 0 0 0 29743 0 3393 0 0 122427 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ctxt 380315
+btime 1374585917
+processes 2651
+procs_running 1
+procs_blocked 0
+softirq 298130 0 121722 2126 29743 15533 0 227 0 930 127849
+
+
+ - cpu - The amount of time, measured in units of USER_HZ (1/100th of a second on most architectures), that the system spent in user mode, user mode with low priority (nice), system mode, and the idle task respectively.
+ - page - The number of memory pages the system paged in and the number that were paged out (from disk).
+ - swap - The number of swap pages the system has brought in and out.
+ - intr - This line shows counts of interrupts serviced since boot time, for each of the possible system interrupts. The first column is the total of all interruptsserviced and each subsequent column is the total for a particular interrupt.
+ - ctxt - The number of context switches that the system underwent.
+ - btime - boot time in seconds since the Epoch - 01.01.1970.
+ - processes - Number of forks since boot.
+ - procs running - Number of processes in runnable state.
+ - procs blocked - Number of processes blocked waiting for I/O to complete.
+
+
+
+/proc/schedstat - displays statistics relevant to the current run queue. Also domain-specific statistics for SMP systems are displayed for all connected processors.
+
+
+ЗАБЕЛЕЖКА:
+Добро домашно. Има обяснения и е даден аутпут от командния ред.
+Успех.
+

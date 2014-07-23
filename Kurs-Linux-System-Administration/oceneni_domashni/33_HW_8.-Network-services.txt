@@ -1,0 +1,145 @@
+Linux System Administration
+Lecture 8. Network services
+Homework variant: 2. Configure DHCPD to remote dynamic dns updates.
+
+
+Testing machine: Debian 7.1.
+Bind and dhcp should be configured and running to allow dynamic updates.
+Testing Domain mydomain.org
+Testing network 192.168.15.0/24
+Local DNS server 192.168.15.2
+Reading sources: https://wiki.debian.org
+
+Procedure:
+
+1. Generate key, which will be used to secuer exchange information between DHCP and DNS. Ony this DHCP should be allowed to perform updates.
+
+Kddns_update.+157+63228
+root@debian7:~# ls
+FAQ  Kddns_update.+157+63228.key  Kddns_update.+157+63228.private  README  README.Debian
+root@debian7:~# 
+
+2. Create ddns.key file and insert the key from .private generated file for secret.
+
+root@debian7:~# cat ddns.key
+key DDNS_UPDATE {
+	algorithm HMAC-MD5.SIG-ALG.REG.INT;
+	secret "1GHqaczEjB6vT7w83aqSeQ=="
+}
+
+
+3. Copy ddns.key file to /etc/bind and /etc/dhcp folders and change owner to root and permissions to 640 for security /Since i am logged as root chown is not nessesry/.
+root@debian7:~# cp ddns.key /etc/dhcp/
+root@debian7:~# cp ddns.key /etc/bind/
+root@debian7:~# chmod 640 /etc/bind/ddns.key
+root@debian7:~# chmod 640 /etc/dhcp/ddns.key
+
+
+4. Key file ddns.key should be incuded into /etc/dhcp/dhcpd.conf in DHCP server machine and /etc/bind/named.conf.local in DNS server machine.
+
+5. Configure /etc/dhcp/dhcpd.conf file --- see coments in listed dhcpd.conf file.
+
+# Linux System Administration
+# Lecture 8. Netwotk services hoemwork.
+# Homework theme: 2. configure DHCPD to do remote dns update
+# 
+# Based on: Sample configuration file for ISC dhcpd for Debian
+#
+#
+
+# Next to option should be uncomented as for this should be the main DHCP server, which will perform updates.
+authoritative;
+
+# Enable DNS Updates
+ddns-updates		on;
+
+# Next option should always be interim. Oher outdated option is adhoc
+ddns-update-style 	interim;
+
+# Nex option ignores updates form clients
+ignore			cient-updates;
+
+# Set DHCP to update DNS entries of static leases. 
+update-static-leases	on;
+
+
+
+# Doamin name, which is also used for DDNS
+option domain-name "mydomain.org";
+
+option domain-name-servers 192.168.15.2;
+
+default-lease-time 600;
+max-lease-time 7200;
+
+# Use this to send dhcp log messages to a different log file (you also
+# have to hack syslog.conf to complete the redirection).
+log-facility local7;
+
+
+
+# Include key for DNS updates
+include "/etc/dhcp/ddns.key:;
+
+# Add zones that DHCP should update
+
+zone mydomain.org. {
+	primary 192.168.15.2;
+	key DDNS_UPDATE;
+}
+
+zone 15.168.192.in-addr.arpa. {
+	primary 192.168.15.2;
+	key DDNS_UPDATE;
+}
+
+# Define subnet for DHCP server.
+
+subnet 192.168.15.0 netmask 255.255.255.0 {
+	range 192.168.15.50 10.16.32.100;
+	option routers 192.168.15.1;
+}
+
+
+
+
+
+6. DNS should be configured to allow updates for each zone DHCP will update. Following lines should be added to /etc/bind/named.conf.local
+
+include "/etc/bind/ddns.key";
+
+zone "mydomain.org" {
+     type master;
+     notify no;
+     file "/var/cache/bind/db.example.org";
+     allow-update { key DDNS_UPDATE; };
+};
+
+zone "15.168.192.in-addr.arpa" {
+     type master;
+     notify no;
+     file "/var/cache/bind/db.192.168.2";
+     allow-update { key DDNS_UPDATE; };
+};
+
+
+
+"notify no" stops bind to forward information to external dns servers.
+
+
+
+
+7. Rester services:
+
+root# /etc/init.d/isc-dhcp-server restart
+root# /etc/init.d/bind9 restart
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\QadraticEquation\bin\Debug\QadraticEquation.exe.config
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\QadraticEquation\bin\Debug\QadraticEquation.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\QadraticEquation\bin\Debug\QadraticEquation.pdb
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\QadraticEquation\obj\Debug\6.QadraticEquation.csprojResolveAssemblyReference.cache
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\QadraticEquation\obj\Debug\QadraticEquation.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\QadraticEquation\obj\Debug\QadraticEquation.pdb

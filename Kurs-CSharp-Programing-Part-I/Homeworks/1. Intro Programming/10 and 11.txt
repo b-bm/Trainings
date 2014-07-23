@@ -1,0 +1,72 @@
+10. Provide a short list with information about the most popular programming languages. How do they differ from C#?
+
+
+
+    Fast Compiled Languages
+
+
+    Assembly Language
+    C
+    C++
+    Pascal
+    C#
+    Java
+
+    Reasonably Fast Interpreted
+
+
+    Perl
+    PHP
+
+    Slow Interpreted
+
+
+    JavaScript
+    ActionScript
+    Basic 
+
+Interpreting is Easier
+It's very easy to stop, change and re-run applications written in an interpreted language and that is why they're popular for learning programming. There is no compilation stage needed. Compiling can be quite a slow process. A large Visual C++ application can take from minutes to hours to compile, depending on how much code has to be rebuilt and the speed of memory and the CPU.
+When Computers first appeared
+When computers first became popular in the 1950s, programs were written in machine code as there was no other way. Programmers had to physically flip switches to enter values. This is such a tedious and slow way of creating an application that higher level computer languages had to be created.
+
+Assembler- Fast to Run- Slow to Write!
+
+Assembly language is the readable version of Machine Code and looks like this "Mov A,$45"
+
+Because it is tied to a particular CPU or family of related CPUs, Assembly Language is not very portable and is time consuming to learn and write. Languages like C have reduced the need for Assembly Language programming except where RAM is limited or time critical code is needed. This is typically in the kernel code at the heart of an Operating System or in a video card driver.
+Assembly Language is the Lowest Level of Code
+Assembly Language is very low level- most of the code just moves values between the CPU registers and memory. If you are writing a payroll package you want to think in terms of salaries and tax deductions, not Register A to Memory location xyz. This is why higher level languages like C++, C# or Java are more productive. The programmer can think in terms of the problem domain (salaries,deductions, and accruals) not the hardware domain (registers, memory and instructions).
+Systems Programming with C
+C was devised in the early 1970s by Dennis Ritchie. It can be thought of as a general purpose tool- very useful and powerful but very easy to let bugs through that can make systems insecure. C is a low level language and has been described as portable Assembly language. The syntax of many Scripting languages is based on C, for example JavaScript, PHP and ActionScript.
+Perl- Websites and Utilities
+Very popular in the Linux world, Perl was one of the first web languages and remains very popular today. For doing "quick and dirty" programming on the web it remains unrivalled and drives many websites. It has though been somewhat eclipsed by PHP as a web scripting language.
+Coding Websites with PHP
+PHP was designed as a language for Web Servers and is very popular in conjunction with Linux, Apache, MySql and PHP or LAMP for short. It is interpreted, but pre-compiled so code executes reasonably quickly. It can be run on desktop computers but is not as widely used for developing desktop applications. Based on C syntax, it also includes Objects and Classes. 
+
+Pascal was devised as a teaching language a few years before C but was very limited with poor string and file handling. Several Manufacturers extended the language but there was no overall leader until Borland's Turbo Pascal (for Dos) and Delphi (for Windows) appeared. These were powerful implementations that added enough functionality to make them suitable for commercial development. However Borland was up against the much bigger Microsoft and lost the battle.
+C++ - A Classy Language!
+C++ or C plus classes as it was originally known came about ten years after C and successfully introduced Object Oriented Programming to C, as well as features like exceptions and templates. Learning all of C++ is a big task- it is by far the most complicated of the programming languages here but once you have mastered it, you'll have no difficulty with any other language.
+C# - Microsoft's Big Bet
+C# was created by Delphi's architect Anders Hejlsberg after he moved to Microsoft and Delphi developers will feel at home with features such as Windows forms.
+
+C# syntax is very similar to Java, which is not surprising as Hejlsberg also worked on J++ after he moved to Microsoft. Learn C# and you are well on the way to knowing Java. Both languages are semi-compiled, so that instead of compiling to machine code, they compile to bytecode ( C# compiles to CIL but it and Bytecode are similar) and are then interpreted.
+Javascript - Programs in your Browser
+Javascript is nothing like Java, instead its a scripting language based on C syntax but with the addition of Objects and is used mainly in browsers. JavaScript is interpreted and a lot slower than compiled code but works well within a browser.
+
+Invented by Netscape it has proved very successful and after several years in the doldrums is enjoying a new lease of life because of AJAX; Asynchronous Javascript and Xml. This allows parts of web pages to update from the server without redrawing the entire page.
+ActionScript - A Flashy languasge!
+ActionScript is an implementation of JavaScript, but exists solely within Macromedia Flash applications. Using vector based graphics, it is used mainly for games, playing videos and other visual effects and for developing sophisticated user interfaces, all running in the browser.
+Basic for Beginners
+Basic is an acronym for Beginners All purpose Symbolic Instruction Code and was created to teach programming in the 1960s. Microsoft have made the language their own with many different versions including VbScript for websites and the very successful Visual Basic. The latest version of that is VB.NET and this runs on the same platform .NET as C# and produces the same CIL bytecode.
+
+[h3Lua A free scripting language written in C that includes garbage collection and coroutines. It interfaces well with C/C++ and is used in the games industry (and non games as well) to script game logic, event triggers and game control. 
+
+
+изтрочник : http://cplus.about.com/od/introductiontoprogramming/a/comparelangs.htm
+
+
+11. Describe the difference between C# and .NET Framework.
+
+Основната разлика, е че .NET Framework е основата-средата, в която се съдържат библиотеките за изпълнение на програми писани на езика С#.
+

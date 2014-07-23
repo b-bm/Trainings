@@ -1,0 +1,12 @@
+RadControls for WinForms = http://www.telerik.com/help/winforms/overview.html
+
+Hardcore:  Pro .NET 2.0 Windows Forms and Custom Controls in C# = http://www.amazon.com/dp/1590594398/?tag=stackoverfl08-20
+
+http://stackoverflow.com/questions/7941699/c-sharp-4-0-winforms-book
+
+По-опростено: .NET Windows Forms in a Nutshell = http://shop.oreilly.com/product/9780596003388.do
+
+http://stackoverflow.com/questions/357545/book-recommendation-for-winforms-design-programming
+
+http://www.riagenic.com/archives/963
+

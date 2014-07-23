@@ -1,0 +1,12 @@
+1. Find hardware devices which can export regular RAM as HDD. Please provide details, how these devices work and how they can be accesed from Linux.
+
+That is SAS (Serial Atached SCSI or Serial Atached SATA) with SSD HDD-s.
+- типа контролер е такъв,че се използва SCSI инфраструктура за връзка с хард дисковете, 
+но на самия коннтролер за връзка с хард дисковете има само един кабел и той е SATA.
+Връзката при този тип свързване е доста бърза.
+На SAS Интеркънекта е по различен от този на SATA.
+При SAS инфраструктурата на контролера е много различна.Там външно контролера е като на SATA (където се вързва кабела), но от вътре back структурата му е SCSI (вътре в чипа ).
+
+
+
+

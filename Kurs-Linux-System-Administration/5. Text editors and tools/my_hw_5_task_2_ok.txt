@@ -1,0 +1,77 @@
+﻿HW - 5:
+
+2. With a single regular expression get all services that have the string 'file' in their names from /etc/services and are runing only on UDP.
+
+Var-1:
+
+[BM_boyan@grizzly ~]$ grep -n -o -i '.*file.*\/udp' /etc/services
+434:afs3-fileserver 7000/udp
+717:profile         136/udp
+1876:bnetfile        1120/udp
+3345:filex-lport     1887/udp
+5322:mobile-file-dl  2926/udp
+6228:filecast        3401/udp
+8104:profilemac      4749/udp
+8226:avt-profile-1   5004/udp
+8229:avt-profile-2   5005/udp
+8996:boe-filesvr     6404/udp
+9308:mindfilesys     7391/udp
+10519:filesphere      24242/udp
+10529:flashfiler      24677/udp
+10636:filenet-powsrm  32767/udp
+10638:filenet-tms     32768/udp
+10640:filenet-rpc     32769/udp
+10642:filenet-nch     32770/udp
+10644:filenet-rmi     32771/udp
+10646:filenet-pa      32772/udp
+10648:filenet-cm      32773/udp
+10650:filenet-re      32774/udp
+10652:filenet-pch     32775/udp
+10654:filenet-peior   32776/udp
+10656:filenet-obrok   32777/udp
+[BM_boyan@grizzly ~]$
+
+Var-2:
+
+[BM_boyan@grizzly ~]$ grep 'file.*udp' /etc/services
+afs3-fileserver 7000/udp                        # file server itself
+profile         136/udp                 # PROFILE Naming System
+bnetfile        1120/udp                # Battle.net File Transfer Protocol
+filex-lport     1887/udp                # FileX Listening Port
+mobile-file-dl  2926/udp                # MOBILE-FILE-DL
+filecast        3401/udp                # filecast
+profilemac      4749/udp                # Profile for Mac
+avt-profile-1   5004/udp                # RTP media data [RFC 3551]
+avt-profile-2   5005/udp                # RTP control protocol [RFC 3551]
+boe-filesvr     6404/udp                # Business Objects Enterprise internal server
+mindfilesys     7391/udp                # mind-file system server
+filesphere      24242/udp               # fileSphere
+flashfiler      24677/udp               # FlashFiler
+filenet-powsrm  32767/udp               # FileNet BPM WS-ReliableMessaging Client
+filenet-tms     32768/udp               # Filenet TMS
+filenet-rpc     32769/udp               # Filenet RPC
+filenet-nch     32770/udp               # Filenet NCH
+filenet-rmi     32771/udp               # FileNet RMI
+filenet-pa      32772/udp               # FileNET Process Analyzer
+filenet-cm      32773/udp               # FileNET Component Manager
+filenet-re      32774/udp               # FileNET Rules Engine
+filenet-pch     32775/udp               # Performance Clearinghouse
+filenet-peior   32776/udp               # FileNET BPM IOR
+filenet-obrok   32777/udp               # FileNet BPM CORBA
+[BM_boyan@grizzly ~]$
+
+Var-3
+
+[BM_boyan@grizzly ~]$ grep --color=auto  'file.*udp' /etc/services
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,71 @@
+﻿INFO about SysRq key:
+
+ON KEYBOARD -> SysRq key
+
+http://www.thegeekstuff.com/2008/12/safe-reboot-of-linux-using-magic-sysrq-key/
+
+http://en.wikipedia.org/wiki/Magic_SysRq_key
+
+https://www.kernel.org/doc/Documentation/sysrq.txt
+
+Every sysadmin needs a little SysRq magic
+http://royal.pingdom.com/2012/06/26/sysadmin-needs-sysrq-magic/
+
+Glance down at your keyboard. Look to the top right, somewhere above or around the “Page Up” and “Home” keys. If you’ve got a keyboard that follows long standing convention (at least if you’re using a PC), you’ll see a key that has the cryptic word “SysRq” on it somewhere, possibly as an alternate function. It likely shares a key with the words “Print Screen.” If you have a modern Lenovo laptop, you can stop searching for that key, however. In a bold departure from tradition, Thinkpads have recently been bereft of that oft neglected key.
+
+What is this strange key and what does it mean anyway? “SysRQ” is short for the general term “system request”, however that doesn’t shed much light on its purpose. For that kind of information, we’ll need to step into our wayback machine and take a gander at computing history.
+How the SysRq key was born
+
+It might not have been the land before time, but it was at least the time before computer users had more than one sickly shade of green (or orange) as the sole color on their screen. That time was 1984, which was the year when the IBM PC/AT was released. For a bit more context, 1984 was one year after the PC/XT had been released. The XT’s keyboard included 83 keys, but the AT had 84. What was the single key that was added? The SysRq key!
+
+Pressing the SysRq key caused the BIOS to execute a special hardware interrupt code. It was originally intended as an aid to running multiple OSs on the PC/AT’s screaming fast 80286 chip (the first one ran at 6 MHz).
+
+Fast forward to modern times after the wildest days of the OS wars are behind us (and sprinkle in a few standards and commonly held best practices), and the SysRq key doesn’t have much use anymore. However, lurking within most PC BIOS, the interrupt that was implemented decades ago is still there. Waiting.
+Adding some magic to SysRq
+
+The original intent of the SysRq key has been long abandoned. However, some OSs still use it for their own purposes. Linux, for example, has been listening for the old interrupt since the mid-nineties. The Linux nomenclature for this capability calls the antiquated key, when combined in a specific sequence, the “Magic SysRq Key.”
+
+The Linux kernel is capable of listening for and processing several commands that rely on the SysRq key. This is a “direct line” to the kernel, and as such can be very dangerous if not used properly. Consider this sentence to be a standard “we are not liable for the destruction you usher forth upon your hapless systems” disclaimer.
+
+Just so long as the kernel itself isn’t hung, you have some very low level tools that might be able to get you out of a jam, ensure security in a suspicious situation and otherwise turn you into a sysadmin superhero.
+What you’ll need
+
+You’ll probably want a kernel that’s not old enough to remember the time when there were only three Star Wars films. That means at least kernel 2.6.12 or newer if you want to have tighter controls over which Magic SysRq Keys can be used, but that’s another topic. Let it suffice to say that if you have any reasonably modern Linux kernel, you should be okay.
+
+Next, you’ll need the kernel to be compiled with SysRq support. Most major distributions compile with support for SysRq so there’s not much to worry about here. (For those who like to peruse kernel source, you can find the sysrq code on the ‘drivers/tty/sysrq.c’  branch)
+
+If your Linux distribution implements procfs, you can easily check for SysRq’s state of enablement with the command ‘cat /proc/sys/kernel/sysrq’. If disabled, enable SysRq using one of several methods. To enable SysRq temporarily (it falls back to being disabled at the next reboot) you can use the sysctl command: sysctl -w kernel.sysrq=“1” or you can simply echo a 1 to the appropriate procfs leaf: echo “1” > /proc/sys/kernel/sysrq.
+
+To persistently enable Magic SysRq keys, you’ll need to edit your sysctl.conf file. It will likely be located at /etc/sysctl.conf. You’ll need to either add the line “kernel.sysrq =1” or edit an existing line that sets kernel.sysrq to 0.
+
+Once enabled, the fun can begin!
+How it works
+
+To use Magic SysRq keys, you’ll need to use a three-key combination of Alt + SysRq + a single letter that performs the desired operation. Your first venture into the world of Magic SysRq keys should be to open up a terminal (if you’re using a windowing system) and then press Alt+SysRq+h. This prints the SysRq help screen in your terminal.
+
+To begin testing more dangerous keystrokes, you could fire up a virtual machine and test SysRq keys that way. Using VMware Player I’m able to test this within a barebones installation of CentOS 6 because VMware hooks into all keystrokes, safely whisking away any of the more dangerous Magic SysRq commands and plugging them straight into the virtual environment.
+Some of the more daring commands
+
+If you dare, try out these commands (don’t say you were not warned):
+
+    Alt+SysRq+b: Immediately reboots the system. No syncing or unmounting of disks is performed. That is a bad thing so avoid it if you can.
+    Alt+SysRq+c: Performs a NULL pointer dereference and completely crashes the machine. Joy! Again, bad thing.
+    Alt+SysRq+e: Sends the SIGTERM signal to all processes except for init.
+    Alt+SysRq+o: Is likely to shut the machine off, but it might not work. It’s not always supported in every kernel.
+
+What is it good for?
+
+The last few examples of Magic SysRq were spectacularly destructive. You should use them only as last resorts and only if you know what you’re doing. The above examples probably led you to wonder why you would even use Magic SysRq commands at all.
+
+To answer that quandary, you should take a look at the SysRq documentation. It’s located with the kernel source, but if you don’t have that lying around, you can always check out the documentation online.
+
+Within the documentation, you will see quite a number of different key combinations. Thirty-five of them to be exact. One of the more interesting combinations is Alt+SysRq+k which will appeal to the clinically paranoid. It kills all programs on the virtual terminal. That’s useful if you approach a machine and want to make sure that the login prompt isn’t some kind of trojan subprocess.
+
+If you want to perform a reboot and your console isn’t responding, you might be tempted to perform Alt-SysRq-b on the system. However, that’s not very nice to your disks or any processes that might still be running and capable of responding to signals. In that case, a sequence of Magic SysRq commands would be in order.
+
+First, you should send the “e” command to SIGTERM all processes thus allowing the opportunity for graceful exits. Processes unable or unwilling to respond to a SIGTERM will need to be handled with the “i” command (In essence: “SIGKILL ALL THE THINGS!”). Then, you’ll want to perform Alt+SysRq+s to “sync” or properly flush any data to disks. Next, Alt+SysRq+u will remount all disks as read only. Finally, Alt+SysRq+b will reboot the system. When it comes up, you will not need to perform any filesystem checking, and you can rest peacefully knowing that you gave every running process your best try at allowing it to close gracefully and write any data to disk consistently.
+Still a useful relic
+
+The SysRq key itself is a relic from a bygone era. However, as long as PCs still use a BIOS, the original interrupt command is still there, waiting to be invoked. Furthermore, as you have just seen, Linux uses this to its advantage for a low level means of recovering and interacting with the system. If understood properly, it can be a very useful tool in an administrator’s careful hands.
+
+Do you have your own insight into the Magic SysRq Key? Have a story about it saving your hide? Or perhaps burning aforementioned hide? Tell us all about it in the comments below!

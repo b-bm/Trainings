@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\PrintNumbersNotDivisibleBy3and7\bin\Debug\PrintNumbersNotDivisibleBy3and7.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\PrintNumbersNotDivisibleBy3and7\bin\Debug\PrintNumbersNotDivisibleBy3and7.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\PrintNumbersNotDivisibleBy3and7\bin\Debug\PrintNumbersNotDivisibleBy3and7.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\PrintNumbersNotDivisibleBy3and7\obj\Debug\2.PrintNumbersNotDivisibleBy3and7.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\PrintNumbersNotDivisibleBy3and7\obj\Debug\PrintNumbersNotDivisibleBy3and7.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\PrintNumbersNotDivisibleBy3and7\obj\Debug\PrintNumbersNotDivisibleBy3and7.pdb

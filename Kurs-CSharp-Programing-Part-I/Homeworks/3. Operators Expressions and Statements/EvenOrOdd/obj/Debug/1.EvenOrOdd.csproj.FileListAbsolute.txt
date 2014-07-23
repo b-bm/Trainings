@@ -1,0 +1,9 @@
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\EvenOrOdd\bin\Debug\EvenOrOdd.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\EvenOrOdd\bin\Debug\EvenOrOdd.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\EvenOrOdd\bin\Debug\EvenOrOdd.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\EvenOrOdd\obj\Debug\1.EvenOrOdd.csprojResolveAssemblyReference.cache
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\EvenOrOdd\obj\Debug\EvenOrOdd.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\EvenOrOdd\obj\Debug\EvenOrOdd.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\EvenOrOdd\bin\Debug\EvenOrOdd.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\EvenOrOdd\obj\Debug\EvenOrOdd.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\EvenOrOdd\obj\Debug\EvenOrOdd.pdb

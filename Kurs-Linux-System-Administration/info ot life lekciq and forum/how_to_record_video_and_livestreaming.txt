@@ -1,0 +1,32 @@
+﻿Запис на Клип и Live streaming:
+
+Тъй като командата с всичките си аргументи е много дълъга, аз като всеки мързелив човек съм си направил alias:
+ 
+
+alias capture_screen='ffmpeg -f x11grab -s 1920x1080+0+0 -i :0.0 -f alsa -i pulse -vcodec libx264 -pix_fmt yuv420p -preset ultrafast -vsync 2 -acodec libmp3lame -ar 44100 -ab 128k -f flv '
+alias capture_screenS='ffmpeg -f x11grab -s 1024x768+0+0 -i :0.0 -f alsa -i pulse -vcodec libx264 -pix_fmt yuv420p -preset ultrafast -vsync 2 -acodec libmp3lame -ar 44100 -ab 128k -f flv '
+ 
+Този формат се оказа доста удачен за YouTube клипчетата и е удобен за live streaming
+
+--> answered by hackman.
+
+На някой от вас може да им е интересно как пускам stream-a. Та ето го скрипта който използвам:
+
+#!/bin/bash
+key='YOUR_KEY_HERE'
+url="live.justin.tv/app/$key"
+
+# Fix microphone audio levels with ALSA. The commands for pulse are different
+amixer cset name='Internal Mic Boost Volume' 3
+amixer cset name='Capture Volume' 70
+
+ffmpeg \
+        -f x11grab -s "1024x768" -r 24 -i :0.0 \
+        -f alsa -ac 2 -i hw:0,0 \
+        -vb 128k -vcodec libx264 -s "1024x768" -threads 4 -b:v 1000k \
+        -acodec libmp3lame -ar 44100 -threads 2 -q:a 5 -ab 128k \
+        -f flv "rtmp://$url"
+
+--> answered by hackman.
+
+

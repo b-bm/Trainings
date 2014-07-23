@@ -1,0 +1,105 @@
+﻿How to install Windows Server 2008 without activating it:
+
+    Run the Windows Server 2008 Setup program.
+    When you are prompted to enter a product key for activation, do not enter a key. 
+	Click No when Setup asks you to confirm your selection.
+    You may be prompted to select the edition of Windows Server 2008 that you want to evaluate. 
+	Select the edition that you want to install.
+
+    Note After Windows Server 2008 is installed, the edition cannot be changed without reinstalling it.
+    When you are prompted, read the evaluation terms in the Microsoft Software License Terms, and then accept the terms.
+    When the Windows Server 2008 Setup program is finished, your initial 60-day evaluation period starts. 
+	To check the time that is left on your current evaluation period, run the Slmgr.vbs script that is in the System32 folder. 
+	Use the -dli switch to run this script. 
+	The slmgr.vbs -dli command displays the number of days that are left in the current 60-day evaluation period.
+
+How to manually extend the evaluation period
+When the initial 60-day evaluation period nears its end, you can run the Slmgr.vbs script to reset the evaluation period. 
+To do this, follow these steps:
+
+    Click Start, and then click Command Prompt.
+    Type slmgr.vbs -dli, and then press ENTER to check the current status of your evaluation period.
+    To reset the evaluation period, type slmgr.vbs –rearm, and then press ENTER.
+    Restart the computer.
+
+This resets the evaluation period to 60 days.
+How to automate the extension of the evaluation period
+You may want to set up a process that automatically resets the evaluation period every 60 days. 
+One way to automate this process is by using the Task Scheduler. 
+You can configure the Task Scheduler to run the Slmgr.vbs script and to restart the server at a particular time. 
+To do this, follow these steps: 
+
+	1. Click Start, point to Administrative Tools, and then click Task Scheduler.
+	2. Copy the following sample task to the server, and then save it as an .xml file. 
+		For example, you can save the file as Extend.xml.
+
+		<?xml version="1.0" encoding="UTF-16"?>
+		<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+		  <RegistrationInfo>
+			<Date>2007-09-17T14:26:04.433</Date>
+			<Author>Microsoft Corporation</Author>
+		  </RegistrationInfo>
+		  <Triggers>
+			<TimeTrigger id="18c4a453-d7aa-4647-916b-af0c3ea16a6b">
+			  <Repetition>
+				<Interval>P31D</Interval>
+				<StopAtDurationEnd>false</StopAtDurationEnd>
+			  </Repetition>
+			  <StartBoundary>2007-10-05T02:23:24</StartBoundary>
+			  <EndBoundary>2008-09-17T14:23:24.777</EndBoundary>
+			  <Enabled>true</Enabled>
+			</TimeTrigger>
+		  </Triggers>
+		  <Principals>
+			<Principal id="Author">
+			  <UserId>domain\alias</UserId>
+			  <LogonType>Password</LogonType>
+			  <RunLevel>HighestAvailable</RunLevel>
+			</Principal>
+		  </Principals>
+		  <Settings>
+			<IdleSettings>
+			  <Duration>PT10M</Duration>
+			  <WaitTimeout>PT1H</WaitTimeout>
+			  <StopOnIdleEnd>true</StopOnIdleEnd>
+			  <RestartOnIdle>false</RestartOnIdle>
+			</IdleSettings>
+			<MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+			<DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>
+			<StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>
+			<AllowHardTerminate>true</AllowHardTerminate>
+			<StartWhenAvailable>false</StartWhenAvailable>
+			<RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>
+			<AllowStartOnDemand>true</AllowStartOnDemand>
+			<Enabled>true</Enabled>
+			<Hidden>false</Hidden>
+			<RunOnlyIfIdle>false</RunOnlyIfIdle>
+			<WakeToRun>true</WakeToRun>
+			<ExecutionTimeLimit>P3D</ExecutionTimeLimit>
+			<DeleteExpiredTaskAfter>PT0S</DeleteExpiredTaskAfter>
+			<Priority>7</Priority>
+			<RestartOnFailure>
+			  <Interval>PT1M</Interval>
+			  <Count>3</Count>
+			</RestartOnFailure>
+		  </Settings>
+		  <Actions Context="Author">
+			<Exec>
+			  <Command>C:\Windows\System32\slmgr.vbs</Command>
+			  <Arguments>-rearm</Arguments>
+			</Exec>
+			<Exec>
+			  <Command>C:\Windows\System32\shutdown.exe</Command>
+			  <Arguments>/r</Arguments>
+			</Exec>
+		  </Actions>
+		</Task>
+	3. In the sample task, change the value of the following “UserID” tag to contain your domain and your alias:
+		<UserId>domain\alias</UserId>
+	4. In the Task Scheduler, click Import Task on the Action menu.
+	5. Click the sample task .xml file. For example, click Extend.xml.
+	6. Click Import.
+	7. Click the Triggers tab.
+	8. Click the One Time trigger, and then click Edit.
+	9. Change the start date of the task to a date just before the end of your current evaluation period.
+	10. Click OK, and then exit the Task Scheduler. 

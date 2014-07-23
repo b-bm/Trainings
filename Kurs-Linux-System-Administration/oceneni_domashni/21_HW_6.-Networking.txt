@@ -1,0 +1,52 @@
+﻿1. Create a routing table called lsa. Then add all of your existing routes to it. And finally make your machine use that table instead of table 'main'.
+
+// Adding a routing table called "lsa" mapped to 252
+echo "252 lsa" >> /etc/iproute2/rt_tables
+
+// List main routing talbe 
+#ip r l
+192.168.0.0/24 dev eth0  proto kernel  scope link  src 192.168.0.3  metric 1 
+default via 192.168.0.1 dev eth0  proto static 
+
+// copy all current routes to talbe "lsa"
+
+# ip r a 192.168.0.0/24 dev eth0  proto kernel  scope link  src 192.168.0.3  metric 1 table lsa
+# ip r a default via 192.168.0.1 dev eth0 proto static table lsa
+
+// Verify the routes are copied. 
+# ip r l t lsa
+192.168.0.0/24 dev eth0  proto kernel  scope link  src 192.168.0.3  metric 1 
+default via 192.168.0.1 dev eth0  proto static 
+
+// List the rules and their priority
+# ip ru l
+0:	from all lookup local 
+32766:	from all lookup main 
+32767:	from all lookup default 
+
+// Insert our new table witrh higher priority than "main"
+# ip ru add from all lookup lsa prio 1000
+
+// From now on table "lsa" will take precedence over table "main" 
+# ip ru l
+0:	from all lookup local 
+1000:	from all lookup lsa 
+32766:	from all lookup main 
+32767:	from all lookup default 
+
+// We can delete talbe "main" but this isn't really necessary since all the traffic that was meant to
+// match it will now go through "lsa". Also, the "main" routing table is still visible if you issue `ip r l t main`.
+
+# ip ru del table main
+# ip ru list
+0:	from all lookup local 
+1000:	from all lookup lsa 
+32767:	from all lookup default 
+
+ЗАБЕЛЕЖКА:
+Добро домашно. Има обяснения и е даден аутпут от командния ред.
+Успех.
+
+
+
+

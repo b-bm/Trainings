@@ -1,0 +1,461 @@
+﻿Lecture UPdated:
+
+The Three Giants of Linux - http://www.linux-mag.com/id/7721/
+The Linux Distribution Diagram - http://futurist.se/gldt/
+List of supported architectures - http://en.wikipedia.org/wiki/Linux_kernel_portability_and_supported_architectures
+History of Linux - http://en.wikipedia.org/wiki/History_of_Linux
+Linux kernel internals structure - http://www.makelinux.net/system/new
+
+
+How to find help in Linux
+
+1. -h / --help
+2. man command/filename
+3. info command/filename
+4. /usr/doc
+5. If man and/or info are not available on your machine, you can always google for the command or serarch for manual pages here: http://linux.die.net/
+6. The Linux Documentation Project - http://www.tldp.org
+7. The Linux Kernel Documentation directory - Documentation/* (http://www.kernel.org)
+8. HowToForge - http://www.howtoforge.com
+
+HardDisk names
+
+/dev/
+ hda1
+ | |\--- 1-x - partition numbers
+ | |---- a - primary master
+ | |---- b - primary slave
+ | |---- c - secondary master
+ | \---- d - secondart slave
+ \------ hd - IDE hard disk or CDROM
+
+ sda1
+ | |\--- 1-x - partition numbers
+ | \---- a-z - device name
+ \------ sd - SCSI/SATA/SAS/USB hard disk
+
+ mmcblk0p1
+   | | \--- 1-x - partition numbers
+   | \----- 0-x - device sequence number
+   \--------- device name (only SD/MMC compatible cards)
+
+ Memory sticks are usually read via USB card readers which expose them as USB hard disks
+
+
+Partitioning
+*** Everything is custom ***
+!!! Always keep /boot on a separate partition and make it between 150-500 MB !!!
+
+Swap considerations:
+1. If you have less then 2GB of RAM, create the swap partition at least as big as the amount of RAM.
+2. If you have less then 1GB of RAM, create thw swap to be double the amount of RAM.
+3. If you have above 4GB of RAM and you are not going to use Hibarnate either remove the swap completely or don't make it bigger then 1GB.
+4. If you are going to use Hibernate, then you need the swap partition to be as big as your ram is + 10-20 MB, no matter how much RAM you have.
+5. Swap can be dispersed across multiple devices in order to increase its performance. If two or more swap partitions have the same priority(for example, pri=0), then the kernel writes to them on round-robin basis.
+
+General partition scheme:
+0 - for swap - take a look at Swap considerations
+1 - for /boot - 150-500 MB
+2 - for / - the rest of the space
+
+Two possible schemas for resize have to be considered:
+1. Leave the biggest partition at the end,
+2. Leave the biggest partition at the begining.
+
+Never put the biggest partition between the others. If you resize it later, you will need to move some partitions to be able to utulize the freed space.
+
+Should you use Linux Software RAID ?
+Should you use LVM ?
+
+Considerations for Linux Software RAID
+1. Redunrancy
+2. Portability
+3. Strange performance setups (/dev/ram0 /dev/sdb1 where sdb1 is setup as --write-mostly)
+4. You have to think cearfuly before creating the md devices in order to prevent block unallignment issues(which cause performance issues).
+
+Considerations for LVM
+1. You can resize, delete, create partitions without meny issues.
+2. You can easily expand your volume groups by adding new drives.
+3. It becomes harder to recover broken data
+4. You have to think cearfuly before creating the volume groups and logical volumes in order to prevent block unallignment issues(which cause performance issues).
+5. LVM is the only good backup solution for MySQL/PgSQL servers. Everything else is cluster/replication based or needs service interruption.
+
+Do not put Linux Software RAID on top of LVM and the other way around. This causes performance issues.
+
+Unfortunately I can't tell you which mirroring code is faster. I personally prefer the SW RAID1, but it is possible that the LVM code is faster. I don't know.
+
+Considerations for primary/logical partitions
+1. Primary partitions are only 4, so you can not scale, with more partitions.
+2. Some operating systems can not boot from logical partitions.
+3. The logical partitions can be teoretically infinite.
+
+Considerations for the size of the partitions
+1. Bigger partitions take longer time to backup and restore.
+2. If you are planning to have HUGE amount of files, but they are small, then you can sacrifice some space to allocate more inodes(tweeking the inode options of the selected FS).
+3. If the partitions are small, they can not contain many files. Also, bigger separation of the data can slow down your hard drive. And finally at some point you may need to expand them or combine them with other partitions.
+4. Very big partitions over 16TB limit you to only a few types of File Systems.
+5. Linux I/O queues are per device, not per partition. Which means that more partitions on the same device is worse then partitions on separate physical devices.
+6. If you are using HW RAID controllers, some times it is better to export two separate devices from your array instead of one(because of the above rule).
+
+Directory structure considerations
+1. /home usualy grows a lot because of all the user content
+2. /usr also grwows, usualy because of a lot of new software
+3. /var grows because of logs, databases or e-mails going trough the SMTP server
+
+What kind of pseudo file systems we have:
+
+- ProcFS -> бележка:( много бърза файлова система, защото чете директно от паметта на кърнела )
+ + /proc/cpuinfo
+ + /proc/meminfo
+ + /proc/partitions
+ + /proc/filesystems
+ + /proc/schedstat
+ + /proc/diskstats
+ + /proc/loadavg
+ + /proc/uptime
+
+- SysFS -> бележка:( много бърза файлова система, защото чете директно от паметта на кърнела )
+ + /sys/class/thermal/thermal_zone0/temp
+ + /sys/power/disk
+ + /sys/bus/cpu/devices/cpu0/cpufreq/cpuinfo_cur_freq
+
+- TmpFS -> бележка:( файлова система, която може да се създаде директно в RAM паметта !!! ) 
+ + block distribution
+
+File systems can be created on a pratition or on a file.
+
+Files that we need to look at:
+- /proc/partitions
+- /proc/mounts
+- /proc/filesystems
+- /etc/fstab
+- /etc/mstab
+
+Commands that we need to look at:
+- mknod
+- fdisk
+- cfdisk
+- sfdisk
+- parted
+- mkswap
+- swapon/swapoff
+- mkfs.ext2/3/4
+- mkfs.reiserfs
+- mkfs.vfat
+- tune2fs
+- dd
+- mount
+- sync
+- echo 0/1/2/3 > /proc/sys/vm/drop_caches (Documentation/sysctl/vm.txt)
+ + 0 - do nothing
+ + 1 - free pagecache
+ + 2 - free directory entries and inodes
+ + 3 - free pagecache, directory entries and inodes
+- fsck.*
+ + /lost+found
+ + e2fsck
+
+Cluster/Network file systems
+ - NFS (mount & export)
+ - CIFS (smbmound/mount -t cifs)
+
+Commands setup:
+ 1. create devices with mknod
+ 2. create/edit/delete partitions with cfdisk
+ 3. create/edit/delete partitions with fdsisk
+ 4. create/edit/delete partitions with sfdisk
+ 5. create/edit/delete partitions with parted
+ 6. create swap fs on a partition
+ 7. create swap fs on a file
+ 8. activate, deactivate and monitor swaps
+ 9. create an ext3 fs on a partition
+10. create an ext2 fs on a file
+11. create reiserfs fs on a partition
+12. create vfat fs on a partition
+13. make a backup of your MBR using dd
+14. convert ext2fs to ext3 with tune2fs
+15. create, modify and delete sw raid with mdadm
+16. create, modify and delete LVM partitions
+17. mount the created partitions
+18. describe the definitions of /etc/fstab and mtab
+19. show mount --bind/--rbind
+20. describe the following mount options:
+ + noatime/nodiratime
+ + auto/noauto
+ + owner
+ + nosuid
+ + nodev
+ + noexec
+ + remount
+ + nofail
+ + usrquota/grpquota
+21. mounting a file using loop
+
+--> ИНФО СЪДЪРЖАНИЕ - ВИДЕА:
+Видео - 1:
+0:01 - Инфо за Мариян Маринов 
+3:30 - Инфо за курса 
+15:45 - Контакти на Мариян Маринов 
+16:30 - Инфо за бъдещия livestriming 
+17:30 - Въпроси от присъстващите 
+26:10 - Какво е Linux(история) 
+34:41 - История на Linux дистрибуциите 
+39:00 - Полезни адреси за Linux историята и като цяло 
+40:00﻿ - Инсталация на CentOS на виртауална машина 
+44:30 - Как да търсим помощ в Linix 
+48:11 - -h/--help команди 
+52:13 - man команда 
+59:30 - info команда 
+1:09:15 - хард дискове 
+1:19:15 - партишъни 
+
+Видео - 2:
+00:30 - Добри практики за разделяне на хард диска
+01:26 - Swap паметта
+09:25 - Дърво на директориите в Linix
+33:14 - LVM
+40:00 - Software RAID
+55:10 - fdisk команда
+57:10 - cfdisk команда
+1:03:10 - sfdisk команда
+1:06:40 -﻿ parted команда
+1:13:20 - Бира time
+48:55 от видеото, Мариян споменава, че записите на външните тракове са колкото и на вътрешните, или поне аз така го разбрах.
+Мисля, че говори за "bit density". Ето какво казват в Wikipedia по въпроса:
+"Each zone is then divided into sectors such that each sector has a similar physical size. 
+Because outer﻿ zones have a greater circumference than inner zones, they are allocated more sectors. 
+This is known as zoned bit rate"
+Zone bit recording
+
+Видео - 3:
+00:50 пояснения за домашните 
+02:30 пояснения за﻿сървъра 
+06:20 procfs 
+07:34 procfs/cpuinfo 
+09:18 procfs/meminfo 
+10:20 procfs/partitions 
+13:25 procfs/schedstat 
+13:57 procfs/diskstats 
+14:40 procfs/loadavg 
+15:45 procfs/uptime 
+16:55 sysfs 
+17:00 sysfs/temp 
+17:45 sysfs/disk 
+18:56 sysfs/cpuinfo 
+21:05 kcore команда 
+22:00 tmpfs 
+26:10 mount команда 
+43:22 fstab команда 
+1:02:37 proc/filesystems 
+1:03:09 /etc/mtab 
+1:07:22 mkfs команда 
+1:12:14 dd команда 
+1:16:30 mkswap команда 
+1:18:20 swapon команда
+1:20:50 swapoff команда
+1:24:00 tune2fs команда
+1:29:53 fsck.* команда
+1:31:22 e2fsck﻿команда
+
+Видео - 4:
+00:05 MBR backup 
+02:40 LMV 
+05:45 LMV - pvcreate команда 
+08:54 LMV - cgcreate команда 
+11:05 LMV - lvcreate команда 
+21:45 Software raid 
+27:10 mdadm команда 
+43:32 quota пояснения 
+47:40 Край на I лекция 
+48:00 boot процедура 
+49:50 boot﻿ loader 
+1:02:45 init 
+1:04:00 пример под grud 
+
+========================================================================
+OLD First var. of lecture:
+
+The Three Giants of Linux - http://www.linux-mag.com/id/7721/
+The Linux Distribution Diagram - http://futurist.se/gldt/
+List of supported architectures - http://en.wikipedia.org/wiki/Linux_kernel_portability_and_supported_architectures
+History of Linux - http://en.wikipedia.org/wiki/History_of_Linux
+Linux kernel internals structure - http://www.makelinux.net/system/new
+
+
+How to find help in Linux
+
+1. -h / --help
+2. man command/filename
+3. info command/filename
+4. If man and/or info are not available on your machine, you can always google for the command or serarch for manual pages here: http://linux.die.net/
+5. The Linux Documentation Project - http://www.tldp.org
+6. The Linux Kernel Documentation directory - Documentation/*
+7. HowToForge - http://www.howtoforge.com
+
+HardDisk names
+
+/dev/
+ hda1
+ | |\--- 1-x - partition numbers
+ | |---- a - primary master
+ | |---- b - primary slave
+ | |---- c - secondary master
+ | \---- d - secondart slave
+ \------ hd - IDE hard disk or CDROM
+
+ sda1
+ | |\--- 1-x - partition numbers
+ | \---- a-z - device name
+ \------ sd - SCSI/SATA/SAS/USB hard disk
+
+ mmcblk0p1
+   |   | \--- 1-x - partition numbers
+   |   \----- 0-x - device sequence number 
+   \--------- device name (only SD/MMC compatible cards)
+
+ Memory sticks are usually read via USB card readers which expose them as USB hard disks
+
+
+Partitioning
+*** Everything is custom ***
+!!! Always keep /boot on a separate partition and make it between 150-500 MB !!!
+
+Swap considerations:
+1. If you have less then 2GB of RAM, create the swap partition at least as big as the amount of RAM.
+2. If you have less then 1GB of RAM, create thw swap to be double the amount of RAM.
+3. If you have above 4GB of RAM and you are not going to use Hibarnate either remove the swap completely or don't make it bigger then 1GB.
+4. If you are going to use Hibernate, then you need the swap partition to be as big as your ram is + 10-20 MB, no matter how much RAM you have.
+5. Swap can be dispersed across multiple devices in order to increase its performance. If two or more swap partitions have the same priority(for example, pri=0), then the kernel writes to them on round-robin basis.
+
+General partition scheme:
+0 - for swap  - take a look at Swap considerations
+1 - for /boot - 150-500 MB
+2 - for /     - the rest of the space
+
+Two possible schemas for resize have to be considered:
+1. Leave the biggest partition at the end,
+2. Leave the biggest partition at the begining.
+
+Never put the biggest partition between the others. If you resize it later, you will need to move some partitions to be able to utulize the freed space.
+
+Should you use Linux Software RAID ?
+Should you use LVM ?
+
+Considerations for Linux Software RAID
+1. Redunrancy
+2. Portability
+3. Strange performance setups (/dev/ram0 /dev/sdb1 where sdb1 is setup as --write-mostly)
+4. You have to think cearfuly before creating the md devices in order to prevent block unallignment issues(which cause performance issues).
+
+Considerations for LVM
+1. You can resize, delete, create partitions without meny issues.
+2. You can easily expand your volume groups by adding new drives.
+3. It becomes harder to recover broken data
+4. You have to think cearfuly before creating the volume groups and logical volumes in order to prevent block unallignment issues(which cause performance issues).
+5. LVM is the only good backup solution for MySQL/PgSQL servers. Everything else is cluster/replication based or needs service interruption.
+
+Do not put Linux Software RAID on top of LVM and the other way around. This causes performance issues.
+
+Unfortunately I can't tell you which mirroring code is faster. I personally prefer the SW RAID1, but it is possible that the LVM code is faster. I don't know.
+
+Considerations for primary/logical partitions
+1. Primary partitions are only 4, so you can not scale, with more partitions.
+2. Some operating systems can not boot from logical partitions.
+3. The logical partitions can be teoretically infinite.
+
+Considerations for the size of the partitions
+1. Bigger partitions take longer time to backup and restore.
+2. If you are planning to have HUGE amount of files, but they are small, then you can sacrifice some space to allocate more inodes(tweeking the inode options of the selected FS).
+3. If the partitions are small, they can not contain many files. Also, bigger separation of the data can slow down your hard drive. And finally at some point you may need to expand them or combine them with other partitions.
+4. Very big partitions over 16TB limit you to only a few types of File Systems. 
+5. Linux I/O queues are per device, not per partition. Which means that more partitions on the same device is worse then partitions on separate physical devices.
+6. If you are using HW RAID controllers, some times it is better to export two separate devices from your array instead of one(because of the above rule).
+
+Directory structure considerations
+1. /home usualy grows a lot because of all the user content
+2. /usr also grwows, usualy because of a lot of new software
+3. /var grows because of logs, databases or e-mails going trough the SMTP server
+
+What kind of pseudo file systems we have:
+- ProcFS
+ + /proc/cpuinfo
+ + /proc/meminfo
+ + /proc/partitions
+ + /proc/filesystems
+ + /proc/schedstat
+ + /proc/diskstats
+ + /proc/loadavg
+ + /proc/uptime
+- SysFS
+ + /sys/class/thermal/thermal_zone0/temp 
+ + /sys/power/disk
+ + /sys/bus/cpu/devices/cpu0/cpufreq/cpuinfo_cur_freq
+- TmpFS
+ + block distribution
+
+File systems can be created on a pratition or on a file.
+
+Files that we need to look at:
+- /proc/partitions
+- /proc/mounts
+- /proc/filesystems
+- /etc/fstab
+- /etc/mstab
+
+Commands that we need to look at:
+- mknod
+- fdisk
+- cfdisk
+- sfdisk
+- parted
+- mkswap
+- swapon/swapoff
+- mkfs.ext2/3/4
+- mkfs.reiserfs
+- mkfs.vfat
+- tune2fs
+- dd
+- mount
+- sync
+- echo 0/1/2/3 > /proc/sys/vm/drop_caches (Documentation/sysctl/vm.txt) 
+ + 0 - do nothing
+ + 1 - free pagecache
+ + 2 - free directory entries and inodes
+ + 3 - free pagecache, directory entries and inodes
+- fsck.*
+ + /lost+found
+ + e2fsck
+
+Cluster/Network file systems
+ - NFS (mount & export)
+ - CIFS (smbmound/mount -t cifs)
+
+Commands setup:
+ 1. create devices with mknod
+ 2. create/edit/delete partitions with cfdisk
+ 3. create/edit/delete partitions with fdsisk
+ 4. create/edit/delete partitions with sfdisk
+ 5. create/edit/delete partitions with parted
+ 6. create swap fs on a partition
+ 7. create swap fs on a file
+ 8. activate, deactivate and monitor swaps
+ 9. create an ext3 fs on a partition
+10. create an ext2 fs on a file
+11. create reiserfs fs on a partition
+12. create vfat fs on a partition
+13. make a backup of your MBR using dd
+14. convert ext2fs to ext3 with tune2fs
+15. create, modify and delete sw raid with mdadm
+16. create, modify and delete LVM partitions
+17. mount the created partitions
+18. describe the definitions of /etc/fstab and mtab
+19. show mount --bind/--rbind 
+20. describe the following mount options:
+ + noatime/nodiratime
+ + auto/noauto
+ + owner
+ + nosuid
+ + nodev
+ + noexec
+ + remount
+

@@ -1,0 +1,53 @@
+﻿2. Write down configuration for GRUB which pass protects changes to the added kernels.
+
+	
+	Grub 2 can set password protection on specific menuentries and for specific users. For example, "John" can access Ubuntu but not the Windows recovery mode, which is only accessible by "Bill", the superuser. To enable basic password protection, the user/administrator must add a superuser (and other users if desired) and password(s) to the /etc/grub.d/00_header* file and manually designate which menuentries require a password in the /etc/grub.d/ files. 
+
+1. Setting Up Password Protection 
+	
+	A. Superuser & Password Designation (Required)
+	
+	Add the following the bottom of /etc/grub.d/00_header (example with user "superman" and pass "1234"):
+
+		cat << EOF
+		set superusers="superman"
+		password superman 1234
+		EOF 
+	
+	B. Other Users (Optional):
+
+		cat << EOF
+		set superusers="superman"
+		password superman 1234
+		password bill 5678
+		EOF 
+	
+	C. Designating Menuentries for Password Protection
+
+	Once the superuser/other users and their password(s) are established, the entries to be protected must be identified.
+	Password protect all Linux kernels on the main partition: /etc/grub.d/10_linux (approximately line 74):
+		
+		To allow the superuser only:
+		
+		printf "menuentry --users superman '${title}' ${CLASS} {\n" "${os}" "${version}" { 
+		
+		Example to permit access by the superuser (superman) and bill (Note, for multiple users, separate the names with a comma - bill,john,jill):
+		
+		printf "menuentry --users bill '${title}' ${CLASS} {\n" "${os}" "${version}" { 
+
+2. Password Encryption - grub-mkpasswd-pbkdf2
+
+	This command converts your desired password into a very long alphanumeric code which is placed in the Grub 2 files. 
+	Note: If you are going to experiment with encrypted passwords, make sure you have at least one good non-password protected menuentry to boot or you may not be able to log on if you encounter problems. To generate an encrypted password, open a terminal and run the following command:
+
+		grub-mkpasswd-pbkdf2
+	
+	Enter the desired password, the reenter it when prompted. Copy the resulting code. Paste the code in /etc/grub.d/00_header after the user and add "password_pbkdf2" instead of only "password" :
+
+		set superusers="drs305"
+		password_pbkdf2 marek grub.pbkdf2.sha512.10000.71C5B50F5ECB0EE953AB18568 4FABAC (shortened for formatting purposes) 
+
+----
+Source: http://ubuntuforums.org/showthread.php?t=1369019
+
+ЗАБЕЛЕЖКА: Добре написано домашно според мен. Изчерпателно и добре обяснен процес.

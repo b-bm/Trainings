@@ -1,0 +1,45 @@
+﻿MySQL
+1. Architecture
+ - library 	libmysql
+ - client	mysql
+ - db server	mysqld (3306)
+ -- query optimizer 
+ -- query planner
+ -- storage engines
+ --- MyISAM 
+ --- InnoDB
+ --- Archive
+ --- Federated
+ --- Memory
+ - file architecture
+  -- .frm - table definitions
+  -- .MYD - table data
+  -- .MYI - table indexes
+  -- .ibd - InnoDB table data
+ - mysql variations
+ -- Oracle's MySQL
+ -- Percona Server MySQL
+ -- MariaDB
+ -- OurDelta
+ -- Drizzle
+2. Configuration
+ - /etc/my.cnf
+ - time zones
+3. Maintenance - mysql-commands.txt
+4. DB initialization - mysql_install_db
+
+
+PgSQL
+1. Architecture
+ - library
+ - client
+ - db server
+ -- query optimizer
+ -- query planner
+ -- One Storage Engine to RULE them ALL
+ - DB architecture
+2. Configuration
+ - data/pg_hba.conf
+ - data/postgresql.conf
+3. Maintenance
+ - creating databases (template0/1)

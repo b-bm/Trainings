@@ -1,0 +1,33 @@
+﻿4. Describe the SELinux security model.
+
+ИЗТОЧНИЦИ - 1:
+https://en.wikipedia.org/wiki/SELinux
+http://elinux.org/Security#SELinux
+
+Security-Enhanced Linux (SELinux) is a Linux feature that provides the mechanism for supporting access control security policies, including United States Department of Defense-style mandatory access controls, through the use of Linux Security Modules (LSM) in the Linux kernel. 
+It is not a Linux distribution, but rather a set of kernel modifications and user-space tools that can be added to various Linux distributions. 
+Its architecture strives to separate enforcement of security decisions from the security policy itself and streamlines the volume of software charged with security policy enforcement.
+The key concepts underlying SELinux can be traced to several earlier projects by the United States National Security Agency.
+It has been integrated into the mainline Linux kernel since version 2.6, on 8 August 2003.
+
+Features:
+    Clean separation of policy from enforcement
+    Well-defined policy interfaces
+    Support for applications querying the policy and enforcing access control (for example, crond running jobs in the correct context)
+    Independent of specific policies and policy languages
+    Independent of specific security label formats and contents
+    Individual labels and controls for kernel objects and services
+    Support for policy changes
+    Separate measures for protecting system integrity (domain-type) and data confidentiality (multilevel security)
+    Flexible policy
+    Controls over process initialization and inheritance and program execution
+    Controls over file systems, directories, files, and open file descriptors
+    Controls over sockets, messages, and network interfaces
+    Controls over use of "capabilities"
+    Cached information on access-decisions via the AVC (Access Vector Cache)
+
+SELinux - This provides an implementation of the Flask Flux Advanced Security Kernel for Linux. 
+SELinux started as a kernel patch which was presented by the NSA to kernel developers during the 2001 kernel summit. 
+Feeback from this presentation started the LSM project, and the SELinux project helped define large parts of the LSM interface. 	
+
+

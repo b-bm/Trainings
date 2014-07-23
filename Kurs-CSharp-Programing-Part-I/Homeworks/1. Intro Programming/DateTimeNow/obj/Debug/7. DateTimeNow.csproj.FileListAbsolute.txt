@@ -1,0 +1,5 @@
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\DateTimeNow\bin\Debug\DateTimeNow.exe.config
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\DateTimeNow\bin\Debug\DateTimeNow.exe
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\DateTimeNow\bin\Debug\DateTimeNow.pdb
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\DateTimeNow\obj\Debug\DateTimeNow.exe
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\DateTimeNow\obj\Debug\DateTimeNow.pdb

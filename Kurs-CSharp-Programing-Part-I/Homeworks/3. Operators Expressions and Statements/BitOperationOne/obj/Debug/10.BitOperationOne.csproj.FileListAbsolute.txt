@@ -1,0 +1,9 @@
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationOne\bin\Debug\BitOperationOne.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationOne\bin\Debug\BitOperationOne.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationOne\bin\Debug\BitOperationOne.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationOne\obj\Debug\10.BitOperationOne.csprojResolveAssemblyReference.cache
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationOne\obj\Debug\BitOperationOne.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationOne\obj\Debug\BitOperationOne.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationOne\bin\Debug\BitOperationOne.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationOne\obj\Debug\BitOperationOne.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationOne\obj\Debug\BitOperationOne.pdb

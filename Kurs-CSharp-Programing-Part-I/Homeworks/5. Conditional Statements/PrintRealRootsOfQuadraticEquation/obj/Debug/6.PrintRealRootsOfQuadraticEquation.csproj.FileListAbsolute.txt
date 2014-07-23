@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\PrintRealRootsOfQuadraticEquation\bin\Debug\PrintRealRootsOfQuadraticEquation.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\PrintRealRootsOfQuadraticEquation\obj\Debug\6.PrintRealRootsOfQuadraticEquation.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\PrintRealRootsOfQuadraticEquation\bin\Debug\PrintRealRootsOfQuadraticEquation.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\PrintRealRootsOfQuadraticEquation\bin\Debug\PrintRealRootsOfQuadraticEquation.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\PrintRealRootsOfQuadraticEquation\obj\Debug\PrintRealRootsOfQuadraticEquation.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\PrintRealRootsOfQuadraticEquation\obj\Debug\PrintRealRootsOfQuadraticEquation.pdb

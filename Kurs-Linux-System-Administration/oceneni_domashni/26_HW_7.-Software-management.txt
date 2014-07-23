@@ -1,0 +1,42 @@
+﻿5. Describe the procedure for creating an RPM based repository.
+
+//Creating a directory where the packages will be stored
+[root@hostname ~]# mkdir -p /share/CentOS/6/RPMRepositoryLocal
+
+//installing the command for creating repositories
+[root@hostname ~]# yum install createrepo
+
+//rebuilding foo-1.2.3.4-1.el4.src.rpm
+[builduser@hostname ~]$ rpmbuild --rebuild /home/rpm/foo-1.2.3.4-1.el4.src.rpm
+
+//moves the created rpm-s and chages the ownership and permissions of the directory
+[root@hostname ~]# mv /home/rpm/foo* /share/CentOS/6/RPMRepositoryLocal
+[root@hostname ~]# chown -R root.root /share/CentOS/6/RPMRepositoryLocal
+[root@hostname ~]# createrepo /share/CentOS/6/RPMRepositoryLocal
+[root@hostname ~]# chmod -R o-w+r /share/CentOS/6/RPMRepositoryLocal
+
+//creating the config file for the repository
+[root@hostname ~]# vi /etc/yum.repos.d/local.repo
+[local]
+name=CentOS-$releasever - local packages for $basearch
+baseurl=file:///share/CentOS/$releasever/local/$basearch
+enabled=1
+gpgcheck=0
+protect=1
+
+//testing if it works
+[root@hostname ~]# yum install foo foo-devel foo-docs
+
+//export the dir via NFS
+[root@hostname ~]# echo "/share 192.168.1.0/24(ro,async)' >>/etc/exports
+[root@hostname ~]# exportfs -r
+
+Source:
+http://wiki.centos.org/HowTos/CreateLocalRepos
+
+ЗАБЕЛЕЖКА:
+Добро домашно. Има и коментари.
+
+Оценка: 9
+
+

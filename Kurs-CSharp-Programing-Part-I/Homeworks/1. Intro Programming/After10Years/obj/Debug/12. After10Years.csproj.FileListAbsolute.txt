@@ -1,0 +1,6 @@
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\After10Years\bin\Debug\After10Years.exe.config
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\After10Years\bin\Debug\After10Years.exe
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\After10Years\bin\Debug\After10Years.pdb
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\After10Years\obj\Debug\12. After10Years.csprojResolveAssemblyReference.cache
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\After10Years\obj\Debug\After10Years.exe
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\After10Years\obj\Debug\After10Years.pdb

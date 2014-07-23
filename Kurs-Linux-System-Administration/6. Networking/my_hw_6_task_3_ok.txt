@@ -1,0 +1,73 @@
+﻿HW - 6:
+
+3. Write a RedHat based configuration file(s) that will create a bridge device from eth0 and eth1.
+
+Install required package :
+
+~# yum install bridge-utils
+
+Let machine has two NIC eth0 and eth1
+
+So, change it like :
+
+1. ~# vi /etc/sysconfig/network-scripts/ifcfg-eth0
+
+---
+DEVICE=eth0
+TYPE=Ethernet
+HWADDR=##:##:##:##:##:##
+ONBOOT=yes
+BRIDGE=br0
+---
+
+2. ~# vi /etc/sysconfig/network-scripts/ifcfg-eth1
+
+---
+DEVICE=eth1
+TYPE=Ethernet
+WADDR=##:##:##:##:##:##
+ONBOOT=yes
+BRIDGE=br0
+---
+
+3. create a file ifcfg-br0 for the bridge device br0. 
+
+~# vi /etc/sysconfig/network-scripts/ifcfg-br0 (Note IP address has been mentioned here)
+
+For static :
+
+---
+DEVICE=br0
+TYPE=Bridge
+ONBOOT=yes
+BOOTPROTO=static
+IPADDR=192.168.1.24
+NETMASK=255.255.255.0
+GATEWAY=192.168.1.254
+DELAY=0
+STP=off
+---
+
+For DHCP :
+
+---
+DEVICE=br0
+TYPE=Bridge
+ONBOOT=yes
+BOOTPROTO=dhcp
+DELAY=0
+STP=off
+---
+
+4. service network restart
+5. test : 
+~# brctl show
+
+==========================================
+INFO:
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-networkscripts-interfaces_network-bridge.html
+
+
+
+
+

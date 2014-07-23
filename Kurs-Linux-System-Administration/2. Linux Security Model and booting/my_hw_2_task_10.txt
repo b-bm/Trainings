@@ -1,0 +1,354 @@
+﻿10. Configure GRUB to load a kernel and its initrd from the Network.
+NEW : ???
+
+Procedure
+The following instructions are intended for experienced users. 
+You should be familiar with rpm, tar, source packages compilation, and the configuration of network services, as well as with the boot loader GRUB (see SDB:The Boot Manager Grub -> http://tr.opensuse.org/SDB:The_Boot_Manager_Grub)
+In the following example scenario, a Linux installation or a recovery system is loaded from the network. 
+For this purpose, a GRUB boot floppy is used to start a client. The files that Linux requires for booting (kernel, initrd) are transferred by GRUB through the tftp protocol. 
+All other files are transferred from a server via ftp or nfs.
+It would also be possible to load a Linux operating system and to operate the client as a diskless client. 
+This configuration exceeds the scope of this article, however.
+
+Step 1: Recompilation of the GRUB Package
+Since GRUB is compiled by default without network card support, it must be recompiled first. 
+For this purpose, install GRUB's source package from the directory /suse/src from the DVD or CD (CD 7 in the Professional Edition, CD 3 in the Personal Edition) by way of the rpm command: 
+
+rpm -Uhv /media/cdrom/suse/src/grub-0.92-69.src.rpm
+
+Then you will find a tarball in the directory /usr/src/packages/SOURCES/. 
+The file netboot/README.netboot in this tarball contains the parameters to compile the support for each network card. 
+Extract this file to the directory /tmp by executing a command similar to the following one (you might have to adjust the GRUB package's version number):
+
+tar -xOjf /usr/src/packages/SOURCES/grub-0.92.tar.bz2 grub-*/netboot/README.netboot >/tmp/README.netboot
+
+For example, for an Intel Ethernet Pro 100 the parameter "--enable-eepro100" is required. It is advisable to activate only the drivers that are actually required, because too many compiled network card drivers might make GRUB crash.
+
+Edit the spec file at /usr/src/packages/SPECS/grub.spec with an ASCII editor of your choice and insert the parameter for your network card support. 
+For example: 
+	%build
+	%ifarch x86_64
+		export CC='cc -m32'
+		CFLAGS="$CFLAGS $RPM_OPT_FLAGS -DNDEBUG -W -Wall
+	-Wpointer-arith -fno-asynchronous-unwind-tables"  
+	./configure \
+	--prefix=/usr --infodir=%{_infodir} --mandir=%{_mandir} --datadir=/usr/lib/grub \
+	--disable-auto-linux-mem-opt --enable-diskless --enable-eepro100
+	%else
+		CFLAGS="$CFLAGS $RPM_OPT_FLAGS -DNDEBUG -W -Wall -Wpointer-arith" 
+	./configure    --prefix=/usr --infodir=%{_infodir} --mandir=%{_mandir} --datadir=/usr/lib/grub \ 
+	--disable-auto-linux-mem-opt --enable-diskless --enable-eepro100
+	%endif
+	make
+
+Increase the release number at the top of the spec file, e.g.: 
+
+Release:      70
+
+hen save the spec file and recompile:
+rpm -bb /usr/src/packages/SPECS/grub.spec
+
+and install the package:
+rpm -Uhv /usr/src/packages/RPMS/i386/grub-0.92-70.i386.rpm
+
+Now create a GRUB boot floppy as follows:
+cd /usr/lib/grub/
+dd if=stage1 of=/dev/fd0
+dd if=stage2 of=/dev/fd0 seek=1
+
+By executing these commands, GRUB's first and second level are directly written on a floppy disk in block form. 
+
+Step 2: Network Services Configuration
+
+GRUB supports the file load from the network by means of the tftp protocol. 
+For this purpose, install the package atftp on your Linux server. 
+Create the directory /tftpboot in which to store the files of the tftp server then copy the kernel (file boot/loader/linux) and the initrd (file boot/loader/initrd) to this directory from the first installation CD or the DVD. 
+To activate the tftp server, edit the file /etc/inetd.conf by inserting the following line:
+
+tftp dgram udp wait nobody /usr/sbin/tcpd /usr/sbin/atftpd /tftpboot
+
+The rescue system can be installed or loaded via ftp or nfs. The following lines describe the configuration of an FTP server. 
+Install the packages vsftpd and ftpdir. To activate the FTP server, edit the file /etc/inetd.conf: remove the comment line from the entry
+
+ftp stream tcp nowait root /usr/sbin/tcpd vsftpd
+
+Activate the inetd by executing
+
+rcinetd start
+
+You can use the command insserv inetd or the runlevel editor to make inetd start automatically at the boot process. 
+For more information about the configuration of server services, refer to the administration manual.
+To release SuSE installation files for share, copy the content of the CD or DVD to the directory /srv/ftp/pub or to a subdirectory. 
+Alternatively, the DVD or the first CD can be mounted at the mount point /srv/ftp/pub:
+mount -t iso9660 -o ro /dev/cdrom /srv/ftp/pub/
+
+Step 3: Testing the GRUB Boot Floppy on the Client
+
+Start the client with the GRUB boot floppy. A sort of prompt will be displayed:
+
+grub >
+
+Inform GRUB about the client IP address, netmask, and server address with:
+
+grub > ifconfig --address=192.168.0.2 --mask=255.255.255.0 --server=192.168.0.1
+
+If a DHCP, BOOTP, or RARP server is running on the server, you can automatically allocate the IP address, for example with the following command in the case of DHCP:
+
+grub > dhcp
+
+In the next step, inform GRUB that the boot files must be loaded from the network (nd stands for "network drive"):
+
+grub > root (nd)
+
+Now the kernel will be loaded. The installation source is provided to linuxrc by means of an additional parameter:
+
+grub > kernel /linux install=ftp://192.168.0.1/pub/
+
+The kernel linux is loaded from the root directory of the tftp server. 
+The installation files loaded via ftp from the directory /pub on the server with the IP 192.168.0.1.
+
+To load SuSE rescue system instead of the installation, append the parameter rescue=1 to the line. 
+If the files should be loaded via NFS, the syntax is install=nfs://server/directory/
+For some network cards, it might be necessary to load the network card module explicitly to start linuxrc. 
+In this case, add the parameter insmod=module_name, replacing module_name with the corresponding kernel module. 
+For example, for an Intel EtherExpress PRO/100:
+
+grub > kernel /linux insmod=e100 install=ftp://192.168.0.1/pub/
+
+If the package linuxrc is installed, find additional parameters for the installation in the file [file:///usr/share/doc/packages/linuxrc/linuxrc.html usr/share/doc/packages/linuxrc/linuxrc.html].
+The initrd is loaded after the kernel:
+
+grub > initrd /initrd
+
+Finally, boot the system with the command
+
+grub > boot
+
+If everything has been correctly configured, the installation or the rescue system should start now. 
+
+Step 4: Simplification of the Client Boot Process by Creating a Menu
+
+To avoid having to enter every command separately, a menu can be loaded from the network. 
+For this purpose, copy the files /boot/message and /boot/grub/menu.lst to the directory /tftpboot on the server so they can be loaded by GRUB via the tftp protocol. 
+Adapt the file /tftpboot/menu.lst to your system according to the example below: 
+
+gfxmenu (nd)/message
+color white/blue black/light-gray
+default 1
+timeout 8
+
+title SuSE Linux Installation
+   kernel (nd)/linux insmod=e100 install=ftp://192.168.0.1/pub/
+   initrd (nd)/initrd
+title SuSE Linux Rescue System
+   kernel (nd)/linux insmod=e100 install=ftp://192.168.0.1/pub/ rescue=1
+   initrd (nd)/initrd
+title Booting from local hard disk
+   root (hd0)
+   chainloader +1
+
+Boot the client with GRUB boot floppy and configure the network by executing the usual ifconfig command:
+grub > ifconfig --address=192.168.0.2 --mask=255.255.255.0 --server=192.168.0.1
+or by means of:
+grub > dhcp
+
+To load the menu, enter:
+grub > configfile (nd)/menu.lst
+
+Now, view the ordinary SuSE boot menu in which to select the requested option. 
+
+Step 5: Further Simplification of the Boot Process
+
+This process can be simplified even more by saving the menu on the floppy disk, so the menu will be automatically loaded, rendering unnecessary any input from the user. 
+Making a boot floppy is a little more complex now. First, a file system must be created on the floppy:
+earth:~ # mke2fs -m 0 /dev/fd0
+
+The floppy must be mounted so the necessary boot files can be copied:
+earth:~ # mount /media/floppy/
+earth:~ # cp /usr/lib/grub/stage1 /usr/lib/grub/stage2 /media/floppy/
+
+Copy the file /tftboot/menu.lst previously created to the floppy. 
+Adjust the newly-created file /media/floppy/menu.lst by inserting the network configuration at the top of the file (the dhcp or ifconfig command): 
+
+dhcp
+gfxmenu (nd)/message
+color white/blue black/light-gray
+default 1
+timeout 8
+
+title SuSE Linux Installation
+   kernel (nd)/linux insmod=e100 install=ftp://192.168.0.1/pub/
+   initrd (nd)/initrd
+title SuSE Linux Rescue System
+   kernel (nd)/linux insmod=e100 install=ftp://192.168.0.1/pub/ rescue=1
+   initrd (nd)/initrd
+title Booting from local hard disk
+   root (hd0)
+   chainloader +1
+
+To make the boot floppy bootable, enter the command grub in a shell:
+earth:~ # grub
+
+Now you are in a grub shell. By executing the following command, the file stage1 located on the floppy will be written to the floppy's boot sector. stage2 and the configuration file menu.lst, both also located on the floppy, are passed as parameters:
+grub > install (fd0)/stage1 (fd0) (fd0)/stage2 p (fd0)/menu.lst
+
+Quit the grub shell with:
+grub > quit
+
+Then unmount the floppy:
+earth:~ # umount /media/floppy
+
+If everything has worked, the configuration will be completely loaded from the floppy during the boot process.
+
+For additional information about GRUB, refer to http://www.gnu.org/manual/grub/html_mono/grub.html. 
+View the same information on your installed system by executing the command info grub in a shell. 
+If the kernel sources are installed (package kernel-source), refer to the file [file:///usr/src/linux/Documentation/nfsroot.txt /usr/src/linux/Documentation/nfsroot.txt] for more information about a Linux start as a diskless client (kernel parameter to boot from NFS).
+This subject exceeds the scope of the free-of-charge installation support.
+SDB:The Boot Manager Grub -> http://tr.opensuse.org/SDB:The_Boot_Manager_Grub
+
+ИЗТОЧНИК:
+http://tr.opensuse.org/SDB:Booting_from_the_Network_with_GRUB
+
+================================================================================
+ЗАБЕЛЕЖКА:
+hackman: Това което описваш, не е това за което се пита
+hackman: ти описваш как да заредиш Grub по мрежа
+hackman: а въпроса е как да заредиш kernel & initrd по мрежата
+
+The following instructions only work on PC BIOS systems where the Preboot eXecution Environment (PXE) is available.
+To generate a PXE boot image, run:
+     grub-mkimage --format=i386-pc-pxe --output=grub.pxe --prefix='(pxe)/boot/grub' pxe pxecmd
+Copy grub.pxe, /boot/grub/*.mod, and /boot/grub/*.lst to the PXE (TFTP) server, ensuring that *.mod and *.lst are accessible via the /boot/grub/ path from the TFTP server root. Set the DHCP server configuration to offer grub.pxe as the boot file (the ‘filename’ option in ISC dhcpd).
+
+You can also use the grub-mknetdir utility to generate an image and a GRUB directory tree, rather than copying files around manually.
+
+After GRUB has started, files on the TFTP server will be accessible via the ‘(pxe)’ device.
+
+The server and gateway IP address can be controlled by changing the ‘(pxe)’ device name to ‘(pxe:server-ip)’ or ‘(pxe:server-ip:gateway-ip)’. Note that this should be changed both in the prefix and in any references to the device name in the configuration file.
+
+GRUB provides several environment variables which may be used to inspect or change the behaviour of the PXE device:
+
+‘net_pxe_ip’
+    The IP address of this machine. Read-only.
+‘net_pxe_mac’
+    The network interface's MAC address. Read-only.
+‘net_pxe_hostname’
+    The client host name provided by DHCP. Read-only.
+‘net_pxe_domain’
+    The client domain name provided by DHCP. Read-only.
+‘net_pxe_rootpath’
+    The path to the client's root disk provided by DHCP. Read-only.
+‘net_pxe_extensionspath’
+    The path to additional DHCP vendor extensions provided by DHCP. Read-only.
+‘net_pxe_boot_file’
+    The boot file name provided by DHCP. Read-only.
+‘net_pxe_dhcp_server_name’
+    The name of the DHCP server responsible for these boot parameters. Read-only.
+‘net_default_server’
+    The default server. Read-write, although setting this is only useful before opening a network device. 
+	
+Източник -> http://www.gnu.org/software/grub/manual/grub.html#Network 
+
+Също така още едно обяснение как става буутването по мрежата от лекцията на 11.07.2013	
+Инфо във видео live_user_aziliann_1373559742.flv от ~ 17.00 мин. до ~ 22.05 мин. от лекцията на 11.07.2013
+Ето и в текстов вариянт информацията от лекцията:
+
+root@terion:fed:/storage/tftpboot# ls -l
+total 31756
+-rwxrwxr-x.  1 hackman hackman     568 Jul  1 05:32 boot.msg
+-rwxrwxr-x.  1 hackman hackman 1862584 May 28  2008 bzImage-2.6.24.3-silla
+drwxrwxr-x. 11 hackman hackman    4096 Jul  1 05:32 centos
+drwxrwxr-x.  3 hackman hackman    4096 Mar 28  2011 debian
+-rwxrwxr-x.  2 hackman hackman 6760169 Mar 13  2011 dinitrd.gz
+-rwxrwxr-x.  2 hackman hackman 2418720 Mar 13  2011 dlinux
+drwxrwxr-x.  2 hackman hackman    4096 Feb  8  2009 doc
+drwxrwxr-x.  2 hackman hackman    4096 Feb 19  2009 dsl
+drwxrwxr-x.  3 hackman hackman    4096 May 28  2008 fedora
+-rwxrwxr-x.  1 hackman hackman      13 Mar  4  2007 help.msg
+-rwxrwxr-x.  1 hackman hackman 4194304 Apr 16  2006 initrd1.cpio
+-rwxrwxr-x.  1 hackman hackman 4194304 Mar 13  2008 initrd2.cpio
+-rwxrwxr-x.  1 hackman hackman 6858123 Oct  2  2009 initrd2.img
+-rwxrwxr-x.  1 hackman hackman  111864 Feb 21  2008 memtest86+-2.01
+-rwxrwxr-x.  1 hackman hackman   13320 Mar  4  2007 pxelinux.0
+drwxrwxr-x.  2 hackman hackman    4096 Jul  1 05:34 pxelinux.cfg
+drwxrwxr-x.  2 hackman hackman    4096 Feb 20  2009 rip
+-rwxrwxr-x.  1 hackman hackman 4190998 Apr 25  2006 vmlinuz1
+-rwxrwxr-x.  1 hackman hackman 1855924 Oct  2  2009 vmlinuz2
+root@terion:fed:/storage/tftpboot# cat help.msg
+Restore info
+root@terion:fed:/storage/tftpboot# cat boot.msg
+
+HackMan's PXE Boot 
+
+F1 for boot info
+F2 for more information
+
+Install or recovery:
+  fedora8 - for Fedora 8
+  fedora9 - for Fedora 9
+  centos5 - for CentOS 5.0
+  centos51 - for CentOS 5.1
+  centos54 - for CentOS 5.4
+  centos6 - for CentOS 6
+  centos63 - for CentOS 6.3 x86_64
+  centos63x86 - for CentOS 6.3 x86
+  centos64 - for CentOS 6.3 x86
+  debian   - Debian Squeeze (stable)
+
+Other options:
+  local - for localboot
+  rescue - for rescue system(currently unavailable)
+  memtest - for running memory tests
+  silla - Silla's default kernel bzImage-2.6.24.3-silla
+
+root@terion:fed:/storage/tftpboot# ls
+boot.msg                dinitrd.gz  fedora        initrd2.img      rip
+bzImage-2.6.24.3-silla  dlinux      help.msg      memtest86+-2.01  vmlinuz1
+centos                  doc         initrd1.cpio  pxelinux.0       vmlinuz2
+debian                  dsl         initrd2.cpio  pxelinux.cfg
+root@terion:fed:/storage/tftpboot# cd pxelinux.cfg
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# ls -la
+total 32
+drwxrwxr-x. 2 hackman hackman 4096 Jul  1 05:34 .
+drwxrwxr-x. 9 hackman hackman 4096 Jul  1 05:32 ..
+-rwxrwxr-x. 1 hackman hackman  818 May 29  2008 01-00-19-d1-b4-6e-ef
+-rwxrwxr-x. 1 hackman hackman  813 May 29  2008 01-00-19-d1-b4-6e-ef~
+-rwxrwxr-x. 1 hackman hackman 2154 Jul  1 05:33 default
+-rwxrwxr-x. 1 hackman hackman 1710 Feb 20  2009 default.rip
+-rwxrwxr-x. 1 hackman hackman  771 May 28  2008 default~
+-rwxrwxr-x. 1 hackman hackman  972 Feb 19  2009 mm-default
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# less default
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# 
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# less default
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# less default
+root@terion:fed:/storage/tftpboot/pxelinux.cfg# cd
+root@terion:fed:~# cd /boot/
+root@terion:fed:/boot# ls
+System.map-3.7.3-101.fc17.i686
+System.map-3.7.6-201.fc18.i686
+System.map-3.7.7-201.fc18.i686
+System.map-3.8.0-0.rc5.git2.1.fc19.i686.PAE
+config-3.7.3-101.fc17.i686
+config-3.7.6-201.fc18.i686
+config-3.7.7-201.fc18.i686
+config-3.8.0-0.rc5.git2.1.fc19.i686.PAE
+extlinux
+grub
+grub2
+initramfs-3.6.7-4.fc16.i686.PAE.img.cpio.gz
+initramfs-3.7.3-101.fc17.i686.img
+initramfs-3.7.6-201.fc18.i686.img
+initramfs-3.7.7-201.fc18.i686.img
+initramfs-3.8.0-0.rc5.git2.1.fc19.i686.PAE.img
+initrd
+initrd-plymouth.img
+initrd.cpio
+lost+found
+vmlinuz-3.7.3-101.fc17.i686
+vmlinuz-3.7.6-201.fc18.i686
+vmlinuz-3.7.7-201.fc18.i686
+vmlinuz-3.8.0-0.rc5.git2.1.fc19.i686.PAE
+root@terion:fed:/boot# mc
+
+root@terion:fed:/boot# exit                                                                
+

@@ -1,0 +1,6 @@
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\PrintNumbersInInterval\bin\Debug\PrintNumbersInInterval.exe.config
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\PrintNumbersInInterval\bin\Debug\PrintNumbersInInterval.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\PrintNumbersInInterval\bin\Debug\PrintNumbersInInterval.pdb
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\PrintNumbersInInterval\obj\Debug\8.PrintNumbersInInterval.csprojResolveAssemblyReference.cache
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\PrintNumbersInInterval\obj\Debug\PrintNumbersInInterval.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\PrintNumbersInInterval\obj\Debug\PrintNumbersInInterval.pdb

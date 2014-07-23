@@ -1,0 +1,83 @@
+﻿Linux администрация homeworks:
+
+homework_lecture_07:
+
+от пост -> http://forums.academy.telerik.com/116927/cpanspec-%D0%B8%D0%BB%D0%B8-cpan2rpm-hw-7-software-management
+По задача:
+2. Make an RPM package for an application written in Perl, Python or Ruby. The expected result is the package and its spec file.
+
+Относно домашното "Make an RPM package for an application written in Perl", пробвам да инсталирам cpanspec  или cpan2rpm.
+
+yum install cpanspec 
+
+yum install cpan2rpm 
+
+ми връща  "No package cpan2rpm available."
+
+Как да го преборя?
+
+--> Пробвай така:
+
+    Download the latest epel-release rpm from
+
+    http://dl.fedoraproject.org/pub/epel/6/i386/
+
+    Install epel-release rpm:
+
+    # rpm -Uvh epel-release*rpm
+
+    Install cpanspec rpm package:
+
+    # yum install cpanspec
+
+Успех!
+	|--> мерси много. получи се.
+
+============================================================================================================
+
+от пост -> http://forums.academy.telerik.com/116833/lsa-software-management-%D0%B4%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D0%BE-10-%D0%B7%D0%B0%D0%B4
+По задача:
+10. Create a C application which uses autoconf to configure config.h. 
+Use autoconf to check if on the machine we have stdio.h, stdlib.h and string.h. 
+The example C code may be(but is not required to be) this:
+
+#include 'config.h'
+int main() {
+    printf(MY_STRING);
+}
+
+#ifndef _MY_CONFIG_H
+#define _MY_CONFIG_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MY_STRING "It works\n"
+#endif
+
+------------------------------------------------
+Ако решавате задача 10 от домашното за лекция 7, то заменете първия ред от примера (използващ директивата include) със следния ред:
+
+#include "config.h"
+
+Така написана директивата include ще търси в текущата директория файл config.h със следното примерно съдържание:
+
+#ifndef _MY_CONFIG_H
+#define _MY_CONFIG_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MY_STRING "It works\n"
+#endif
+ 
+Аз поне така разбирам условието на задача 10?
+
+by Kiril Ilarionov
+============================================================================================================
+
+
+
+
+
+
+
+

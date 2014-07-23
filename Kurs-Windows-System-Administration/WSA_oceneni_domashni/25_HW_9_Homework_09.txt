@@ -1,0 +1,81 @@
+﻿
+                                     2. Describe the idea of the Access Based Enumaration (ABE) feature. Provide details and different scenarious.
+                                     =============================================================================================================
+
+
+Access-based Enumeration is a new feature included with Windows Server 2003 Service Pack 1. This feature allows users of Windows Server 2003–based file servers to list only the files and folders 
+to which they have access when browsing content on the file server. This eliminates user confusion that can be caused when users connect to a file server and encounter a large number of files and
+folders that they cannot access.
+Access-based Enumeration filters the list of available files and folders on a server to include only those that the requesting user has access to. 
+This feature applies to:
+
+    Domain-joined computers.
+    IT professionals who want to control the user’s experience.
+
+Access-based Enumeration allows users to see only files and folders that they have access to on a file server. This feature is not enabled by default.
+To enable this feature, a property must be set on a file share to allow access-based enumeration. To enable this feature on your server, you can download a shell extension that provides both a graphical
+user interface for enabling access-based enumeration and a command-line interface for managing this feature. When this download is installed, a wizard will run that can automatically enable Access-based 
+Enumeration on the shared folders on your computer. This download includes a whitepaper that provides further details about the shell extension, command line interface, and the NetShareSetInfo application 
+programming interface (API). This download is available on the Microsoft Download Center at http://go.microsoft.com/fwlink/?LinkId=46228.
+If you want to develop a tool yourself, you can use the NetShareSetInfo API. This property is an attribute of the NetShareSetInfo (API). For more information about the NetShareSetInfo API, see the Platform
+SDK and the MSDN Web site at http://go.microsoft.com/fwlink/?LinkId=46511. To enable Access-based Enumeration, you need to set a flag that points to the SHARE_INFO_1005 structure. For more information about
+the SHARE_INFO_1005 structure, see the Platform SDK and the MSDN Web site at http://go.microsoft.com/fwlink/?LinkId=45504.
+
+The new flag to enable Access-based Enumeration is
+#define SHI1005_FLAGS_ENFORCE_NAMESPACE_ACCESS  0x0800
+This flag is only applicable to Windows Server 2003 Service Pack 1 and will have no effect on other versions of the Windows operating system.
+After the feature is enabled, a listing of the content in that share will present the content that the user has access to.
+
+Consider the following scenario:
+
+    You deploy a Distributed File System (DFS) root named \\dfs-share\users. Several DFS links exist under the root.
+    These DFS links represent the home directories of several users.
+    You want to enable Access-based Enumeration on the \\dfs-share\users root so that users see only their home directories when the users enumerate the root. 
+
+To implement Access-based Enumeration in this scenario, follow these steps:
+
+    1. Use administrative credentials to log on to Windows Server 2003.
+    2.Use the Cacls utility to set the appropriate access control lists (ACLs) on the DFS links. (The Cacls utility is included in Windows Server 2003.)
+
+For example, make the ACL on the link the same as the ACL on the target of the link. Therefore, if \\dfs-share\users\johndoe links to a target named \\server1\share1\johndoe, make the ACL on 
+\\dfs-share\users\johndoe the same as the ACL on \\server1\share1\johndoe. If the target is on a Windows-based computer, type cacls at the command prompt to verify the ACL. For more information about the
+Cacls utility, type cacls /? at a command prompt.
+    3. Apply the Access-based Enumeration property on each root share by using the ABEUI utility. To obtain this utility, visit the following Microsoft Web site:
+http://www.microsoft.com/downloads/details.aspx?FamilyID=04a563d9-78d9-4342-a485-b030ac442084&DisplayLang=en
+Note Set the Access-based Enumeration property on each replicated root share.
+    4.As soon as the domain root and the links are replicated, use the Cacls utility to manually set the ACLs on the replicated links. Repeat this step for all replicas. However, first make sure that the 
+root and links have been fully replicated on the target.
+    5 In a cluster environment, when a node fails over to another node, DFS removes all the DFS links and recreates them on every failover. When failover occurs, ACLs must be reapplied on the links. 
+To automatically reapply links after a failover, follow these steps:
+           a: From the cluster administrator console, create a script resource. Make sure that this new resource is part of the same group as the DFS and as the share resources.
+           b: Add the script resource to the script resource that sets the ACLs for each DFS link.
+           c: Make the new script resource dependent on the DFS resource. This step makes sure that the new script resource is run only after the DFS links are created on the new failed over node.
+           d: Take the group offline, and then put the group back online to make sure that the new script resource works.
+    6. Restart the Distributed File System (DFS) service. To do this, follow these steps: 
+           
+           a: Click Start, click Run, type cmd, and then click OK.
+           b: Type net stop DFS, and then press ENTER.
+           c: Type net start DFS, and then press ENTER.
+
+After you follow these steps, only those DFS links that a user has the rights to access are displayed when the root is enumerated.
+
+Sometimes, the ACLs on links are reset and must be reapplied. ACLs are reset in the following scenarios:
+
+    A DFS root is restored by using the DFS utility (Dfsutil.exe). The ACLs on the DFS links are not preserved and are reset.
+    DFS roots are exported and then imported to another location. The ACLs on the DFS links are not preserved and are reset.
+    If you add a new DFS root target, the links do not receive the appropriate ACLs because the links are created for the first time.
+    If you rename a DFS link, the DFS service deletes and recreates the link. The ACL on the link is reset.
+    If you delete multi-component links, DFS removes any empty intermediate directories. Any ACL that was set on a directory is lost when a directory is removed. When you create a new multi-component 
+link by using the same path, you must reapply all ACLs on the intermediate directories.
+
+Note When Access-based Enumeration does not perform as expected with DFS links, first examine the ACLs on the DFS links by using the Cacls utility.
+If the ACL on the DFS link is not set to match the ACL on the target, the following conditions may be true:
+
+    If the ACL on the link is more restrictive than the ACL on the target, the link will not be displayed. However, if the user knows the name of the link, the user can locate the appropriate path and 
+see the contents of the target.
+    If the ACL on the link is less restrictive than the ACL on the target, the link is displayed. However, when the user locates the link, the user sees an "Access Denied" message.
+
+
+http://technet.microsoft.com/en-us/library/cc784710%28v=ws.10%29.aspx
+http://havardkristiansen.com/?p=152
+    

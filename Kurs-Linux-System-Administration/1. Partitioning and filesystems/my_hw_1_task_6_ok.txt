@@ -1,0 +1,23 @@
+﻿6. Write down the commands needed to create SW RAID10 with 4 SATA drives. How will you add one more drive as hot-spare?
+
+Create a 4-disk RAID10 array using Linux Software RAID and mdadm:
+Create individual RAID1 volumes and then stripe a RAID0 volume over the RAID1 arrays. 
+That requires creating extra /dev/mdN nodes which can be confusing to others people.
+
+1) Create the /dev/mdN node for the new RAID10 array.
+If already have /dev/md0 to /dev/md4 so going to create /dev/md5 ("5" appears twice in the command).
+
+# mknod /dev/md5 b 9 5
+
+2) Use fdisk on the (4) drives, create a single primary partition of type "fd" (Linux raid autodetect). 
+If on these 4 discs have no data we don't worry about that we can lose data.
+
+3) Create the mdadm RAID set using 4 devices and a level of RAID10.
+
+# mdadm --create /dev/md5 -v --raid-devices=4 --chunk=32 --level=raid10 /dev/sdc1 /dev/sdd1 /dev/sde1 /dev/sdf1
+
+hot-spare drive -> # mdadm --create /dev/md5 --raid-devices=4 --spare-devices=1 --layout=n2 --level=raid10 /dev/sd[a-f]1
+
+
+източник на информацията: http://techblog.tgharold.com/2006/08/creating-4-disk-raid10-using-mdadm.shtml
+

@@ -1,0 +1,20 @@
+Named.conf
+------------------------
+acl clients { 10.0.0.0/8};
+options {
+	allow-recursion { clients; };
+	allow-query { clients; };
+};
+
+
+
+Zone File..
+----------------------
+zone "maimunka.net" IN {
+ type master;
+	file "master/maimunka.net.hosts";
+	allow-update {10.0.8.11;10.0.8.12;};
+};
+
+
+// Source http://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-bind-namedconf.html

@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\NthCatalianNumber\bin\Debug\NthCatalianNumber.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\NthCatalianNumber\bin\Debug\NthCatalianNumber.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\NthCatalianNumber\bin\Debug\NthCatalianNumber.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\NthCatalianNumber\obj\Debug\9.NthCatalianNumber.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\NthCatalianNumber\obj\Debug\NthCatalianNumber.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\NthCatalianNumber\obj\Debug\NthCatalianNumber.pdb

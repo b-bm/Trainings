@@ -1,0 +1,37 @@
+﻿Ето линковете за отделните части на видеото. Може да пейстнете командите в конзола или да свалите файловете по друг удобен за вас начин:
+
+wget http://store28.media28.justin.tv/archives/2013-7-11/live_user_aziliann_1373557941.flv
+wget http://store42.media42.justin.tv/archives/2013-7-11/live_user_aziliann_1373559742.flv
+wget http://store17.media17.justin.tv/archives/2013-7-11/live_user_aziliann_1373561548.flv
+wget http://store44.media44.justin.tv/archives/2013-7-11/live_user_aziliann_1373563346.flv
+Edit: линковете за втората част: 
+ 
+wget http://store22.media22.justin.tv/archives/2013-7-11/live_user_aziliann_1373564824.flv
+wget http://store47.media47.justin.tv/archives/2013-7-11/live_user_aziliann_1373566631.flv
+wget http://store44.media44.justin.tv/archives/2013-7-11/live_user_aziliann_1373568432.flv
+wget http://store21.media21.justin.tv/archives/2013-7-11/live_user_aziliann_1373570229.flv
+wget http://store22.media22.justin.tv/archives/2013-7-11/live_user_aziliann_1373564824.flv
+ 
+Edit: Ето как да обедините файловете за всяка от двете части в един голям видео файл (за целта ви трябва ffmpeg): 
+ 
+1) Правите си файл за всяка една от двете части като следния: 
+file 'live_user_aziliann_1373557941.flv'
+file 'live_user_aziliann_1373559742.flv'
+file 'live_user_aziliann_1373561548.flv'
+file 'live_user_aziliann_1373563346.flv'
+ 
+Записвате го като list.txt (или друго произволно име). 
+ 
+2) в конзолата пишете следното: 
+ 
+ffmpeg -f concat -i list.txt -c copy final_part_1.flv
+
+
+============================================================
+
+http://ffmpeg.org/trac/ffmpeg/wiki/CompilationGuide
+
+http://ffmpeg.org/platform.html
+
+http://www.wikihow.com/Install-FFmpeg-on-Windows
+

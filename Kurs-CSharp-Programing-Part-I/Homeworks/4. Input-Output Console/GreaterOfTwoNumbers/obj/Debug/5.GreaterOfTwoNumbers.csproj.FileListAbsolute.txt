@@ -1,0 +1,6 @@
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\GreaterOfTwoNumbers\bin\Debug\GreaterOfTwoNumbers.exe.config
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\GreaterOfTwoNumbers\bin\Debug\GreaterOfTwoNumbers.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\GreaterOfTwoNumbers\bin\Debug\GreaterOfTwoNumbers.pdb
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\GreaterOfTwoNumbers\obj\Debug\5.GreaterOfTwoNumbers.csprojResolveAssemblyReference.cache
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\GreaterOfTwoNumbers\obj\Debug\GreaterOfTwoNumbers.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\GreaterOfTwoNumbers\obj\Debug\GreaterOfTwoNumbers.pdb

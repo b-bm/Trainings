@@ -1,0 +1,16 @@
+﻿7. List all opend files using only the /proc fs.
+
+ls -l /proc/*/fd
+
+lists file descriptors of all currently running processes. 
+
+" /proc/[pid]/fd
+              This is a subdirectory containing one entry for each file  which
+              the process has open, named by its file descriptor, and which is
+              a symbolic link to the actual file.  Thus, 0 is standard  input,
+              1 standard output, 2 standard error, etc. "
+Quote taken from proc manual page.
+
+ЗАБЕЛЕЖКА:
+
+Добро домашно според мен. Успех.

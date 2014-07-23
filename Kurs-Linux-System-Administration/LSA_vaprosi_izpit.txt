@@ -1,0 +1,159 @@
+﻿МОИ ЗАПИСКИ:
+
+11-задачи / CentOS5.x + grub1
+
+1. boot loaders - grub1 - команди, счупвания, kernel параметри
+- конфигурациония файл + всички конфигурации за да върви след рестарт на машината. 
+video 2.Linux Security M... - 11.07.2013 - Linux Security Model and booting - Part I -> 1live_user_aziliann_1373557941 -> 16:10 + 2live_user_aziliann + 3live_user_aziliann 
++ 4live_user_aziliann (превъртай и търси инфото)
+	|--> /boot/grub/grub.conf или симлинк menu.lst - 
+	- в /etc трябва да имаме една директория rc.d, в която да имаме rc скриптове или init скриптове (/etc/rc.d/rc.M/rc.S and so on) 
+	Тези скриптове се грижат за стартирането на разни неща по машината ни. 
+	/etc/rc.d директорията само я има в slackware в другите дистрибуции има и други rc директории (друга структура /etc/rc.d /etc/rc.local и сим линкове в rc директории водещи към скрипт-файлове) 
+	- има и нова структура /etc/init.d/* това е директорията със всичките ни init скрипотове, които имат точноопределен стандарт на именоване според рън левела
+	Виж "info ot life lekciq and forum -> Konsole output...konsole1-out.txt" 
+	Скриптовете, които започват с "K" са за kill, а тези с "S" са за start. Цифрите са за приоритетност, ако има няколко скрипта с еднакви числа се стартират паралелно.
+	В /etc/rc.d/rc.local СИ СЛАГАМЕ ВСИЧКИ КОМАНДИ ИЛИ ПЪТИЩА ДО ФАЙЛОВЕ СЪС СКРИПТОВЕ, КОИТО ИСКАМЕ ДА СЕ ИЗПЪЛНЯВАТ СЪС СТАРТИРАНЕ НА МАШИНАТА. rc.local ФАЙЛА СЕ ИЗПЪЛНЯВА НА ВСИЧКИ runing НИВА!!!
+
+======================///======================	
+2. файлови системи - команда - dd
+	|--> тулове fdisk -l ; cfdisk ; sfdisk ; -> fdisk /dev/vda
+video 1.Partitioning and filesystems -> 27.06.2013 - Disks partitioning part II LSA_01....part 2 -> 54:50	
+dd = video 1.Partitioning and filesystems -> 04.07.2013 - Partitioning and file systems part III....part III -> 01:11:40 + video 04.07.2013 - Partitioning and file systems part IV....part IV
+	dd if=/dev/vda of=vda-mbr bs=1024 count=1 -> копира първите 1024 байта от началото на харддиска(не информацията от партишъните) в файл vda-mbr (т.е. backup на MBR-а)
+	dd if=<source> of=<target> bs=<byte size> count=<howmany times>
+
+======================///======================	
+3. подкарване на няколко сървиса - web server (Apache-httpd), mysql, php, ssh и WordPress ->> всички конф.промени да са в конфигурационните файлове,за да върви всичко след рестарт на машината!!!
+->> директория /etc/rc.local 
+	- В /etc/rc.d/rc.local СИ СЛАГАМЕ ВСИЧКИ КОМАНДИ ИЛИ ПЪТИЩА ДО ФАЙЛОВЕ СЪС СКРИПТОВЕ, КОИТО ИСКАМЕ ДА СЕ ИЗПЪЛНЯВАТ СЪС СТАРТИРАНЕ НА МАШИНАТА. rc.local ФАЙЛА СЕ ИЗПЪЛНЯВА НА ВСИЧКИ runing НИВА!!!
+video 2.Linux Security M... - 11.07.2013 - Linux Security Model and booting - Part I -> 4live_user_aziliann - 07:40
+виж и video 11.07.2013 - Linux Security Model and booting - Part II -> 1live_user_aziliann 
+
+--->> виж info ot life lekciq and forum -> Как да подкараме html и php сайт на CentOS.txt
+
+- apache:
+	-> конфигурация (конф.файл)
+		|--> /etc/httpd/conf -> vim httpd.conf
+		 By default, the httpd service does not start automatically at boot time. 
+		 If you would wish to have Apache startup at boot time, you will need to add a call to apachectl in your startup files within the rc.N directory. 
+		 A typical file used is rc.local. As this starts Apache as root, it is recommended to properly configure your security and authentication before adding this call.
+		 You can also configure the httpd service to start up at boot time, using an initscript utility, such as /sbin/chkconfig, /usr/sbin/ntsysv, or the Services Configuration Tool program. 
+	$ sudo /sbin/service httpd restart stop start -> рестартира, спира или стартира сървиса на apache web сървъра 
+	$ sudo apachectl restart stop start -> рестартира, спира или стартира сървиса на apache web сървъра
+
+	- web сървъра си държи сайтовете в /var/www/html/ а може да бъде и в /home/some_user/public_html
+	
+video 10.Advanced services - video_17.10.2013 -> LSA-11.Advanced services - Apache-Part I ->
+	
+- mysql:
+	-> как да се инициализира Б.Д. (6 - 7 точка от manual-а)
+		|-->
+		
+	-> как да се подкара mysql в друга директория
+		|-->
+		
+	-> как да се създаде от конзолата (начин+команди) база данни, потребител и парола за WordPress
+		|-->
+		
+video 11.MySQL... - video_24.10.2013 -> LSA-12.Databases-MySQL ->
+*** разгледай aditional info папката
+ 		
+- php:
+	->
+	
+- ssh:
+	-> конфигуриране
+		|-->
+video 9.Basic system... - video_07.10.2013 -> LSA-09.System services - Cron,SSH...Part I -> 
+
+======================///====================== 
+4. конфигуриране на мрежа
+- команди - ifconfig, всичко необходимо за настройка на мрежата - ръчно
+	|--> ethtool eth0 - инфо за мрежата или ethtool -i eth0 - показва драйвера	
+video 6.Networking - 15.08.2013 Linux Basic N...1 -> 1_video_1_Networking -> 11:50
+	
+	- $ ifconfig -a или ifconfig -a|grep mtu или ifconfig -a|grep Link - показва какви мрежови интерфейси има на машината
+	- $ ifconfig eth0 192.168.1.2 netmask 255.255.255.0 - добавя IP адрес и нет маска
+	- $ ifconfig eth0 hw ether 52:54:00:06:C9:87 - за промяна на MAC адреса ни
+	- $ ifconfig eth0:jon 192.168.1.3 netmask 255.255.255.0 или ifconfig eth0:0 192.168.1.3 netmask 255.255.255.0 - за добавяне на мултипъл IP-та на един и същи интерфейс
+
+video 6.Networking - 15.08.2013 Linux Basic N...1 -> 2_video_1_Networking -> 02:02 <-> ~ 14:50
+
+- за запазване не конфигурацията след рестарт
+	|--> /etc/sysconfig/$vim ifcfg-etho -> файл с конфигурация за мрежата
+		DEVICE=eth0 -> устройството
+		BOOTPROTO=static -> статично или по DHCP
+		ONBOOT=yes -> да зарежда при boot
+		IPADDR=127.0.0.1 -> IP-то
+		NETMASK=255.255.255.255 -> не е задължителен
+		NETWORK=127.0.0.0 -> не е задължителен
+		BROADCAST=0.0.0.0 -> не е задължителен 
+	|--> /etc/sysconfig/$vim ifup-eth -> файл със скрипт за автоматизация на мрежовите настройки
+*** разгледай $ cat /etc/hosts файла 
+
+======================///======================
+5. user контрол
+- създаване и модифициране на потребителите на машината - команди + от конфигурационните файлове на ръка(чрез vim)   
+	|--> в /etc/shadow са паролите на потребителите, в /etc/group са имената на групите и потребителите, които са в тази група
+	- useradd -m some_user -> създава потребител с директория в /home/
+	
+video 2.Linux Security M... - 11.07.2013 - Linux Security Model and booting - Part II -> 1live_user_aziliann -> 13:53
+	
+*** да се проверят всички конфигурационни файлове 
+	-> къде се намират 
+		|--> /etc/ -> директория за повечето конфигурации на linux
+		
+	-> как се edit-ват на ръка.
+		|-->
+
+======================///======================
+*** може да се наложи да се ползва "rpm" за да се разбере къде се намират конфигурационните файлове.
+
+*** WordPress-а ще трябва да се копира от една директория в друга(ще бъде казано къде)
+
+*** да се прегледа директория var/log
+
+
+===============================================================
+4. Самият изпит:
+
+4.1. Задачите ще са 11 - като максималният брой точки е 100
+
+4.2. При помощ от лекторите получавате -10точки 
+
+4.3. Същинската част:
+
+4.3.1. Boot loader  - GRUB 1 (синтаксис, команди, kernel параметри и други) след рестарт да бъдат запазени направите промени [да записани промените в конфигурационният файл]
+	-> 11.07.2013 - Linux Security Model and booting - Part I -> 1live_user_aziliann_1373557941 -> 16:10
+4.3.2. Команди за създаване на файлови системи - DD
+	-> 04.07.2013 - Partitioning and File systems part III LSA_ 01. Partitioning and File systems part III
+4.3.3. Подкарване на различни услуги
+
+4.3.4. MySQL - инициализиране на базата данни / 6 или 7 точка от записките/
+	->
+SQL - дъмпове
+	->
+4.3.5. WordPress
+
+4.3.6. WEB сървър - подкаране, PHP да работи
+	->
+4.3.7. Конфигуриране на мрежата - ifconfig / ако някой може и със скрипт / 
+	-> 6. Networking -> 1_video_1_Networking -> 12:00 ; 2_video_1_Networking ; 
+4.3.8. SSH сървис - активиранe след Reboot, MySQL, PHP 
+	->
+Като допълнение или допълнителни жокери:
+
+* Директорията var/logs - добре да се прегледа
+	->
+* Директорията rc/local - за конфигурация на мрежата 
+	->
+* RPM - конфигурационните файлове къде се намират
+	->
+* Създаване и модифициране на потребители
+	->
+* NSSwitch.conf
+	->
+уточнение:
+* NSSwitch.conf. Или най-лесно man nssswitch.conf на повечето дистрибуции.
+

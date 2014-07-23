@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\CalculateTrapezoidArea\bin\Debug\CalculateTrapezoidArea.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\CalculateTrapezoidArea\bin\Debug\CalculateTrapezoidArea.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\CalculateTrapezoidArea\bin\Debug\CalculateTrapezoidArea.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\CalculateTrapezoidArea\obj\Debug\8.CalculateTrapezoidArea.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\CalculateTrapezoidArea\obj\Debug\CalculateTrapezoidArea.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\CalculateTrapezoidArea\obj\Debug\CalculateTrapezoidArea.pdb

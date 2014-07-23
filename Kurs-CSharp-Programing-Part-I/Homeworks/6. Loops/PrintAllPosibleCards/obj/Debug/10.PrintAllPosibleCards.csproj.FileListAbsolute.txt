@@ -1,0 +1,5 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\PrintAllPosibleCards\bin\Debug\PrintAllPosibleCards.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\PrintAllPosibleCards\bin\Debug\PrintAllPosibleCards.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\PrintAllPosibleCards\bin\Debug\PrintAllPosibleCards.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\PrintAllPosibleCards\obj\Debug\PrintAllPosibleCards.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\PrintAllPosibleCards\obj\Debug\PrintAllPosibleCards.pdb

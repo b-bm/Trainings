@@ -1,0 +1,29 @@
+﻿7. Configure agetty for serial console ttyS0 with Systemd.
+
+agetty is an "alternative getty". It takes all of its parameters on the command line, with no use of /etc/gettydefs or any other configuration file. 
+agetty is documented in the manual page agetty(8). Figure 6-6 shows how to invoke agetty for use with a serial console.
+
+-> Figure 6-6. /etc/inittab entry for agetty
+
+co:2345:respawn:/sbin/agetty -h -t 60 ttyS0 9600 vt102
+
+ttyS0 refers to the serial device /dev/ttyS0.
+
+"9600" is the bits per second of the serial link. 
+agetty will support multiple values, using the modem's CONNECT message or the RS-232 Break signal to select between them. 
+Only use one value, as serial consoles only have only one data rate.
+
+"vt102" sets the TERM environment variable to indicate that a VT100 terminal is connecting.
+
+"-h" activates CTS/RTS handshaking.
+
+"-t 60" allows 60 seconds for someone to attempt to log in before the modem is hung up. 
+You should test this feature to ensure that init is not restarting agetty every 60 seconds when the link is idle. 
+Look for a continually changing process identifier for agetty.
+
+agetty uses escape sequences in /etc/issue to insert information. For example, \n.\o \l will appear as remote.example.edu.au ttyS0.
+When you log out agetty does not appear to lower the Data Terminal Ready signal to force the modme to hang up. 
+If having people automatically disconnected at the end of their login session matters to you then you might consider mgetty instead.
+
+Източник: http://www.faqs.org/docs/Linux-HOWTO/Remote-Serial-Console-HOWTO.html#GETTY
+

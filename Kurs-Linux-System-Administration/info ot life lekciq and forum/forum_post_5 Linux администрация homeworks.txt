@@ -1,0 +1,326 @@
+﻿Linux администрация homeworks:
+
+homework_lecture_05:
+
+от пост -> http://forums.academy.telerik.com/113779/linux-sa-5-text-editors-and-tools-homework
+
+1. Login on grizzly and get the home folders of the usernames that have numbers in them.
+
+$ ls /home/ |grep -h '[0-9]'
+
+-->  Колега, има по-добро и по-лесно решение н тази задача и то е:
+
+ls -l /home/*[0-9]*
+
+by hackman  
+============================================================================================================
+
+# Chose to 4. Execute this: lynx --dump http://cnn.com
+#   Now get a the count of:
+#   - how many internal links (links to the same hostname - cnn.com)
+#   - how many external links (links to hostnames other then cnn.com)
+#   - how many links to subdomains (links to hostnames *.cnn.com)
+#   - how many links to direct javascript executions (something like this 'javascript:')
+
+# First we would better create a file with the dump of lynx to not repeat and thus to have some speed up a bit with the process. 
+Surprisingly we'll call the file "dump":
+
+[teo@rewind ~]$ lynx --dump http://cnn.com > dump
+[teo@rewind ~]$ head -5 dump
+   REFRESH(1800 sec): [1]http://edition.cnn.com/?refresh=1
+   #[2]CNN.com [3]CNN.com Video [4]CNN - Top Stories [RSS] [5]CNN [6]CNN
+   Arabic [7]CNN Mexico
+
+   [8]CNN
+
+[teo@rewind ~]$ tail -5 dump
+ 412. http://edition.cnn.com/2013/08/07/travel/gallery/2013-national-geographic-photo-contest-gallery/index.html?hpt=hp_bn5
+ 413. http://edition.cnn.com/2013/08/05/travel/gallery/chungking-mansions/index.html?hpt=hp_bn5
+ 414. http://edition.cnn.com/2013/07/08/world/americas/urban-oasis-offers-hope-haiti/index.html?hpt=hp_bn6
+ 415. http://edition.cnn.com/2013/08/10/world/asia/china-baby-trafficking-twin-girls/index.html?hpt=hp_bn7
+ 416. http://edition.cnn.com/2013/08/11/us/perseid-meteor-shower/index.html?hpt=hp_bn8
+
+# As we can see above, the "dump" file lynx have created, has the following pattern after the "Visible links" and "Hidden links" lists:
+#     - a space in the front of the line;
+#     - number of the link in the dump with a dot (.) afterwards
+#     - the type of the protocol - ftp://, http://, https:// (I know that there is no ftp in the output, but it was a personal chalenge to include the pattern to find it)
+#     - and finally the full path of subdomain.domain.tld/folders... etc.
+
+# On the first question regarding "how many internal links (links to the same hostname - cnn.com)" 
+we could use the following pattern as a starting point to output any line that begins with the pattern above - space, number, dot, space, protocol and www.cnn.com as in the example below:
+
+[teo@rewind ~]$ grep -E "[[:space:]]{1}[[:digit:]]+.[[:space:]]{1}(https?|ftp)://www.cnn.com" dump
+   5. http://www.cnn.com/
+ 186. http://www.cnn.com/2013/05/01/world/defining-moments/index.html?hpt=hp_bn3
+ 189. http://www.cnn.com/2013/05/01/world/defining-moments/index.html?hpt=hp_bn3
+
+# In my example only three links are referring to "www.cnn.com"
+
+# On the second question "how many external links (links to hostnames other then cnn.com)" 
+we could use grep functionality to exclude all lines that has cnn.com with:
+
+[teo@rewind ~]$ grep -v "cnn.com" dump
+...
+
+# And then pipe the output to a similar to the previous example grep command with regex that would match our space,number,dot,space,protocol pattern:
+
+[teo@rewind ~]$ grep -v "cnn.com" dump | grep -E "[[:space:]]{1}[[:digit:]]+.[[:space:]]{1}(https?|ftp)://"
+ 113. http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fcnninternational&send=false&layout=button_count&amp;width=450&show_faces=false&action=like&colorscheme=light&font=arial&height=21
+ 114. https://twitter.com/cnni
+ 327. http://www.ireport.com/?cnn=yes
+ 335. http://www.turnerstoreonline.com/
+ 339. http://www.cnnchile.com/
+ 340. http://www.cnnmexico.com/
+ 342. http://www.cnn.co.jp/
+ 343. http://www.cnnturk.com/
+ 344. http://www.turner.com/
+ 348. http://www.cnnmediainfo.com/
+ 352. http://www.turner.com/careers/
+
+# We can use grep's "-c" option to count the number of links above:
+
+[teo@rewind ~]$ grep -v "cnn.com" dump | grep -c -E "[[:space:]]{1}[[:digit:]]+.[[:space:]]{1}(https?|ftp)://"
+11
+
+# This might look like it is the simplest and most logical way to exclude a pattern, but there is another way of answering this question and it is by using negative lookahead. 
+We have to switch to "grep -P" which would match perl regular expressions (thus negative lookahead), as in the example below:
+
+[teo@rewind ~]$ grep -P '[[:space:]]{1}[[:digit:]]+.[[:space:]]{1}(https?|ftp)://(?!.*cnn.com)' dump
+ 113. http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fcnninternational&send=false&layout=button_count&amp;width=450&show_faces=false&action=like&colorscheme=light&font=arial&height=21
+ 114. https://twitter.com/cnni
+ 327. http://www.ireport.com/?cnn=yes
+ 335. http://www.turnerstoreonline.com/
+ 339. http://www.cnnchile.com/
+ 340. http://www.cnnmexico.com/
+ 342. http://www.cnn.co.jp/
+ 343. http://www.cnnturk.com/
+ 344. http://www.turner.com/
+ 348. http://www.cnnmediainfo.com/
+ 352. http://www.turner.com/careers/
+
+# With the patter above we've excluded all matches that has ".*cnn.com" after "://". Again - works only with "grep -P".
+
+# On the third question "how many links to subdomains (links to hostnames *.cnn.com)" are in this output, we could use the following:
+
+[teo@rewind ~]$ grep -c -E "[[:space:]]{1}[[:digit:]]+.[[:space:]]{1}(https?|ftp)://([[:alnum:]]+[.])+cnn.com" dump
+396
+
+# grep counted that we have 396 lines that are containing the following any string of one space, then any number of digits followed by the charachter dot (.),
+then either "http://", "https://" or "ftp://", then any number of alphanumeric string followed by dot either one or more times (e.g. "travel.cnn.com", "blogs.travel.cnn.com", etc.) and finally the string "cnn.com".
+
+# On the last question for "how many links to direct javascript executions (something like this 'javascript:')" 
+we could use simply following:
+
+[teo@rewind ~]$ grep "javascript:" dump
+  15. javascript:cnn_initeditionhtml(3);
+  16. javascript:void(0);
+  17. javascript:void(0);
+ 125. javascript:MainLocalObj.Weather.checkInput('weather', document.localAllLookupForm.inputField.value);
+ 311. javascript:qvSubmitVote_65280();
+ 312. javascript:qvGetResults_65280();
+ 375. javascript:void(0);
+ 376. javascript:void(0);
+
+[teo@rewind ~]$ grep "javascript:" dump -c
+8
+
+# In the end as a summary:
+
+# - how many internal links (links to the same hostname - cnn.com)
+
+[teo@rewind ~]$ lynx --dump http://cnn.com | grep -E "[[:space:]]{1}[[:digit:]]+.[[:space:]]{1}(https?|ftp)://www.cnn.com" -c
+3
+
+# - how many external links (links to hostnames other then cnn.com) -- this is the first way
+
+[teo@rewind ~]$ lynx --dump http://cnn.com | grep -v "cnn.com" | grep -c -E "[[:space:]]{1}[[:digit:]]+.[[:space:]]{1}(https?|ftp)://"
+11
+
+# and with perl regular expression and negative lookahead:
+
+[teo@rewind ~]$ lynx --dump http://cnn.com | grep -c -P '[[:space:]]{1}[[:digit:]]+.[[:space:]]{1}(https?|ftp)://(?!.*cnn.com)'
+11
+
+# - how many links to subdomains (links to hostnames *.cnn.com)
+
+[teo@rewind ~]$ lynx --dump http://cnn.com | grep -E -c "[[:space:]]{1}[[:digit:]]+.[[:space:]]{1}(https?|ftp)://([[:alnum:]]+[.])+cnn.com"
+390
+
+# It is somewhat different from my previous attempt on the file, as we can see with the following diff, the difference would be from the dynamically changing content on the website:
+
+[teo@rewind ~]$ diff -y <(lynx --dump http://cnn.com | grep -E "[[:space:]]{1}[[:digit:]]+.[[:space:]]{1}(https?|ftp)://([[:alnum:]]+[.])+cnn.com") <(grep -E "[[:space:]]{1}[[:digit:]]+.[[:space:]]{1}(https?|ftp)://([[:alnum:]]+[.])+cnn.com" dump)
+
+# And the lastly - how many links to direct javascript executions (something like this 'javascript:')
+
+[teo@rewind ~]$ lynx --dump http://cnn.com | grep "javascript:" dump -c
+8
+
+#Sources for this homework below:
+#    http://stackoverflow.com/questions/9197814/regex-lookahead-for-not-followed-by-in-grep
+#    http://www.regular-expressions.info/lookaround.html
+#    http://www.linuxforu.com/2012/06/beginners-guide-gnu-grep-basics-regular-expressions/
+#    http://www.panix.com/~elflord/unix/grep.html#expressions
+#    http://www.gnu.org/software/grep/manual/html_node/Regular-Expressions.html#Regular-Expressions
+#    
+#    
+# Thanks for getting here.
+#
+# EOF
+
+--> by ttanev
+
+============================================================================================================
+
+1. Login on grizzly and get the home folders of the usernames that have numbers in them.
+ 
+ls -d /home/* |sed 's/\/home\///'|awk '/[0-9]/'
+ 
+Командата има три части. изпълнявани последователно (pipe):
+- С командата ls -d визуализираме само директориите (теоретично е възможно да има и файлове в /home директорията) с презумпцията 1 потребител = 1 директория;
+- Със sed филтрираме „/home/“ представката;
+- С awk допълнително филтрираме имената на потребителите, като визуализираме само тези, които съдържат числа в тях.
+ 
+Ако целта е да се укаже пълния път до домашната директория на потребителите, втората част от командата не е необходима.
+ 
+Изход от командата:
+[angie@grizzly ~]$ ls -d /home/* |sed 's/\/home\///'|awk '/[0-9]/'
+4
+blagovestie1
+dandreev1
+d.georgiev.91
+djordjo7
+fuzly2
+GiK986
+gogo74
+iordan93
+Ivan72
+kamen779
+kmalamov1
+loopback0
+m4rt00
+mage3
+martotko1
+nikolai.velkov1
+pacho10
+pe6ev
+pe6o
+petko9001
+plam40
+rossi87
+s0ny123
+stefito3
+svv1234
+tm206
+todor87
+user1
+val10
+Vali0
+veidar45
+vik16r
+VLD62
+ze3rax
+
+	|--> Здравей, този начин, както и останалите посочени тук, не отчита едно нещо: 
+		 потребител може да има директория извън /home, както и потребител да има директория с име, различно от неговото. 
+		 Ето как го правя аз:
+
+		 awk -F : '{ if ($1 ~ /[0-9]/)  print "user",  $1 ", homedir: " $6 }' /etc/passwd
+
+		 Това изкарва директории на потребители, които имат цифра в името.  
+		 Ако целта е да се изведат всички директории, които съдържат цифра в името и са $HOME за потребител, променямe match правилото:
+
+		 awk -F : '{ if ($6 ~ /[0-9]/)  print "user",  $1 ", homedir: " $6 }' /etc/passwd
+
+--> 
+
+============================================================================================================
+
+1. Login on grizzly and get the home folders of the usernames that have numbers in them.
+To get home folders I will parse /etc/passwd file using awk:
+
+[username@grizzly ~]$ awk -F":" '$1~/.*[0-9].*/ {print $6}' /etc/passwd
+/home/iordan93
+/home/user1
+/home/djordjo7
+/home/m4rt00
+/home/Ivan72
+/home/blagovestie1
+/home/ze3rax
+/home/petko9001
+/home/gogo74
+/home/GiK986
+/home/martotko1
+/home/todor87
+/home/rossi87
+/home/d.georgiev.91
+/home/pe6o
+/home/Vali0
+/home/dandreev1
+/home/veidar45
+/home/mage3
+/home/nikolai.velkov1
+/home/stefito3
+/home/kamen779
+/home/tm206
+/home/val10
+/home/s0ny123
+/home/fuzly2
+/home/svv1234
+/home/plam40
+/home/loopback0
+/home/VLD62
+/home/vik16r
+/home/pe6ev
+/home/pacho10
+/home/4
+/home/kmalamov1
+/home/pacho19
+
+============================================================================================================
+
+5. Execute this: lynx --dump http://cnn.com. Now get only the relative path to all links that are on hostnames *.cnn.com and cnn.com included.
+
+Ако правилно съм разбрал условието, но ето едно решение:
+
+lynx --dump http://cnn.com | awk -Fcnn.com/ 'BEGIN {print "Relative path to all links that are on hostnames *.cnn.com and cnn.com "} /http:\/\// {++cnncount} END {print "\n There are "cnncount" relative paths found.\n"}{print "", $2}'
+
+- Подразбиращият се разделител е заменен със "cnn.com/";
+
+- Добавена е "екстра" - броя matched elements/raws.
+============================================================================================================
+
+3. On grizzly, parse /var/spool/mail/root and give me the timestamps of every e-mail that has 'SECURITY information' in its subject.
+
+[root@grizzly mail]# grep -A2 'SECURITY information' /var/spool/mail/root|awk '/Date/ {print $3,$4,$5,$6}'
+2 Jul 2013 01:23:11
+2 Jul 2013 01:23:12
+.......... Output omitted ...............
+15 Aug 2013 19:10:05
+15 Aug 2013 19:34:47
+15 Aug 2013 23:03:49
+[root@grizzly mail]#
+============================================================================================================
+
+============================================================================================================
+
+============================================================================================================
+
+============================================================================================================
+
+============================================================================================================
+
+============================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+

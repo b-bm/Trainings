@@ -1,0 +1,20 @@
+﻿WSA - HW - 1:
+
+5. Describe the differences between MBR and GPT.
+	
+Разликите между MBR и GPT (GUID Partition Table) могат да се обяснят на кратко по следния начин:
+	1. MBR
+		- Storage Size: Поддържа до 2 терабайта размер на пъртищъна
+		- BOOT Support: Диск от този вид  може да boot-не(да зареди) само от биоса на дънната платка
+		- Partition Configuration: Има лимит - Пъртишъните могат да бъдат 4 primary или 3 primary и 1 extended
+	2. GPT (GUID Partition Table)
+		- Storage Size: Поддържа повече от 2 терабайта размер на пъртищъна, но Windows поставя ограничения до 256 терабайта размер на пъртищъна (лимит на NTFS файловата система) и 128 пъртищъна за диск 
+		- BOOT Support: Диск от този вид  може да boot-не(да зареди) само от EFI или UEFI дънна платка
+		- Partition Configuration: Няма лимити Windows restricts these limits further to 256 TB for a single partition (NTFS limit), and 128 partitions.
+
+повече информация за GPT (GUID Partition Table) -> http://msdn.microsoft.com/en-us/windows/hardware/gg463525.aspx#X-201104111922504 и http://en.wikipedia.org/wiki/GUID_Partition_Table
+
+повече информация за MBR (Master Boot Record) -> http://technet.microsoft.com/en-us/library/cc976786.aspx и http://en.wikipedia.org/wiki/Master_boot_record
+
+
+

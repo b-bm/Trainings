@@ -1,0 +1,134 @@
+﻿Using ECC in OpenSSL and strongSwan on Fedora:
+
+Red Hat is currently not supplying Elliptic Curve Crytography (ECC) in binary packages due to concerns about patents. 
+There are various opinions about this subject and other Linux distributions such as Debian and Ubuntu have included ECC.
+For those who want or need ECC (for example, to interoprate with a VPN using X.509 ECDSA certificates or to use ECC-based smartcards) it is necessary to rebuild the Fedora OpenSSL package and related packages such as strongSwan
+
+Here I describe how to make the rebuild using the original sources and Fedora spec file to stay as close to the original Fedora binary as possible. 
+
+The procedure has been tested on Fedora 19 but can be adapted for other Fedora versions and/or RHEL/Centos/EPEL users.
+Prepare the system
+
+As root, install the necessary tools and dependencies for building. Remove the old openssl-devel package so it won't cause any problems during build.
+
+rpm -e openssl-devel
+yum install rpm-build krb5-devel zlib-devel gcc \
+   gmp-devel libcurl-devel openldap-devel \
+   NetworkManager-devel NetworkManager-glib-devel sqlite-devel
+
+# Set up an rpmbuild environment:
+
+# If you haven't used rpmbuild before, it is necessary to set up a small config file and directory tree for package building. The following commands will do that:
+
+[ ! -e ~/.rpmmacros ] && \
+    echo '%_topdir      %(echo $HOME)/rpmbuild' > ~/.rpmmacros
+[ ! -d rpmbuild ] && mkdir rpmbuild
+cd ~/rpmbuild
+mkdir -p BUILD BUILDROOT RPMS/i386 RPMS/x86_64 SOURCES SPECS SRPMS
+
+# Obtain the packages and build
+
+# Here we download the source packages from Fedora and apply a small patch to enable the ECC algorithms. 
+# This code can be cut and pasted into a script:
+
+cd ~/rpmbuild/SRPMS
+wget http://dl.fedoraproject.org/pub/fedora/linux/releases/19/Everything/source/SRPMS/o/openssl-1.0.1e-4.fc19.src.rpm
+wget http://dl.fedoraproject.org/pub/fedora/linux/releases/19/Everything/source/SRPMS/s/strongswan-5.0.2-2.fc19.src.rpm
+rpm -i openssl-1.0.1e-4.fc19.src.rpm
+rpm -i strongswan-5.0.2-2.fc19.src.rpm
+cd ../SOURCES
+wget http://www.openssl.org/source/openssl-1.0.1e.tar.gz
+cd ../SPECS
+wget http://zxvdr.fedorapeople.org/openssl.spec.ec_patch
+# Fedora's SRPM has a modified source, must use the original
+patch -p0 < openssl.spec.ec_patch
+sed -i -e 's/-usa.tar.xz/.tar.gz/' openssl.spec
+rpmbuild -bb openssl.spec
+
+# Install the OpenSSL packages
+
+# The strongSwan build script will detect the OpenSSL ECDSA functionality and enable the corresponding code in strongSwan. 
+# Therefore, it is necessary to install the OpenSSL packages now, before building strongSwan:
+
+cd ~/rpmbuild/RPMS/$(uname -i)
+rpm -Uvh --force \
+    openssl-1.0.1e*rpm \
+    openssl-devel-1.0.1e*rpm \
+    openssl-libs-1.0.1e*rpm
+
+# You can test that ECC is supported now by running the command:
+
+openssl ec -help
+
+# If you receive the help text, ECC is supported.
+# Rebuild the strongSwan packages
+
+# The strongSwan package does not need to be modified or patched in any way. 
+# When it builds, it will dynamically detect the ECDSA support in OpenSSL and the strongSwan package will support it too:
+
+cd ~/rpmbuild/SPECS
+rpmbuild -bb strongswan.spec
+
+# Now install the binary packages:
+
+cd ~/rpmbuild/RPMS/$(uname -i)
+rpm -Uvh --force \
+    strongswan-5*rpm \
+    strongswan-tnc-imcvs*rpm
+
+# Testing strongSwan is relatively easy, just try creating and viewing an ECDSA key. 
+# Note that on Fedora, the strongSwan command utility "ipsec" is actually invoked using the command "strongswan":
+
+cd /tmp
+strongswan pki -g --type ecdsa --size 384 > myKey.der
+strongswan pki -a --type ecdsa-priv --in myKey.der
+private key with:
+pubkey:    ECDSA 384 bits
+keyid:     66:27:29:e3:b2:e2:1f:81:fd:7b:25:86:59:86:5b:25:8f:84:6d:83
+subjkey:   28:50:c3:9e:9c:ad:04:a8:db:72:47:f9:18:37:00:ad:ad:03:9f:bc
+
+# Troubleshooting
+
+# If you get this error:
+
+# ipsec pki
+/sbin/ipsec: unknown IPsec command "pki" ("ipsec --help" for list)
+
+# you are incorrectly invoking the command "ipsec". Use the command "strongswan" instead.
+
+# If you get this error:
+
+plugin 'pkcs7' failed to load: /usr/lib64/strongswan/plugins/libstrongswan-pkcs7.so: cannot open shared object file: No such file or directory
+
+# it means you only installed the strongswan package and you also need to install the package strongswan-tnc-imcvs
+
+-------------------------------------------------------------------------------------
+--> Daniel.Pocock's blog
+
+Comments:
+
+Hi,
+thank you for your tutorial. Some notes:
+
+    mkdir rpmbuild # it would be better to use mkdir ~/rpmbuild
+    diff ~/rpmbuild/SPECS/strongswan.spec* # few changes in order to build it properly
+    215,220c215,220
+    < %dir %{_libdir}/%{name}/imcvs/imc-attestation.so
+    < %dir %{_libdir}/%{name}/imcvs/imc-scanner.so
+    < %dir %{_libdir}/%{name}/imcvs/imc-test.so
+    < %dir %{_libdir}/%{name}/imcvs/imv-attestation.so
+    < %dir %{_libdir}/%{name}/imcvs/imv-scanner.so
+    < %dir %{_libdir}/%{name}/imcvs/imv-test.so
+    ---
+    > %{_libdir}/%{name}/imcvs/imc-attestation.so
+    > %{_libdir}/%{name}/imcvs/imc-scanner.so
+    > %{_libdir}/%{name}/imcvs/imc-test.so
+    > %{_libdir}/%{name}/imcvs/imv-attestation.so
+    > %{_libdir}/%{name}/imcvs/imv-scanner.so
+    > %{_libdir}/%{name}/imcvs/imv-test.so 
+
+-------------------------------------------------------------------------------------
+
+
+
+

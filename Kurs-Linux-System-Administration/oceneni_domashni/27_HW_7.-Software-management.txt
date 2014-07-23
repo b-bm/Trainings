@@ -1,0 +1,80 @@
+﻿5. Describe the procedure for creating an RPM based repository.
+
+If you have downloaded, created, or rebuilt RPM packages locally you may want a place to put them so they are accessible from all the machines on your local net.
+
+# [root@server1 ~]# yum --nogpgcheck localinstall packagename.arch.rpm
+or the older and simpler approach for an unsigned package:
+# [root@server1 ~]# rpm -Uvh packagename.arch.rpm
+
+One benefit of the rpm based approach, is that a developer can incrementally solve dependencies, and rpm will suggest what the next needed package must provide, and one can build up a 'just enough' solution:
+# [root@server1 ~]# rpm -Uvh package1.arch.rpm package2.arch.rpm   ...
+
+The following procedure will explain how to set up an NFS share containing a repository of locally built/rebuilt/downloaded packages and access them in a uniform manner from other systems of the same distro version. One can follow a similar procedure to enable local mirrors of os, updates, etc. avoiding downloading from external mirror servers, and controlling availability of updates to local machines until they have been tested.
+
+Step1
+First create directory structure on the server, say server1:
+# [root@server1 ~]# mkdir -p /share/CentOS/4/local/i386/RPMS
+If createrepo is not already installed, as it will not be by default, install it:
+# [root@server1 ~]# yum install createrepo
+
+Step2
+Build a spiffy new set of packages from foo-1.2.3.4-1.el4.src.rpm (or alternately get packages from anoth
+# [builduser@server1 ~]$ rpmbuild --rebuild /path/to/srpm/foo-1.2.3.4-1.el4.src.rpm
+This creates (for example):
+/home/builduser/rpmbuild/RPMS/foo-1.2.3.4-1.el4.i386.rpm
+/home/builduser/rpmbuild/RPMS/foo-devel-1.2.3.4-1.el4.i386.rpm
+/home/builduser/rpmbuild/RPMS/foo-docs-1.2.3.4-1.el4.i386.rpm
+
+Step3
+Move the files to the repo and create metadata:
+# [root@server1 ~]# mv /home/builduser/rpmbuild/RPMS/foo* /share/CentOS/4/local/i386/RPMS
+# [root@server1 ~]# chown -R root.root /share/CentOS/4/local
+# [root@server1 ~]# createrepo /share/CentOS/4/local/i386
+# [root@server1 ~]# chmod -R o-w+r /share/CentOS/4/local
+
+Note: The previous two steps are repeated as new packages are added to the repo.
+
+Step4
+Create /etc/yum.repos.d/local.repo:
+# [local]
+# name=CentOS-$releasever - local packages for $basearch
+# baseurl=file:///share/CentOS/$releasever/local/$basearch
+# enabled=1
+# gpgcheck=0
+# protect=1
+For HTTP or FTP repos the baseurl line must be changed accordingly.
+
+Install packages on the server to test the repo. can be removed later if not required on server:
+# [root@server1 ~]# yum install foo foo-devel foo-docs
+
+Step5
+Export the directory via NFS - if not already on a shared directory. Change the IP address to suit your local network. Use "rw" and address 'root_squash' issues, rather than "ro" if you want the share to be writable from suitably privileged machines:
+# [root@server1 ~]# echo "/share 192.168.1.0/24(ro,async)' >>/etc/exports
+# [root@server1 ~]# exportfs -r
+
+Step6
+Log on to a client machine (e.g. client1) as root and set up the NFS mount and yum configuration:
+# [root@client1 ~]# scp server1:/etc/yum.repos.d/local.repo /etc/yum.repos.d/
+# [root@client1 ~]# ln -s /net/server1/share /share
+
+Test the setup - should be able to see the repo:
+# [root@client1 ~]# ls /share/CentOS/4/local
+
+Step7
+Install packages on client:
+# [root@client1 ~]# yum install foo foo-devel foo-docs
+
+Repeat the last three steps for additional clients as required.
+
+
+source http://wiki.centos.org/HowTos/CreateLocalRepos
+
+ЗАБЕЛЕЖКА:
+Добро домашно. Има и коментари.
+Успех!
+
+Оценка: 9
+
+
+
+

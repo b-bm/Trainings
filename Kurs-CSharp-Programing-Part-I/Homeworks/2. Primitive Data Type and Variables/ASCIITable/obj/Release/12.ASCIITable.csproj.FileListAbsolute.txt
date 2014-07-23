@@ -1,0 +1,8 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\ASCIITable\bin\Release\ASCIITable.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\ASCIITable\bin\Release\ASCIITable.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\ASCIITable\bin\Release\ASCIITable.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\ASCIITable\obj\Release\ASCIITable.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\ASCIITable\obj\Release\ASCIITable.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\ASCIITable\bin\Release\ASCIITable.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\ASCIITable\obj\Release\ASCIITable.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\ASCIITable\obj\Release\ASCIITable.pdb

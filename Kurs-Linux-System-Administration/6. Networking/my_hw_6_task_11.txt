@@ -1,0 +1,32 @@
+﻿HW - 6:
+
+11. Describe the difference between dhclient and dhcpcd.
+
+dhclient - Dynamic Host Configuration Protocol Client:
+The Internet Systems Consortium DHCP Client, dhclient, provides a means for configuring one or more network interfaces using the Dynamic Host Configuration Protocol, BOOTP protocol, or if these protocols fail, by statically assigning an address. 
+On startup, dhclient reads the dhclient.conf for configuration instructions. It then gets a list of all the network interfaces that are configured in the current system. 
+For each interface, it attempts to configure the interface using the DHCP protocol. 
+In order to keep track of leases across system reboots and server restarts, dhclient keeps a list of leases it has been assigned in the dhclient.leases file. 
+On startup, after reading the dhclient.conf file, dhclient reads the dhclient.leases file to refresh its memory about what leases it has been assigned. 
+
+dhcpcd - DHCP client daemon:
+dhcpcd is an implementation of the DHCP client specified in RFC2131 (when -r option is not specified) and RFC1541 (when -r option is specified).
+It gets the host information (IP address, netmask, broadcast address, etc.) from a DHCP server and configures the network interface of the machine on which it is running. 
+It also tries to renew the lease time according to RFC2131 or RFC1541 (obsolete).  
+The dhcpcd daemon is normally started by the /etc/rc.tcpip file that normally runs at boot time. 
+By default, this is commented out and not run on machine startup. There are smit options to enable the DHCP client.
+The dhcpcd daemon reads its configuration file and attempts to bring up and get an IP address and other configuration options for the interfaces specified within the configuration file. 
+The dhcpcd daemon runs in the background while the system is up. It will renew an already received address as required.
+
+dhclient is a one-shot client - it reaches out to a server once and only once to request or validate a client's IP address.
+In contrast, dhcpcd runs in background and actively manages re-requests after expired lease time etc. pp. without needing to be called again.
+dhclient е dhcp клиент, това е еднократно изпълнима програма по подразбиране, която може да се ползва и като постоянен демон.
+dhcpcd също е dhcp клиент предоставен от ISC, но той е постоянна услуга по подразбиране.
+
+
+Източници:
+http://linux.die.net/man/8/dhclient
+http://linux.about.com/library/cmd/blcmdl8_dhclient.htm
+http://www.phystech.com/download/dhcpcd_man.html
+http://pic.dhe.ibm.com/infocenter/aix/v7r1/index.jsp?topic=%2Fcom.ibm.aix.cmds%2Fdoc%2Faixcmds2%2Fdhcpcd.htm
+

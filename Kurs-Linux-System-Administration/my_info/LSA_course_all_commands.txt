@@ -1,0 +1,599 @@
+﻿LSA course all commands and tools:
+
+# VIM - editor:
+# for edit mode type - "i-insert" or "v-visual"
+# for command type - ":"
+# exit here pres - "esc"
+# exit here pres - "q"
+# for undo - "u" in command mode
+# for write type "w" in command mode ; "x" - write and exit
+# then press ESC key, type : followed by x and [enter] key -> esk+:x+ente
+# :wq! overrides read-only permission (if you have the permission to override permissions, for instance when you are using the root account.
+#*****************************************************************************************
+# Пример за alias търсене на инфо за различните команди по различните секции на "man-a".
+# Показва секциите на "man-a" в които има инфо за дадената команда 
+##~$ for i in {1..8}; do man $i дадената команда; done
+#
+##~$ for i in {1..8}; do man $i passwd; done
+#
+#*****************************************************************************************
+
+#******* lecture-1 *******
+#******* Команди за partitioning на дискове *******
+
+	fdisk - всичко в едно, но без resize
+	sfdisk - удобен за скриптове
+	cfdisk - удобен на по-стари дистрибуции
+	parted - улеснен интерфейс за по-лесна работ и допълнителни функционалности като resize
+
+	fsck - Команда която базирано на файловата система стартира спесифична за тази FS filesystem check команда
+	fsck,ext2
+	fsck,ext3
+	fsck,reiserfs
+	fsck,xfs
+	e2fsck - ext2/3/4 dedicated filesystem cache.
+
+	Създаване на файлова система:
+	mkfs.ext2
+	mkfs.ext3
+	mkfs.reiserfs
+	mkfs.xfs
+	Resize filesystem:
+	resize_reiserfs
+	resize2fs
+
+	!!! XFS под Linux може само да се увеличава но неможе да се намаля. !!!
+
+	tune2fs - команда с която можете да променяте настройките на файловата система
+	Пример:
+
+	# tune2fs -O^has_journal /dev/hda6
+	Горната команда премахва journal-а на ext3 файлова система сложена върху /dev/hda6 като ефективно прави файловата система върху hda6 на ext2
+
+	LVM tools:
+	създаване:
+	pvcreate
+	vgcreate
+	lvcreate
+	преглеждане:
+	pvdisplay
+	vgdisplay
+	lvdisplay
+	премахване:
+	pvremove
+	vgremove
+	lvremove
+	промяна:
+	pvchange
+	vgchange
+	lvchange
+
+	Software RAID:
+	mdadm  - един обединен tool за работа със софтуерни RAID-ове, препоръчителен за създаването и поддржката на software RAID
+	raidtools - пакет с комбинация от програми за създаване и поддръгка на софтуерни RAID-ове. 
+	Пакетът е прекалено стар и се препоръчва вече да се използва mdadm
+
+	Disk information:
+	hdparm - използва се за информация/настройка/спиране/пускане на IDE/SCSI дискове
+	sdparm - използва се за информация/настройка/спиране/пускане на SATA/SAS дискове
+	smartctl - използва се за информация/настройка/спиране/пускане на всички видове дискове
+	Може да си говори и с контролерите на които са свързани дисковете
+
+	mount - команда за монтиране на диск в директория
+	  -o remount,rw
+	  -t tmpfs
+	  --bind & --rbind
+	  
+#******* Commands that we need to look at: *******
+
+	- mknod
+	- fdisk
+	- cfdisk
+	- sfdisk
+	- parted
+	- mkswap
+	- swapon/swapoff
+	- mkfs.ext2/3/4
+	- mkfs.reiserfs
+	- mkfs.vfat
+	- tune2fs
+	- dd -> disk dump побитово копиране на информацията от един диск, партищън или файл в друг диск, партищън или файл
+		 |--> с dd да не се копира цял хард диск на друг !!! 
+	- mount
+	- sync
+	- echo 0/1/2/3 > /proc/sys/vm/drop_caches (Documentation/sysctl/vm.txt)
+	 + 0 - do nothing
+	 + 1 - free pagecache
+	 + 2 - free directory entries and inodes
+	 + 3 - free pagecache, directory entries and inodes
+	- fsck.*
+	 + /lost+found
+	 + e2fsck
+
+	Cluster/Network file systems
+	 - NFS (mount & export)
+	 - CIFS (smbmound/mount -t cifs)
+
+Commands setup:
+	 1. create devices with mknod
+	 2. create/edit/delete partitions with cfdisk
+	 3. create/edit/delete partitions with fdsisk
+	 4. create/edit/delete partitions with sfdisk
+	 5. create/edit/delete partitions with parted
+	 6. create swap fs on a partition
+	 7. create swap fs on a file
+	 8. activate, deactivate and monitor swaps
+	 9. create an ext3 fs on a partition
+	10. create an ext2 fs on a file
+	11. create reiserfs fs on a partition
+	12. create vfat fs on a partition
+	13. make a backup of your MBR using dd
+	14. convert ext2fs to ext3 with tune2fs
+	15. create, modify and delete sw raid with mdadm
+	16. create, modify and delete LVM partitions
+	17. mount the created partitions
+	18. describe the definitions of /etc/fstab and mtab
+	19. show mount --bind/--rbind
+	20. describe the following mount options:
+	 + noatime/nodiratime
+	 + auto/noauto
+	 + owner
+	 + nosuid
+	 + nodev
+	 + noexec
+	 + remount
+	 + nofail
+	 + usrquota/grpquota
+	21. mounting a file using loop
+
+#******* HOW TO GET A ROOT -> video 04.07.2013 - IV -> 1:03:05 *******
+
+	1. в GRUB избираме опцията "a"
+	2. <init=/bin/bash
+	3. # mount -o remount,rw /
+	4. # su -
+	5. # passwd root
+	6. слагаме новата парола
+	7. restart (ctrl+Alt+del)
+
+#******* lecture-2 *******
+#******* linux basic commands *******
+
+	cd              - change dir
+	pwd             - show current directory
+	ls              - list files & dirs -> ll - е като командата ls
+
+	cp              - copy file
+	mv              - move/rename file
+	rm              - remove file/dir
+	ln              - link file (symbolic or hard)
+	mkdir   - create dir
+	rmdir   - remove dir
+
+	touch   - creates empty file if not existing or changes its last modified date if existing
+	echo    - prints information on the stdout
+	cat             - show the contents of a file
+	cut             - cuts a line in parts(shows only one column of a file)
+	paste   - append columns
+	tail    - shows N lines from the end of a file
+	head    - shows N lines from the beginning of a file
+	wc              - word/line count
+	nl              - number of lines
+	grep    - search for string with regular expression
+	sort    - sorting lines
+	uniq    - Locate identical lines
+	less    - view contents of a file with support for paging and search
+	more    - paging software
+	date    - show current date, set date
+
+	tar     - GNU Tar archiver
+	gzip    - GNU Zip archiver
+	bzip2   - GNU BZip2 archiver
+
+	df       - filesystem usage
+	du       - file space usage
+	sync     - flush the buffers to all disk
+	mount    - mount a device
+	umount - umount a device
+
+	wh      - check who is logged in
+	w       - check who is logged in and what cmd he is currently executing
+	ps      - show process list - показва всички работещи процеси ( ps -axf )
+	pstree  - show process list tree
+	pgrep   - search trough the process list
+	kill    - send signal to a process
+	killall - to all processes like name
+	uptime  - check the machine uptime
+	top             - System monitor
+
+	chown   - change owner or owner and group
+	chgrp   - change group
+	chmod   - change permissions
+
+	stat    - get file system information
+	umask   - set initial create mask
+
+	lsattr  - list advanced attributes
+	chattr  - change advanced attributes
+
+	getfacl - list file system ACLs
+	setfacl - set file system ACLs
+
+	getfattr - list file attributes (man 5 attr)
+	setfattr - set file attributes (man 5 attr)
+
+	echo [some text] > [file name] (echo Hallo, dude > mytest1 ) - от видео създаване на файл с текст в текуща директория
+	
+# ******* security commands *******
+
+	id - prints your user id, user name, and all groups that you are part of
+	whoami - tells you your user name at the moment
+	useradd - add new user
+	userdel - removes existing user
+	usermod - modifies user information
+	passwd - change user passowd
+	groupadd - add new group
+	groupdel - removes existing group
+	groupmod - change group name
+	groups - show all groups in which you are member
+	gpasswd - change group password
+	chsh - chnage user shell
+	chfn - change user info
+	chown - change the owner
+	chgrp - change the group owner
+	chmod - change file permissions
+	umask - change the file creation mask
+	lsattr - list file attributes
+	chattr - change file attributes
+
+	additional chmod:
+	1 - sticky bit
+	2 - set gid
+	3 - set gid & sticky bit
+	4 - set uid
+	5 - set uid & sticky bit
+	6 - set uid & set gid
+	7 - set uid & set gid & sticky bit
+
+	additional file attributes:
+	A - noatime
+	a - append only
+	i - immutable
+	j - jurnaled (useful only with ext3)
+	s - secure delete
+	S - sync to disk
+	u - undelete (not for ext2 & ext3)
+
+#******* lecture-3 *******
+# ******* some commands *******
+
+	Process signals -> user commands: kill, pkill, skill
+	Working with a processes
+	  nice, renice, snice
+	  bg, fg, jobs, nohup
+
+	Switch User
+	  su
+	  sudo
+  
+# ******* some commands -> capabilities *******
+	man capabilities
+
+	getcap - list file capabilities
+	setcap - set file capabilities
+
+	# setcap 'cap_chown=iep' /usr/bin/php-cgi
+	# getcap /usr/bin/php-cgi
+	/usr/bin/php-cgi = cap_chown+eip
+
+	# setcap 'cap_sys_chroot=iep' /usr/bin/php-cgi
+	# getcap /usr/bin/php-cgi
+	/usr/bin/php-cgi = cap_sys_chroot+eip
+
+	# setcap 'cap_sys_chroot=iep cap_chown+ep' /usr/bin/php-cgi
+	# getcap /usr/bin/php-cgi
+	/usr/bin/php-cgi = cap_sys_chroot+eip cap_chown+ep
+
+#******* lecture-4 *******
+# ******* some commands *******
+
+	echo		-> принти текст, може и да запише текст във файл (echo "${some text}" > fileA)
+	cat			-> 
+	cut			-> 
+	nl			-> номерира и подрежда текст ляво/дясно
+	wc			-> брояч на линии/редове, думи, символи
+	head		-> изкарва ПЪРВИТЕ n на брой реда от файл, може да се зададе точно колко реда да се изведат 
+	tail		-> изкарва ПОСЛЕДНИТЕ n на брой реда от файл, може да се зададе точно колко реда да се изведат
+	date		-> 
+	pwd			-> в коя директория се намираме (if [ "$(pwd)" == "/home" ]; then some_command )
+				|--> функция проверяваща с командата "pwd" дали сме в дадена директория и ако сме в нея(само тогава)се изпълнява следващата команда
+	basename	-> взима основното име на файл от целия път, който е зададен  
+	readlink	-> показва към кой файл сочи даден симлинк
+	seq			-> 
+	sort		-> сортира, може да се зададе коя колона/ред да сортира
+	uniq		-> 
+	df			-> показва диск юсиджа (disc usage) (df -h)
+	du			-> показва колко точно MB се използват в дадена директория или потребител/потребителска директория (du -sh)
+	yes			-> премахва нуждата да се потвърждава дадена команда 
+				|--> (yes|rm some_file* -> премахва всички файлове в дадена директория без нужда да се потвърждава всеки файл)
+	diff		-> показва в даден файл кои редове са изтрити
+	zgrep		-> прави същото като grep само че в gzip файл без да има нужда от разархивиране
+	zcat		-> прави същото като cat само че в gzip файл без да има нужда от разархивиране
+	zdiff		-> прави същото като diff само че в gzip файл без да има нужда от разархивиране
+	
+	sleep		-> команда за пауза
+	
+	alias -> in bash-training-2.txt -> за описване и съхранение на дълги команди в .bashrc
+	file-descriptors -> video - 25.07.2013 - Shells and Bash scripting - Part I LSA_ 04. Shells and Bash scripting - part I -> 00:46:45
+	pipes "|" -> video - 25.07.2013 - Shells and Bash scripting - Part I LSA_ 04. Shells and Bash scripting - part I -> 00:52:35
+	Команди разделени с "|" се изпълняват по следния начин: изпълнява се команда 1 и изхода от нея се изпълнява с команда 2 и т.н.т.
+	Команди разделени с ";" се изпълняват последователно една след друга.
+	info commands -> video - 29.07.2013 - Bash scripting - Part II LSA_ 04. Bash scripting - Part II -> 00:11:06
+	
+	screen -> команда създаваща виртуален терминал, който може да се шерва с друг user 
+			|-> video - 29.07.2013 - Bash scripting - Part II LSA_ 04. Bash scripting - Part II -> 01:56:45
+
+#******* lecture-5 *******
+# ******* some commands -> Text editors *******
+
+	Usefull command line tools:
+	more		-> 
+	less		->
+	mc			->
+	screen		->
+	wget		-> команда / тул за download
+	curl		-> команда / тул за download
+	lynx/links	->
+
+# ******* grep / sed / awk  *******
+#  *** special matches: ***
+	[:alnum:]  Alphanumeric characters.
+	[:alpha:]  Alphabetic characters.
+	[:blank:]  Space or tab characters.
+	[:cntrl:]  Control characters.
+	[:digit:]  Numeric characters.
+	[:graph:]  Characters that are both printable and visible.  (A space is printable, but not visible, while an a is both.)
+	[:lower:]  Lower-case alphabetic characters.
+	[:print:]  Printable characters (characters that are not control characters.)
+	[:punct:]  Punctuation characters (characters that are not letter,  digits,  control  characters,  or  space characters).
+	[:space:]  Space characters (such as space, tab, and formfeed, to name a few).
+	[:upper:]  Upper-case alphabetic characters.
+	[:xdigit:] Characters that are hexadecimal digits.
+
+	\s - space or tab
+	\w - a whole word
+	\d - digit
+
+	\a        alarm, that is, the BEL character (hex 07)
+	\cx       "control-x", where x is any ASCII character
+	\e        escape (hex 1B)
+	\f        formfeed (hex 0C)
+	\n        linefeed (hex 0A)
+	\r        carriage return (hex 0D)
+	\t        tab (hex 09)
+	\ddd      character with octal code ddd, or back reference
+	\xhh      character with hex code hh
+	\x{hhh..} character with hex code hhh..
+
+#  *** sed / awk ***
+
+#******* lecture-6 *******
+# ******* some commands -> networking *******
+	List all network interfaces:
+		ifconfig -a
+	List only network interfaces that are UP:
+		ifconfig
+		
+	List all network interfaces with iproute2:
+		ip addr list
+		ip addr show
+		ip addr
+		ip a l
+		ip a s
+		ip a
+		
+	List all current routes:
+		route -n (the -n is for do not resolve IPs)
+		
+	Adding a routes with route:
+		route add -net 192.168.22.0/24 gw 10.2.0.1 dev eth0
+		route add -host 10.2.0.128  dev eth0
+		
+	Adding default gw with route:
+		route add default gw 10.2.0.1
+		
+	List all current routes with iproute2:
+		ip route show
+		ip route list
+		ip route
+		ip r s
+		ip r l
+		ip r
+		
+	Adding routes with iproute2:
+		ip route add 192.168.22.0/24 via 10.2.0.1 dev eth0
+		ip r a 192.168.22.0/24 via 10.2.0.1 dev eth0
+		ip route add 10.2.0.128 dev eth0
+		ip r a 10.2.0.128 dev eth0
+	Adding default gw with iproute2:
+		ip route add 0/0 via 10.2.0.1
+		ip r a default via 10.2.0.1
+		
+	Configure network interface with ifconfig:
+		ifconfig eth0 10.2.0.254 netmask 255.255.255.0
+
+	Metrics - the lower the metric, the more preferable this route becomes
+
+	Configure network interface with iproute2:
+		ip address add 10.2.0.254/24 dev eth0
+		ip link set eth0 up
+		ip route add 10.2.0.0/24 dev eth0
+
+	Adding network interface aliases with ifconfig:
+		ifconfig eth0:x 10.2.0.19 netmask 255.255.255.0
+
+	Adding network interface aliases with iproute2:
+		ip a a 10.2.0.19/24 dev eth0 label eth0:0
+		ip r a 10.2.0.0/24 dev eth0
+
+	Looking up your ARP table with arp:
+		arp -n
+
+	Looking up your ARP table with iproute2:
+		ip neigh list
+		ip neigh 
+		ip n l
+		ip n
+
+	What is the route that my machine will choose to ip xx.xxx.xx.xxx:
+		ip route get xx.xxx.xx.xxx
+
+	Update the switch MAC table:
+		arping -U -I eth0 -c3 interface_ip
+
+	Enable forwarding:
+		echo 1 > /proc/sys/net/ipv4/ip_forward /  sysctl net.ipv4.ip_forward=1
+
+	Routing tables
+		/etc/iproute2/rt_tables
+		ip rule list
+		ip rule
+		ip ru l
+		ip ru
+
+#******* lecture-7 *******
+# ******* Software management *******
+
+	Installation from source
+	- compiling
+	  - linking to libraries (-l -I)
+	  - source optimization ( -O0 -O1 -O2 )
+	- patching
+	- Source packages
+	  - verification (md5sum, sha1sum)
+	  - configure
+	  - make
+	  - make install
+	- autoconf
+	- automake
+	Example project - binutils
+	Package managers
+	- RPM based
+	- DEB based
+	Package structure
+	- RPM
+	   - cpio archive
+	   - scripts
+	- DEB
+	   - contents
+	   - debian
+	RPM based commands
+	- rpm
+	- yum
+	DEB based commands
+	- apt-get
+	- apt-cache
+	- dpkg
+
+#******* lecture-8 *******
+# ******* Network services *******
+
+
+#******* lecture-9 *******
+# ******* Basic system services *******
+
+
+#******* lecture-10 *******
+# ******* Advanced services *******
+
+
+#******* lecture-11 *******
+# ******* MySQL and PgSQL *******
+
+
+#******* lecture-12 *******
+# *******  *******
+
+
+#******* lecture-13 *******
+# *******  *******
+
+
+#******* lecture-14 *******
+# *******  *******
+
+
+#******* lecture-15 *******
+# *******  *******
+
+**************************************************************************
+**************************************************************************
+Структура на linux:
+
+/ -> slash 
+	bin -> директория за обикновени програми за обикновенните потребители
+	boot -> директория за кърнел, boot loader, initrd (поне 200MB)
+	chroot -> директория за
+	dev -> директория за device файлове
+	etc -> директория за повечето конфигурации на linux
+	home -> дир. на обикновенните потребители
+	lib -> директория за основни библиотеки на linux, libc - мн.важна библиотека
+	lost+found -> директория за
+	media -> директория за монтиране на други devices( устройства като USB flash ) -> автоматизирана
+	mnt -> директория за монтиране на други devices -> ръчно
+	opt -> директория за опционален софтуер ( нещо, което не идва с дистрибуцията, някакви дайвери и др. )
+	proc -> директория за информация за процеси, настройка на ядрото и др.
+	root -> директория на админа
+	sbin -> директория за програми на админа.
+	selinux -> директория за
+	srv -> директория за
+	str -> директория за
+	sys -> директория за файлове с достъп до информация от кърнела
+	tmp -> директория за temp. файлове
+	usr -> директория за user доп.програми, доп.настройки, игри, библиотеки
+	var -> директория за файлове, които се променят много често не ясно какви са точно.
+**************************************************************************
+**************************************************************************
+#******* SOME COMMANDS FROM MY STUDIES *******
+
+# ТЪРСЕНЕ НА ДИРЕКТОРИЯ / ФАЙЛ:
+	find / -type d -name "lectures" 2> /dev/null -> показва пълния път до търсена директория, ако знаем само нейното име
+	find / -type f -name "lectures" 2> /dev/null
+	
+# ДАВАНЕ НА ROOT ПРАВА НА ОБИКНОВЕН User чрез SUDO(добавяне на User-a в SUDOERS):
+	1. # vim /etc/sudoers
+	2. some_user ALL=(ALL) ALL -> търсим този ред "##Allow root to run any commands anywhere" и добавяме реда под реда за root
+
+# ДЕКОМПРЕСИРАНЕ НА tar.gz ФАЙЛ:
+	# tar -zxvf some_file.tar.gz -> декомпресира в текущата дирекрория
+	$ sudo tar -zxvf some_file.tar.gz
+	# tar -zxvf some_file.tar.gz -C /some_dir/some_dir -> декомпресира в определена дирекрория
+Where:
+	-z : Work on gzip compression automatically when reading archives.
+	-x : Extract archives.
+	-v : Produce verbose output i.e. display progress and extracted file list on screen.
+	-f : Read the archive from the archive to the specified file. In this example, read some_file.tar.gz archive.
+
+# СТАРТИРАНЕ, СПИРАНЕ, РЕСТАРТИРАНЕ НА Apache - httpd (конфигурационния файл е в /etc/httpd/conf -> vim httpd.conf)
+The httpd RPM installs the /etc/init.d/httpd script, which can be accessed using the /sbin/service + command
+
+	$ sudo /sbin/service httpd restart stop start -> рестартира, спира или стартира сървиса на apache web сървъра 
+	$ sudo apachectl restart stop start -> рестартира, спира или стартира сървиса на apache web сървъра
+
+#
+	
+**************************************************************************
+**************************************************************************
+# VIM - editor:
+#
+# for edit mode type - "i-insert" or "v-visual"
+# for command mode - ":"
+# exit here pres - "esc"
+# exit here pres - "q"
+# for undo - "u" in command mode
+# for write type "w" in command mode ; "x" - write and exit
+# then press ESC key, type : followed by x and [enter] key -> esk+:x+ente
+# :wq! overrides read-only permission (if you have the permission to override permissions, for instance when you are using the root account.
+#
+#
+**************************************************************************

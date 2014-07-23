@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatingPointPrecision\bin\Debug\FloatingPointPrecision.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatingPointPrecision\bin\Debug\FloatingPointPrecision.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatingPointPrecision\bin\Debug\FloatingPointPrecision.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatingPointPrecision\obj\Debug\3.FloatingPointPrecision.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatingPointPrecision\obj\Debug\FloatingPointPrecision.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatingPointPrecision\obj\Debug\FloatingPointPrecision.pdb

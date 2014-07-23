@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntagerInHexadecimalFormat\bin\Debug\IntagerInHexadecimalFormat.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntagerInHexadecimalFormat\obj\Debug\4.IntagerInHexadecimalFormat.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntagerInHexadecimalFormat\bin\Debug\IntagerInHexadecimalFormat.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntagerInHexadecimalFormat\bin\Debug\IntagerInHexadecimalFormat.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntagerInHexadecimalFormat\obj\Debug\IntagerInHexadecimalFormat.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\IntagerInHexadecimalFormat\obj\Debug\IntagerInHexadecimalFormat.pdb

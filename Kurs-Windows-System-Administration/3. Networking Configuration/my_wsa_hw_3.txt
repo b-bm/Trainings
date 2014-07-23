@@ -1,0 +1,34 @@
+﻿WSA - HW - 3:
+
+5. Describe how the APIPA (IPv4) Auto-Configuration works. 
+Provides additional information what is the mechanism used to prevent duplicate IP Address.
+
+Въведение: 
+Link-local address
+In a computer network, a link-local address is a network address that is intended and valid only for communications within a network segment (a single network link, or often: one broadcast domain) that a host is connected to.
+Usually, link-local addresses are not guaranteed to be unique beyond a single network segment. In comparison, other classes of addresses like organisation-wide or world-wide (or global) addresses, are unique within an organisation, or even world-wide. 
+Routers therefore do not forward packets with link-local addresses.
+The term link-local address would normally be used in cases where a protocol also supports non-link-local (e.g. global) addresses (like IPv4). 
+For protocols that support only link-local addresses (like Ethernet, USB), the plain term 'address' suffices.
+Link-local addresses for IPv4 are defined in the address block 169.254.0.0/16, in CIDR notation.
+
+На кратко какво е APIPA:
+
+Automatic Private IP Addressing (APIPA)
+When a globally routable or a private address becomes available after a link-local address has been assigned, the use of the new address should generally be preferred to the link-local address for new connections but communication via the link-local address is still possible.
+Microsoft refers to this address autoconfiguration method as Automatic Private IP Addressing (APIPA). 
+It is sometimes also casually referred to as auto-IP.
+
+
+Повече информация относно Automatic Private IP Addressing (APIPA):
+
+http://en.wikipedia.org/wiki/Private_network
+http://en.wikipedia.org/wiki/Link-local_address
+http://www.ietf.org/rfc/rfc3927.txt
+http://www.tcpipguide.com/free/t_DHCPAutoconfigurationAutomaticPrivateIPAddressingA.htm
+http://www.rfc-base.org/txt/rfc-3330.txt
+http://tools.ietf.org/search/rfc3330
+http://support.microsoft.com/kb/220874
+http://technet.microsoft.com/en-us/library/dd163570.aspx
+
+

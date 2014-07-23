@@ -1,0 +1,62 @@
+﻿Progress bar на Bash
+
+Тъй като в друга тема ме попитаха, реших да ви дам малко примери за progress bar писан на bash.
+Преди обаче да видите какво съм направил, моля да имате предвид, че аз лично подони глезотиики ги намирам за глупави във scripts. 
+В rsync или scp/wget да, но във script ми се струват глупави неща които само пречат да видиш истината
+
+Най-простичкият начин за който се сещам е следният:
+
+#!/bin/bash
+complete=0;
+echo -n '['
+while [ "$complete" != 78 ]; do
+    sleep 0.2
+    echo -n '#'
+    let complete++
+done
+echo ']'
+
+В този пример, на мястото на sleep-а слагате вашата функция. 
+Готиното, че този bar можете да бъде модифициран и да прескача с повече от едно # на цикъл.
+
+Следващият ви вариянт би бил това:
+
+#!/bin/bash
+complete=0
+progress=''
+while [ "$complete" != 78 ]; do
+    sleep 0.2
+    clear
+    progress="$progress#"
+    printf "[%-78s]\n" $progress
+    let complete++
+done
+
+В този вариянт се възползваме от функционалностите на командите clear и printf, които ни дават възможност да постигнем доста по-реалистичен progress bar.
+
+Ето и последният вариянт който ще ви предложа. Тук се възползваме от един трик на echo, който ви позволява да презаписвате текущият ред.
+
+#!/bin/bash
+function progress_bar() {
+    max=$1
+    percent=0
+    progress=''
+    while [ $percent -lt $(($max+1)) ]; do
+        echo -ne "\r\t[ "
+        echo -ne "${progress}> ] $((percent*100/$max))% "
+        progress="${progress}="
+        let percent++
+        sleep 0.2
+    done
+    echo -e " Done.\n"
+}   
+progress_bar 60
+
+Има доста начини да постигнете progress bars, има дори и команда bar която прави точно това нещо: http://www.theiling.de/projects/bar.html
+
+--> by hackman
+
+
+
+
+

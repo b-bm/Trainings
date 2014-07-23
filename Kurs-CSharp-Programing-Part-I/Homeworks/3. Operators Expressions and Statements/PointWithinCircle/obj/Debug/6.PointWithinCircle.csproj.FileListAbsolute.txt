@@ -1,0 +1,9 @@
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointWithinCircle\bin\Debug\PointWithinCircle.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointWithinCircle\bin\Debug\PointWithinCircle.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointWithinCircle\bin\Debug\PointWithinCircle.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointWithinCircle\obj\Debug\6.PointWithinCircle.csprojResolveAssemblyReference.cache
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointWithinCircle\obj\Debug\PointWithinCircle.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointWithinCircle\obj\Debug\PointWithinCircle.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointWithinCircle\bin\Debug\PointWithinCircle.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointWithinCircle\obj\Debug\PointWithinCircle.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointWithinCircle\obj\Debug\PointWithinCircle.pdb

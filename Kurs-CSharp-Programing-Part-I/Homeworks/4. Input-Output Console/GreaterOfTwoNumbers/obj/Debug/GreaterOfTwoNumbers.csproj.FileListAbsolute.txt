@@ -1,0 +1,1 @@
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\GreaterOfTwoNumbers\bin\Debug\GreaterOfTwoNumbers.exe.config

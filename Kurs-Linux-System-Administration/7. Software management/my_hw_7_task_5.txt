@@ -1,0 +1,212 @@
+﻿HW - 7:
+
+5. Describe the procedure for creating an RPM based repository.
+Махни допълнителните неща !!!
+
+Creating a Repository for RPMs and Creating your own RPM repo installer
+
+Install the necessary tools
+yum install rpm-sign gnupg
+
+Now create the gpg certificates
+gpg –gen-key
+select default for everything, then enter a password
+
+Edit the file /home/username/.rpmmacros and add the macro
+%_gpg_name “email-address”
+
+where email address is your email address.
+
+Note: If you are using a package that is already found inside the fedora repositories, you will need to increment the release number, so that your release number is higher. 
+After doing this, the package with the highest release number will be installed.
+
+Next sign your rpm packages
+rpm –addsign units-2.00-9.fc17.x86_64.rpm
+
+Add your key to the list of allowed keys to use. 
+If you do not add your key to the allowed list of keys on each computer using your repo, then you will not be allowed to install the package. 
+This will result in this error:
+warning: rpmts_HdrFromFdno: Header V4 RSA/SHA1 Signature, key ID f2f80ec8: NOKEY
+
+So, instead of getting this error, lets add the key to the list. First as the same user that you ran “gpg –gen-key” as, run:
+gpg –export –armour EMAIL-ADDRESS
+
+Where the email is the one entered in the previous steps. 
+Copy the output, which should be your public key, and place it in a file in the directory /etc/pki/rpm-gpg/ for example:
+sudo vi /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-oatley
+then paste the key inside this file
+
+### Create the yum repository:
+In this case, the repo file connects locally, create this file in /etc/yum.repos.d/
+this file created was called: fedora-oatley.repo
+sudo vi /etc/yum.repos.d/fedora-oatley.repo
+
+[fedora-oatley]
+name=fedora-oatley
+baseurl=http://ip-address-of-your-computer/repo
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-oatley
+
+### Making the repository on a httpd server:
+Install the httpd server
+sudo yum install httpd
+make a directory that you would like to contain repo data
+sudo mkdir /var/www/html/repo/
+copy over the sign packages that you would like your repo to serve
+sudo cp /home/username/rpmbuild/RPMS/x86_64/units-2.00-9.fc17.x86_64.rpm /var/www/html/repo
+create the repo meta data
+createrepo /var/www/html/repo
+Make sure the httpd is running
+systemctl start httpd.service
+
+### To disable all repositories and enable only yours, then install the package:
+yum –disablerepo=\* –enablerepo=your-repository-name install package-name
+
+For my repository I used:
+yum –disablerepo=\* –enablerepo=fedora-oatley install units
+
+### Note: The next part is making an rpm that can install your repository on another persons computer. 
+This part will only work if your httpd webserver is serving to the internet, and you placed the correct ip address inside your .repo file.
+
+### Installing a repository on a remote computer with an rpm
+
+First gather some of the files created in the previous steps
+
+The repository file that was created
+/etc/yum.repos.d/oatley-raspi.repo
+
+The gpg key that was created
+/etc/pki/gpg-rpm/RPM-GPG-KEY-oatley-raspi
+
+Copy these files to a temporary folder named: your-package-name-1.0
+For example
+mkdir oatley-raspi-repo-1.0
+
+Note: the name is important and you will need to remember it and use it in a later part! 
+The 1.0 at the end is the version number, you will be placing this in the spec file later.
+
+Now you need to archive and compress the folder and the 2 files inside
+tar -cvzf oatley-raspi-repo.tar.gz oatley-raspi-repo-1.0
+
+Next copy the .tar.gz file to your SOURCES directory in your rpmbuild folder
+cp oatley-raspi-repo.tar.gz ~/rpmbuild/SOURCES/
+
+Now you need to create the spec file for the rpm. 
+There are a couple difference in this spec file compared to that of one containing a binary file.
+
+The first difference is the line:
+BuildArch: noarch
+Which tells the build that this is not a binary rpm, which means the rpm just contains config files, images, text, etc. 
+But no binary files or programs.
+
+Putting the exit 0 after all of these macros is not required, but if you are running into issues with it failing due to installation issues such as running a ./configure, then they may help.
+%prep
+exit 0
+%setup -q
+%build
+exit 0
+
+This is where we install the config files, or the repo file and the gpg key file. 
+There is no configure, make, or make install macros in this spec file as we are not performing any of these action.
+%install
+mkdir -p %{buildroot}/etc/yum.repos.d/
+mkdir -p %{buildroot}/etc/pki/rpm-gpg/
+cp oatley-raspi.repo %{buildroot}/etc/yum.repos.d/oatley-raspi.repo
+cp RPM-GPG-KEY-oatley-raspi %{buildroot}/etc/pki/rpm-gpg/RPM-GPG-KEY-oatley-raspi
+
+The last difference, which could easly be inside either a binary or a noarch spec file, is the %config(noreplace) macros. 
+By adding files into the /etc, rpmbuild assumes they are either executable files or config files. 
+Since in this case they are not executable files, you declare them as config files with the %config macro. 
+If you say “%config(noreplace) file” then if it finds a copy of the file it will not replace it, if you say “%config(replace) file” then the file will be replaced.
+
+%files
+%doc README
+%config(noreplace) /etc/yum.repos.d/oatley-raspi.repo
+%config(noreplace) /etc/pki/rpm-gpg/RPM-GPG-KEY-oatley-raspi
+
+Run rpmbuild followed by rpmlint to check the spec and rpm files for errors and fix them accordingly(if there are any unexpected errors)
+rpmbuild -ba SPECS/oatley-raspi-repo.spec
+rpmlint -i SPECS/oatley-raspi-repo.spec
+
+At this point you should be able to install your repo on another computer and connect to your repository and download any of the packages on it.
+
+
+Източник Провери:
+http://andrewow.wordpress.com/2012/10/13/creating-rpm-repositories-and-making-a-repository-installer/
+
+Провери и тези:
+http://wiki.centos.org/HowTos/CreateLocalRepos
+http://www.webmo.net/support/yum_repository.html
+http://www.techrepublic.com/blog/linux-and-open-source/create-your-own-yum-repository/
+http://linuxsysconfig.com/2013/04/create-a-yum-repository-with-custom-gpg-signed-packages/
+-----------------------------------------------------------------------------------------
+
+http://www.practicalweb.co.uk/blog/12/11/21/how-create-custom-yum-repository-centos-6
+
+If you want to create custom rpms and install then with the usual automated dependency management you'll need your own yum repository. 
+This is just the RPMS and metadata in the format of static xml files served by a webserver.
+
+First you need a GPG key to sign your packages.
+
+	# make some randomness if running headless
+	sudo rngd -r /dev/urandom
+	# start the agent
+	gpg-agent --use-standard-socket --daemon
+	# interactive key generation (accept the defaults for key type, provide your name and email when promted)
+	gpg --gen-key
+	#
+	gpg --export -a 'My Name' > MY-RPM-GPG-KEY
+
+You won't need the random generator if you do this on a desktop, but on a headless system I found I needed this. 
+These actions will store a private key in your keyring, and a public key in the specified file.
+
+Build your rpm
+First configure rpm to use the key you just added to your key ring, checing you don't oveerwrite earlier configuration).
+
+	[ ! -f ~/.rpmmacros ] && echo '%_signature gpg
+	%_gpg_name My Name
+	' > ~/.rpmmacros
+
+Now build your RPM (assuming you are already setup to do this).
+
+	rpmbuild -bb --sign ~/rpmbuild/SPECS/my-project.spec
+
+Setup the Yum Repo
+Setup apache, make the directory structure, with teh repo files. This can be the same or a different server to your build machine.
+
+	# make the repo base url
+	sudo mkdir -p /var/www/html/myrepo
+	# make it wrietable by you normal account
+	sudo chown $(id -un).$(id -gn) /var/www/html/myrepo
+	# copy you rpm files
+	cp *rpm /var/www/html/myrepo
+	# create the metadata
+	createrepo /var/www/html/myrepo
+
+	# Setup an apache Alias for this directory
+	echo 'Alias /myrepo/ /var/www/html/myrepo/
+	' > /etc/httpd/conf.d/my-yum-repo
+
+	# restart Apache to pickup the change
+	service restart httpd
+
+Configure the system that will use the custom repo
+
+Copy over the GPG key, and import it into the rpm database.
+
+	sudo rpm --import MY-RPM-GPG-KEY
+
+Configure yum to use the new repo.
+
+	echo '[my-repo]
+	name=My Custom Packages
+	baseurl=http://yum.example.com/myrepo
+	> /etc/yum.repos.d/my.repo
+
+Now you should be able to install your custom packages with regular yum commands. 
+When you update your rpms just re-run the createrepo command to update the metadata.
+
+
+

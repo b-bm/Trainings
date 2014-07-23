@@ -1,0 +1,52 @@
+﻿WSA - HW – 8 :
+
+4. Describe the commond differences between AppLocker and Software Restriction features.
+
+Software Restriction Policies (SRP) was originally designed in Windows XP and Windows Server 2003 to help IT professionals limit the number of applications that would require administrator access. 
+With the introduction of User Account Control (UAC) and the emphasis of standard user accounts in Windows Vista, fewer applications today require administrator privileges. 
+As a result, AppLocker was introduced to expand the original goals of SRP by allowing IT administrators to create a comprehensive list of applications that should be allowed to run.
+
+For more information visit the AppLocker resource pages on Microsoft.com:
+http://technet.microsoft.com/en-us/library/dd723678(v=ws.10).aspx
+
+http://technet.microsoft.com/en-us/library/ee619725%28v=WS.10%29.aspx#BKMK_SRPdifferences
+
+Blacklisting and Whitelisting
+
+Malware-protection programs such as antivirus and antispyware software often use a technique referred to as blacklisting to protect computers. 
+Programs that employ blacklisting allow everything to be stored on a computer other than files that are infected with threats listed on the blacklist. 
+If a file is infected, these programs will either delete or quarantine it.
+
+An emerging approach to combating malware is whitelisting. 
+Whitelisting takes an opposite approach to blacklisting—that is, the protection program blocks everything except the files that are on its whitelist.
+When it comes to protecting computers against the execution of unwanted malware, whitelisting is preferable to blacklisting. 
+Whitelisting eases the life of the administrator, because in today’s interconnected world, users are typically allowed to run fewer applications than they should be blocked from running—including an almost unlimited number of unknown malicious executables that users might download from the Internet. 
+However, whitelisting creates the risk of locking yourself out if you don’t use it properly. 
+For example, you might neglect to add your management applications to the whitelist. 
+In addition, you can inadvertently prevent your users from working if you forget to add one of their applications to the whitelist.
+SRPs and AppLocker both support whitelisting and blacklisting, although they have different default policies. 
+AppLocker uses whitelisting by default, thereby blocking everything; the administrator must explicitly define the applications that can run. 
+The default SRP configuration uses blacklisting, which allows all applications to run; the administrator must define exceptions for any applications to be blocked. 
+Setting up whitelisting with SRPs is difficult, which is why most admins use it only for blacklisting applications. 
+AppLocker is much better suited to provide whitelisting-based protection for controlling applications.
+
+Setting Up AppLocker Rules:
+Create Default Rules:
+Automatically Generate Rules:
+Create New Rule:
+Enforcing AppLocker Rules:
+A Major Step Forward:
+
+source:
+http://windowsitpro.com/security/applocker-windows-server-2008-r2-and-windows-7
+
+
+
+
+
+
+
+
+
+
+

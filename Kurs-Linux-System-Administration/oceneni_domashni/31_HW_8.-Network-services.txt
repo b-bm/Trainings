@@ -1,0 +1,104 @@
+1. Configure BIND to accept remote dynamic updates for zone maimunka.net. Show the named.conf and the zone file.
+
+
+
+1. named.conf:
+
+# cat /etc/named.conf
+
+// named.conf
+//
+// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS
+// server as a caching only nameserver (as a localhost DNS resolver only).
+//
+// See /usr/share/doc/bind*/sample/ for example named configuration files.
+//
+
+options {
+	listen-on port 53 { 127.0.0.1; };
+	listen-on-v6 port 53 { ::1; };
+	directory 	"/var/named";
+	dump-file 	"/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+	allow-query     { localhost; };
+	recursion yes;
+
+	dnssec-enable yes;
+	dnssec-validation yes;
+	dnssec-lookaside auto;
+
+	/* Path to ISC DLV key */
+	bindkeys-file "/etc/named.iscdlv.key";
+
+	managed-keys-directory "/var/named/dynamic";
+};
+
+logging {
+        channel default_debug {
+                file "data/named.run";
+                severity dynamic;
+        };
+};
+
+zone "." IN {
+	type hint;
+	file "named.ca";
+};
+
+zone "maimunka.net" {
+
+    type master;
+
+    file "maimunka.net.db";
+
+    update-policy {
+
+        grant update-key name maimunka.net ANY;
+
+    };
+
+};
+
+include "/etc/named.rfc1912.zones";
+include "/etc/named.root.key";
+
+
+
+2. zone File:
+
+# cat /var/named/maimunka.net.db
+
+
+; Zone file for maimunka.net
+$TTL 14400
+@      86400    IN      SOA     ns5.kasserver. maimunka.maimunka.com. (
+                2013100401      ; serial, todays date+todays
+                86400           ; refresh, seconds
+                7200            ; retry, seconds
+                3600000         ; expire, seconds
+                86400 )         ; minimum, seconds
+
+maimunka.net. 86400 IN NS ns5.kasserver.com.
+maimunka.net. 86400 IN NS ns6.kasserver.com.
+
+
+maimunka.net. IN A 85.13.138.161
+
+localhost.maimunka.net. IN A 127.0.0.1
+
+maimunka.net. IN MX 0 maimunka.net.
+
+mail IN CNAME maimunka.net.
+www IN CNAME maimunka.net.
+ftp IN CNAME maimunka.net.
+
+
+Source:
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Deployment_Guide/ch-bind.html
+http://bahut.alma.ch/2013/01/personal-dynamic-dns.html
+http://wiki.samba.org/index.php/Dns-backend_bind
+
+
+
+

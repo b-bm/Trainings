@@ -1,0 +1,6 @@
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\TheSumOfEnNumbers\bin\Debug\TheSumOfEnNumbers.exe.config
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\TheSumOfEnNumbers\bin\Debug\TheSumOfEnNumbers.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\TheSumOfEnNumbers\bin\Debug\TheSumOfEnNumbers.pdb
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\TheSumOfEnNumbers\obj\Debug\7.TheSumOfEnNumbers.csprojResolveAssemblyReference.cache
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\TheSumOfEnNumbers\obj\Debug\TheSumOfEnNumbers.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\TheSumOfEnNumbers\obj\Debug\TheSumOfEnNumbers.pdb

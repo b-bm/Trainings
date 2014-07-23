@@ -1,0 +1,3 @@
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\PrintMyFirstLastName\bin\Debug\PrintMyFirstLastName.exe.config
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\PrintMyFirstLastName\obj\Debug\PrintMyFirstLastName.exe
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\PrintMyFirstLastName\obj\Debug\PrintMyFirstLastName.pdb

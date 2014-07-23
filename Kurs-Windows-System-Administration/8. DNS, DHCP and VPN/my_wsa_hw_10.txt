@@ -1,0 +1,18 @@
+﻿WSA - HW – 10 :
+
+2. Describe the idea of the Secure Socket Tunneling Protocl (SSTP). Provide details and different scenarious.
+
+http://en.wikipedia.org/wiki/Secure_Socket_Tunneling_Protocol
+
+http://technet.microsoft.com/en-us/magazine/2007.06.cableguy.aspx
+
+http://www.computerhope.com/jargon/s/sstp.htm
+
+http://www.windowsecurity.com/articles-tutorials/firewalls_and_VPN/Secure-Socket-Tunneling-Protocol.html
+
+http://blogs.technet.com/b/rrasblog
+
+http://technet.microsoft.com/en-us/library/cc771298%28v=ws.10%29.aspx
+
+
+

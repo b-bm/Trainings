@@ -1,0 +1,26 @@
+﻿WSA - HW – 11 :
+
+1. Describe the idea of WDS multicast transmission. Provide details and different configuration options.
+
+Windows Deployment Services is the updated and redesigned version of Remote Installation Services (RIS). 
+Windows Deployment Services enables you to deploy Windows operating systems over the network, which means that you do not have to install each operating system directly from a CD or DVD. 
+
+
+http://technet.microsoft.com/en-us/library/cc732477.aspx
+
+http://technet.microsoft.com/en-us/library/dd637994%28v=ws.10%29.aspx
+
+http://technet.microsoft.com/en-us/library/7d837d88-6d8e-420c-b68f-a5b4baeb5248.aspx
+
+http://technet.microsoft.com/en-us/library/dd637994%28v=ws.10%29.aspx
+
+http://technet.microsoft.com/en-us/library/cc771060.aspx
+
+http://araihan.wordpress.com/2009/12/07/windows-deployment-services-create-and-deploy-multicast-images
+
+http://systemscenter.ru/wds_deploymentguide.en/html/30f88532-d31b-416f-9ce0-c8050bec0b03.htm
+
+
+
+
+

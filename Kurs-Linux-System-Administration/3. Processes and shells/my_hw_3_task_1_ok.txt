@@ -1,0 +1,60 @@
+﻿HW - 3:
+1. Describe the MAC security model.
+
+ИЗТОЧНИК - 1: http://www.cgisecurity.com/owasp/html/ch08s02.html
+
+Mandatory Access Control (MAC) ensures that the enforcement of organizational security policy does not rely on voluntary web application user compliance. 
+MAC secures information by assigning sensitivity labels on information and comparing this to the level of sensitivity a user is operating at. 
+In general, MAC access control mechanisms are more secure than DAC yet have trade offs in performance and convenience to users. 
+MAC mechanisms assign a security level to all information, assign a security clearance to each user, and ensure that all users only have access to that data for which they have a clearance. 
+MAC is usually appropriate for extremely secure systems including multilevel secure military applications or mission critical data applications. 
+A MAC access control model often exhibits one or more of the following attributes.
+
+    1.Only administrators, not data owners, make changes to a resource's security label.
+
+    2.All data is assigned security level that reflects its relative sensitivity, confidentiality, and protection value.
+
+    3.All users can read from a lower classification than the one they are granted (A "secret" user can read an unclassified document).
+
+    4.All users can write to a higher classification (A "secret" user can post information to a Top Secret resource).
+
+    5.All users are given read/write access to objects only of the same classification (a "secret" user can only read/write to a secret document).
+
+    6.Access is authorized or restricted to objects based on the time of day depending on the labeling on the resource and the user's credentials (driven by policy).
+
+    7.Access is authorized or restricted to objects based on the security characteristics of the HTTP client (e.g. SSL bit length, version information, originating IP address or domain, etc.) 
+
+ИЗТОЧНИЦИ - 2:
+http://www.cyberciti.biz/faq/what-is-selinux/
+http://en.wikipedia.org/wiki/Mandatory_access_control
+http://en.wikipedia.org/wiki/Security-Enhanced_Linux
+
+MAC: Security mechanism via SELinux
+MAC is an acronym for Mandatory Access Control (MAC). SELinux is an implementation of a MAC security mechanism. It is built into the Linux kernel and enabled by default on Fedora, CentOS, RHEL and a few other Linux distributions. SELinux allows server admin to define various permissions for all process. It defines how all processes can interact with other parts of the server such as:
+
+    Pipes
+    Files
+    Network ports
+    Sockets
+    Directories
+    Other process
+
+SELinux puts restrictions on each of the above object according to a policy. For example, an apache user with full permission can only access /var/www/html directory, but can not touch other parts of the system such as /etc directory without policy modification. If an attacker managed to gain access to sendmail mail or bind dns or apache web server, would only have access to exploited server and the files normally has access as defined in the policy for the server. An attacker can not access the other parts of the system or internal LAN. In other words, damage can be now restricted to the particular server and files. The cracker will not able to get a shell on your server via common daemons such as Apache / BIND / Sendmail as SELinux offers the following security features:
+
+    Protect users' data from unauthorized access.
+    Protect other daemons or programs from unauthorized access.
+    Protect network ports / sockets / files from unauthorized access.
+    Protect server against exploits.
+    Avoid privilege escalation and much more.
+
+Please note that SELinux is not a silver bullet for protecting the server. 
+You must follow other security practices such as
+                         |
+						 |-> http://www.cyberciti.biz/tips/linux-security.html
+
+    Implementing firewalls policy.
+    Server monitoring.
+    Patching the system on time.
+    Writing and securing cgi/php/python/perl scripts.
+
+

@@ -1,0 +1,129 @@
+﻿6. Describe the contents of the following files from the /proc file system: modules, filesystems, diskstats, mounts.
+
+
+1. /proc/modules, one of the most important files in /proc, containing a list of the kernel modules currently loaded . It gives some indication ( not always entirely correct) of dependencies.
+
+2. /proc/filesystems, a list of the file systems supported by the kernel at the time of listing
+
+
+3. /proc/diskstats, giving some information (including device numbers) for each of the logical disk devices
+
+
+4. /proc/mounts, a symlink to self/mounts which contains a list of the currently mounted devices and their mount points (and which file system is in use and what mount options are in use).
+
+Outputs:
+
+1. [iavoreo@grizzly ~]$ cat /proc/modules
+bluetooth 83477 0 - Live 0x00000000
+rfkill 14794 1 bluetooth, Live 0x00000000
+iptable_nat 5053 0 - Live 0x00000000
+nf_nat 18765 1 iptable_nat, Live 0x00000000
+nf_conntrack_ipv4 7694 3 iptable_nat,nf_nat, Live 0x00000000
+nf_defrag_ipv4 1039 1 nf_conntrack_ipv4, Live 0x00000000
+iptable_filter 2173 0 - Live 0x00000000
+ip_tables 9567 2 iptable_nat,iptable_filter, Live 0x00000000
+tcp_diag 693 0 - Live 0x00000000
+inet_diag 7302 1 tcp_diag, Live 0x00000000
+ipt_REJECT 1867 0 - Live 0x00000000
+ip6t_REJECT 3987 2 - Live 0x00000000
+nf_conntrack_ipv6 7207 2 - Live 0x00000000
+nf_defrag_ipv6 8897 1 nf_conntrack_ipv6, Live 0x00000000
+xt_state 1064 2 - Live 0x00000000
+nf_conntrack 65428 5 iptable_nat,nf_nat,nf_conntrack_ipv4,nf_conntrack_ipv6,xt_state, Live 0x00000000
+ip6table_filter 2245 1 - Live 0x00000000
+ip6_tables 10867 1 ip6table_filter, Live 0x00000000
+ipv6 264059 59 ip6t_REJECT,nf_conntrack_ipv6,nf_defrag_ipv6, Live 0x00000000
+ext3 199564 1 - Live 0x00000000
+jbd 64453 1 ext3, Live 0x00000000
+dm_mod 68755 0 - Live 0x00000000
+virtio_balloon 3866 0 - Live 0x00000000
+i2c_piix4 11156 0 - Live 0x00000000
+i2c_core 25632 1 i2c_piix4, Live 0x00000000
+virtio_net 13237 0 - Live 0x00000000
+sg 24038 0 - Live 0x00000000
+ext4 328781 1 - Live 0x00000000
+mbcache 6017 2 ext3,ext4, Live 0x00000000
+jbd2 74118 1 ext4, Live 0x00000000
+virtio_blk 6091 3 - Live 0x00000000
+sr_mod 13282 0 - Live 0x00000000
+cdrom 33416 1 sr_mod, Live 0x00000000
+virtio_pci 5392 0 - Live 0x00000000
+virtio_ring 7020 4 virtio_balloon,virtio_net,virtio_blk,virtio_pci, Live 0x00000000
+virtio 3760 4 virtio_balloon,virtio_net,virtio_blk,virtio_pci, Live 0x00000000
+pata_acpi 2513 0 - Live 0x00000000
+ata_generic 2805 0 - Live 0x00000000
+ata_piix 20413 0 - Live 0x00000000
+
+2. [iavoreo@grizzly ~]$ cat /proc/filesystems
+nodev   sysfs
+nodev   rootfs
+nodev   bdev
+nodev   proc
+nodev   cgroup
+nodev   cpuset
+nodev   tmpfs
+nodev   devtmpfs
+nodev   binfmt_misc
+nodev   debugfs
+nodev   securityfs
+nodev   sockfs
+nodev   usbfs
+nodev   pipefs
+nodev   anon_inodefs
+nodev   inotifyfs
+nodev   devpts
+nodev   ramfs
+nodev   hugetlbfs
+        iso9660
+nodev   pstore
+nodev   mqueue
+        ext4
+        ext3
+
+3. [iavoreo@grizzly ~]$ cat /proc/diskstats
+   1       0 ram0 0 0 0 0 0 0 0 0 0 0 0
+   1       1 ram1 0 0 0 0 0 0 0 0 0 0 0
+   1       2 ram2 0 0 0 0 0 0 0 0 0 0 0
+   1       3 ram3 0 0 0 0 0 0 0 0 0 0 0
+   1       4 ram4 0 0 0 0 0 0 0 0 0 0 0
+   1       5 ram5 0 0 0 0 0 0 0 0 0 0 0
+   1       6 ram6 0 0 0 0 0 0 0 0 0 0 0
+   1       7 ram7 0 0 0 0 0 0 0 0 0 0 0
+   1       8 ram8 0 0 0 0 0 0 0 0 0 0 0
+   1       9 ram9 0 0 0 0 0 0 0 0 0 0 0
+   1      10 ram10 0 0 0 0 0 0 0 0 0 0 0
+   1      11 ram11 0 0 0 0 0 0 0 0 0 0 0
+   1      12 ram12 0 0 0 0 0 0 0 0 0 0 0
+   1      13 ram13 0 0 0 0 0 0 0 0 0 0 0
+   1      14 ram14 0 0 0 0 0 0 0 0 0 0 0
+   1      15 ram15 0 0 0 0 0 0 0 0 0 0 0
+   7       0 loop0 0 0 0 0 0 0 0 0 0 0 0
+   7       1 loop1 0 0 0 0 0 0 0 0 0 0 0
+   7       2 loop2 0 0 0 0 0 0 0 0 0 0 0
+   7       3 loop3 0 0 0 0 0 0 0 0 0 0 0
+   7       4 loop4 0 0 0 0 0 0 0 0 0 0 0
+   7       5 loop5 0 0 0 0 0 0 0 0 0 0 0
+   7       6 loop6 0 0 0 0 0 0 0 0 0 0 0
+   7       7 loop7 0 0 0 0 0 0 0 0 0 0 0
+  11       0 sr0 0 0 0 0 0 0 0 0 0 0 0
+ 253       0 vda 9871 1464 452790 82489 427730 1027548 11649492 18059737 0 2600491 18142407
+ 253       1 vda1 887 269 36908 365 248 139 780 23360 0 19776 23725
+ 253       2 vda2 8763 1174 413946 82029 427482 1027409 11648712 18036377 0 2588132 18118587
+
+4. [iavoreo@grizzly ~]$ cat /proc/mounts
+rootfs / rootfs rw 0 0
+proc /proc proc rw,relatime 0 0
+sysfs /sys sysfs rw,relatime 0 0
+devtmpfs /dev devtmpfs rw,relatime,size=3985688k,nr_inodes=171674,mode=755 0 0
+devpts /dev/pts devpts rw,relatime,gid=5,mode=620,ptmxmode=000 0 0
+tmpfs /dev/shm tmpfs rw,relatime 0 0
+/dev/vda2 / ext4 rw,relatime,barrier=1,data=ordered 0 0
+/proc/bus/usb /proc/bus/usb usbfs rw,relatime 0 0
+/dev/vda1 /boot ext3 rw,relatime,errors=continue,user_xattr,acl,barrier=1,data=ordered 0 0
+none /proc/sys/fs/binfmt_misc binfmt_misc rw,relatime 0 0
+/dev/vda2 /var/tmp ext4 rw,relatime,barrier=1,data=ordered 0 0
+
+ЗАБЕЛЕЖКА:
+Добро домашно. Има обяснения и е даден аутпут от командния ред.
+Успех.
+

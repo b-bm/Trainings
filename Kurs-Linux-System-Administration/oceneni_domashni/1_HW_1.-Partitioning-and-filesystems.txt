@@ -1,0 +1,129 @@
+======================================================================================
+=17. Find all possible command line tools related to XFS administration (at least 5).=
+======================================================================================
+ADMINISTRATOR COMMANDS
+       path [ N ]
+              Lists  all  paths  with  devices/project  identifiers or set the
+              current path to the Nth list entry (the current path is used  by
+              many   of   the  commands  described  here,  it  identifies  the
+              filesystem toward which a command is directed).  The patch  list
+              can  come  from  several  places  -  the command line, the mount
+              table, and the /etc/projects file.
+
+       report [ -gpu ] [ -bir ] [ -ahntLNU ] [ -f file ]
+              Report filesystem quota information.   This  reports  all  quota
+              usage  for  a  filesystem,  for  the specified quota type (u/g/p
+              and/or blocks/inodes/realtime).  It reports blocks in 1KB  units
+              by  default.  The -h option reports in a "human-readable" format
+              similar to the df(1) command. The -f option outputs  the  report
+              to  file  instead  of  stdout.  The  -a  option  reports  on all
+              filesystems. The -n option outputs the numeric ID instead of the
+              name. The -L and -U options specify lower and upper ID bounds to
+              report on. The -N option reports information without the  header
+              line. The -t option performs a terse report.
+
+       state [ -gpu ] [ -av ] [ -f file ]
+              Report  overall  quota  state  information.  This reports on the
+              state of quota accounting, quota enforcement, and the number  of
+              extents  being used by quota metadata within the filesystem. The
+              -f option outputs state information to file instead  of  stdout.
+              The  -a option reports state on all filesystems and not just the
+              current path.
+
+       limit [ -gpu ] bsoft=N | bhard=N | isoft=N  |  ihard=N  |  rtbsoft=N  |
+              rtbhard=N -d | id | name
+              Set   quota  block  limits  (bhard/bsoft),  inode  count  limits
+              (ihard/isoft) and/or realtime  block  limits  (rtbhard/rtbsoft).
+              The  -d  option  (defaults) can be used to set the default value
+              that will be used, otherwise a specific user/group/project  name
+              or numeric identifier must be specified.
+
+       timer [ -gpu ] [ -bir ] value
+              Allows  the  quota  enforcement timeout (i.e. the amount of time
+              allowed to pass before the soft limits are enforced as the  hard
+              limits)  to  be  modified.  The  current  timeout setting can be
+              displayed using the state  command.  The  value  argument  is  a
+              number  of seconds, but units of ’minutes’, ’hours’, ’days’, and
+              ’weeks’ are also understood (as  are  their  abbreviations  ’m’,
+              ’h’, ’d’, and ’w’).
+
+       warn [ -gpu ] [ -bir ] value -d | id | name
+              Allows  the  quota  warnings  limit  (i.e. the number of times a
+              warning will be send to someone over quota)  to  be  viewed  and
+              modified.  The  -d  option  (defaults)  can  be  used to set the
+              default  time  that  will  be   used,   otherwise   a   specific
+              user/group/project name or numeric identifier must be specified.
+              NOTE: this feature is not currently implemented.
+
+       enable [ -gpu ] [ -v ]
+              Switches on quota enforcement for the filesystem  identified  by
+              the  current  path.   This  requires the filesystem to have been
+              mounted with quota enabled, and for accounting to  be  currently
+              active.  The  -v  option  (verbose) displays the state after the
+              operation has completed.
+
+       disable [ -gpu ] [ -v ]
+              Disables  quota  enforcement,  while  leaving  quota  accounting
+              active.  The  -v  option  (verbose) displays the state after the
+              operation has completed.
+
+       off [ -gpu ] [ -v ]
+              Permanently switches quota off for the filesystem identified  by
+              the   current   path.   Quota  can  only  be  switched  back  on
+              subsequently by unmounting and then mounting again.
+
+       remove [ -gpu ] [ -v ]
+              Remove any space allocated to quota metadata from the filesystem
+              identified  by  the  current path.  Quota must not be enabled on
+              the filesystem, else this operation will report an error.
+
+       dump [ -gpu ] [ -f file ]
+              Dump out quota limit information for backup utilities, either to
+              standard  output  (default)  or  to  a  file.   This is only the
+              limits, not the usage information, of course.
+
+       restore [ -gpu ] [ -f file ]
+              Restore quota limits from a backup file.  The file  must  be  in
+              the format produced by the dump command.
+
+       quot [ -gpu ] [ -bir ] [ -acnv ] [ -f file ]
+              Summarize filesystem ownership, by user, group or project.  This
+              command uses a special XFS "bulkstat" interface to quickly  scan
+              an entire filesystem and report usage information.  This command
+              can be used even when filesystem quota are not enabled, as it is
+              a full-filesystem scan (it may also take a long time...). The -a
+              option displays information on all filesystems.  The  -c  option
+              displays a histogram instead of a report. The -n option displays
+              numeric IDs rather than names. The -v  option  displays  verbose
+              information.  The  -f  option send the output to file instead of
+              stdout.
+
+       project [ -cCs id | name ]
+              Without arguments, this command lists known  project  names  and
+              identifiers   (based   on   entries  in  the  /etc/projects  and
+              /etc/projid files).  The  -c,  -C,  and  -s  options  allow  the
+              directory tree quota mechanism, discussed in detail below, to be
+              maintained.
+
+# xfs_check ;
+	-check the system.
+
+# xfs_repair ;
+	-In some cases, XFS filesystem corruption, even on the root file system, can be repaired
+with the command.
+
+# xfsdump_quotas ;
+	-If the filesystem being dumped contains quotas, xfsdump will use repquota(1M) to
+store the quotas in the following files in the root of the filesystem to be dumped.
+
+# xfsdump_quotas_group ; 
+	
+# xfsrestore ;
+	-detects and bypasses media errors and recovers rapidly after encountering them. 
+
+# xfsdump ;
+	-You can use to back up data to various media.
+
+# xfsrestore ;
+	-Use xfsrestore to restore data backed up with xfsdump. You can restore files,
+subdirectories, and filesystems—regardless of the way they were backed up.;

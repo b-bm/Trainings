@@ -1,0 +1,5 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\ApplesBonusScore\bin\Debug\ApplesBonusScore.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\ApplesBonusScore\bin\Debug\ApplesBonusScore.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\ApplesBonusScore\bin\Debug\ApplesBonusScore.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\ApplesBonusScore\obj\Debug\ApplesBonusScore.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\ApplesBonusScore\obj\Debug\ApplesBonusScore.pdb

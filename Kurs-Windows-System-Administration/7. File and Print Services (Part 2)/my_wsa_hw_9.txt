@@ -1,0 +1,20 @@
+﻿WSA - HW – 9 :
+
+7. Find and document any solutions that can be used in cooperation with the Distributed File System Replication (DFS-R) features and provides file locking over all replication members. 
+
+some solution 1:
+http://www.peersoftware.com/solutions/file-locking-for-ms-dfsr.html
+http://www.peersoftware.com/products/file-collaboration/peerlock.html
+
+some solution 2:
+http://www.globalscape.com/wafs/
+
+about DFS-R:
+http://technet.microsoft.com/en-us/library/cc787066%28v=ws.10%29.aspx
+
+http://technet.microsoft.com/en-us/library/cc753479%28v=WS.10%29.aspx
+
+http://support.microsoft.com/kb/2533009
+
+
+

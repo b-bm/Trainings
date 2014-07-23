@@ -1,0 +1,105 @@
+﻿Backup script:
+
+Здравейте. Искам да споделя бекъп-скрипт, който писах преди известно време. 
+В случай, че някой открие полза в неговата работа на администратор ще се радвам. 
+Предполагам, че нивото не е супер-професионално, но е факт, че върши работа.:)
+
+#!/bin/bash
+
+
+# Log the begining of the script - date and hour
+echo StartBackup `date` >> /var/tmp/backup/log.txt && echo StartBackup `date` >> /mnt/backup/logs/log.txt
+
+# Define source and destination paths
+SRC="/var/www-81/support/"
+DST="/var/tmp/backup/"
+DSTS="/var/tmp/backup/support"
+LOG="/var/tmp/backup/log.txt"
+
+
+# Copy files to temp directory and log errors if occurs
+cp -ur $SRC $DST 2> /mnt/backup/logs/backupERROR-$(date +%Y-%m-%d-%H:%M)
+
+# Dump SQL database to temp directory
+/usr/bin/mysqldump --user=backupadmin --password=somepassword --databases mantis --result-file=/var/tmp/backup/db/mantisdb.sql
+/usr/bin/mysqldump --user=backupadmin --password=somepassword --databases vsftpd --result-file=/var/tmp/backup/db/vsftpdb.sql
+/usr/bin/mysqldump --user=backupadmin --password=somepassword --databases Loganalyzer --result-file=/var/tmp/backup/db/logdb.sql
+
+
+# Archive files from temp directory and place them in ext. HDD
+tar -czPf /mnt/backup/support/Backup-$(date +%Y-%m-%d-%H:%M).tar.gz /var/tmp/backup/support
+
+# Compare directories, subdirectories, files and write to the log file if there are differences
+diff -r $SRC $DSTS >> $LOG
+
+# Check support archive last file. If error occurs until archiving it would be written in the log file.
+cd /mnt/backup/support/
+lastfile=`ls -1tr | tail -n 1`
+md5sum $lastfile > chk.md5sum
+md5sum -c chk.md5sum >> $LOG
+
+# Copy db files from tmp directory to external (mounted) HDD
+cp -ur /var/tmp/backup/db/mantisdb.sql /mnt/backup/db/Mantis/Mantis-$(date +%Y-%m-%d-%H:%M).sql
+cp -ur /var/tmp/backup/db/vsftpdb.sql /mnt/backup/db/Vsftpd/Vsftpd-$(date +%Y-%m-%d-%H:%M).sql
+cp -ur /var/tmp/backup/db/logdb.sql /mnt/backup/db/Loganalyzer/Loganalyzer-$(date +%Y-%m-%d-%H:%M).sql
+
+# Check databases SQL files. If checksums are different the error would be written in the log file.
+cd /mnt/backup/db/Mantis
+lastfile=`ls -1tr | tail -n 1`
+md5sum $lastfile > chk.md5sum
+md5sum -c chk.md5sum >> $LOG
+
+cd /mnt/backup/db/Vsftpd
+lastfile=`ls -1tr | tail -n 1`
+md5sum $lastfile > chk.md5sum
+md5sum -c chk.md5sum >> $LOG
+
+cd /mnt/backup/db/Loganalyzer
+lastfile=`ls -1tr | tail -n 1`
+md5sum $lastfile > chk.md5sum
+md5sum -c chk.md5sum >> $LOG
+
+# Find and delete empty log files
+find /mnt/backup/logs/* -name '*' -size 0 -delete
+
+# Find and delete support files older than 5 days, and database files older than 60 days.
+find /mnt/backup/support/* -mtime +5 -exec rm {} \;
+find /mnt/backup/db/Mantis/* -mtime +60 -exec rm {} \;
+find /mnt/backup/db/Vsftpd/* -mtime +60 -exec rm {} \;
+find /mnt/backup/db/Loganalyzer/* -mtime +60 -exec rm {} \;
+
+# Log the end of the script - date and hour
+echo EndBackup `date` >> $LOG && echo EndBackup `date` >> /mnt/backup/logs/log.txt
+echo =========================================== >> $LOG
+
+# Send mail that contains the last 21 lines of the log file.
+tail -n 21 /var/tmp/backup/log.txt | mail -s "Linux Backup Result" -a "From:Backup.Linux.Server@somehost.com" backup.events@somehost.com, somebody.else@gmail.com
+
+Скриптът, разбира се е зададен да се стартира през crontab всеки ден в еди си колко часа. 
+Резултатът, който нормално получавам в мейла /когато всичко е наред/ е следния:
+
+StartBackup Sun Aug 4 04:00:01 EEST 2013
+Backup-2013-08-04-04:00.tar.gz: OK
+Mantis-2013-08-04-04:00.sql: OK
+Vsftpd-2013-08-04-04:00.sql: OK
+Loganalyzer-2013-08-04-04:00.sql: OK
+EndBackup Sun Aug 4 04:00:29 EEST 2013
+===========================================
+StartBackup Mon Aug 5 04:00:01 EEST 2013
+Backup-2013-08-05-04:00.tar.gz: OK
+Mantis-2013-08-05-04:00.sql: OK
+Vsftpd-2013-08-05-04:00.sql: OK
+Loganalyzer-2013-08-05-04:00.sql: OK
+EndBackup Mon Aug 5 04:00:32 EEST 2013
+===========================================
+StartBackup Tue Aug 6 04:00:01 EEST 2013
+Backup-2013-08-06-04:00.tar.gz: OK
+Mantis-2013-08-06-04:00.sql: OK
+Vsftpd-2013-08-06-04:00.sql: OK
+Loganalyzer-2013-08-06-04:00.sql: OK
+EndBackup Tue Aug 6 04:00:28 EEST 2013
+=========================================== 
+
+
+
+

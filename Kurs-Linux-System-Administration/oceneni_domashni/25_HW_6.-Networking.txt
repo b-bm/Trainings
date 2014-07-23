@@ -1,0 +1,33 @@
+﻿#7. Write a Debian based configuration file that #will #create a bridge device from eth0 and eth1.
+
+
+#-------------------------
+#/etc/network/interfaces
+#-------------------------
+
+  
+# The loopback network interface
+ 
+	auto lo
+	iface lo inet loopback
+
+# Set up interfaces manually, avoiding conflicts #with, e.g., network manager
+ 
+	iface eth0 inet manual
+	iface eth1 inet manual
+
+	auto eth0
+	iface eth0 inet dhcp
+
+	auto eth1
+	iface eth1 inet dhcp
+
+#Bridge setup, addresses by dhcp
+
+auto br0   
+iface br0 inet dhcp
+        bridge_ports eth0 eth1
+	
+ЗАБЕЛЕЖКА:
+Добро домашно. Можеше да е даден и аутпут от командния ред.
+Успех.

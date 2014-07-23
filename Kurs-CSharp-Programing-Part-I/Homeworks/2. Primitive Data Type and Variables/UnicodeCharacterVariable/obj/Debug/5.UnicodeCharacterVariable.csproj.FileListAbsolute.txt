@@ -1,0 +1,5 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\UnicodeCharacterVariable\bin\Debug\UnicodeCharacterVariable.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\UnicodeCharacterVariable\bin\Debug\UnicodeCharacterVariable.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\UnicodeCharacterVariable\bin\Debug\UnicodeCharacterVariable.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\UnicodeCharacterVariable\obj\Debug\UnicodeCharacterVariable.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\UnicodeCharacterVariable\obj\Debug\UnicodeCharacterVariable.pdb

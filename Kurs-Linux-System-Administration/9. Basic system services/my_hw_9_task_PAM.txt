@@ -1,0 +1,174 @@
+﻿HW - 9:
+
+Explain PAM:
+
+### About PAM:
+
+Programs that grant users access to a system use authentication to verify each other's identity (that is, to establish that a user is who they say they are).
+Historically, each program had its own way of authenticating users. 
+In Red Hat Enterprise Linux, many programs are configured to use a centralized authentication mechanism called Pluggable Authentication Modules (PAM).
+PAM uses a pluggable, modular architecture, which affords the system administrator a great deal of flexibility in setting authentication policies for the system. 
+PAM is a useful system for developers and administrators for several reasons:
+
+    PAM provides a common authentication scheme that can be used with a wide variety of applications.
+    PAM provides significant flexibility and control over authentication for both system administrators and application developers.
+    PAM provides a single, fully-documented library which allows developers to write programs without having to create their own authentication schemes. 
+
+PAM has an extensive documentation set with much more detail about both using PAM and writing modules to extend or integrate PAM with other applications. 
+Almost all of the major modules and configuration files with PAM have their own manpages. 
+Additionally, the /usr/share/doc/pam-version# directory contains a System Administrators' Guide, a Module Writers' Manual, and the Application Developers' Manual, as well as a copy of the PAM standard, DCE-RFC 86.0.
+The libraries for PAM are available at http://www.kernel.org/pub/linux/libs/pam
+This is the primary distribution website for the Linux-PAM project, containing information on various PAM modules, frequently asked questions, and additional PAM documentation. 
+
+### PAM Configuration Files:
+
+The /etc/pam.d/ directory contains the PAM configuration files for each PAM-aware application. 
+
+### PAM Service Files:
+
+Each PAM-aware application or service has a file in the /etc/pam.d/ directory. Each file in this directory has the same name as the service to which it controls access.
+The PAM-aware program is responsible for defining its service name and installing its own PAM configuration file in the /etc/pam.d/ directory. 
+For example, the login program defines its service name as login and installs the /etc/pam.d/login PAM configuration file.
+
+### PAM Configuration File Format:
+
+Each PAM configuration file contains a group of directives that define the module and any controls or arguments with it.
+The directives all have a simple syntax that identifies the module purpose (interface) and the configuration settings for the module.
+
+module_interface control_flag module_name module_arguments
+
+### PAM Module Interfaces:
+
+Four types of PAM module interface are available. Each of these corresponds to a different aspect of the authorization process:
+
+    auth — This module interface authenticates use. For example, it requests and verifies the validity of a password. Modules with this interface can also set credentials, such as group memberships or Kerberos tickets.
+
+    account — This module interface verifies that access is allowed. For example, it checks if a user account has expired or if a user is allowed to log in at a particular time of day.
+
+    password — This module interface is used for changing user passwords.
+
+    session — This module interface configures and manages user sessions. 
+Modules with this interface can also perform additional tasks that are needed to allow access, like mounting a user's home directory and making the user's mailbox available.
+
+NOTE:
+An individual module can provide any or all module interfaces. For instance, pam_unix.so provides all four module interfaces. 
+
+In a PAM configuration file, the module interface is the first field defined. For example:
+
+auth	required	pam_unix.so
+
+This instructs PAM to use the pam_unix.so module's auth interface.
+Module interface directives can be stacked, or placed upon one another, so that multiple modules are used together for one purpose. 
+If a module's control flag uses the sufficient or requisite value, then the order in which the modules are listed is important to the authentication process.
+Stacking makes it easy for an administrator to require specific conditions to exist before allowing the user to authenticate. 
+For example, the reboot command normally uses several stacked modules, as seen in its PAM configuration file: 
+
+[root@MyServer ~]# cat /etc/pam.d/reboot
+#%PAM-1.0
+auth	sufficient	pam_rootok.so
+auth	required	pam_console.so
+#auth	include		system-auth
+account	required	pam_permit.so
+
+The first line is a comment and is not processed.
+auth sufficient pam_rootok.so — This line uses the pam_rootok.so module to check whether the current user is root, by verifying that their UID is 0. 
+If this test succeeds, no other modules are consulted and the command is executed. If this test fails, the next module is consulted.
+auth required pam_console.so — This line uses the pam_console.so module to attempt to authenticate the user. 
+If this user is already logged in at the console, pam_console.so checks whether there is a file in the /etc/security/console.apps/ directory with the same name as the service name (reboot). 
+If such a file exists, authentication succeeds and control is passed to the next module.
+#auth include system-auth — This line is commented and is not processed.
+account required pam_permit.so — This line uses the pam_permit.so module to allow the root user or anyone logged in at the console to reboot the system. 
+
+IMPORTANT:
+
+The order in which required modules are called is not critical. Only the sufficient and requisite control flags cause order to become important. 
+
+### Simple PAM Configuration Files:
+
+Example 2.1, “Simple PAM Configuration” is a sample PAM application configuration file:
+
+Example 2.1. Simple PAM Configuration:
+	#%PAM-1.0
+	auth		required  pam_securetty.so
+	auth		required  pam_unix.so nullok
+	auth		required  pam_nologin.so
+	account		required  pam_unix.so
+	password	required  pam_cracklib.so retry=3
+	password	required  pam_unix.so shadow nullok use_authtok
+	session	required  pam_unix.so
+
+The first line is a comment, indicated by the hash mark (#) at the beginning of the line.
+Lines two through four stack three modules for login authentication.
+auth required pam_securetty.so — This module ensures that if the user is trying to log in as root, the tty on which the user is logging in is listed in the /etc/securetty file, if that file exists.
+If the tty is not listed in the file, any attempt to log in as root fails with a Login incorrect message.
+auth required pam_unix.so nullok — This module prompts the user for a password and then checks the password using the information stored in /etc/passwd and, if it exists, /etc/shadow.
+The argument nullok instructs the pam_unix.so module to allow a blank password.
+auth required pam_nologin.so — This is the final authentication step. It checks whether the /etc/nologin file exists. If it exists and the user is not root, authentication fails. 
+
+NOTE:
+In this example, all three auth modules are checked, even if the first auth module fails. 
+This prevents the user from knowing at what stage their authentication failed. 
+Such knowledge in the hands of an attacker could allow them to more easily deduce how to crack the system. 
+
+account required pam_unix.so — This module performs any necessary account verification. 
+For example, if shadow passwords have been enabled, the account interface of the pam_unix.so module checks to see if the account has expired or if the user has not changed the password within the allowed grace period.
+password required pam_cracklib.so retry=3 — If a password has expired, the password component of the pam_cracklib.so module prompts for a new password. 
+It then tests the newly created password to see whether it can easily be determined by a dictionary-based password cracking program.
+The argument retry=3 specifies that if the test fails the first time, the user has two more chances to create a strong password.
+password required pam_unix.so shadow nullok use_authtok — This line specifies that if the program changes the user's password, using the password interface of the pam_unix.so module.
+
+    The argument shadow instructs the module to create shadow passwords when updating a user's password.
+    The argument nullok instructs the module to allow the user to change their password from a blank password, otherwise a null password is treated as an account lock.
+    The final argument on this line, use_authtok, provides a good example of the importance of order when stacking PAM modules. This argument instructs the module not to prompt the user for a new password. Instead, it accepts any password that was recorded by a previous password module. In this way, all new passwords must pass the pam_cracklib.so test for secure passwords before being accepted. 
+
+session required pam_unix.so — The final line instructs the session interface of the pam_unix.so module to manage the session. 
+This module logs the user name and the service type to /var/log/secure at the beginning and end of each session. 
+This module can be supplemented by stacking it with other session modules for additional functionality. 
+
+### Creating PAM Modules:
+
+New PAM modules can be created or added at any time for use by PAM-aware applications. 
+PAM-aware programs can immediately use the new module and any methods it defines without being recompiled or otherwise modified. 
+This allows developers and system administrators to mix-and-match, as well as test, authentication methods for different programs without recompiling them.
+Documentation on writing modules is included in the /usr/share/doc/pam-version# directory. 
+
+Източник:
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Managing_Smart_Cards/Pluggable_Authentication_Modules.html
+
+http://www.linux-pam.org/
+
+http://www.linux-pam.org/Linux-PAM-html/sag-overview.html
+
+
+ Here is a figure that describes the overall organization of Linux-PAM:
+
+  +----------------+
+  | application: X |
+  +----------------+       /  +----------+     +================+
+  | authentication-[---->--\--] Linux-   |--<--| PAM config file|
+  |       +        [----<--/--]   PAM    |     |================|
+  |[conversation()][--+    \  |          |     | X auth .. a.so |
+  +----------------+  |    /  +-n--n-----+     | X auth .. b.so |
+  |                |  |       __|  |           |           _____/
+  |  service user  |  A      |     |           |____,-----'
+  |                |  |      V     A
+  +----------------+  +------|-----|---------+ -----+------+
+                         +---u-----u----+    |      |      |
+                         |   auth....   |--[ a ]--[ b ]--[ c ]
+                         +--------------+
+                         |   acct....   |--[ b ]--[ d ]
+                         +--------------+
+                         |   password   |--[ b ]--[ c ]
+                         +--------------+
+                         |   session    |--[ e ]--[ c ]
+                         +--------------+
+      
+
+
+
+
+
+
+
+
+

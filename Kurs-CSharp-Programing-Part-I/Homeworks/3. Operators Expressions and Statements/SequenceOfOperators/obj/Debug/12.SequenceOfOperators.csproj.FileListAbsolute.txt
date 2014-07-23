@@ -1,0 +1,9 @@
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\SequenceOfOperators\bin\Debug\SequenceOfOperators.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\SequenceOfOperators\bin\Debug\SequenceOfOperators.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\SequenceOfOperators\bin\Debug\SequenceOfOperators.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\SequenceOfOperators\obj\Debug\12.SequenceOfOperators.csprojResolveAssemblyReference.cache
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\SequenceOfOperators\obj\Debug\SequenceOfOperators.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\SequenceOfOperators\obj\Debug\SequenceOfOperators.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\SequenceOfOperators\bin\Debug\SequenceOfOperators.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\SequenceOfOperators\obj\Debug\SequenceOfOperators.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\SequenceOfOperators\obj\Debug\SequenceOfOperators.pdb

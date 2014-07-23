@@ -1,0 +1,5 @@
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\CalculateSquareRoot\bin\Debug\CalculateSquareRoot.exe.config
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\CalculateSquareRoot\bin\Debug\CalculateSquareRoot.exe
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\CalculateSquareRoot\bin\Debug\CalculateSquareRoot.pdb
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\CalculateSquareRoot\obj\Debug\CalculateSquareRoot.exe
+D:\Boyan's Docs\Kursove\TELERIK_MY\Kurs_C# Programing_Part_I\Homeworks\2. Intro Programming\CalculateSquareRoot\obj\Debug\CalculateSquareRoot.pdb

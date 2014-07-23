@@ -1,0 +1,6 @@
+c:\users\ghost\documents\visual studio 2012\Projects\6. Loops\OutPutAMatrixVariantOne\bin\Debug\OutPutAMatrixVariantOne.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\OutPutAMatrixVariantOne\bin\Debug\OutPutAMatrixVariantOne.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\OutPutAMatrixVariantOne\bin\Debug\OutPutAMatrixVariantOne.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\OutPutAMatrixVariantOne\obj\Debug\11.OutPutAMatrixVariantOne.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\OutPutAMatrixVariantOne\obj\Debug\OutPutAMatrixVariantOne.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\OutPutAMatrixVariantOne\obj\Debug\OutPutAMatrixVariantOne.pdb

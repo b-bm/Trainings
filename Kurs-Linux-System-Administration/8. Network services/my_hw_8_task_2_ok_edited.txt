@@ -1,0 +1,92 @@
+﻿HW - 8:
+
+2. Configure DHCPD to do remote dynamic dns updates.
+
+DHCP Server Configuration
+
+Additionally you have to configure your DHCP server to update these zones. 
+To do so, you need to edit the file /etc/dhcp/dhcpd.conf. This file consists of different sections. 
+In the global section, which is everything that is not inside a Subnet-, or group block, you have to add the following:
+
+	option domain-name "example.org";
+
+	ddns-updates           on;
+	ddns-update-style      interim;
+	ignore                 client-updates;
+	update-static-leases   on;
+
+option domain-name:
+This options specifies the domain name, which is also used for DDNS.
+
+ddns-update-style:
+This option should always be interim. The only other option is adhoc, but that one is outdated .
+
+client-updates:
+If you use the option allow client-updates, the clients are allowed to register their name at the DNS server by themselves. 
+We don't want this, so I added ignore client-updates (which is already the default option), just to show this explicitly.
+
+update-static-leases:
+By default the DHCP-Server doesn't update the DNS entries of static leases. 
+If you want it to update them, you need to set this option to on. 
+It can be that this causes some problems, that's why the manpage of dhcpd.conf doesn't recommend the use of it. 
+If you experience problems, turn it off, but then you have to configure these hosts statically not only for DHCP, but also for DNS.
+
+You have to add the following lines for the zones that shall be updated by your DHCP server. 
+
+	include "/etc/dhcp/ddns.key";
+
+	zone example.org. {
+	  primary 127.0.0.1;
+	  key DDNS_UPDATE;
+	}
+
+	zone 2.168.192.in-addr.arpa. {
+	  primary 127.0.0.1;
+	  key DDNS_UPDATE;
+	}
+
+The primary statement specifies the IP address of the name server whose zone information is to be updated. 
+In this case DHCP and DNS server are running on the same machine, that's why we put 127.0.0.1 there. 
+If that's not the case, you have to put the IP address of the machine that the DNS server is running on there. 
+The zone descriptions have to end with a period.
+
+The complete dhcpd.conf file after the previous steps and with a basic configuration for the subnet 192.168.2.0/24: 
+
+	authoritative;
+	option domain-name "example.org";
+	option domain-name-servers ns.example.org;
+
+	ddns-updates on;
+	ddns-update-style interim;
+	ignore client-updates;
+	update-static-leases on;
+
+	default-lease-time 600;
+	max-lease-time 7200;
+	log-facility local7;
+
+
+	include "/etc/dhcp/ddns.key";
+
+	zone EXAMPLE.ORG. {
+	  primary 127.0.0.1;
+	  key DDNS_UPDATE;
+	}
+
+	zone 2.168.192.in-addr.arpa. {
+	  primary 127.0.0.1;
+	  key DDNS_UPDATE;
+	}
+
+
+	subnet 192.168.2.0 netmask 255.255.255.0 {
+			range 192.168.2.10 192.168.2.100;
+			option routers 192.168.2.1;
+	}
+
+Restart the servers
+
+	root# /etc/init.d/isc-dhcp-server restart
+	root# /etc/init.d/bind9 restart
+	
+

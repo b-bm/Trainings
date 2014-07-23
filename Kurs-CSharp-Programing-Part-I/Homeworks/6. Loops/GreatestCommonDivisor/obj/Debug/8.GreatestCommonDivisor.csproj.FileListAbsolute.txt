@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\GreatestCommonDivisor\bin\Debug\GreatestCommonDivisor.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\GreatestCommonDivisor\bin\Debug\GreatestCommonDivisor.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\GreatestCommonDivisor\bin\Debug\GreatestCommonDivisor.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\GreatestCommonDivisor\obj\Debug\8.GreatestCommonDivisor.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\GreatestCommonDivisor\obj\Debug\GreatestCommonDivisor.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\GreatestCommonDivisor\obj\Debug\GreatestCommonDivisor.pdb

@@ -1,0 +1,1624 @@
+﻿hackman@terion:~$ grizzly
+Last login: Thu Jul 11 14:01:49 2013 from 85.14.7.110
+[root@grizzly ~]# cat /etc/redhat-release 
+CentOS release 6.4 (Final)
+[root@grizzly ~]# cd /etc
+[root@grizzly etc]# ls 
+adjtime                  elinks.conf  ld.so.conf      pm              services
+aliases                  environment  ld.so.conf.d    popt.d          sestatus.conf
+aliases.db               ethers       libaudit.conf   postfix         shadow
+alternatives             exports      libuser.conf    ppp             shadow-
+anacrontab               favicon.png  localtime       printcap        shells
+asound.conf              filesystems  login.defs      profile         skel
+audisp                   fonts        logrotate.conf  profile.d       ssh
+audit                    fstab        logrotate.d     protocols       ssl
+bash_completion.d        gai.conf     ltrace.conf     rc              statetab
+bashrc                   gcrypt       lynx.cfg        rc0.d           statetab.d
+blkid                    gitweb.conf  lynx.lss        rc1.d           subversion
+centos-release           gnupg        lynx-site.cfg   rc2.d           sudo.conf
+chkconfig.d              group        magic           rc3.d           sudoers
+cron.d                   group-       makedev.d       rc4.d           sudoers.d
+cron.daily               grub.conf    man.config      rc5.d           sudo-ldap.conf
+cron.deny                gshadow      mc              rc6.d           sysconfig
+cron.hourly              gshadow-     mke2fs.conf     rc.d            sysctl.conf
+cron.monthly             host.conf    modprobe.d      rc.local        system-release
+crontab                  hosts        motd            rc.sysinit      system-release-cpe
+cron.weekly              hosts.allow  mtab            redhat-release  terminfo
+crypttab                 hosts.deny   my.cnf          resolv.conf     udev
+csh.cshrc                httpd        nanorc          rpc             vimrc                
+csh.login                init         NetworkManager  rpm             virc                 
+dbus-1                   init.d       networks        rsyslog.conf    wgetrc               
+default                  inittab      nsswitch.conf   rsyslog.d       X11
+depmod.d                 inputrc      openldap        rwtab           xdg
+dhcp                     iproute2     opt             rwtab.d         xinetd.conf
+DIR_COLORS               irssi.conf   pam.d           sasl2           xinetd.d
+DIR_COLORS.256color      issue        passwd          screenrc        yum
+DIR_COLORS.lightbgcolor  issue.net    passwd-         securetty       yum.conf
+dracut.conf              krb5.conf    pki             security        yum.repos.d
+dracut.conf.d            ld.so.cache  plymouth        selinux
+[root@grizzly etc]# 
+Broadcast message from m4rt00@grizzly.yuhu.biz (pts/37) (Thu Jul 11 19:01:26 2013):
+
+kak e mom4eta
+
+Broadcast message from uzunov@grizzly.yuhu.biz (pts/27) (Thu Jul 11 19:01:41 2013):
+
+super
+^C
+[root@grizzly etc]# 
+Broadcast message from nesk@grizzly.yuhu.biz (pts/26) (Thu Jul 11 19:03:46 2013):
+
+hello
+
+Broadcast message from krassi.manev@grizzly.yuhu.biz (pts/40) (Thu Jul 11 19:05:26 2013):
+
+hi
+
+You have new mail in /var/spool/mail/root
+[root@grizzly etc]# 
+[root@grizzly etc]# mesg n
+[root@grizzly etc]# cd /boot/
+You have new mail in /var/spool/mail/root
+[root@grizzly boot]# ls -la
+total 18040
+dr-xr-xr-x.  5 root root     1024 Jul  1 19:21 .
+dr-xr-xr-x. 21 root root     4096 Jul  1 19:27 ..
+-rw-r--r--.  1 root root   108872 Feb 22 00:13 config-2.6.32-358.el6.i686
+drwxr-xr-x.  3 root root     1024 Jul  1 19:20 efi
+drwxr-xr-x.  2 root root     1024 Jul  1 19:22 grub
+-rw-r--r--.  1 root root 12255589 Jul  1 19:22 initramfs-2.6.32-358.el6.i686.img
+drwx------.  2 root root    12288 Jul  1 19:19 lost+found
+-rw-r--r--.  1 root root   182272 Feb 22 00:14 symvers-2.6.32-358.el6.i686.gz
+-rw-r--r--.  1 root root  1898529 Feb 22 00:13 System.map-2.6.32-358.el6.i686
+-rwxr-xr-x.  1 root root  3917440 Feb 22 00:13 vmlinuz-2.6.32-358.el6.i686
+-rw-r--r--.  1 root root      164 Feb 22 00:13 .vmlinuz-2.6.32-358.el6.i686.hmac
+[root@grizzly boot]# cd grub/
+[root@grizzly grub]# ls
+device.map     grub.conf         minix_stage1_5     stage2
+e2fs_stage1_5  iso9660_stage1_5  reiserfs_stage1_5  ufs2_stage1_5
+fat_stage1_5   jfs_stage1_5      splash.xpm.gz      vstafs_stage1_5
+ffs_stage1_5   menu.lst          stage1             xfs_stage1_5
+[root@grizzly grub]# pwd
+/boot/grub
+[root@grizzly grub]# vi grub.conf
+You have new mail in /var/spool/mail/root
+[root@grizzly grub]# vi grub.conf
+You have new mail in /var/spool/mail/root
+[root@grizzly grub]# ls -l
+total 280
+-rw-r--r--. 1 root root     63 Jul  1 19:22 device.map
+-rw-r--r--. 1 root root  13392 Jul  1 19:22 e2fs_stage1_5
+-rw-r--r--. 1 root root  12632 Jul  1 19:22 fat_stage1_5
+-rw-r--r--. 1 root root  11760 Jul  1 19:22 ffs_stage1_5
+-rw-------. 1 root root    763 Jul  1 19:22 grub.conf
+-rw-r--r--. 1 root root  11768 Jul  1 19:22 iso9660_stage1_5
+-rw-r--r--. 1 root root  13280 Jul  1 19:22 jfs_stage1_5
+lrwxrwxrwx. 1 root root     11 Jul  1 19:22 menu.lst -> ./grub.conf
+-rw-r--r--. 1 root root  11968 Jul  1 19:22 minix_stage1_5
+-rw-r--r--. 1 root root  14424 Jul  1 19:22 reiserfs_stage1_5
+-rw-r--r--. 1 root root   1341 Nov 14  2010 splash.xpm.gz
+-rw-r--r--. 1 root root    512 Jul  1 19:22 stage1
+-rw-r--r--. 1 root root 126000 Jul  1 19:22 stage2
+-rw-r--r--. 1 root root  12036 Jul  1 19:22 ufs2_stage1_5
+-rw-r--r--. 1 root root  11376 Jul  1 19:22 vstafs_stage1_5
+-rw-r--r--. 1 root root  13976 Jul  1 19:22 xfs_stage1_5
+[root@grizzly grub]# vi grub.conf
+You have new mail in /var/spool/mail/root
+[root@grizzly grub]# ls -ld /etc/rc*
+lrwxrwxrwx.  1 root root    7 Jul  1 19:20 /etc/rc -> rc.d/rc                              
+lrwxrwxrwx.  1 root root   10 Jul  1 19:20 /etc/rc0.d -> rc.d/rc0.d                        
+lrwxrwxrwx.  1 root root   10 Jul  1 19:20 /etc/rc1.d -> rc.d/rc1.d                        
+lrwxrwxrwx.  1 root root   10 Jul  1 19:20 /etc/rc2.d -> rc.d/rc2.d                        
+lrwxrwxrwx.  1 root root   10 Jul  1 19:20 /etc/rc3.d -> rc.d/rc3.d                        
+lrwxrwxrwx.  1 root root   10 Jul  1 19:20 /etc/rc4.d -> rc.d/rc4.d
+lrwxrwxrwx.  1 root root   10 Jul  1 19:20 /etc/rc5.d -> rc.d/rc5.d
+lrwxrwxrwx.  1 root root   10 Jul  1 19:20 /etc/rc6.d -> rc.d/rc6.d
+drwxr-xr-x. 10 root root 4096 Jul  1 19:20 /etc/rc.d
+lrwxrwxrwx.  1 root root   13 Jul  1 19:20 /etc/rc.local -> rc.d/rc.local
+lrwxrwxrwx.  1 root root   15 Jul  1 19:20 /etc/rc.sysinit -> rc.d/rc.sysinit
+[root@grizzly grub]# ls -ld /etc/init.d/
+drwxr-xr-x. 2 root root 4096 Jul  6 03:52 /etc/init.d/
+[root@grizzly grub]# ls -l rc.d/rc6.d
+ls: cannot access rc.d/rc6.d: No such file or directory
+[root@grizzly grub]# ls -l rc.d/rc6.d/
+ls: cannot access rc.d/rc6.d/: No such file or directory
+[root@grizzly grub]# cd /etc
+[root@grizzly etc]# ls -l rc.d/rc6.d/
+total 0
+lrwxrwxrwx. 1 root root 19 Jul  1 19:20 K10saslauthd -> ../init.d/saslauthd
+lrwxrwxrwx  1 root root 18 Jul  6 03:52 K15svnserve -> ../init.d/svnserve
+lrwxrwxrwx. 1 root root 14 Jul  1 19:21 K25sshd -> ../init.d/sshd
+lrwxrwxrwx. 1 root root 17 Jul  1 19:20 K30postfix -> ../init.d/postfix
+lrwxrwxrwx. 1 root root 20 Jul  1 19:20 K50netconsole -> ../init.d/netconsole
+lrwxrwxrwx  1 root root 16 Jul  3 02:42 K50xinetd -> ../init.d/xinetd
+lrwxrwxrwx. 1 root root 15 Jul  1 19:20 K60crond -> ../init.d/crond
+lrwxrwxrwx. 1 root root 15 Jul  1 19:20 K75netfs -> ../init.d/netfs
+lrwxrwxrwx. 1 root root 19 Jul  1 19:20 K75udev-post -> ../init.d/udev-post
+lrwxrwxrwx. 1 root root 21 Jul  1 19:20 K87restorecond -> ../init.d/restorecond
+lrwxrwxrwx. 1 root root 16 Jul  1 19:21 K88auditd -> ../init.d/auditd
+lrwxrwxrwx. 1 root root 17 Jul  1 19:20 K88rsyslog -> ../init.d/rsyslog
+lrwxrwxrwx. 1 root root 15 Jul  1 19:20 K89rdisc -> ../init.d/rdisc
+lrwxrwxrwx. 1 root root 17 Jul  1 19:20 K90network -> ../init.d/network
+lrwxrwxrwx. 1 root root 19 Jul  1 19:20 K92ip6tables -> ../init.d/ip6tables
+lrwxrwxrwx. 1 root root 18 Jul  1 19:20 K92iptables -> ../init.d/iptables
+lrwxrwxrwx. 1 root root 17 Jul  1 19:20 S00killall -> ../init.d/killall
+lrwxrwxrwx. 1 root root 14 Jul  1 19:20 S01reboot -> ../init.d/halt
+[root@grizzly etc]# ls -l rc.d/rc3.d/
+total 0
+lrwxrwxrwx. 1 root root 19 Jul  1 19:20 K10saslauthd -> ../init.d/saslauthd
+lrwxrwxrwx  1 root root 18 Jul  6 03:52 K15svnserve -> ../init.d/svnserve
+lrwxrwxrwx. 1 root root 20 Jul  1 19:20 K50netconsole -> ../init.d/netconsole
+lrwxrwxrwx. 1 root root 21 Jul  1 19:20 K87restorecond -> ../init.d/restorecond
+lrwxrwxrwx  1 root root 16 Jul  1 19:35 K88auditd -> ../init.d/auditd
+lrwxrwxrwx. 1 root root 15 Jul  1 19:20 K89rdisc -> ../init.d/rdisc
+lrwxrwxrwx. 1 root root 19 Jul  1 19:20 S08ip6tables -> ../init.d/ip6tables
+lrwxrwxrwx. 1 root root 18 Jul  1 19:20 S08iptables -> ../init.d/iptables
+lrwxrwxrwx. 1 root root 17 Jul  1 19:20 S10network -> ../init.d/network
+lrwxrwxrwx. 1 root root 17 Jul  1 19:20 S12rsyslog -> ../init.d/rsyslog
+lrwxrwxrwx. 1 root root 15 Jul  1 19:20 S25netfs -> ../init.d/netfs
+lrwxrwxrwx. 1 root root 19 Jul  1 19:20 S26udev-post -> ../init.d/udev-post
+lrwxrwxrwx. 1 root root 14 Jul  1 19:21 S55sshd -> ../init.d/sshd
+lrwxrwxrwx  1 root root 16 Jul  3 02:42 S56xinetd -> ../init.d/xinetd
+lrwxrwxrwx. 1 root root 17 Jul  1 19:20 S80postfix -> ../init.d/postfix
+lrwxrwxrwx. 1 root root 15 Jul  1 19:20 S90crond -> ../init.d/crond
+lrwxrwxrwx. 1 root root 11 Jul  1 19:20 S99local -> ../rc.local
+[root@grizzly etc]# vi ../init.d/postfix
+[root@grizzly etc]# vi init.d/postfix 
+[root@grizzly etc]# init.d/postfix 
+Usage: init.d/postfix {start|stop|restart|reload|abort|flush|check|status|condrestart}
+[root@grizzly etc]# init.d/postfix status
+master (pid  1135) is running...
+[root@grizzly etc]# cd init.d/
+[root@grizzly init.d]# ls -la
+total 140
+drwxr-xr-x.  2 root root  4096 Jul 11 20:25 .
+drwxr-xr-x. 10 root root  4096 Jul  1 19:20 ..
+-rwxr-xr-x.  1 root root  3378 Jun 22  2012 auditd
+-rwxr-xr-x.  1 root root  2793 Jul 19  2011 crond
+-rw-r--r--.  1 root root 18216 Jan  9  2013 functions
+-rwxr-xr-x.  1 root root  5829 Jan  9  2013 halt
+-rwxr-xr-x.  1 root root  9515 Feb 22 03:44 ip6tables
+-rwxr-xr-x.  1 root root  9409 Feb 22 03:44 iptables
+-rwxr-xr-x.  1 root root   652 Jan  9  2013 killall
+-rwxr-xr-x.  1 root root  2989 Jan  9  2013 netconsole
+-rwxr-xr-x.  1 root root  5486 Jan  9  2013 netfs
+-rwxr-xr-x.  1 root root  6334 Jan  9  2013 network
+-rwxr-xr-x.  1 root root  3852 Dec  3  2011 postfix
+-rwxr-xr-x.  1 root root  1559 May 20  2009 rdisc
+-rwxr-xr-x.  1 root root  1822 Feb 22 07:37 restorecond
+-rwxr-xr-x.  1 root root  2011 Jan  9  2013 rsyslog
+-rwxr-xr-x.  1 root root  1698 Feb 22 07:37 sandbox
+-rwxr-xr-x.  1 root root  2056 Nov 20  2012 saslauthd
+-rwxr-xr-x.  1 root root   647 Jan  9  2013 single
+-rwxr-xr-x.  1 root root  4534 Feb 22 05:49 sshd
+-rwxr-xr-x   1 root root  2276 Apr  2 15:50 svnserve
+-rwxr-xr-x.  1 root root  2294 Feb 22 07:21 udev-post
+-rwxr-xr-x   1 root root  3555 Feb 22 05:02 xinetd
+[root@grizzly init.d]# cat /etc/init
+init/    init.d/  inittab  
+[root@grizzly init.d]# cat /etc/inittab 
+# inittab is only used by upstart for the default runlevel.
+#
+# ADDING OTHER CONFIGURATION HERE WILL HAVE NO EFFECT ON YOUR SYSTEM.
+#
+# System initialization is started by /etc/init/rcS.conf
+#
+# Individual runlevels are started by /etc/init/rc.conf
+#
+# Ctrl-Alt-Delete is handled by /etc/init/control-alt-delete.conf
+#
+# Terminal gettys are handled by /etc/init/tty.conf and /etc/init/serial.conf,
+# with configuration in /etc/sysconfig/init.
+#
+# For information on how to write upstart event handlers, or how
+# upstart works, see init(5), init(8), and initctl(8).
+#
+# Default runlevel. The runlevels used are:
+#   0 - halt (Do NOT set initdefault to this)
+#   1 - Single user mode
+#   2 - Multiuser, without NFS (The same as 3, if you do not have networking)
+#   3 - Full multiuser mode
+#   4 - unused
+#   5 - X11
+#   6 - reboot (Do NOT set initdefault to this)
+# 
+id:3:initdefault:
+[root@grizzly init.d]# cd ..
+[root@grizzly etc]# ls
+adjtime                  elinks.conf  ld.so.conf      pm              services
+aliases                  environment  ld.so.conf.d    popt.d          sestatus.conf
+aliases.db               ethers       libaudit.conf   postfix         shadow
+alternatives             exports      libuser.conf    ppp             shadow-
+anacrontab               favicon.png  localtime       printcap        shells
+asound.conf              filesystems  login.defs      profile         skel
+audisp                   fonts        logrotate.conf  profile.d       ssh
+audit                    fstab        logrotate.d     protocols       ssl
+bash_completion.d        gai.conf     ltrace.conf     rc              statetab
+bashrc                   gcrypt       lynx.cfg        rc0.d           statetab.d
+blkid                    gitweb.conf  lynx.lss        rc1.d           subversion
+centos-release           gnupg        lynx-site.cfg   rc2.d           sudo.conf
+chkconfig.d              group        magic           rc3.d           sudoers
+cron.d                   group-       makedev.d       rc4.d           sudoers.d
+cron.daily               grub.conf    man.config      rc5.d           sudo-ldap.conf
+cron.deny                gshadow      mc              rc6.d           sysconfig
+cron.hourly              gshadow-     mke2fs.conf     rc.d            sysctl.conf
+cron.monthly             host.conf    modprobe.d      rc.local        system-release
+crontab                  hosts        motd            rc.sysinit      system-release-cpe
+cron.weekly              hosts.allow  mtab            redhat-release  terminfo
+crypttab                 hosts.deny   my.cnf          resolv.conf     udev
+csh.cshrc                httpd        nanorc          rpc             vimrc
+csh.login                init         NetworkManager  rpm             virc
+dbus-1                   init.d       networks        rsyslog.conf    wgetrc
+default                  inittab      nsswitch.conf   rsyslog.d       X11
+depmod.d                 inputrc      openldap        rwtab           xdg
+dhcp                     iproute2     opt             rwtab.d         xinetd.conf
+DIR_COLORS               irssi.conf   pam.d           sasl2           xinetd.d
+DIR_COLORS.256color      issue        passwd          screenrc        yum
+DIR_COLORS.lightbgcolor  issue.net    passwd-         securetty       yum.conf
+dracut.conf              krb5.conf    pki             security        yum.repos.d
+dracut.conf.d            ld.so.cache  plymouth        selinux
+[root@grizzly etc]# cd rc3.d
+[root@grizzly rc3.d]# ls -l
+total 0
+lrwxrwxrwx. 1 root root 19 Jul  1 19:20 K10saslauthd -> ../init.d/saslauthd
+lrwxrwxrwx  1 root root 18 Jul  6 03:52 K15svnserve -> ../init.d/svnserve
+lrwxrwxrwx. 1 root root 20 Jul  1 19:20 K50netconsole -> ../init.d/netconsole
+lrwxrwxrwx. 1 root root 21 Jul  1 19:20 K87restorecond -> ../init.d/restorecond
+lrwxrwxrwx  1 root root 16 Jul  1 19:35 K88auditd -> ../init.d/auditd
+lrwxrwxrwx. 1 root root 15 Jul  1 19:20 K89rdisc -> ../init.d/rdisc
+lrwxrwxrwx. 1 root root 19 Jul  1 19:20 S08ip6tables -> ../init.d/ip6tables
+lrwxrwxrwx. 1 root root 18 Jul  1 19:20 S08iptables -> ../init.d/iptables
+lrwxrwxrwx. 1 root root 17 Jul  1 19:20 S10network -> ../init.d/network
+lrwxrwxrwx. 1 root root 17 Jul  1 19:20 S12rsyslog -> ../init.d/rsyslog
+lrwxrwxrwx. 1 root root 15 Jul  1 19:20 S25netfs -> ../init.d/netfs
+lrwxrwxrwx. 1 root root 19 Jul  1 19:20 S26udev-post -> ../init.d/udev-post
+lrwxrwxrwx. 1 root root 14 Jul  1 19:21 S55sshd -> ../init.d/sshd
+lrwxrwxrwx  1 root root 16 Jul  3 02:42 S56xinetd -> ../init.d/xinetd
+lrwxrwxrwx. 1 root root 17 Jul  1 19:20 S80postfix -> ../init.d/postfix
+lrwxrwxrwx. 1 root root 15 Jul  1 19:20 S90crond -> ../init.d/crond
+lrwxrwxrwx. 1 root root 11 Jul  1 19:20 S99local -> ../rc.local
+[root@grizzly rc3.d]# cd ..
+[root@grizzly etc]# cd /etc/rc.d
+[root@grizzly rc.d]# ls
+init.d  rc  rc0.d  rc1.d  rc2.d  rc3.d  rc4.d  rc5.d  rc6.d  rc.local  rc.sysinit
+[root@grizzly rc.d]# vi rc.local
+[root@grizzly rc.d]# vi rc 
+[root@grizzly rc.d]# vi rc.sysinit
+[root@grizzly rc.d]# ?? /^C
+[root@grizzly rc.d]# cd /etc/init
+[root@grizzly init]# ls -l
+total 56
+-rw-r--r--. 1 root root  260 Jan  9  2013 control-alt-delete.conf
+-rw-r--r--. 1 root root  130 Aug 29  2012 init-system-dbus.conf
+-rw-r--r--. 1 root root  316 Jan  9  2013 kexec-disable.conf
+-rw-r--r--. 1 root root  409 Jan  9  2013 plymouth-shutdown.conf
+-rw-r--r--. 1 root root  217 Jan  9  2013 prefdm.conf
+-rw-r--r--. 1 root root  358 Jan  9  2013 quit-plymouth.conf
+-rw-r--r--. 1 root root  281 Jan  9  2013 rc.conf
+-rw-r--r--. 1 root root  909 Jan  9  2013 rcS.conf
+-rw-r--r--. 1 root root  283 Jan  9  2013 rcS-emergency.conf
+-rw-r--r--. 1 root root  580 Jan  9  2013 rcS-sulogin.conf
+-rw-r--r--. 1 root root 1162 Jan  9  2013 serial.conf
+-rw-r--r--. 1 root root  643 Jan  9  2013 splash-manager.conf
+-rw-r--r--. 1 root root  329 Jan  9  2013 start-ttys.conf
+-rw-r--r--. 1 root root  198 Jan  9  2013 tty.conf
+[root@grizzly init]# cat /etc/init.conf 
+cat: /etc/init.conf: No such file or directory
+[root@grizzly init]# cat rc.conf
+# rc - System V runlevel compatibility
+#
+# This task runs the old sysv-rc runlevel scripts.  It
+# is usually started by the telinit compatibility wrapper.
+
+start on runlevel [0123456]
+
+stop on runlevel [!$RUNLEVEL]
+
+task
+
+export RUNLEVEL
+console output
+exec /etc/rc.d/rc $RUNLEVEL
+[root@grizzly init]# ls
+control-alt-delete.conf  prefdm.conf         rcS-emergency.conf   start-ttys.conf
+init-system-dbus.conf    quit-plymouth.conf  rcS-sulogin.conf     tty.conf
+kexec-disable.conf       rc.conf             serial.conf
+plymouth-shutdown.conf   rcS.conf            splash-manager.conf
+[root@grizzly init]# cat rcS.conf
+# rcS - runlevel compatibility
+#
+# This task runs the old sysv-rc startup scripts.
+
+start on startup
+
+stop on runlevel
+
+task
+
+# Note: there can be no previous runlevel here, if we have one it's bad
+# information (we enter rc1 not rcS for maintenance).  Run /etc/rc.d/rc
+# without information so that it defaults to previous=N runlevel=S.
+console output
+pre-start script
+        for t in $(cat /proc/cmdline); do
+                case $t in
+                        emergency)
+                                start rcS-emergency
+                                break
+                        ;;
+                esac
+        done
+end script
+exec /etc/rc.d/rc.sysinit
+post-stop script
+        if [ "$UPSTART_EVENTS" = "startup" ]; then
+                [ -f /etc/inittab ] && runlevel=$(/bin/awk -F ':' '$3 == "initdefault" && $1 !~ "^#" { print $2 }' /etc/inittab)
+                [ -z "$runlevel" ] && runlevel="3"
+                for t in $(cat /proc/cmdline); do
+                        case $t in
+                                -s|single|S|s) runlevel="S" ;;
+                                [1-9])       runlevel="$t" ;;
+                        esac
+                done
+                exec telinit $runlevel
+        fi
+end script
+[root@grizzly init]# ls
+control-alt-delete.conf  prefdm.conf         rcS-emergency.conf   start-ttys.conf
+init-system-dbus.conf    quit-plymouth.conf  rcS-sulogin.conf     tty.conf
+kexec-disable.conf       rc.conf             serial.conf
+plymouth-shutdown.conf   rcS.conf            splash-manager.conf
+[root@grizzly init]# cd
+[root@grizzly ~]# less /etc/passwd
+[root@grizzly ~]# cat /etc/shadow
+root:$6$EggjWXMR$jsxSGEdFpgnfnx8XjEJp8cRL6DonL4pzS1NtromMORzsz85uhtqKlv52GAiKAvXBuJh93GX4lhTgKIb82POo70:15887:0:99999:7:::
+bin:*:15628:0:99999:7:::
+daemon:*:15628:0:99999:7:::
+adm:*:15628:0:99999:7:::
+lp:*:15628:0:99999:7:::
+sync:*:15628:0:99999:7:::
+shutdown:*:15628:0:99999:7:::
+halt:*:15628:0:99999:7:::
+mail:*:15628:0:99999:7:::
+uucp:*:15628:0:99999:7:::
+operator:*:15628:0:99999:7:::
+games:*:15628:0:99999:7:::
+gopher:*:15628:0:99999:7:::
+ftp:*:15628:0:99999:7:::
+nobody:*:15628:0:99999:7:::
+vcsa:!!:15887::::::
+saslauth:!!:15887::::::
+postfix:!!:15887::::::
+sshd:!!:15887::::::
+tcpdump:!!:15887::::::
+hackman:$6$iCX83b5K$GW8ZXwMm.v6iynksdwT.YcF7.5x.nIMX2OzF.dwJkQY3gGYyNBAkc42xW5pX1dblO.xsZPLvBm0sJ7ggJke7m/:15887:0:99999:7:::
+course:$6$UGbBPexB$xHlwGCJi/wYCSmR95SjIjAt6VrUS6BurSfzGssFv7ZPUFMmb9P0STyzfESKXCPcCHJqeAGtWoyfepI7txvIMt0:15887:0:99999:7:::
+iordan93:!!:15887:0:99999:7:::
+yordandar:$6$BEwk4O2U$w8flsV5Xa0Z7I7gNLltqe/ioQI2idpJpxk1be.I8o7QVUWuLt85LBYDkkcAYtcayzC32WkHL9J0/YYLvmYcPR/:15887:0:99999:7:::
+stamopetkov:$6$g6AO2bwH$/74G8j8oMHhjSZBT/fsTVkszp3AJja/etai7fYpjeH2z10AOmtkQi7fAoI.HEKcQJgbkcwhPvBiASgMwfvdxR1:15887:0:99999:7:::
+h.mohedin:$6$gQlAhzG6$j1YsLPTwkL1lceIE33cVO69WasYHK6LvmrCcr2Urbs4uu45Bi1cJelNojOzv5Rvi1/bUV/lHeuKCstDXZv.qw/:15888:0:99999:7:::
+user1:$6$QELLGRx9$3kvjHDwm8Q6pgcIzLbBBon8tHiiyb324Ck0fTGTjvEPn/RVPaEWDXZGvZOllNAI14WsEUYqtgyLafYDdAUT1E0:15888:0:99999:7:::
+lamqta:$6$Zi/QD0yZ$.jxnX.MdbpinX32AqMtGqYRiZzA1QaVkbDkanoKsaPilPPIbbNJ6G8hXuTMJ5G/xHxtQVuAGKld7k81A2yb610:15888:0:99999:7:::
+statica:$6$MpWYxIxO$jKoPw/mECavzK6MFOprruWjWwFW2GOrRuGwFuU8Ob9Cx0mgqaltwzT4jG7GSuiKqbq7DVJwEjyaZiO/l1y3Oe0:15888:0:99999:7:::
+djordjo7:$6$UuoC22mg$ahO5La3rWRSFABYUX5TyBOoGXSIZhyaKIQlf/Fkp3WgwnhwLQPQA6FTPhlAdPKpIorEaMd7jDDUE8KcsQU5Ko1:15888:0:99999:7:::
+m4rt00:$6$uO/jxH2f$Uvhk4EROsw5w48RrOZW6WashUYI8FTsA2hV41vPeFbw9s9UdraSUBE9/SBZCXf4FYOq2AI9Y5jlFL9YfXdEgY.:15888:0:99999:7:::
+pesho:$6$l8JRFP5i$q7bMMlUBXeTsaWh.J/RR6F/F/Ol2Ut5WCQEhudDBBwZ0tXvIdgFMV1dcN6S90Yd230lsOc8tBa1rPCN33jxTu.:15888:0:99999:7:::
+samodiva:$6$1rqhmdJo$iVcySOhzfuZzutHKS3X3bf7zYNHsSjJuBrrtocbcFnFEz5ILBqLV0e0AsGiC/QCiFD8SjUuP/pbi32Uq5q7q91:15888:0:99999:7:::
+krasin:$6$E/WZkHR1$B7PFmIVjscyXGkkMsRysKzdYGvDwfNuYcdnhieFXBfjIB0SPbKi5BiXNjsB67UFM3vocxSD9usVWsE5r/JTAe0:15888:0:99999:7:::
+svetlio:$6$sKMPt99w$9pUAB2LAEht8huKIWgmMS/ZkqADy4.u/5H8I8DSDw/R3FxEsS/KtQp8WWeRkGdQukL/zjlbF6MVNXtJ8UMliC.:15888:0:99999:7:::
+suni:$6$okgW6qKz$5P383647Z7w9fj./2tp9X1hOzi.0pFTNzXRMXV5/1Ro5/8GJLsq9SQ9g3tOWJe0AbnGmXFhO6JkwfCDbHv3Ua1:15888:0:99999:7:::
+jeffrey:$6$b2W8BnBo$UG1RR0tpOAd1H3hkK/EAaq15sEmGC2yoEzecbxznxNuV.0LxXkbuTvaeu.UWOOCMtZfh/gAO3pwuDEHOE70iL1:15888:0:99999:7:::
+yulimoto:$6$Uu/v0PFB$8ygvRqx0seEyaj3K7NBMMK89xmc3o4OyCB7nNQTDkySCir6/hUCSeyREWy1aJIJHN5rdvN3EltMUFQsPUipND0:15888:0:99999:7:::
+marianab:$6$aG8Dwe4S$/2WqhC36UGOW3Sz3JEFw5YAebOhrjrcM.Bc4y.1TQ2HyjCgc6tLK3qewqryTAbZqW5jt2UYXi2v3pBL2JqbXV0:15888:0:99999:7:::
+stoyanov:$6$hcRsE5e6$FQGUB/b6Oszr.2FMQDDnbP.GqXDx1.f94TTvEXHnDn4oUalB5XBW2yWquKtVOAtYCF2cfVNeugyWnO4QDXjJj.:15888:0:99999:7:::
+Slavov:$6$BjU78Ol3$ZeVqBRidU8LH09QI0xExa/HB1wHxojxZw695WdGGbVmfyd1ZjNwG.MWrWjoX73xsfFFmVXEwOlXIbNf9ocX1L.:15888:0:99999:7:::
+vlado:$6$eDIqrOJF$Q7kTh1wpkAJLNCdh/sRC8yh7dw6piPSkkWFVt3SEYNavLNdrYVJYAtgqF5ikh5PwoB5Ez4ar5dteKwyr5YPtJ0:15888:0:99999:7:::
+angie:$6$MaQklb09$5V8luIuZXvTE8tbs48hN.xgtyB0SlULKm1MrPintKTFVNmCsc5mklc2F1jkqL4ocp8IgKW0KL7Xb3y5g/3mLF0:15888:0:99999:7:::
+dencho:$6$4Y3O1qPc$JBukW5GIeMY117PWtUJ7K2CHsGgEAywriqzAqBtnVUO9HigrUJY5BDqywKUUQroOeN/6SL7e0VNFJZiFhxSUi.:15888:0:99999:7:::
+speedmaister:$6$9L62oOjl$Hb47DAu7kfpaI99Z0fngl9h3tysl2.SrHvMvc8WWmzalNASeRzD.z5TwcECh8QVrDc9DK0rPp2X46RK6E3Dr51:15888:0:99999:7:::
+solarwind:$6$dN./dtjI$5AVIbaCip4szTHcine2cwEqc93kqzzT4XlR10trgCxUfMxWJoUffU4q7hN.wgFXFk8Q9B.wviz5oQjBfQteMh.:15888:0:99999:7:::
+fairytale:$6$fF7l7LOu$qVv6CqxyulY6jrUdBx1JA3klzhevFhgRDaOtry6FyDcU12SFRQD9e7/hV3D7O83mAki3xOOnl//hFq4RKF.Ef/:15888:0:99999:7:::
+yavor-atov:$6$lLv9Ho/C$WMxIhfZwSVdyHvtCfJZb53KWphRCtmKI9/fX0/ae8IvVVi0.mag0eZ3IYhPJsOMd4gpmTl8qWxYo2DZAFcN9H0:15888:0:99999:7:::
+marko:$6$ubT/LaRd$.zrnEaluvxh0IR71G0uLrsccgCjZJtwRlb.uFu8K/QG0uSAiQp.rpYUAlNK9n1kmfIxAlyjFksWaiavV2zNxM1:15888:0:99999:7:::
+admin:$6$Vb9ocPNl$g6uKLEGvgnqe/VcNHQGFvQTzYT2xHelNfIULHPuTy36xnfmkE4RvXeSKTh8HC31.OfzkmnbQJzcpqqnC3Xt5/1:15888:0:99999:7:::
+gyankov:$6$ELqzY05W$mZ2wwbLRBa4v9SP6Seh.dst34CK47lpqVvndnieRDxajR73rVgy1FNwGXhbs8pDufIqQp7L6AL8Z8PQLJyMO20:15888:0:99999:7:::
+butchbs:$6$Q49L9zqd$wMHrY0qszwgyF3nkFsy8PkvZ3rGAsmxtiYHC08uhMzdvyu3qSuDyGqeSpeYFwXgKGPD8DgJ79D3tDxtPqGGcV/:15888:0:99999:7:::
+Ivan72:$6$8Gi4oytU$pailUpba9mCIHrDQzuCgrctYPTRehurzhaKUju3ollAdnflpzBASgOWjc8HAuQTgLA2Jmym6he/Y0I8BN4q.K.:15888:0:99999:7:::
+itsiporov:$6$P3NU90.S$lncgqgrOB7y1FJj6vChEM55SZpuTIxC9XzpM9tVhpOY3L.fj8M7VQtma9NVP/CbHeKQWwdOukWX6JWB19b20p.:15888:0:99999:7:::
+uzunov:$6$olxryQZy$qpDm8UPHA7a9OJ.BcaqYFGTYKT6y2riRw/aeoyGDMbrJ1qOcJ6AlWRXgj0IJVnPetiA/YcPnIKjnLUKVXRcae0:15888:0:99999:7:::
+s.metodiev:$6$LwWnnTy/$ig.7n/SVb1V7vtnsxO0E4vnBZRCQRHyumRVR5iPuXGow33I4PPnvSu0FDZd3cqE8vrwkW840WFv0sbysphLzY1:15888:0:99999:7:::
+ilianmril:$6$DhF2R.xG$OcfDDDMucC61EGg/XdvBQxqidxRV52.vyyf5m/0eS5wNwtbUVLqwC2DDyvn.SqzsjUju72kquUjU3vAq6MofN1:15888:0:99999:7:::
+intelbg:$6$AdAXeKMg$q8ccg0oSveUiF3c5F6Y9sIN22KOz0450SuiZRBfm/ZdoY9285Sqze7wmhsExCwU7jUu5oksfRkIMqHze9mN1d0:15888:0:99999:7:::
+Nevenka:$6$Io59iFGY$dlBQ8/5IUCB6l.GMU3qd0r/vTZUzb55fObF76RMaOR.Zs2XXRXPeePH3ulnYo7atwNGtNV7w71WosZ.EbIZ6M1:15888:0:99999:7:::
+blagovestie1:!!:15888:0:99999:7:::
+blagovestie:!!:15888:0:99999:7:::
+lyubenblagoev:$6$/Fae8bnw$JlsZrzulZQD06nwddnH2PwFni0xGommeT5ulC5HHBuZkvoZGbezaB0EEA.eyQtM3/Uyb/ESJ3n4/3qJ5ICPUG0:15888:0:99999:7:::
+milen:$6$vzVEaG91$Il89WVhCmlyZfdYayZnF87EqXYi3lg4rAfjeQqscTcWRABJ0EZuxxiba/i/uQtodVm1K4RbcCEYMHKIeZ9Dk71:15888:0:99999:7:::
+valcho:$6$U89vRplm$icbGSaezuESbOBdli06Q9Pa/rzo0Pn985wRd6EWRQGq0ha0KUtgSLVL7e7g6I7Ctt5KgVdz2E40JzJnuWrYqf/:15888:0:99999:7:::
+penkovalchev:$6$5nyWJ20t$Z5iBePf/bybX5rDL9qd6mXAIUM.O/yLRIFw2DUwOyqUaxvgk.LNLqlSQsUG9CXYhpViojVRDFg33jYl1LAW9d1:15888:0:99999:7:::
+nadska:$6$qEPbfQNR$cYwm0lG/5fhV6zojXA8CDI2BafjeqMaVGdwWTkxfqx6yg87qnEuwgOIzm6APQoo1ayK2zG01sokF2WRK4QTn8.:15888:0:99999:7:::
+RosenN:$6$3MWcdH9Q$TITSx7b.LeohyBAKQoTRAvJ71jdjC.87ETO7XEfMdgD0lTlEtp1VwgFoHzHt9FAGnBnXXCldaEsKyzstj.7kG0:15888:0:99999:7:::
+ze3rax:$6$KYxawpCB$A5JkPSs8GGZhZIjeF/g7lXQ/OEIbxi/ReyV2iB3yCxZFrCfteHHlakWI.fBjhXWrEZtRAY8twnzx1Sz6aCkQy1:15888:0:99999:7:::
+ipconfigv:$6$vYxALbB4$JGDAncpFOJ9O.XcUUJtw7.WU8LosfWof8u2CKykOEIg4J70sfl6EkSWj7phuN2NbUwM5ZrBPkOcszA00Tflcl/:15888:0:99999:7:::
+ipconfig:$6$efxVQOgi$uv/goCffd0tVDDdmUClU70pqrJS.4KpWel7YkGM0Zhr8MPtz05WwJrX.nL5e9l0nuv42IepLYvHqswPh9l5nK0:15888:0:99999:7:::
+edrenchev:$6$djr6eaQa$VGDTjgdqadbuLTkm0vbVfcC.yay54l/4a758mAHB8jVfpbqxlA4gI6/e1sWhD4hpYbmAWOjItV8mHYQp2p4b30:15888:0:99999:7:::
+compiler:$6$foDseS5l$yq4B/uJONiNAkDFlE8IBYDe7dUWqzOAofkYepM7P9T8bC11iUOU/oLMIgEMAutCcRAio0d7CivJsFtM0SsYiw1:15888:0:99999:7:::
+gavril:$6$Zcc8hcTN$A88Fv2CM9IYpqgFJr9UOQVrzuYogEK4962FpOK7XmEYs8O5zhB43q1jFqiKvZjyEz12nEUuK/T/o1q4kpzFVz/:15888:0:99999:7:::
+gabo:$6$peHtZYVV$9aIW0LvcBc4Lzr6IYCXAgKQT8KlR9CKKq95VVCB1gQr4AedtK8mCu0i84aXT.IT01frIdnLEsin2EIXkMj6G.0:15888:0:99999:7:::
+ivzb:$6$ZDbU0PPG$cRL63ii9f6W45CFMVOxzL/mDI5s2ferSWhIwjm7zhBY8lKLiNrybygK3XBfUUyncomtT8YdbDwfKItCQixd2E1:15888:0:99999:7:::
+krasiga:$6$Fob0B52z$kKBE6UiXYMQBikIFmVkk.vVpLoUxXhon298iVnDMIkSCc5iHs/VirEHkaveotWfTPCTQ/tyfyjjcHZcDDJmqZ/:15888:0:99999:7:::
+pinkie_Pie:$6$zU9CcS7c$MRn.qjUHYo2hZd9lzQnXZxuyx1Zxxtsq5FbQWldNHb39IWwH8sqmrnQA6KNMYTLt65RYQrOFaNKcbn5Yw1Esm1:15888:0:99999:7:::
+greynwhite:$6$LzqdzI53$G0i.hmhhIUR/B9zDBqU2o94t3zlJQxBXxjJBjyvLkC44yjeNDuJKGW4o9jPRtq42G/sJhzWdHRAHiceQd0L.J/:15888:0:99999:7:::
+artur:$6$yu1kH/1V$/ATjR5i5YPTPEyNXCtJcvQ.THFCDDg0kNHdh./hHJHg8vQ1/j.2VRIZDhwBBCJWC/XaUSkQGQ5/vE91GnC9em1:15888:0:99999:7:::
+tbelev:$6$ynRBHVcS$gRoeH.kOTKCSzNfCzwl/8gN7mwZCuhRB0eEwGwxIkn0uXHrHMPrsaBUt5scUSFgUYoZmALnlHiPBZ1uyPPfv4/:15888:0:99999:7:::
+midnight:$6$ik8wseHJ$SSo9.lKOZ/U7428jPwAFh1KzYi6FUZkxlWt8CXJJLmIqQDjiY.9PZJiOtCc3Psdo1VV1mSWpcYiqtXg82RtIf/:15888:0:99999:7:::
+tsvetan.georgiev:$6$suCHqCuh$HIKY/A9fD/It0pzmGX/plPrjs/LMwCzKYmjd6AgDhPdpF3awbjL2cKPy.z5Wd3jDESYiA2DEOtd3OT6M1sZ4.1:15888:0:99999:7:::
+shosho:$6$2Ys5s4vP$GDOCafOB/1rztf2SpdKb12IyTlceUG7d7IMnvRvBx0JP.NO2GzZk27daLV7i1tmu5sgWkBZ3pyXgCEm/oUMWK/:15888:0:99999:7:::
+topalov:$6$/U9ZCdI2$5fnF7Eq09qpKAFLJYf/DNugIfqjjBu8Wct3tQx/J2DYkXj2LlkZr20bi/ZbQJhhPqYcTT7lBiJl7JwMmu01.y/:15888:0:99999:7:::
+komador:$6$OAJnmJFt$a1dn2JaPC9ExJ7Hyv3QnKMusvt7M18GjlMNdTvStb5u.jR4pmQHUFJR2sQh7zqe6IZitn0P9PVe9ZYEeygrJ6/:15888:0:99999:7:::
+zhivko:$6$vki0LV1g$baNjlyjmdsEBhV.9Yw5TAPe49ncUSynQkup85oynrIKy.iUHhFOWbNV68eNnt..KYqxvT4dcl8qJ880AUFNDX.:15888:0:99999:7:::
+spilev:$6$zvVas6dn$E5poWsycvpggr8TfgQhB2xTYBgRSaR9.gSHBhhx2p.3XEXUgwwUL6/lIj9p9ZcQ5nUQYOPuHGaiO8BbJbIRhl0:15888:0:99999:7:::
+dyrgel:$6$Y1tfQMrG$fvV7BVKZxusTHeIj3YH1xP8vMZ.cj.LxgB2g4Hsu1rVq7Ztm6yAmlP.mpRglUfebEHTGnBZ3dJFA5We6aRdBe1:15888:0:99999:7:::
+episparh:$6$uMN9BGiq$6NzhhiFNY0fopkJXZbDaCNwY4vTb.tVLpsaRFtDB3lxQsceiB4cwEwTiUhruIhoRZqCw0sK2VWF4nOaKLH8/v/:15888:0:99999:7:::
+phalaaxx:$6$lQ9MT3V/$XPs69no6azkRaeDz2GJ73l33UHtRQaLnUj4TF/nqaBcZ5Lo2LCSqIUDR5u12NjqFQ.NEtXTNvY2f01cUUAUza0:15888:0:99999:7:::
+explorerv:$6$aA4fo1tM$lCYmiczTd8qN2ydP6YR/Z5v503OjSYrojT1kq4mICd2eo.1tqwiq610fXcekrhfP1mVUuijJwveRQkl6UhKza1:15888:0:99999:7:::
+dimp:$6$rnJvtcoW$2gkD1wx4xBrImFbVWTfx1z4k93Zidfkot2n/qyeFdJf4KrDsXt.G4WEvVYuxt8pxiSXC3rpLKaY4yUZl5kxnH/:15888:0:99999:7:::
+petko9001:$6$lxF9I7Kz$K1VLs3Y2ga2c.mh8NaTCWWMa4DWko61HZghvr0if3rlcTAR7dqlhbx5jnsxKHVesmxuJ9Bk1OtrnruhYnFjaK.:15888:0:99999:7:::
+vladisr:$6$0Q9SjhvQ$FZs.hJ3ZYG6Y5aeg60TzSyWOPiIe21YIuUTEdFTwCfi0GuFDnSE63RxBzVqrKzTndAqQshD8kdIMsqAxjZ8Ej0:15888:0:99999:7:::
+teo:$6$IWc7Q/.j$ThT/1WRL6c6sKE.4izOj8dBL4vxXG48wtCypak/RUnoqW1vQtBwQRdfIBZpepY7xeCCS3y6VPCa6xkjzHnDP2/:15888:0:99999:7:::
+nasty:$6$yF5htPMV$cgERBPKwUgyNgp3Tewy29aLGgzcF3V0hmJFAbHPeSXYtWknCT9ZdaZj8YLkjZtogN6PTfKjmleeWwB8WMdLat.:15888:0:99999:7:::
+radtonev:$6$ke6k/N1a$bhpQtM.02t2d/QymW2b/TSdHzDqnj9NTfXqoCp52SYGJjyvEEmwTOO.qM24WdXCTJsyEF0TKQGWuj9I9Zs1hi.:15888:0:99999:7:::
+livanova:$6$zIIcGtiL$3nh93F0TNrBl8DDBvmFDF9TnvkTfw0.krKzoXiJqwsRKxJJswr9llO5B.jwqJkaWR9e7J8TCHRLbGfqDkJH4r.:15888:0:99999:7:::
+konsa:$6$WJpNxNeN$rmCOWW3wFiVWAV9wAJ8yuIzEiuRRVF9l44hR6.su5KfT3EJaOhjGGYgnVRUEJRfx9SpZ2fWF6TubYE56M962.1:15888:0:99999:7:::
+asya:$6$tqjWehUH$Ne7oQBfaEnIkz.bVUBOSO6.YZB4ZxXH9TYmJkIhW1qp1pjsojbTKDukAPVtQgmYSyzoLUEO.Lty6/lzqrMDmj0:15888:0:99999:7:::
+adrum:$6$pIjl14T8$F/1SSDE7PjvW7qJmgMwXh48MvyfarpkdPDj9FYgVwy7r2tl9.ZdW28w5tRhDqhcrbyBbx77X3L6eZBt2NmjIS0:15888:0:99999:7:::
+leona:$6$e534Gwgf$yhhh8Av0EoWr2bWHncrS1UV5l53um6akkIqg5LdiTDJCAwVPiYmksV28QNa4Ym.g3zPLxNWIzdTucM5t9PysS.:15888:0:99999:7:::
+bgotov:$6$8laiZ8ak$1ktiPiHmurW.uNoWcvPx61WKZaSu3vGATzT8aRGvOYu50CC/XDDk.HOLV.RVqwKQqge67813yJb6WxNQrrd3l.:15888:0:99999:7:::
+pgachev:$6$MQ8T967I$hLCi/UW.STqwnqadlRh9HHfdpCE1K/dwcEXB8z3AOg/6EmQYejnvAHjX3bYuajWOExlvxLDR9R4Fu/Y5xMd5h1:15888:0:99999:7:::
+informer:$6$xA1XKyUR$ZzamaPtOZQKgl6sa1YYfKEezHkddOeFCMd/Ve1rHFW8dwE0j4O9Gq.yQM3Sa.KhWV09uQE6WhureDxujR7d841:15888:0:99999:7:::
+gogo74:$6$ztMvZfop$/Sq7/O.RPko9Q4hIXxtVlTeI9pEZWpWHZ716FjQ.VKC0TaDUyDVyPR2xfiCI36d9eiAH.8/MLzQPyDz4qwkkD/:15888:0:99999:7:::
+wiseman:$6$.158Dtw4$4sTY14FKz5gHghxEyFlZVfIITd87Y2nbfA67KkTxbU5N8uwA2aGyPKN2.ZkhB0RGRIqQ6msFawW/DX2g6HyFn0:15888:0:99999:7:::
+GiK986:$6$HIvD1C7R$8ytPGDcCgoh7h0rLlWFkCZZ7sw.UhMeLLT81x81JCIlnmJ2QufoWpmGIKEy2Po4q5SI5D9TNENb4Fi9AID17R.:15888:0:99999:7:::
+lupo:$6$0Fr3s3E3$drdzZNdIPztaFsGoab2VHOITOkGGX7TLCw7e59dOdva74h3/10YLnX1EjM8DL5IQuuT83qS18LKTksZx4Itqu0:15888:0:99999:7:::
+lusmil:$6$zMiRx1UG$e1/Fv.DEbKb3RQhIkl5n/RCgD0hwWFdSXuueplmMrsTiKxbK6m6GXeAAY0auol4kucMBQBzDJTTElpz3klmHm0:15888:0:99999:7:::
+boyan_BM:!!:15888:0:99999:7:::
+exit:!!:15888:0:99999:7:::
+Martotko:$6$y6Q1tP9f$fDRQ5U2JBH4004BxIT5q4jJTMS2UwhYaTBUyHuiS8U5O00zDSzbBguqYyOn/8/pP/XyJktpoHi7VSZikoVlOP1:15888:0:99999:7:::
+BM_boyan:$6$hEjN3eYZ$X9wqqGJIT85oggaoOF4T44dDU5C609yHlSYvKWAebhrAlauximSVYGROBWOCmeB7TOa5.CRjLCAOWt2M6yFcb1:15888:0:99999:7:::
+martotko1:$6$QGBeTf2T$Bb1nbqvW5K8pZoogZREuI1x2lDos.BNkvEwYuzfzc/n0JDU4UpHeN27J4q4TY7tkNlwU8kU/WbrBt5AK70bjW.:15888:0:99999:7:::
+Max:$6$IRyl5ZJF$LnDHIXgWk6bFdmAPdNTbdB0n4IxceEgN2E8ktXKyLlHYMW.svpKLW/9sOeyLM.U/lkALgtrYMKH.Ff6hA52Ib.:15888:0:99999:7:::
+todor87:$6$fZFZNvCA$B85TQ14uBbycTsQ/f7M1skgFwrjuqvF0FdMlG.Q8msC9zAOyteyafjujdyUNxxWIsbq70svAZEPR25lbOpTNA.:15889:0:99999:7:::
+gt:$6$lmpCkG3K$JNeOqNRZuWHVPDb2rLTI1JE.WcXdwxUPQcpYXD2ijT54KeuSViviO.FtEdOZs1qVsDGCGUeH.Rg1J5CK3M7I4.:15889:0:99999:7:::
+kuncavia:$6$oXVPidKP$gwlMO2HmkIILPLtyFIMTrlep5CJGJmg7MH7V8.a4ANvu10O5rl8..oRv.fOIW4JT1NfG.M.NLfrkNClxhtI/9.:15889:0:99999:7:::
+ivanmar:$6$myXJKcT2$e4Nw2ccZizlutfq99tO6ZG1tsW1ZnxPMjqESBT8IpJANn6ZNHqIO/8sjid0UDi/Xg2A6eRbqswmC4yvXgJJDR/:15889:0:99999:7:::
+shmirgel:$6$OirJ0KOK$sa2BXSBOZSBnpWyzJl6NQAa16euNeqWRMjlaSL9uvEvqTyAs65RMxBmd2rvl.EflhLkcLMNpNrftH/yZOfYY91:15889:0:99999:7:::
+magicwitch:!!:15889:0:99999:7:::
+rossi87:$6$bHaleFgp$RfUwIQ8DkpvqWD7I6CxmHe.CloK3Lqu23hJ6Vm7yJmTZE6TFlqgey/TSFFkYON35B7zf3E0fIsf3wm6wHvADx/:15889:0:99999:7:::
+fluffyelke:$6$lsUL70.S$UQnFHtcUWVe6axxTMAb3PCeoOLqqOakDbVtlSiknn4pSCksYMccZMk6iS0Dkum5Z5CqTV10DWG/QMs7fYHeRV0:15889:0:99999:7:::
+ncuxoto:$6$d0ezkEOP$UoDj7grFr5WVuTNjwndHN6Gje.CtmPnKAKexRH/NNfrCYCahBn7aWj47wNr8oAtH2iymonsZSTP53LGheuY5d.:15889:0:99999:7:::
+milev:$6$T3805j4q$2nng1YDZ1W9feZmkiyrGcFFdFhFwB92h.LWe1zA5RNF/kdI/Gf33hXfjXQw9E1.pFfSp052/eHX2B4Z.HPXNb/:15889:0:99999:7:::
+georgidimov:$6$cpJV2EpJ$XAy9ZkUXtUAMH8B6ZJXcnzg3trUwOMTx6pcO1tqH0Q45Hs9k2FlSmCOLAUlhw8zIsxr97avKeNinoL7pEITRY.:15889:0:99999:7:::
+nikiserdar:$6$sL/Yh37v$KILypU36kAFr62MXYCvuECiwChkGeP0/Mx7kvC5VRI2gMl.rFmkWXyc2gL8TG89hJIXt5O8QHyC8mlcdlzy2v1:15889:0:99999:7:::
+balflear:$6$65uqboR2$7s70v8iH/e9EJqhtotK4HeZaAwqffcL.1wZ7gwvjbgVquBLZFjzYtxJ7Y/7WtbloX3VV/sMXWJ2D4A.7Aw99L1:15889:0:99999:7:::
+kiril.ilarionov:$6$zv.eH/JT$sggrlAG7vxCQ1iOP7.1TebTdEMkjIyM.E5x3rornAS5QlUBeQg1voUHv7eZAV6EDjUEJ9HAKKry7nUNkcFIFB/:15889:0:99999:7:::
+anton_dutsov:$6$2YTIU2eg$uI4MFSC/qNZRyq4BLggaB1PoyUOAsN75rrwP3Xm7MA4Qq92uE08DnqUcVrW.9HnOBlONPxGZGCq76nyoduyW1.:15889:0:99999:7:::
+icevv:$6$6e7EnBLR$DQ16WM.nMRykuuT7G/5sSPD4K1yQeOOkwJ47K60W5pdKSohYjxvou/4I6STaMACuQzk3JaXQy3INNpuYQCtKo/:15889:0:99999:7:::
+KacanuH:$6$Ab4mTGpt$K04ww6.Bg4LBejUlbBp/9aMYq16ow6PKfoR1fexAm/b3PyU3LbKaH3nPWnV1JxmmO3h9B6yoFBHZLixZgCWyL.:15889:0:99999:7:::
+guevara:$6$G7S8IKrb$5jGp1Cspw0xABr0UtlnAPugPqwgRR2cWkCoUHBFUyE4gIoumX1KTGlWmjKIG62sqA5Xp.I9RadSawB.UyC99J1:15889:0:99999:7:::
+xekc:$6$PTkHWOa5$hCEzPcpinK9YdZqCpJYZGcu3KB.QIjpEXxObAb/62iSl4TrRmB7lKpVEa2zSZVu8GvRWSK2WuzkxkO4.sTEbJ/:15889:0:99999:7:::
+FireBug:!!:15889:0:99999:7:::
+Niki:$6$P80AbTeI$vt2eTXawcTJh6dJ0unjilD.Nc/HbCyY7UQJtAKmK.mFtxtxxk2pDxW2M6tzshGSlRD.lihU1fv/fkgx/rEhKT.:15889:0:99999:7:::
+ivan.velichkov:$6$obCBOM8f$AoYf7Q2YG4cX2Gf2EayrdLf2Zf2ixJF3/oLTyPxInQ49GUR8JpxLBSZmPnheBA1wT5hgTSNXbmNkqn0Sw8vM6/:15889:0:99999:7:::
+yoan:$6$IAIIAqpa$DeYr01H/kzAErQqbGkQ6/9YMf9nxhvq6khOgB2tKc5UUXNq4.OCCXGVfbPRzK9tlQ6k8Nwx.vrSeMqoCWIpzX/:15889:0:99999:7:::
+nfh:$6$M.fmK.Ws$IgTmtPrKiYOczC1ZtWkhOiU1fbDnrmppAcGR1CzBHz9RFqcxOr8tF/BzQZ3ieyqIF8KxemZ5akD1kUEQglUww0:15889:0:99999:7:::
+xox:$6$eFIQ83cf$LjLWDQ/Ct9DlPJV1sZ39L7camFfHBGvF9QXvpY5YAZVYMl9kjTkVdEwHlqyMFRJVMb/igxwJfnAqlO.1Cem3s/:15889:0:99999:7:::
+stuBaliyski-smolyan:$6$.jZDT/rq$3vDUUHhmDBcXzh.B.9YlWLnS81iD21Lsji/OnXhGQ3tlO3MvGnO1g8VM5E2oWMLCjziMZbqxu16mXREI8BzTS0:15889:0:99999:7:::
+kyp:$6$5nvsSNj6$fb5Z9frtm5HB0KuQx44UXpKWhwlPA4QRRead36dDqvdnHmQAlAL8DaiiEejQ2TnvWH1t4quyBZFRCC94KPwlS.:15889:0:99999:7:::
+mmanov:$6$tMashpqV$Q201qSQGWqEI0LCJwjyhJ8nXbzqPiw8c6lOtBwgbGA0s9gDFx2JRLz/BxltawUCCaIegVZdRKOuFV3bbcBAKb/:15889:0:99999:7:::
+ovasilev:$6$meiuEbDw$SRO7IXQhiHJqnAP0qJYD4XZ6si3yVX6kHMgoLRFUA9YT.Be6fpgGxUG80zMgSFU6kwmrHmHCia6krHNPnpvnY0:15889:0:99999:7:::
+psotirov:$6$HJJ4aFc3$Y7x/myoctlyoDtXZ6EAPY40AuWHevj2A/e9cOQKYbRjKXYDvBISNpK0UdS9U4R1ImUkjC0lsxbU70Qv9FW0pH0:15889:0:99999:7:::
+alexn:$6$XYtfEkaE$eu3VWJOenEDdykoEsAprpuXij970TVhNTVZlhiteKF0TKkn9fEIvY4R5B7j3pyfjvNx1HPnL88vpkVCeyW89R.:15889:0:99999:7:::
+lengarski:$6$opgTGwBM$a2m5o4s8XPVuGEqiPHqjJmdYyiqjMofLC26A3hwMrAX7/b4pSTUs/EYsKz.QccxshRn0WEaD3bnauS0zCo2An0:15889:0:99999:7:::
+seder:$6$SET1VbfL$U/x2tow3JqnNIUKAiF3sTrjJ6zO2QJpbBne1Beg8FJ3UUr.lu38iKzOfe2lsewIKCFdoUnVGB7Ptf2YzbpQE81:15889:0:99999:7:::
+svenson:$6$fl5GzE0B$1GU4xVsEWwVfJOOvFENEDeLGaaNcIP8Pbz.RpWT2eDr8QmkjcrkFUBoEFcchTK5EY2FofPNRe/PStJd3RPCz81:15889:0:99999:7:::
+valioabc:$6$.Nu.3yZM$HOYjcyMPTLBMsSu47IOjWrVUf7mWM5nHJGOUp3u0wyC9ItsQPS3dhhBbEZILZmppnVQaVHvJM3qkGTYwbLTp50:15889:0:99999:7:::
+hanasd:$6$ufxMgOC4$0HSGSJZ3cO80HCbjz5mIrRCgdpgt32yrdDi9lU7V0W41.1i1Z74KLp.ogWSGYpfYGy.iWrlyeYH/eunsdhHzP.:15889:0:99999:7:::
+edyyy:$6$C8dyAKs8$ZYoi4J5aRXw8zwM9x95Q/BQRnQmG/Z.yxFQ6F/T5ZJ.cxklAiNwAwuTQU5ovLb9VqxsO4b0Bs3X06433w2ZKB.:15889:0:99999:7:::
+icoantonov:$6$eulK49ir$C6Kqg44yQT9Q6KmO0Ub3zCT9MBXnU.6xZLbgMmZ7fj5GG5Olqs1dnnjIwB7Xk5QImiGniK4RGNDWngpmE7JHS0:15889:0:99999:7:::
+miroslavTsakov:$6$5NOgUaEd$oYGr2xQqTlTnkS7TmZNzD5ls6yjPQrScKY.AzcCo8waB/GXb/Jg8atPCAa5C9ghv/Z0xBLZehxZ/4iWvY4ABy1:15889:0:99999:7:::
+pano:$6$1VZGtDjC$tq4ibFBQw.Nafrk3lb0zrA3dsYscOs8AbkMY0XXpe3D7hUUvjuM4SAAq8aUgGL4qNHcAkPurWVp1Lh9vrqMhq/:15889:0:99999:7:::
+mikel:$6$cLBElecs$Pglq380RGCxW7D5KpDV3jCAf.33hwfJTXid2p22Dg2KztOQJNy3O1lCaudga88drqYGJ13V2jYjQc4l.xuXR20:15889:0:99999:7:::
+vistef:$6$jFh.WRvy$hyV8WfiNKOxgGKIxWnI7c44WtMv6COmBg2PS6858obHBj6bvd9yT4R/1Dh3NZxBm.P1zcc18rwl2jcTcpqB1x0:15889:0:99999:7:::
+pokerman:$6$1CquCGji$1dTRGaDM1ZGm9NAi9GyzsZgj7AOFWWzP7PKU7XLVc3Jaq.Mceo/GmFvzPcqEVwvMZ9O1T2zFfXJZWnCs/3R1g1:15889:0:99999:7:::
+nzrusev:$6$z5CsLMqS$ttG/C66nZ1C2B2MRE8XbLDCLSVlFe4VjRjqYq6bUZI8Eg6oWaHrQElbP7Cs/dxppCwAV.P0WCjAebKD7aCtrP1:15889:0:99999:7:::
+spetrov:$6$jou270lU$EPTglClSRaRIDuj8aroa9Cf8kfW68PxDnOm7leCecxzIREIR7yAehHy5Dmx8FCU.ptv.Hmk3ZhlEXRMrh5Ju3.:15890:0:99999:7:::
+nimok:$6$ZbdH1vig$Vt0ASlbsQoLkvEflaInwkWm3aPyFG9glYqlDwkMHlaXw1iX8M6h8I8VctSxvuhgY1.aeO.g/3gv6b8T3.PtfG0:15890:0:99999:7:::
+metalbig:$6$ZXGI0AWd$c6.lNEzStMyiY2IXrAW6R58XHgqjyk/hDZikbzIQynM2s03VSEdw/bo54tTTE4amVfvNjlWHRD2uK8tmsm5lY0:15890:0:99999:7:::
+rizo:$6$Vuejektd$nXpZkyMy8AO6XUICCKR2Q5M7ikbm3JshT0tEkWNscjAdoxlk7Wx1jGYObOIIOZnIoFpE9uFlK9byDCmlCw6pr1:15890:0:99999:7:::
+niki:$6$p5eTFvuL$37.ZkWUNJYDRg.NF0HjiFi4M6oNi/w.d6e9Tjvmf72jR6eX.2zCJW2vwGvyMoCNHosPMvHXhcBoZtJ6IZidRT.:15890:0:99999:7:::
+movix:$6$QpHiVtCu$BXL.akH4hcgkBdw411UiPBpyAP3RhNTxH17vevTiVYUjFQfbYZzcYjo1X41MYcga2tRDSgFc5DjasR70IJg2T/:15890:0:99999:7:::
+d.georgiev.91:$6$3LZAPgYn$aay3fpRN3rQmvNlg5f/Bp9/Yt0pZmFsgNf3V6Q1Gygi3LcWRXVjSQ4LUvdajZXEWpX1Q0PsIeYF3eSQUdRWeG0:15890:0:99999:7:::
+ivan.kp:$6$P/sNyhHR$ZzNauDadjhmz5QCq7iDReTIxcP3.S5WsbtpaWWBZ7lGA5ExtT3htUF0ukQjmLMrT8N9LaVouXqb2ZqJ2gRt281:15890:0:99999:7:::
+mishev:$6$Quz.Hijv$RGfSxa0o23mKK1PmOX2nyPWeQMXmnqxmeQ1jDiGurkOCiRMud91s6eHxVKJxB9fup4h43M.iuQl3UQxSU.0NR0:15890:0:99999:7:::
+jack:$6$GNYAho6f$s9K1WEwqB5m2.iDYz9cHLsxhAw3gHs6Xuzs3y3sA46qmtZQtsI34Pp44RomIU9pR7foJhKNkrUc9MjT3X8oRP0:15890:0:99999:7:::
+vvyagov:$6$hawsMDQQ$xl9c14JwFNSwBVoBsmbU7.P002Gq5wlWUJcv87vDqXBRfT67CiXJ99HfEl03UFsHAjamRkKMUwu17o4fke3c/.:15890:0:99999:7:::
+htx:$6$qeY15dj3$4H.cnRiWHQOdejmQ7vXSCET2HDrE/4ZBFSZ.JxR7Yv4qEkJFg/UMRIlq3Fnqmh7tAC6w.mj5BfwrCZWJqRnC5/:15890:0:99999:7:::
+stephen:$6$.k4QG77P$E6D9iP3iQTjqnmSXnmWTE.17DwtmnKLXS43Z.8YEfwFqAnb/1JozBja8RrB7p0GHmwd0LwXve/050.nOydWIQ1:15890:0:99999:7:::
+shures:$6$AddW1yby$EneOuyGM9vRq52ylCmHqPITY7.VRVGQ7tIVvAoN.a1S.h7Zj8x7lj67EwFPBg.lfiZg2RqYQBQl.QIcCG1k05.:15890:0:99999:7:::
+fuzly:$6$USJWPxtM$Y4yl68vzISbSghfK0TjI8BeXXetRuBL.eaj1SGpsbZHUHpP/mwp7/0JoiBaNNxN1NyK7W6kYzw.R3hWoICuIi0:15890:0:99999:7:::
+iavoreo:$6$p5NKmD6.$HZ8Og1BgwJJrsobEJPfAw5RkGNkxbeRHzcDPYeHy.kyeQ/hXqnd38su/nxLmhYNFogqHxzU1ziqzS3z.4nbnG1:15890:0:99999:7:::
+vikipan:$6$4a5M94Mx$X8U0Meki1PIwxMOa2JsR9ZSjg8qZb5dq0MDYaNeW2dnH59hWMDJeahlrRi5nk.46/cy3Fnxm.zJO6SXfQkTev/:15890:0:99999:7:::
+strahil:$6$ltocO757$hwiFAhLKkst.mo26I/5ThD0L1xAGs8kUbMggZ3CQU633zJEmRRGI7dWdJX2xO91zzhxNaqCgwcJfXIPIqJUJi/:15890:0:99999:7:::
+dominionbg:$6$DmzAX6QM$eOia5IqDcyEExrD/a3ft6tbKSm9IS1CKTCxA5s1KGEER/LZH5V/BMXpUycK6YYM.94gcnifxPMuUFALwBOxH51:15890:0:99999:7:::
+boiko:$6$P6R3kbqg$WqPyaRQhABnlMf9TnuzibApNgb6bwlF/4kJy7JbG6lSFQkHkXrkud5VH2kZH2fsncVkPycW4Ymc/9VW1I/0vO.:15890:0:99999:7:::
+skolew:$6$dLFkx4vH$JC0AjNA7hHLyvQEXbydTdyHLfc.d0WfVTFO1pBsxYDx8AmDwNFReWuwoRvU9cH0WjyabXoVJ2TjDDsjCV243t1:15890:0:99999:7:::
+mihail_petrov:$6$JeYSBK4J$nY1tNkB3xlS1HDAJeC.hFOGJaPfd89DAnF4hJ/axdCLmnbPIRCtN6lkkjMK0/NszOLGDZk4x10LPsoNJ8NlNN.:15890:0:99999:7:::
+krassi.manev:$6$po2kns8n$vmgHTzqCq/k8dSuuLh8k/idQw/W32m/3WNlrjgMFMwvAve1qff35tt1zjCeTpy5wSGrn5sqXELiWrORip.CZE0:15890:0:99999:7:::
+Neti:!!:15890:0:99999:7:::
+vtopalov:$6$9KPbPWo2$Ei4gV6l.LfQDNlPP9oV45QUzn0B4f.Pl8/kY15u3AvhxN.eoy074bnZuWeXaBJmZpRIXJ3iAJLp02ci6v5ERo1:15890:0:99999:7:::
+Natali:$6$y56M41KX$SMkhghB/q77KWHWTmHUe2p9iqGS/dKys6h8sJ.DZ6U3z9EjFT7HG9OwkdHb8a8OQ1wqRB6cOODhatOC0L9iqa/:15890:0:99999:7:::
+markoni:$6$WkTm01Hb$ePKBe3YDr/OCxWFnF8D4Iii9ZJ2vItTqb1Qm3.EiuW.8t8fiPfRkiQyq1i5LCAulz2IvA2Y9SuOmCBt8mGRBn0:15890:0:99999:7:::
+svetlanka:$6$8R6EoMOY$9joqxF70./51Cis9Rzf99hkH/NzsqTK9cic3H37dnXcHI9wfC0eIc5yRpYa2O7P/trPp57uPVnJei/lSuaqk2/:15890:0:99999:7:::
+bboyanov:$6$sSC6ZuVm$NR05Rx9EXJuXYM5IjwjdrWlx3BRvWm5aIuAetunhVJh8zULCSq2AfERqIgcQ5ExK9DJSnUvcS3jpwIHC2DBQl.:15890:0:99999:7:::
+hristo:$6$FwtmP8CY$sEuRTFGPTAfRC4WveTi2Gio9QQrkhij7aNwI7nhbD3458LltS8fAWXpOWrZtweL8Ks4AlL9dM.5DyFL2Zd8Rx0:15890:0:99999:7:::
+bevalkov:$6$C8jOVNIP$eQTTAVHr3U6ll8Sq2Wb8OnRgRePkJ6A6hD8hEjxSHpSOAuRGgTm9RgfuJ/nf/Zlx1yukiEaPEovCW/OzYKkxM1:15890:0:99999:7:::
+nektar:$6$fAIdC3sf$XX/ulgDz16Wz0YjGlRL4RelEyNu9PajvaSsmfQrlyX09SanIiVH/u48Z58xw1pyt0uTqmLJui./Nd.0qdgymu.:15890:0:99999:7:::
+samvimes:$6$Zw0ogWgA$KnQjiEagNOJkTT7HW0nt0IDqPuW1Nv7yxlba6WS58wH2KfUSJqBDwTNBw.9IiJCtkc6tl8wir3HgusBjEQH.T.:15890:0:99999:7:::
+pe6o:$6$c1peZD9k$QSfkefD3uFc2O26OGyqMDIHUVjY0BP6kKsq.51F17m1Ing2z879gddyvhdajDd9OgMlMdYyJIsoMhe/Xi3Xt..:15890:0:99999:7:::
+a_boyanov:$6$oxpEJW8Y$8kDkb.WTZc4P5AGXjkTQWJPLBAL66AHd030RToTItIteIDh.MHvzRyARl2sGENOlQbefH2e5j8Uqv2NqrqZ7F1:15890:0:99999:7:::
+quasar:$6$PDzglWsu$SCv.MJuRJTc8QShpQMk/J/t/JSzatrbI1a24MJDIX0iBQdvwPOr.S0j31Cjjmxy7F4L3.56lc6LrXePmChSEA1:15890:0:99999:7:::
+hmaleev:$6$rn8D4dKB$zsbXl/otrfAIb.GpG96oMPKq3HcsxfQbWUk20IcnGO9lYFqMWrmsxwEaasUmDvGGiXGoIALDZCJYv6ZtZw/FG.:15890:0:99999:7:::
+Vali0:$6$MC37/nyP$1tyk0pHvI8jY9yyoKUNH04UzQR3vbGJ.ievU4Abj7sIU9S6tgRPbrZiDuJoqgbLOq.RLo9M5atBKSAEeUxtHg0:15890:0:99999:7:::
+st_ivan:$6$/1AHvXI9$oSp.cdCj/0ICinKfbNi/U3AVv4XBpdxR4Rj9doXNJpBspPly/lALrzXXbBdOSnD7HpOziwszg/.TBRNcxpd2c1:15890:0:99999:7:::
+skatatika:$6$f2UU7UDS$2TvbsFTuV8G6a.t0IiHjMP2og8S8YfV50FaR3fIY358xfyTcSCRJkilCXvFX0kHmeW2AIsVG4SXcGZEGVIUNd.:15890:0:99999:7:::
+si:$6$B8CftP79$f0zTvhgzewhJnDw/Q7vQ07SWeSCD9zLo4hbWHvCYeROktJfcRd.S81MN5o5XLLUIaJYdu.4x.5mmcg8T6pmhG1:15890:0:99999:7:::
+p.dobrinov:$6$WqiqbxDX$pVgH06MBPQV4AVCcKS/19YelQT3vuad8pg9ZIlzgurEeOs777oUwbOv6SfeNMTraBMMoa6LYj3HpiUHC5F0ab.:15890:0:99999:7:::
+strachev:$6$T1OoI19w$1Xke1Dp/G76w17kveeIrxEfERXuzxgOm.56lhLPDzBpVY7wtdo81gBnoPn6M0xTtUEKDbeC.qfP8ogqA4o8Pm.:15890:0:99999:7:::
+nikiman:$6$L3hKHhQY$TWROPXRBc5m6DEyOSarEPuRkbRPDKI0h2Pqik3wtcRfJwXY3f1Z87CoHNG8R1WNjy9i6ayDzSIKW7bKE2.lG2/:15890:0:99999:7:::
+ivaylo:$6$HAoW0iX8$0zi0Etq38RyrU7bCMcB4wFwTbJCXl1bBO12keHXtzB6FnhjbNhgl4SCA3T7NSy/LywjdOE0Ube9lKUaHRnEbP0:15890:0:99999:7:::
+te:$6$UcaOfe/O$mMBK7qF9tGvWiapnBH0fjG3Nnj2tXyF2ZEkATpKj2tPWnAqTn8TZZsLsMgnIg9ntT0z8u/9c0dyA/nPZ26XzL0:15890:0:99999:7:::
+loshlio:$6$QQdM0K2J$UzoJ4agArxmm4aTL1WH.xArCsIPWrsXk1iBvmzODRfFyLo0H34.LBlkJ2qhIoTF7gEtchvcANAPgP9E0cE6Pn0:15891:0:99999:7:::
+vorb:$6$4OWu3n1B$cYrhXR86bwQBpAk6kXSa0s4vCNKOHCv6jm.cOH0z7p9F5sFShC4mQw9qpl0bKuF11rlF.rLEX3jBFt8up3lso0:15891:0:99999:7:::
+Dex:$6$hEjlHjyV$lbbWs8WcdmX9b6vWgdxn7ki31nfIFl.fD4Bhw5X5WO8bhkfqd0/kI5FQ46pYLYyx2isbhRzC9qZ0M3ZmIGSd40:15891:0:99999:7:::
+insaneripper:$6$MZLWKWQL$B/Ppeqmrhkv8PFCqPG2Ung8MYQ.PhypZX.yFgNTuWXou5WiTluMDgmZDqOMoPWS4cB3AR7IbvCWn11Q0JVaqj0:15891:0:99999:7:::
+dandreev:!!:15891:0:99999:7:::
+dandreev1:$6$i.tnIJ8L$c1.r3OYyUuRDzLHtx2YCGBiftJgzh1dFtpKfkeFp9Xwf6PBWxQVaj.50nmmcUhY1Gvm70Ho5yqSRn3kuegP/r0:15891:0:99999:7:::
+veidar45:$6$3Hkzhzjw$qWoBMUBfJ1c929K9jzyKA2WRpaC5qaF.f9eKZUuLdT9drH8fzHe0FeEs2wGkg07J9nUAmtdvThM0wRARx/B7S.:15891:0:99999:7:::
+sg:$6$Z0n.NCEK$yKOb5JK9C53NipIFPHS/o0WCBnPVpHopiVJDuRjIf5eQIdBvUkgPHqiryyDplIo4LT8mxIOLPZjWCaG3N.FnL.:15891:0:99999:7:::
+BLShark:$6$vVUo1oqj$TRYNfVYA5j07gq1GsymZOSMkk5iwxpdJW.wXi5tOkVCbv4BvGfN3Yfd/D.ioN5zmNI5FIikg5HgXGsw02m2F6/:15891:0:99999:7:::
+grigoo:$6$NhQhCwbs$JFeMYQut9C.DMEwyohJ0aiWLDBEFNmG/i29NsXZx06gYFy9mMzecmdraa9NepXEKaj0T.Nt2WsHQg5lgphQie0:15891:0:99999:7:::
+mtzvetanov:$6$ncTzmj7a$V6OzwyQuVgLKPXwJbKh7WCgwix6.VlGwJgKKOLLTGPiZEl2o1W5EXpMQLWwmZ4rbz56kk3zqnG6BtxRa17gJ10:15891:0:99999:7:::
+elendro:$6$GCVGr3Hb$QP7Nenk4Iv2cJTp3hUMlHQ7IaXxtAgsMXILz.Up2pjI.oEUP6.awDY/cq8HgOe339qTI.6.o5lxtVHl66Bhnv0:15891:0:99999:7:::
+chervenkov:$6$xlAmMn1S$AAHQ5kmjqfSTkVV6osoMs1erLgpoZGwHKDFjOjrB6F3LSwjewoVgPY5orcDh2UpD1JNE9Z9iMUuSnOT5Gl6H91:15891:0:99999:7:::
+demislav:$6$wJ0GGUI/$wh27SrfUikzVXsqb6nYe3rASR2WK.iJDxBlMevlVJR032Q12TYf.hZ3Li8F3T8yKRjVehioXBctli51WIAD1K/:15891:0:99999:7:::
+gstoyanovv:!!:15891:0:99999:7:::
+gstoyanov:$6$cwYAG3ro$GU.p68/a3R.5fdxtF1g47wunt8NVlI8YYU6UIQpyXeNjGZdyCFuNLGfkhMGgac9S4p545Er9mUYPCRnX3PoGi0:15891:0:99999:7:::
+mage3:$6$dx7uBBTL$qsdlvfSPURS0anCQ8IN/AF0C8AOoNiY/PiCNkTw8fWy7oOzIEo7RnryzJAZU4W3lqsc/3Hc4Od20hmydfpdiB.:15891:0:99999:7:::
+dimphd:$6$WwvmFC4A$CliV9n/LS7xF.zmaS4oNJ38U6oeg2Is0KxFcFl19JjH4E63iEwSKenI3g9DbLUgAJn0Ciz1m3MCOmOTFeG5wX0:15891:0:99999:7:::
+nikolai.velkov1:$6$EmsY2IlU$gajmx7Z.MIeMCPFUZBa2hosEIgLwWfOSLzQ4MxvCl45g7IHzkIhJIBWTlfcUA3VnlKlvChoJsJWT4vE4UQ7Xe/:15891:0:99999:7:::
+stefito3:$6$4Bt9MWFb$AzmkHLs8Qp5aW43/5AOGngjjIFg3KAlfd9l0eaEsE/92edfxaQb0CBFirIn./FERNk0EMcD.XvM2Ro1.LSXE50:15891:0:99999:7:::
+Boris:$6$7eQmOz7w$2btyMOE5zb5sk11rkb74E9K4mieW357QblTVJr5wX.Ds4ixiIXozxTRzMXHOWHiORJTgTo5kNv8VpAVSjlLEq0:15891:0:99999:7:::
+plamer:$6$4LWu6Hr/$BJKZUTls948ozh2cruxnb6iV283zrltSZNokM12sfp6EcOPVWu91gkCIsSRajRt6jZ8us/qHUV4L7YhMbOtvN1:15891:0:99999:7:::
+ridik:$6$ZpMi.OOf$2b02EGXB.1GktMttugTQgdWWguhY6rWy1uaQfYvWJ/7cVBm0FtL7LcQQ5KuYFBY1iP0Yh61p7oT.uV0hOSCLV.:15891:0:99999:7:::
+pepone:$6$UdK5hb5k$Pjq8m.BVUfzbwSddbHddSM9alOOFuPFZX7Vub4Y3AwAa9Md8lZWrB49N7UvrJXXqmA1RkBTqHgwcNzH1uF1WR/:15891:0:99999:7:::
+kamen779:$6$ZCWWeO43$qz0BVtg/fPs7MxWoLHgGeMWwgkwvoRNhC.W5vQhy6h5Wja9MZAQ/5yQ.falEmQsH2l7.0MOmMQRVYKtC4s86w1:15891:0:99999:7:::
+tm206:$6$IbayGfTA$W/2eDAnO6Ay4Mel.7UvE5yvqLtw0ckCbC.2Z4XpIRTDQB1qZ5Mi0zFLHh9gJexuX3IWT4tl.RaED115fbf2/4/:15891:0:99999:7:::
+silverboy:$6$U5HaU16A$A3L.H87XC/2TF1oH69ZmpM0VLE6dkCkjgKKQ4oJPZzzA7kOqZ54SLnA82c5uLdaldNjLmYTFkUP6Ot/6tY8nc.:15891:0:99999:7:::
+val10:$6$2ZtjqC54$LuNrZ5GpAqP2uPhTooSNdXlcCqkcXuOkuaIL5AHUJ.oZNsr3/dsXhoZGxsWu1QoH9kN126bYOJ/sBGB9YTnsc.:15891:0:99999:7:::
+iren_y:$6$bABm8CqM$9sMoXlCfKA35R.l1rF.BApiLwXTjq.0st7Z/VroEl7o.l9cW8DzhSVGW7s3dWbs7IodJH0zTszWxUl.8IJQqY0:15892:0:99999:7:::
+munata:!!:15892:0:99999:7:::
+angeloff:$6$FpINoHYe$rnRO7lGYPKC4OfRQCHP17wXwOIKEmzMjdCNPTvIqta4v7lxzC1d4xM6qF9fIQCahyUFeJ5c/9YfzGMu8UmA3W0:15892:0:99999:7:::
+joroboss:!!:15892:0:99999:7:::
+veronika:$6$kv8ajOKE$JMTnLwQNH00yFJ2Ig2WLGzm4v1uu4KL.jSJf1KFBkXlO1kWNSrHX4q2W53YP3ntgyUkY1A..h/1ngUi8QRNku0:15892:0:99999:7:::
+ro:$6$sz4REkh7$vnaEjYVL6d1cencwna8WpZF2/cgnc.0Zm0zAXAZz6i/NNmcbEPAWlKhzgJNpnojG.2Sv03sGJZ0wjb8MG6rkx0:15892:0:99999:7:::
+kotsevk:$6$P1nZ7yNN$afDz7r3JYkMPgZMO/BxC0hY4tcEqrNh7zXH2i6Xa.rLkjY6AG4zR/FC8P0I8Ee.1y4V/mk9YBnJdauUrwDvP8/:15892:0:99999:7:::
+mikell:$6$IkbVamuX$AGsbnd8.imMpJXla7.V8Gnj4MOp6ZOo/.Yq.wiCWy3h7u3l2IrDPOWuLSy6ZM9UxgWcS4nHw3PTyeFbYXiPM1/:15892:0:99999:7:::
+Ivaka:$6$9HMdjIUP$4c0H84bTkzHrRf1IkcoMcEf6/htRC2ZG9ieIds.wW.DJdb4attlLbbu73qPMGleEStoeLDDGWeMi.Ovu0dAQ10:15892:0:99999:7:::
+aangov:$6$vjmbPX5D$KzK8eVi2IxKVg39bPTgT0OMArDL5ZfxaCQRYGnm4sh1tuHgTxeNytEehzwRcKJWFgaMy7A1nnKZRUnYcgP23d0:15893:0:99999:7:::
+vivoactive:$6$4x7pVM.S$g/7EuLGDJjRjI.crvzOT6jmYA.OGMf.qM413P4Jj5Y4XWoVhxBgnKUn8N1rxIfkauByxsG88CEU1fc9C/lOep1:15893:0:99999:7:::
+s0ny123:$6$LMb7Oqmp$cwNbPSmPvp1f7WzLBMaCzxdnMbSCT8VbKErfPwcAjA/eTGRyP4Ka3KeLFHEt1DJrUVyI3NBGAhWemyv2cAwsz.:15893:0:99999:7:::
+shosh:$6$ayZvkxAt$E7eMdg1TDIh0PJ2enOg93hUHVPEJD/G5OokZmLjMBqzH1NM5zL.JAPZAr0APOpR8z3eOU0V6wOVxIl6xowUHa/:15893:0:99999:7:::
+sendtneri:$6$xu1ZGERb$COCj5VEm2a0o1PuvQfcB/6AFXkppWnqexCER92u.bLsq7CcuVboYr8bSdymU4Rsb2cp.URTCpSFUgExH6xVpH.:15893:0:99999:7:::
+vidkid:$6$VDaxWYx1$kyTmF.2l4F4BQeegvJ21D.uiHA95Xq700.Z7oK8RdQbO100cB5JMt6y1drgoxbT3QpYUU3CR7RmjFK.IK8cbA.:15893:0:99999:7:::
+sagruob:$6$c5kEB2yO$iHPGXvDNl.p92ZcABW.7wUxIyNx9sQTg9MhriFN/QmwCtJKUr6tlJMhOElyoaOx94Lo0e0HGjKBYMdaPdiHwF1:15894:0:99999:7:::
+liubenoff:!!:15894:0:99999:7:::
+gliubenov:$6$XBpmTWP5$cVnaBPbABS3b40YMU4JEqxFSabj/jZQiowTI2zPqbee2J/IKAFKY/6pZ9IeY.H/m2tw0Z5kMid6hffpT7vl4t1:15894:0:99999:7:::
+johny:$6$TYStUxzz$K5Vh3Ga2dVpeXR7ymcMSjQqILy1ZInkMLfmuq1P43foY4M6PhKd/aXEmdUjMJ6MsRNuW8/IQCVR6j3wQooSZj.:15894:0:99999:7:::
+fuzly2:$6$vvB2/m5f$LtFkZpgb/nASG4EoOdImjWFX.q.G9LAWZq4w8iPrTXu9DTUoSCU0uuTqo8nxcQy5oS6ExN0jK.iJeiZC7go.5/:15894:0:99999:7:::
+stef:$6$W046YCJo$Cmn9scpffSNX2DDq8UyacmjZPtUe2pg2t0ZHKBQ3eHPOhrdN29WRGcBiLisq3UlFXiWLZzT98iTEaeWzNJwlv1:15894:0:99999:7:::
+mims:$6$qFMB4EH.$4bbE423DUYxFzAIGpq10ttKWngIhi1R..8h1SAP5lKFUg7OrNAzWdNQkcO6QW3NiC8Hihh17ZEPF7yAvKQqtj/:15894:0:99999:7:::
+vbahtev:$6$kS2TvbTb$YofOREZqw9ifqRF17ZPwbGiQc/etpDAYMFG4HZgGbgDlHxLW4aW0qQjemQ0sLOCD8Vd1Pb4kkLg71t9125uHM0:15895:0:99999:7:::
+svv1234:$6$p/G3Zzrx$ccAuGnCVDsyeAoyaCuziJdpx3dVXiUJSP6h6VeEifAkfBblS5vOYzrjETN7eXn7mhxpkDaEGq1LuqQ6jVoGQL/:15895:0:99999:7:::
+komadrin:$6$LHfFUtqz$HoCbvutgV1HKTHz0B3ewkGQjm759mPwGfJXle7XOAffoTIsGyAnL5NBtVyjCO5Ra.HWQnJqlympb0MbPHF69q1:15895:0:99999:7:::
+marek:$6$lSHPqQ0W$mM2J6hevoQ26QjOGPquAGGjSBd9FlBdlBliaBg5VpLMKWbuTXA/8shq3Tn7eIpgyeOGdx1sQbWCmq0JsSpGR5.:15895:0:99999:7:::
+vergy:$6$wK5PxW.r$Fcac/eSJ9/T9lNQ9nB1ZLHItItItHr.uRhPOeo/J0qtpk2liMJ2s8OcPJ0EdC/wvXxTjyW3/hdLHb9vBVYOk10:15896:0:99999:7:::
+rosi:$6$mpY5NSq7$N.RY26mdqmdb9ZQlYlORj6Z0aFLZFrQa/Zbmp0qzuJu0Cv3Er.8/PQXka9YiQf01/iBTMg2N7dV4FlRZgrrn20:15897:0:99999:7:::
+istefanov:$6$gGTFF.ZK$yhpYnk/vfgc0LBtfgjwYe61tgqIuzls69gBLB6eXsItQoo4XijHZsb/tKs.6r1nPFAwx3gzM/mJS.bJMN/Wnt.:15897:0:99999:7:::
+haripetrov:$6$E2O5YSFk$U6q38Ii2FxxHf41PKwOhEzWpivlPeJN5br8tpdTwu2rG1kJ.mAuiwzFNSU2ehrEyW6kno90uMSsp8OfiSwp/O/:15897:0:99999:7:::
+future:!!:15897:0:99999:7:::
+tuxar:$6$uGT88VTd$aUhVtP9642fEYqRjrB.FZmFpyCr4NYwNRURspaMyWA9eZQdh/Gy2.FFWMQ69sj.gUgbfollG6q0K2aaRzagsh1:15897:0:99999:7:::
+Dido:$6$7AcuiZ/n$4QY2PHyOJT3DkU.5PqnafZwALo325nbHq.vOhcEvxXeoKMFNN3D7JLMQ3HPG.zuac8NMrfFaFu/Y5Q2DdwTzg0:15897:0:99999:7:::
+caesar:$6$4tpUSBst$4sO7rcmgpUeVaregWlD79zQ.xCxNCfZTOjRS0WYwlzdqeTMyrw.HHKF6xQ/gUhSBQu7wl1PKwjXLEkGMl5LjZ/:15897:0:99999:7:::
+beast:$6$tk6OvtBj$MnsxhlABUbCMP9ER2KYt3mWnSJ8v/35RlDH53Vxi5Ohqniny/TLq1Ke8NBh8qUf7vy7sxwbQCkGu/Bd/Bcj1Z0:15897:0:99999:7:::
+nesk:$6$DCv4ukgo$U9ez3pWwOFdlFTvis17ZRWo1eeY4du.plB9ofRA9CxMZ58pqt1gGwK.jfpfFYFfJEpF.eZKeydD.oGhOYDGum/:15897:0:99999:7:::
+kalinsofia:$6$BOG7NyE3$OjDXpcFrU8TZ65f8E4UlS1/JYSVJJxvebJZ/WlMNUh3Koac9OTBdGjcV8TZkoyKJ8M0q7BwvO3ITMPHkf..HW/:15897:0:99999:7:::
+georgiev.mbg:$6$A4h92SS3$OFZgNTo6ydIHGvrmankUh0Jo6jQJhW.Mp8SqsxXUHpLxdIsVRavWcoWbJicciaHFFExOzFxYTBrz4hWus5V7n/:15897:0:99999:7:::
+plam40:$6$QFfNLTQJ$TK6w2qPHYGLp7c8o0WkeOKn5T.Pa7zaHAF23TRbg2r2uzp6ZG5sfJig00akeaUjHs3B5nJJEo/qXFPqXnjdy7.:15897:0:99999:7:::
+kmalamov:$6$Zkq3dM9V$R.../tYG78L2pN2FPY/G/LF716KCYEi6SvZHC0duzuj7mnUVIUsUl0Dj5YEWN/spFLEB84/vyjl5uYRMfZJwV1:15897:0:99999:7:::
+didi:$6$5Iyd1eSs$rNTtsCghIGW5xIqBVVRGuvRuIWQKgBAilvXPd2SbeGuELTMqBZSigTFj.v0gP.in5oBaj/VIAGVcUyXAj7sq./:15897:0:99999:7:::
+loopback0:$6$mUtxBa.r$LGFeefswsN5E2XQNK05RFqGFKkU.3Bl9QIsDaxl8sABELkFeDEOjP2sDKt9zpultQ1RQFbh9GvasWAKY2hETj/:15897:0:99999:7:::
+ico:$6$6d5Y4H03$sHgkwKynVAqtz7XN1W.4J3N.XbGAvp54TpYAUa7xBtXPXvflEFak2h9DdAfwThxyyyCthk.t6w/NCWa5odVvy/:15897:0:99999:7:::
+wizkid:$6$DQnloZHR$omMz3lZyN0Sqb6q9oMtI6O4kWe3D1m9xWwyPhF8iJhkF09pID.9Cw98WOB8QT0PAEcPBysYG1Lt1mqOrZnwam.:15897:0:99999:7:::
+metaxoff:$6$Goctoa2D$DjuzvuwT6dTkptSYX5b9AbdyqQ2XTwG0ejY9rFAUrRwIn3Hohp5icRt9LTaQgs8Hf9/XfPa/YfdFwhCbKLq1f1:15897:0:99999:7:::
+VLD62:$6$j5WDktrm$8hbF8.08wveiqMTg7LhVEoN2ZnX8/9gwPa4nEVC.AsnNDoDbAp/62.sufEgUCUFZa7Q3TomKxRM8BwjPRnHl7.:15897:0:99999:7:::
+nymus:$6$L6spoBbU$srJGPL47sjNC8NmlmvNGBQw9XDcE/RHVD1R0I/VrAlTFfi96HnwJeBA6CJD9UdC8rz2AYF1skChooKkPZsraG/:15897:0:99999:7:::
+topalovs:$6$v7cye99k$ZjV/breOK.jUzfK95I1eXgaz/Wfmd97yiNXJfmxUBzoKiuPwpRKbwgpgtDWN8WaGSz48J/s44N5gQPRkuQo6z.:15897:0:99999:7:::
+dnk:$6$c3tiXn23$qMlWEGt1itN3DB3eP2Ns4tFA70DHBZNqFRPgpOX2LNLEviKllXrkMeJivbm6SsEP5YWGZ7wtNTJokAoKMjA/S.:15897:0:99999:7:::
+ronnie:!!:15897:0:99999:7:::
+fityla:$6$UCmG5dLd$qMRKgfGsq4XsIzekb1Srk17yGxu109LPRu9l.lFmmKzGepg5OhWSji78SE6UluxC0vtXGqQiQ4HNN0yQ.lLiO.:15897:0:99999:7:::
+poly:$6$jfqFgsNx$lLRtZUZK465KVJAImeoXrvF3dnVkGwCpsj5uTKVfy01ThWUyYnKh3juYMXWMiSsSNxUOTH4vm4Tp7rS7qv/lP0:15897:0:99999:7:::
+[root@grizzly ~]# head /etc/shadow
+root:$6$EggjWXMR$jsxSGEdFpgnfnx8XjEJp8cRL6DonL4pzS1NtromMORzsz85uhtqKlv52GAiKAvXBuJh93GX4lhTgKIb82POo70:15887:0:99999:7:::
+bin:*:15628:0:99999:7:::
+daemon:*:15628:0:99999:7:::
+adm:*:15628:0:99999:7:::
+lp:*:15628:0:99999:7:::
+sync:*:15628:0:99999:7:::
+shutdown:*:15628:0:99999:7:::
+halt:*:15628:0:99999:7:::
+mail:*:15628:0:99999:7:::
+uucp:*:15628:0:99999:7:::
+[root@grizzly ~]# 
+[root@grizzly ~]# 
+[root@grizzly ~]# 
+[root@grizzly ~]# 
+[root@grizzly ~]# 
+[root@grizzly ~]# head /etc/shadow
+root:$6$EggjWXMR$jsxSGEdFpgnfnx8XjEJp8cRL6DonL4pzS1NtromMORzsz85uhtqKlv52GAiKAvXBuJh93GX4lhTgKIb82POo70:15887:0:99999:7:::
+bin:*:15628:0:99999:7:::
+daemon:*:15628:0:99999:7:::
+adm:*:15628:0:99999:7:::
+lp:*:15628:0:99999:7:::
+sync:*:15628:0:99999:7:::
+shutdown:*:15628:0:99999:7:::
+halt:*:15628:0:99999:7:::
+mail:*:15628:0:99999:7:::
+uucp:*:15628:0:99999:7:::
+[root@grizzly ~]# cat /etc/shadow
+root:$6$EggjWXMR$jsxSGEdFpgnfnx8XjEJp8cRL6DonL4pzS1NtromMORzsz85uhtqKlv52GAiKAvXBuJh93GX4lhTgKIb82POo70:15887:0:99999:7:::
+bin:*:15628:0:99999:7:::
+daemon:*:15628:0:99999:7:::
+adm:*:15628:0:99999:7:::
+lp:*:15628:0:99999:7:::
+sync:*:15628:0:99999:7:::
+shutdown:*:15628:0:99999:7:::
+halt:*:15628:0:99999:7:::
+mail:*:15628:0:99999:7:::
+uucp:*:15628:0:99999:7:::
+operator:*:15628:0:99999:7:::
+games:*:15628:0:99999:7:::
+gopher:*:15628:0:99999:7:::
+ftp:*:15628:0:99999:7:::
+nobody:*:15628:0:99999:7:::
+vcsa:!!:15887::::::
+saslauth:!!:15887::::::
+postfix:!!:15887::::::
+sshd:!!:15887::::::
+tcpdump:!!:15887::::::
+hackman:$6$iCX83b5K$GW8ZXwMm.v6iynksdwT.YcF7.5x.nIMX2OzF.dwJkQY3gGYyNBAkc42xW5pX1dblO.xsZPLvBm0sJ7ggJke7m/:15887:0:99999:7:::
+course:$6$UGbBPexB$xHlwGCJi/wYCSmR95SjIjAt6VrUS6BurSfzGssFv7ZPUFMmb9P0STyzfESKXCPcCHJqeAGtWoyfepI7txvIMt0:15887:0:99999:7:::
+iordan93:!!:15887:0:99999:7:::
+yordandar:$6$BEwk4O2U$w8flsV5Xa0Z7I7gNLltqe/ioQI2idpJpxk1be.I8o7QVUWuLt85LBYDkkcAYtcayzC32WkHL9J0/YYLvmYcPR/:15887:0:99999:7:::
+stamopetkov:$6$g6AO2bwH$/74G8j8oMHhjSZBT/fsTVkszp3AJja/etai7fYpjeH2z10AOmtkQi7fAoI.HEKcQJgbkcwhPvBiASgMwfvdxR1:15887:0:99999:7:::
+h.mohedin:$6$gQlAhzG6$j1YsLPTwkL1lceIE33cVO69WasYHK6LvmrCcr2Urbs4uu45Bi1cJelNojOzv5Rvi1/bUV/lHeuKCstDXZv.qw/:15888:0:99999:7:::
+user1:$6$QELLGRx9$3kvjHDwm8Q6pgcIzLbBBon8tHiiyb324Ck0fTGTjvEPn/RVPaEWDXZGvZOllNAI14WsEUYqtgyLafYDdAUT1E0:15888:0:99999:7:::
+lamqta:$6$Zi/QD0yZ$.jxnX.MdbpinX32AqMtGqYRiZzA1QaVkbDkanoKsaPilPPIbbNJ6G8hXuTMJ5G/xHxtQVuAGKld7k81A2yb610:15888:0:99999:7:::
+statica:$6$MpWYxIxO$jKoPw/mECavzK6MFOprruWjWwFW2GOrRuGwFuU8Ob9Cx0mgqaltwzT4jG7GSuiKqbq7DVJwEjyaZiO/l1y3Oe0:15888:0:99999:7:::
+djordjo7:$6$UuoC22mg$ahO5La3rWRSFABYUX5TyBOoGXSIZhyaKIQlf/Fkp3WgwnhwLQPQA6FTPhlAdPKpIorEaMd7jDDUE8KcsQU5Ko1:15888:0:99999:7:::
+m4rt00:$6$uO/jxH2f$Uvhk4EROsw5w48RrOZW6WashUYI8FTsA2hV41vPeFbw9s9UdraSUBE9/SBZCXf4FYOq2AI9Y5jlFL9YfXdEgY.:15888:0:99999:7:::
+pesho:$6$l8JRFP5i$q7bMMlUBXeTsaWh.J/RR6F/F/Ol2Ut5WCQEhudDBBwZ0tXvIdgFMV1dcN6S90Yd230lsOc8tBa1rPCN33jxTu.:15888:0:99999:7:::
+samodiva:$6$1rqhmdJo$iVcySOhzfuZzutHKS3X3bf7zYNHsSjJuBrrtocbcFnFEz5ILBqLV0e0AsGiC/QCiFD8SjUuP/pbi32Uq5q7q91:15888:0:99999:7:::
+krasin:$6$E/WZkHR1$B7PFmIVjscyXGkkMsRysKzdYGvDwfNuYcdnhieFXBfjIB0SPbKi5BiXNjsB67UFM3vocxSD9usVWsE5r/JTAe0:15888:0:99999:7:::
+svetlio:$6$sKMPt99w$9pUAB2LAEht8huKIWgmMS/ZkqADy4.u/5H8I8DSDw/R3FxEsS/KtQp8WWeRkGdQukL/zjlbF6MVNXtJ8UMliC.:15888:0:99999:7:::
+suni:$6$okgW6qKz$5P383647Z7w9fj./2tp9X1hOzi.0pFTNzXRMXV5/1Ro5/8GJLsq9SQ9g3tOWJe0AbnGmXFhO6JkwfCDbHv3Ua1:15888:0:99999:7:::
+jeffrey:$6$b2W8BnBo$UG1RR0tpOAd1H3hkK/EAaq15sEmGC2yoEzecbxznxNuV.0LxXkbuTvaeu.UWOOCMtZfh/gAO3pwuDEHOE70iL1:15888:0:99999:7:::
+yulimoto:$6$Uu/v0PFB$8ygvRqx0seEyaj3K7NBMMK89xmc3o4OyCB7nNQTDkySCir6/hUCSeyREWy1aJIJHN5rdvN3EltMUFQsPUipND0:15888:0:99999:7:::
+marianab:$6$aG8Dwe4S$/2WqhC36UGOW3Sz3JEFw5YAebOhrjrcM.Bc4y.1TQ2HyjCgc6tLK3qewqryTAbZqW5jt2UYXi2v3pBL2JqbXV0:15888:0:99999:7:::
+stoyanov:$6$hcRsE5e6$FQGUB/b6Oszr.2FMQDDnbP.GqXDx1.f94TTvEXHnDn4oUalB5XBW2yWquKtVOAtYCF2cfVNeugyWnO4QDXjJj.:15888:0:99999:7:::
+Slavov:$6$BjU78Ol3$ZeVqBRidU8LH09QI0xExa/HB1wHxojxZw695WdGGbVmfyd1ZjNwG.MWrWjoX73xsfFFmVXEwOlXIbNf9ocX1L.:15888:0:99999:7:::
+vlado:$6$eDIqrOJF$Q7kTh1wpkAJLNCdh/sRC8yh7dw6piPSkkWFVt3SEYNavLNdrYVJYAtgqF5ikh5PwoB5Ez4ar5dteKwyr5YPtJ0:15888:0:99999:7:::
+angie:$6$MaQklb09$5V8luIuZXvTE8tbs48hN.xgtyB0SlULKm1MrPintKTFVNmCsc5mklc2F1jkqL4ocp8IgKW0KL7Xb3y5g/3mLF0:15888:0:99999:7:::
+dencho:$6$4Y3O1qPc$JBukW5GIeMY117PWtUJ7K2CHsGgEAywriqzAqBtnVUO9HigrUJY5BDqywKUUQroOeN/6SL7e0VNFJZiFhxSUi.:15888:0:99999:7:::
+speedmaister:$6$9L62oOjl$Hb47DAu7kfpaI99Z0fngl9h3tysl2.SrHvMvc8WWmzalNASeRzD.z5TwcECh8QVrDc9DK0rPp2X46RK6E3Dr51:15888:0:99999:7:::
+solarwind:$6$dN./dtjI$5AVIbaCip4szTHcine2cwEqc93kqzzT4XlR10trgCxUfMxWJoUffU4q7hN.wgFXFk8Q9B.wviz5oQjBfQteMh.:15888:0:99999:7:::
+fairytale:$6$fF7l7LOu$qVv6CqxyulY6jrUdBx1JA3klzhevFhgRDaOtry6FyDcU12SFRQD9e7/hV3D7O83mAki3xOOnl//hFq4RKF.Ef/:15888:0:99999:7:::
+yavor-atov:$6$lLv9Ho/C$WMxIhfZwSVdyHvtCfJZb53KWphRCtmKI9/fX0/ae8IvVVi0.mag0eZ3IYhPJsOMd4gpmTl8qWxYo2DZAFcN9H0:15888:0:99999:7:::
+marko:$6$ubT/LaRd$.zrnEaluvxh0IR71G0uLrsccgCjZJtwRlb.uFu8K/QG0uSAiQp.rpYUAlNK9n1kmfIxAlyjFksWaiavV2zNxM1:15888:0:99999:7:::
+admin:$6$Vb9ocPNl$g6uKLEGvgnqe/VcNHQGFvQTzYT2xHelNfIULHPuTy36xnfmkE4RvXeSKTh8HC31.OfzkmnbQJzcpqqnC3Xt5/1:15888:0:99999:7:::
+gyankov:$6$ELqzY05W$mZ2wwbLRBa4v9SP6Seh.dst34CK47lpqVvndnieRDxajR73rVgy1FNwGXhbs8pDufIqQp7L6AL8Z8PQLJyMO20:15888:0:99999:7:::
+butchbs:$6$Q49L9zqd$wMHrY0qszwgyF3nkFsy8PkvZ3rGAsmxtiYHC08uhMzdvyu3qSuDyGqeSpeYFwXgKGPD8DgJ79D3tDxtPqGGcV/:15888:0:99999:7:::
+Ivan72:$6$8Gi4oytU$pailUpba9mCIHrDQzuCgrctYPTRehurzhaKUju3ollAdnflpzBASgOWjc8HAuQTgLA2Jmym6he/Y0I8BN4q.K.:15888:0:99999:7:::
+itsiporov:$6$P3NU90.S$lncgqgrOB7y1FJj6vChEM55SZpuTIxC9XzpM9tVhpOY3L.fj8M7VQtma9NVP/CbHeKQWwdOukWX6JWB19b20p.:15888:0:99999:7:::
+uzunov:$6$olxryQZy$qpDm8UPHA7a9OJ.BcaqYFGTYKT6y2riRw/aeoyGDMbrJ1qOcJ6AlWRXgj0IJVnPetiA/YcPnIKjnLUKVXRcae0:15888:0:99999:7:::
+s.metodiev:$6$LwWnnTy/$ig.7n/SVb1V7vtnsxO0E4vnBZRCQRHyumRVR5iPuXGow33I4PPnvSu0FDZd3cqE8vrwkW840WFv0sbysphLzY1:15888:0:99999:7:::
+ilianmril:$6$DhF2R.xG$OcfDDDMucC61EGg/XdvBQxqidxRV52.vyyf5m/0eS5wNwtbUVLqwC2DDyvn.SqzsjUju72kquUjU3vAq6MofN1:15888:0:99999:7:::
+intelbg:$6$AdAXeKMg$q8ccg0oSveUiF3c5F6Y9sIN22KOz0450SuiZRBfm/ZdoY9285Sqze7wmhsExCwU7jUu5oksfRkIMqHze9mN1d0:15888:0:99999:7:::
+Nevenka:$6$Io59iFGY$dlBQ8/5IUCB6l.GMU3qd0r/vTZUzb55fObF76RMaOR.Zs2XXRXPeePH3ulnYo7atwNGtNV7w71WosZ.EbIZ6M1:15888:0:99999:7:::
+blagovestie1:!!:15888:0:99999:7:::
+blagovestie:!!:15888:0:99999:7:::
+lyubenblagoev:$6$/Fae8bnw$JlsZrzulZQD06nwddnH2PwFni0xGommeT5ulC5HHBuZkvoZGbezaB0EEA.eyQtM3/Uyb/ESJ3n4/3qJ5ICPUG0:15888:0:99999:7:::
+milen:$6$vzVEaG91$Il89WVhCmlyZfdYayZnF87EqXYi3lg4rAfjeQqscTcWRABJ0EZuxxiba/i/uQtodVm1K4RbcCEYMHKIeZ9Dk71:15888:0:99999:7:::
+valcho:$6$U89vRplm$icbGSaezuESbOBdli06Q9Pa/rzo0Pn985wRd6EWRQGq0ha0KUtgSLVL7e7g6I7Ctt5KgVdz2E40JzJnuWrYqf/:15888:0:99999:7:::
+penkovalchev:$6$5nyWJ20t$Z5iBePf/bybX5rDL9qd6mXAIUM.O/yLRIFw2DUwOyqUaxvgk.LNLqlSQsUG9CXYhpViojVRDFg33jYl1LAW9d1:15888:0:99999:7:::
+nadska:$6$qEPbfQNR$cYwm0lG/5fhV6zojXA8CDI2BafjeqMaVGdwWTkxfqx6yg87qnEuwgOIzm6APQoo1ayK2zG01sokF2WRK4QTn8.:15888:0:99999:7:::
+RosenN:$6$3MWcdH9Q$TITSx7b.LeohyBAKQoTRAvJ71jdjC.87ETO7XEfMdgD0lTlEtp1VwgFoHzHt9FAGnBnXXCldaEsKyzstj.7kG0:15888:0:99999:7:::
+ze3rax:$6$KYxawpCB$A5JkPSs8GGZhZIjeF/g7lXQ/OEIbxi/ReyV2iB3yCxZFrCfteHHlakWI.fBjhXWrEZtRAY8twnzx1Sz6aCkQy1:15888:0:99999:7:::
+ipconfigv:$6$vYxALbB4$JGDAncpFOJ9O.XcUUJtw7.WU8LosfWof8u2CKykOEIg4J70sfl6EkSWj7phuN2NbUwM5ZrBPkOcszA00Tflcl/:15888:0:99999:7:::
+ipconfig:$6$efxVQOgi$uv/goCffd0tVDDdmUClU70pqrJS.4KpWel7YkGM0Zhr8MPtz05WwJrX.nL5e9l0nuv42IepLYvHqswPh9l5nK0:15888:0:99999:7:::
+edrenchev:$6$djr6eaQa$VGDTjgdqadbuLTkm0vbVfcC.yay54l/4a758mAHB8jVfpbqxlA4gI6/e1sWhD4hpYbmAWOjItV8mHYQp2p4b30:15888:0:99999:7:::
+compiler:$6$foDseS5l$yq4B/uJONiNAkDFlE8IBYDe7dUWqzOAofkYepM7P9T8bC11iUOU/oLMIgEMAutCcRAio0d7CivJsFtM0SsYiw1:15888:0:99999:7:::
+gavril:$6$Zcc8hcTN$A88Fv2CM9IYpqgFJr9UOQVrzuYogEK4962FpOK7XmEYs8O5zhB43q1jFqiKvZjyEz12nEUuK/T/o1q4kpzFVz/:15888:0:99999:7:::
+gabo:$6$peHtZYVV$9aIW0LvcBc4Lzr6IYCXAgKQT8KlR9CKKq95VVCB1gQr4AedtK8mCu0i84aXT.IT01frIdnLEsin2EIXkMj6G.0:15888:0:99999:7:::
+ivzb:$6$ZDbU0PPG$cRL63ii9f6W45CFMVOxzL/mDI5s2ferSWhIwjm7zhBY8lKLiNrybygK3XBfUUyncomtT8YdbDwfKItCQixd2E1:15888:0:99999:7:::
+krasiga:$6$Fob0B52z$kKBE6UiXYMQBikIFmVkk.vVpLoUxXhon298iVnDMIkSCc5iHs/VirEHkaveotWfTPCTQ/tyfyjjcHZcDDJmqZ/:15888:0:99999:7:::
+pinkie_Pie:$6$zU9CcS7c$MRn.qjUHYo2hZd9lzQnXZxuyx1Zxxtsq5FbQWldNHb39IWwH8sqmrnQA6KNMYTLt65RYQrOFaNKcbn5Yw1Esm1:15888:0:99999:7:::
+greynwhite:$6$LzqdzI53$G0i.hmhhIUR/B9zDBqU2o94t3zlJQxBXxjJBjyvLkC44yjeNDuJKGW4o9jPRtq42G/sJhzWdHRAHiceQd0L.J/:15888:0:99999:7:::
+artur:$6$yu1kH/1V$/ATjR5i5YPTPEyNXCtJcvQ.THFCDDg0kNHdh./hHJHg8vQ1/j.2VRIZDhwBBCJWC/XaUSkQGQ5/vE91GnC9em1:15888:0:99999:7:::
+tbelev:$6$ynRBHVcS$gRoeH.kOTKCSzNfCzwl/8gN7mwZCuhRB0eEwGwxIkn0uXHrHMPrsaBUt5scUSFgUYoZmALnlHiPBZ1uyPPfv4/:15888:0:99999:7:::
+midnight:$6$ik8wseHJ$SSo9.lKOZ/U7428jPwAFh1KzYi6FUZkxlWt8CXJJLmIqQDjiY.9PZJiOtCc3Psdo1VV1mSWpcYiqtXg82RtIf/:15888:0:99999:7:::
+tsvetan.georgiev:$6$suCHqCuh$HIKY/A9fD/It0pzmGX/plPrjs/LMwCzKYmjd6AgDhPdpF3awbjL2cKPy.z5Wd3jDESYiA2DEOtd3OT6M1sZ4.1:15888:0:99999:7:::
+shosho:$6$2Ys5s4vP$GDOCafOB/1rztf2SpdKb12IyTlceUG7d7IMnvRvBx0JP.NO2GzZk27daLV7i1tmu5sgWkBZ3pyXgCEm/oUMWK/:15888:0:99999:7:::
+topalov:$6$/U9ZCdI2$5fnF7Eq09qpKAFLJYf/DNugIfqjjBu8Wct3tQx/J2DYkXj2LlkZr20bi/ZbQJhhPqYcTT7lBiJl7JwMmu01.y/:15888:0:99999:7:::
+komador:$6$OAJnmJFt$a1dn2JaPC9ExJ7Hyv3QnKMusvt7M18GjlMNdTvStb5u.jR4pmQHUFJR2sQh7zqe6IZitn0P9PVe9ZYEeygrJ6/:15888:0:99999:7:::
+zhivko:$6$vki0LV1g$baNjlyjmdsEBhV.9Yw5TAPe49ncUSynQkup85oynrIKy.iUHhFOWbNV68eNnt..KYqxvT4dcl8qJ880AUFNDX.:15888:0:99999:7:::
+spilev:$6$zvVas6dn$E5poWsycvpggr8TfgQhB2xTYBgRSaR9.gSHBhhx2p.3XEXUgwwUL6/lIj9p9ZcQ5nUQYOPuHGaiO8BbJbIRhl0:15888:0:99999:7:::
+dyrgel:$6$Y1tfQMrG$fvV7BVKZxusTHeIj3YH1xP8vMZ.cj.LxgB2g4Hsu1rVq7Ztm6yAmlP.mpRglUfebEHTGnBZ3dJFA5We6aRdBe1:15888:0:99999:7:::
+episparh:$6$uMN9BGiq$6NzhhiFNY0fopkJXZbDaCNwY4vTb.tVLpsaRFtDB3lxQsceiB4cwEwTiUhruIhoRZqCw0sK2VWF4nOaKLH8/v/:15888:0:99999:7:::
+phalaaxx:$6$lQ9MT3V/$XPs69no6azkRaeDz2GJ73l33UHtRQaLnUj4TF/nqaBcZ5Lo2LCSqIUDR5u12NjqFQ.NEtXTNvY2f01cUUAUza0:15888:0:99999:7:::
+explorerv:$6$aA4fo1tM$lCYmiczTd8qN2ydP6YR/Z5v503OjSYrojT1kq4mICd2eo.1tqwiq610fXcekrhfP1mVUuijJwveRQkl6UhKza1:15888:0:99999:7:::
+dimp:$6$rnJvtcoW$2gkD1wx4xBrImFbVWTfx1z4k93Zidfkot2n/qyeFdJf4KrDsXt.G4WEvVYuxt8pxiSXC3rpLKaY4yUZl5kxnH/:15888:0:99999:7:::
+petko9001:$6$lxF9I7Kz$K1VLs3Y2ga2c.mh8NaTCWWMa4DWko61HZghvr0if3rlcTAR7dqlhbx5jnsxKHVesmxuJ9Bk1OtrnruhYnFjaK.:15888:0:99999:7:::
+vladisr:$6$0Q9SjhvQ$FZs.hJ3ZYG6Y5aeg60TzSyWOPiIe21YIuUTEdFTwCfi0GuFDnSE63RxBzVqrKzTndAqQshD8kdIMsqAxjZ8Ej0:15888:0:99999:7:::
+teo:$6$IWc7Q/.j$ThT/1WRL6c6sKE.4izOj8dBL4vxXG48wtCypak/RUnoqW1vQtBwQRdfIBZpepY7xeCCS3y6VPCa6xkjzHnDP2/:15888:0:99999:7:::
+nasty:$6$yF5htPMV$cgERBPKwUgyNgp3Tewy29aLGgzcF3V0hmJFAbHPeSXYtWknCT9ZdaZj8YLkjZtogN6PTfKjmleeWwB8WMdLat.:15888:0:99999:7:::
+radtonev:$6$ke6k/N1a$bhpQtM.02t2d/QymW2b/TSdHzDqnj9NTfXqoCp52SYGJjyvEEmwTOO.qM24WdXCTJsyEF0TKQGWuj9I9Zs1hi.:15888:0:99999:7:::
+livanova:$6$zIIcGtiL$3nh93F0TNrBl8DDBvmFDF9TnvkTfw0.krKzoXiJqwsRKxJJswr9llO5B.jwqJkaWR9e7J8TCHRLbGfqDkJH4r.:15888:0:99999:7:::
+konsa:$6$WJpNxNeN$rmCOWW3wFiVWAV9wAJ8yuIzEiuRRVF9l44hR6.su5KfT3EJaOhjGGYgnVRUEJRfx9SpZ2fWF6TubYE56M962.1:15888:0:99999:7:::
+asya:$6$tqjWehUH$Ne7oQBfaEnIkz.bVUBOSO6.YZB4ZxXH9TYmJkIhW1qp1pjsojbTKDukAPVtQgmYSyzoLUEO.Lty6/lzqrMDmj0:15888:0:99999:7:::
+adrum:$6$pIjl14T8$F/1SSDE7PjvW7qJmgMwXh48MvyfarpkdPDj9FYgVwy7r2tl9.ZdW28w5tRhDqhcrbyBbx77X3L6eZBt2NmjIS0:15888:0:99999:7:::
+leona:$6$e534Gwgf$yhhh8Av0EoWr2bWHncrS1UV5l53um6akkIqg5LdiTDJCAwVPiYmksV28QNa4Ym.g3zPLxNWIzdTucM5t9PysS.:15888:0:99999:7:::
+bgotov:$6$8laiZ8ak$1ktiPiHmurW.uNoWcvPx61WKZaSu3vGATzT8aRGvOYu50CC/XDDk.HOLV.RVqwKQqge67813yJb6WxNQrrd3l.:15888:0:99999:7:::
+pgachev:$6$MQ8T967I$hLCi/UW.STqwnqadlRh9HHfdpCE1K/dwcEXB8z3AOg/6EmQYejnvAHjX3bYuajWOExlvxLDR9R4Fu/Y5xMd5h1:15888:0:99999:7:::
+informer:$6$xA1XKyUR$ZzamaPtOZQKgl6sa1YYfKEezHkddOeFCMd/Ve1rHFW8dwE0j4O9Gq.yQM3Sa.KhWV09uQE6WhureDxujR7d841:15888:0:99999:7:::
+gogo74:$6$ztMvZfop$/Sq7/O.RPko9Q4hIXxtVlTeI9pEZWpWHZ716FjQ.VKC0TaDUyDVyPR2xfiCI36d9eiAH.8/MLzQPyDz4qwkkD/:15888:0:99999:7:::
+wiseman:$6$.158Dtw4$4sTY14FKz5gHghxEyFlZVfIITd87Y2nbfA67KkTxbU5N8uwA2aGyPKN2.ZkhB0RGRIqQ6msFawW/DX2g6HyFn0:15888:0:99999:7:::
+GiK986:$6$HIvD1C7R$8ytPGDcCgoh7h0rLlWFkCZZ7sw.UhMeLLT81x81JCIlnmJ2QufoWpmGIKEy2Po4q5SI5D9TNENb4Fi9AID17R.:15888:0:99999:7:::
+lupo:$6$0Fr3s3E3$drdzZNdIPztaFsGoab2VHOITOkGGX7TLCw7e59dOdva74h3/10YLnX1EjM8DL5IQuuT83qS18LKTksZx4Itqu0:15888:0:99999:7:::
+lusmil:$6$zMiRx1UG$e1/Fv.DEbKb3RQhIkl5n/RCgD0hwWFdSXuueplmMrsTiKxbK6m6GXeAAY0auol4kucMBQBzDJTTElpz3klmHm0:15888:0:99999:7:::
+boyan_BM:!!:15888:0:99999:7:::
+exit:!!:15888:0:99999:7:::
+Martotko:$6$y6Q1tP9f$fDRQ5U2JBH4004BxIT5q4jJTMS2UwhYaTBUyHuiS8U5O00zDSzbBguqYyOn/8/pP/XyJktpoHi7VSZikoVlOP1:15888:0:99999:7:::
+BM_boyan:$6$hEjN3eYZ$X9wqqGJIT85oggaoOF4T44dDU5C609yHlSYvKWAebhrAlauximSVYGROBWOCmeB7TOa5.CRjLCAOWt2M6yFcb1:15888:0:99999:7:::
+martotko1:$6$QGBeTf2T$Bb1nbqvW5K8pZoogZREuI1x2lDos.BNkvEwYuzfzc/n0JDU4UpHeN27J4q4TY7tkNlwU8kU/WbrBt5AK70bjW.:15888:0:99999:7:::
+Max:$6$IRyl5ZJF$LnDHIXgWk6bFdmAPdNTbdB0n4IxceEgN2E8ktXKyLlHYMW.svpKLW/9sOeyLM.U/lkALgtrYMKH.Ff6hA52Ib.:15888:0:99999:7:::
+todor87:$6$fZFZNvCA$B85TQ14uBbycTsQ/f7M1skgFwrjuqvF0FdMlG.Q8msC9zAOyteyafjujdyUNxxWIsbq70svAZEPR25lbOpTNA.:15889:0:99999:7:::
+gt:$6$lmpCkG3K$JNeOqNRZuWHVPDb2rLTI1JE.WcXdwxUPQcpYXD2ijT54KeuSViviO.FtEdOZs1qVsDGCGUeH.Rg1J5CK3M7I4.:15889:0:99999:7:::
+kuncavia:$6$oXVPidKP$gwlMO2HmkIILPLtyFIMTrlep5CJGJmg7MH7V8.a4ANvu10O5rl8..oRv.fOIW4JT1NfG.M.NLfrkNClxhtI/9.:15889:0:99999:7:::
+ivanmar:$6$myXJKcT2$e4Nw2ccZizlutfq99tO6ZG1tsW1ZnxPMjqESBT8IpJANn6ZNHqIO/8sjid0UDi/Xg2A6eRbqswmC4yvXgJJDR/:15889:0:99999:7:::
+shmirgel:$6$OirJ0KOK$sa2BXSBOZSBnpWyzJl6NQAa16euNeqWRMjlaSL9uvEvqTyAs65RMxBmd2rvl.EflhLkcLMNpNrftH/yZOfYY91:15889:0:99999:7:::
+magicwitch:!!:15889:0:99999:7:::
+rossi87:$6$bHaleFgp$RfUwIQ8DkpvqWD7I6CxmHe.CloK3Lqu23hJ6Vm7yJmTZE6TFlqgey/TSFFkYON35B7zf3E0fIsf3wm6wHvADx/:15889:0:99999:7:::
+fluffyelke:$6$lsUL70.S$UQnFHtcUWVe6axxTMAb3PCeoOLqqOakDbVtlSiknn4pSCksYMccZMk6iS0Dkum5Z5CqTV10DWG/QMs7fYHeRV0:15889:0:99999:7:::
+ncuxoto:$6$d0ezkEOP$UoDj7grFr5WVuTNjwndHN6Gje.CtmPnKAKexRH/NNfrCYCahBn7aWj47wNr8oAtH2iymonsZSTP53LGheuY5d.:15889:0:99999:7:::
+milev:$6$T3805j4q$2nng1YDZ1W9feZmkiyrGcFFdFhFwB92h.LWe1zA5RNF/kdI/Gf33hXfjXQw9E1.pFfSp052/eHX2B4Z.HPXNb/:15889:0:99999:7:::
+georgidimov:$6$cpJV2EpJ$XAy9ZkUXtUAMH8B6ZJXcnzg3trUwOMTx6pcO1tqH0Q45Hs9k2FlSmCOLAUlhw8zIsxr97avKeNinoL7pEITRY.:15889:0:99999:7:::
+nikiserdar:$6$sL/Yh37v$KILypU36kAFr62MXYCvuECiwChkGeP0/Mx7kvC5VRI2gMl.rFmkWXyc2gL8TG89hJIXt5O8QHyC8mlcdlzy2v1:15889:0:99999:7:::
+balflear:$6$65uqboR2$7s70v8iH/e9EJqhtotK4HeZaAwqffcL.1wZ7gwvjbgVquBLZFjzYtxJ7Y/7WtbloX3VV/sMXWJ2D4A.7Aw99L1:15889:0:99999:7:::
+kiril.ilarionov:$6$zv.eH/JT$sggrlAG7vxCQ1iOP7.1TebTdEMkjIyM.E5x3rornAS5QlUBeQg1voUHv7eZAV6EDjUEJ9HAKKry7nUNkcFIFB/:15889:0:99999:7:::
+anton_dutsov:$6$2YTIU2eg$uI4MFSC/qNZRyq4BLggaB1PoyUOAsN75rrwP3Xm7MA4Qq92uE08DnqUcVrW.9HnOBlONPxGZGCq76nyoduyW1.:15889:0:99999:7:::
+icevv:$6$6e7EnBLR$DQ16WM.nMRykuuT7G/5sSPD4K1yQeOOkwJ47K60W5pdKSohYjxvou/4I6STaMACuQzk3JaXQy3INNpuYQCtKo/:15889:0:99999:7:::
+KacanuH:$6$Ab4mTGpt$K04ww6.Bg4LBejUlbBp/9aMYq16ow6PKfoR1fexAm/b3PyU3LbKaH3nPWnV1JxmmO3h9B6yoFBHZLixZgCWyL.:15889:0:99999:7:::
+guevara:$6$G7S8IKrb$5jGp1Cspw0xABr0UtlnAPugPqwgRR2cWkCoUHBFUyE4gIoumX1KTGlWmjKIG62sqA5Xp.I9RadSawB.UyC99J1:15889:0:99999:7:::
+xekc:$6$PTkHWOa5$hCEzPcpinK9YdZqCpJYZGcu3KB.QIjpEXxObAb/62iSl4TrRmB7lKpVEa2zSZVu8GvRWSK2WuzkxkO4.sTEbJ/:15889:0:99999:7:::
+FireBug:!!:15889:0:99999:7:::
+Niki:$6$P80AbTeI$vt2eTXawcTJh6dJ0unjilD.Nc/HbCyY7UQJtAKmK.mFtxtxxk2pDxW2M6tzshGSlRD.lihU1fv/fkgx/rEhKT.:15889:0:99999:7:::
+ivan.velichkov:$6$obCBOM8f$AoYf7Q2YG4cX2Gf2EayrdLf2Zf2ixJF3/oLTyPxInQ49GUR8JpxLBSZmPnheBA1wT5hgTSNXbmNkqn0Sw8vM6/:15889:0:99999:7:::
+yoan:$6$IAIIAqpa$DeYr01H/kzAErQqbGkQ6/9YMf9nxhvq6khOgB2tKc5UUXNq4.OCCXGVfbPRzK9tlQ6k8Nwx.vrSeMqoCWIpzX/:15889:0:99999:7:::
+nfh:$6$M.fmK.Ws$IgTmtPrKiYOczC1ZtWkhOiU1fbDnrmppAcGR1CzBHz9RFqcxOr8tF/BzQZ3ieyqIF8KxemZ5akD1kUEQglUww0:15889:0:99999:7:::
+xox:$6$eFIQ83cf$LjLWDQ/Ct9DlPJV1sZ39L7camFfHBGvF9QXvpY5YAZVYMl9kjTkVdEwHlqyMFRJVMb/igxwJfnAqlO.1Cem3s/:15889:0:99999:7:::
+stuBaliyski-smolyan:$6$.jZDT/rq$3vDUUHhmDBcXzh.B.9YlWLnS81iD21Lsji/OnXhGQ3tlO3MvGnO1g8VM5E2oWMLCjziMZbqxu16mXREI8BzTS0:15889:0:99999:7:::
+kyp:$6$5nvsSNj6$fb5Z9frtm5HB0KuQx44UXpKWhwlPA4QRRead36dDqvdnHmQAlAL8DaiiEejQ2TnvWH1t4quyBZFRCC94KPwlS.:15889:0:99999:7:::
+mmanov:$6$tMashpqV$Q201qSQGWqEI0LCJwjyhJ8nXbzqPiw8c6lOtBwgbGA0s9gDFx2JRLz/BxltawUCCaIegVZdRKOuFV3bbcBAKb/:15889:0:99999:7:::
+ovasilev:$6$meiuEbDw$SRO7IXQhiHJqnAP0qJYD4XZ6si3yVX6kHMgoLRFUA9YT.Be6fpgGxUG80zMgSFU6kwmrHmHCia6krHNPnpvnY0:15889:0:99999:7:::
+psotirov:$6$HJJ4aFc3$Y7x/myoctlyoDtXZ6EAPY40AuWHevj2A/e9cOQKYbRjKXYDvBISNpK0UdS9U4R1ImUkjC0lsxbU70Qv9FW0pH0:15889:0:99999:7:::
+alexn:$6$XYtfEkaE$eu3VWJOenEDdykoEsAprpuXij970TVhNTVZlhiteKF0TKkn9fEIvY4R5B7j3pyfjvNx1HPnL88vpkVCeyW89R.:15889:0:99999:7:::
+lengarski:$6$opgTGwBM$a2m5o4s8XPVuGEqiPHqjJmdYyiqjMofLC26A3hwMrAX7/b4pSTUs/EYsKz.QccxshRn0WEaD3bnauS0zCo2An0:15889:0:99999:7:::
+seder:$6$SET1VbfL$U/x2tow3JqnNIUKAiF3sTrjJ6zO2QJpbBne1Beg8FJ3UUr.lu38iKzOfe2lsewIKCFdoUnVGB7Ptf2YzbpQE81:15889:0:99999:7:::
+svenson:$6$fl5GzE0B$1GU4xVsEWwVfJOOvFENEDeLGaaNcIP8Pbz.RpWT2eDr8QmkjcrkFUBoEFcchTK5EY2FofPNRe/PStJd3RPCz81:15889:0:99999:7:::
+valioabc:$6$.Nu.3yZM$HOYjcyMPTLBMsSu47IOjWrVUf7mWM5nHJGOUp3u0wyC9ItsQPS3dhhBbEZILZmppnVQaVHvJM3qkGTYwbLTp50:15889:0:99999:7:::
+hanasd:$6$ufxMgOC4$0HSGSJZ3cO80HCbjz5mIrRCgdpgt32yrdDi9lU7V0W41.1i1Z74KLp.ogWSGYpfYGy.iWrlyeYH/eunsdhHzP.:15889:0:99999:7:::
+edyyy:$6$C8dyAKs8$ZYoi4J5aRXw8zwM9x95Q/BQRnQmG/Z.yxFQ6F/T5ZJ.cxklAiNwAwuTQU5ovLb9VqxsO4b0Bs3X06433w2ZKB.:15889:0:99999:7:::
+icoantonov:$6$eulK49ir$C6Kqg44yQT9Q6KmO0Ub3zCT9MBXnU.6xZLbgMmZ7fj5GG5Olqs1dnnjIwB7Xk5QImiGniK4RGNDWngpmE7JHS0:15889:0:99999:7:::
+miroslavTsakov:$6$5NOgUaEd$oYGr2xQqTlTnkS7TmZNzD5ls6yjPQrScKY.AzcCo8waB/GXb/Jg8atPCAa5C9ghv/Z0xBLZehxZ/4iWvY4ABy1:15889:0:99999:7:::
+pano:$6$1VZGtDjC$tq4ibFBQw.Nafrk3lb0zrA3dsYscOs8AbkMY0XXpe3D7hUUvjuM4SAAq8aUgGL4qNHcAkPurWVp1Lh9vrqMhq/:15889:0:99999:7:::
+mikel:$6$cLBElecs$Pglq380RGCxW7D5KpDV3jCAf.33hwfJTXid2p22Dg2KztOQJNy3O1lCaudga88drqYGJ13V2jYjQc4l.xuXR20:15889:0:99999:7:::
+vistef:$6$jFh.WRvy$hyV8WfiNKOxgGKIxWnI7c44WtMv6COmBg2PS6858obHBj6bvd9yT4R/1Dh3NZxBm.P1zcc18rwl2jcTcpqB1x0:15889:0:99999:7:::
+pokerman:$6$1CquCGji$1dTRGaDM1ZGm9NAi9GyzsZgj7AOFWWzP7PKU7XLVc3Jaq.Mceo/GmFvzPcqEVwvMZ9O1T2zFfXJZWnCs/3R1g1:15889:0:99999:7:::
+nzrusev:$6$z5CsLMqS$ttG/C66nZ1C2B2MRE8XbLDCLSVlFe4VjRjqYq6bUZI8Eg6oWaHrQElbP7Cs/dxppCwAV.P0WCjAebKD7aCtrP1:15889:0:99999:7:::
+spetrov:$6$jou270lU$EPTglClSRaRIDuj8aroa9Cf8kfW68PxDnOm7leCecxzIREIR7yAehHy5Dmx8FCU.ptv.Hmk3ZhlEXRMrh5Ju3.:15890:0:99999:7:::
+nimok:$6$ZbdH1vig$Vt0ASlbsQoLkvEflaInwkWm3aPyFG9glYqlDwkMHlaXw1iX8M6h8I8VctSxvuhgY1.aeO.g/3gv6b8T3.PtfG0:15890:0:99999:7:::
+metalbig:$6$ZXGI0AWd$c6.lNEzStMyiY2IXrAW6R58XHgqjyk/hDZikbzIQynM2s03VSEdw/bo54tTTE4amVfvNjlWHRD2uK8tmsm5lY0:15890:0:99999:7:::
+rizo:$6$Vuejektd$nXpZkyMy8AO6XUICCKR2Q5M7ikbm3JshT0tEkWNscjAdoxlk7Wx1jGYObOIIOZnIoFpE9uFlK9byDCmlCw6pr1:15890:0:99999:7:::
+niki:$6$p5eTFvuL$37.ZkWUNJYDRg.NF0HjiFi4M6oNi/w.d6e9Tjvmf72jR6eX.2zCJW2vwGvyMoCNHosPMvHXhcBoZtJ6IZidRT.:15890:0:99999:7:::
+movix:$6$QpHiVtCu$BXL.akH4hcgkBdw411UiPBpyAP3RhNTxH17vevTiVYUjFQfbYZzcYjo1X41MYcga2tRDSgFc5DjasR70IJg2T/:15890:0:99999:7:::
+d.georgiev.91:$6$3LZAPgYn$aay3fpRN3rQmvNlg5f/Bp9/Yt0pZmFsgNf3V6Q1Gygi3LcWRXVjSQ4LUvdajZXEWpX1Q0PsIeYF3eSQUdRWeG0:15890:0:99999:7:::
+ivan.kp:$6$P/sNyhHR$ZzNauDadjhmz5QCq7iDReTIxcP3.S5WsbtpaWWBZ7lGA5ExtT3htUF0ukQjmLMrT8N9LaVouXqb2ZqJ2gRt281:15890:0:99999:7:::
+mishev:$6$Quz.Hijv$RGfSxa0o23mKK1PmOX2nyPWeQMXmnqxmeQ1jDiGurkOCiRMud91s6eHxVKJxB9fup4h43M.iuQl3UQxSU.0NR0:15890:0:99999:7:::
+jack:$6$GNYAho6f$s9K1WEwqB5m2.iDYz9cHLsxhAw3gHs6Xuzs3y3sA46qmtZQtsI34Pp44RomIU9pR7foJhKNkrUc9MjT3X8oRP0:15890:0:99999:7:::
+vvyagov:$6$hawsMDQQ$xl9c14JwFNSwBVoBsmbU7.P002Gq5wlWUJcv87vDqXBRfT67CiXJ99HfEl03UFsHAjamRkKMUwu17o4fke3c/.:15890:0:99999:7:::
+htx:$6$qeY15dj3$4H.cnRiWHQOdejmQ7vXSCET2HDrE/4ZBFSZ.JxR7Yv4qEkJFg/UMRIlq3Fnqmh7tAC6w.mj5BfwrCZWJqRnC5/:15890:0:99999:7:::
+stephen:$6$.k4QG77P$E6D9iP3iQTjqnmSXnmWTE.17DwtmnKLXS43Z.8YEfwFqAnb/1JozBja8RrB7p0GHmwd0LwXve/050.nOydWIQ1:15890:0:99999:7:::
+shures:$6$AddW1yby$EneOuyGM9vRq52ylCmHqPITY7.VRVGQ7tIVvAoN.a1S.h7Zj8x7lj67EwFPBg.lfiZg2RqYQBQl.QIcCG1k05.:15890:0:99999:7:::
+fuzly:$6$USJWPxtM$Y4yl68vzISbSghfK0TjI8BeXXetRuBL.eaj1SGpsbZHUHpP/mwp7/0JoiBaNNxN1NyK7W6kYzw.R3hWoICuIi0:15890:0:99999:7:::
+iavoreo:$6$p5NKmD6.$HZ8Og1BgwJJrsobEJPfAw5RkGNkxbeRHzcDPYeHy.kyeQ/hXqnd38su/nxLmhYNFogqHxzU1ziqzS3z.4nbnG1:15890:0:99999:7:::
+vikipan:$6$4a5M94Mx$X8U0Meki1PIwxMOa2JsR9ZSjg8qZb5dq0MDYaNeW2dnH59hWMDJeahlrRi5nk.46/cy3Fnxm.zJO6SXfQkTev/:15890:0:99999:7:::
+strahil:$6$ltocO757$hwiFAhLKkst.mo26I/5ThD0L1xAGs8kUbMggZ3CQU633zJEmRRGI7dWdJX2xO91zzhxNaqCgwcJfXIPIqJUJi/:15890:0:99999:7:::
+dominionbg:$6$DmzAX6QM$eOia5IqDcyEExrD/a3ft6tbKSm9IS1CKTCxA5s1KGEER/LZH5V/BMXpUycK6YYM.94gcnifxPMuUFALwBOxH51:15890:0:99999:7:::
+boiko:$6$P6R3kbqg$WqPyaRQhABnlMf9TnuzibApNgb6bwlF/4kJy7JbG6lSFQkHkXrkud5VH2kZH2fsncVkPycW4Ymc/9VW1I/0vO.:15890:0:99999:7:::
+skolew:$6$dLFkx4vH$JC0AjNA7hHLyvQEXbydTdyHLfc.d0WfVTFO1pBsxYDx8AmDwNFReWuwoRvU9cH0WjyabXoVJ2TjDDsjCV243t1:15890:0:99999:7:::
+mihail_petrov:$6$JeYSBK4J$nY1tNkB3xlS1HDAJeC.hFOGJaPfd89DAnF4hJ/axdCLmnbPIRCtN6lkkjMK0/NszOLGDZk4x10LPsoNJ8NlNN.:15890:0:99999:7:::
+krassi.manev:$6$po2kns8n$vmgHTzqCq/k8dSuuLh8k/idQw/W32m/3WNlrjgMFMwvAve1qff35tt1zjCeTpy5wSGrn5sqXELiWrORip.CZE0:15890:0:99999:7:::
+Neti:!!:15890:0:99999:7:::
+vtopalov:$6$9KPbPWo2$Ei4gV6l.LfQDNlPP9oV45QUzn0B4f.Pl8/kY15u3AvhxN.eoy074bnZuWeXaBJmZpRIXJ3iAJLp02ci6v5ERo1:15890:0:99999:7:::
+Natali:$6$y56M41KX$SMkhghB/q77KWHWTmHUe2p9iqGS/dKys6h8sJ.DZ6U3z9EjFT7HG9OwkdHb8a8OQ1wqRB6cOODhatOC0L9iqa/:15890:0:99999:7:::
+markoni:$6$WkTm01Hb$ePKBe3YDr/OCxWFnF8D4Iii9ZJ2vItTqb1Qm3.EiuW.8t8fiPfRkiQyq1i5LCAulz2IvA2Y9SuOmCBt8mGRBn0:15890:0:99999:7:::
+svetlanka:$6$8R6EoMOY$9joqxF70./51Cis9Rzf99hkH/NzsqTK9cic3H37dnXcHI9wfC0eIc5yRpYa2O7P/trPp57uPVnJei/lSuaqk2/:15890:0:99999:7:::
+bboyanov:$6$sSC6ZuVm$NR05Rx9EXJuXYM5IjwjdrWlx3BRvWm5aIuAetunhVJh8zULCSq2AfERqIgcQ5ExK9DJSnUvcS3jpwIHC2DBQl.:15890:0:99999:7:::
+hristo:$6$FwtmP8CY$sEuRTFGPTAfRC4WveTi2Gio9QQrkhij7aNwI7nhbD3458LltS8fAWXpOWrZtweL8Ks4AlL9dM.5DyFL2Zd8Rx0:15890:0:99999:7:::
+bevalkov:$6$C8jOVNIP$eQTTAVHr3U6ll8Sq2Wb8OnRgRePkJ6A6hD8hEjxSHpSOAuRGgTm9RgfuJ/nf/Zlx1yukiEaPEovCW/OzYKkxM1:15890:0:99999:7:::
+nektar:$6$fAIdC3sf$XX/ulgDz16Wz0YjGlRL4RelEyNu9PajvaSsmfQrlyX09SanIiVH/u48Z58xw1pyt0uTqmLJui./Nd.0qdgymu.:15890:0:99999:7:::
+samvimes:$6$Zw0ogWgA$KnQjiEagNOJkTT7HW0nt0IDqPuW1Nv7yxlba6WS58wH2KfUSJqBDwTNBw.9IiJCtkc6tl8wir3HgusBjEQH.T.:15890:0:99999:7:::
+pe6o:$6$c1peZD9k$QSfkefD3uFc2O26OGyqMDIHUVjY0BP6kKsq.51F17m1Ing2z879gddyvhdajDd9OgMlMdYyJIsoMhe/Xi3Xt..:15890:0:99999:7:::
+a_boyanov:$6$oxpEJW8Y$8kDkb.WTZc4P5AGXjkTQWJPLBAL66AHd030RToTItIteIDh.MHvzRyARl2sGENOlQbefH2e5j8Uqv2NqrqZ7F1:15890:0:99999:7:::
+quasar:$6$PDzglWsu$SCv.MJuRJTc8QShpQMk/J/t/JSzatrbI1a24MJDIX0iBQdvwPOr.S0j31Cjjmxy7F4L3.56lc6LrXePmChSEA1:15890:0:99999:7:::
+hmaleev:$6$rn8D4dKB$zsbXl/otrfAIb.GpG96oMPKq3HcsxfQbWUk20IcnGO9lYFqMWrmsxwEaasUmDvGGiXGoIALDZCJYv6ZtZw/FG.:15890:0:99999:7:::
+Vali0:$6$MC37/nyP$1tyk0pHvI8jY9yyoKUNH04UzQR3vbGJ.ievU4Abj7sIU9S6tgRPbrZiDuJoqgbLOq.RLo9M5atBKSAEeUxtHg0:15890:0:99999:7:::
+st_ivan:$6$/1AHvXI9$oSp.cdCj/0ICinKfbNi/U3AVv4XBpdxR4Rj9doXNJpBspPly/lALrzXXbBdOSnD7HpOziwszg/.TBRNcxpd2c1:15890:0:99999:7:::
+skatatika:$6$f2UU7UDS$2TvbsFTuV8G6a.t0IiHjMP2og8S8YfV50FaR3fIY358xfyTcSCRJkilCXvFX0kHmeW2AIsVG4SXcGZEGVIUNd.:15890:0:99999:7:::
+si:$6$B8CftP79$f0zTvhgzewhJnDw/Q7vQ07SWeSCD9zLo4hbWHvCYeROktJfcRd.S81MN5o5XLLUIaJYdu.4x.5mmcg8T6pmhG1:15890:0:99999:7:::
+p.dobrinov:$6$WqiqbxDX$pVgH06MBPQV4AVCcKS/19YelQT3vuad8pg9ZIlzgurEeOs777oUwbOv6SfeNMTraBMMoa6LYj3HpiUHC5F0ab.:15890:0:99999:7:::
+strachev:$6$T1OoI19w$1Xke1Dp/G76w17kveeIrxEfERXuzxgOm.56lhLPDzBpVY7wtdo81gBnoPn6M0xTtUEKDbeC.qfP8ogqA4o8Pm.:15890:0:99999:7:::
+nikiman:$6$L3hKHhQY$TWROPXRBc5m6DEyOSarEPuRkbRPDKI0h2Pqik3wtcRfJwXY3f1Z87CoHNG8R1WNjy9i6ayDzSIKW7bKE2.lG2/:15890:0:99999:7:::
+ivaylo:$6$HAoW0iX8$0zi0Etq38RyrU7bCMcB4wFwTbJCXl1bBO12keHXtzB6FnhjbNhgl4SCA3T7NSy/LywjdOE0Ube9lKUaHRnEbP0:15890:0:99999:7:::
+te:$6$UcaOfe/O$mMBK7qF9tGvWiapnBH0fjG3Nnj2tXyF2ZEkATpKj2tPWnAqTn8TZZsLsMgnIg9ntT0z8u/9c0dyA/nPZ26XzL0:15890:0:99999:7:::
+loshlio:$6$QQdM0K2J$UzoJ4agArxmm4aTL1WH.xArCsIPWrsXk1iBvmzODRfFyLo0H34.LBlkJ2qhIoTF7gEtchvcANAPgP9E0cE6Pn0:15891:0:99999:7:::
+vorb:$6$4OWu3n1B$cYrhXR86bwQBpAk6kXSa0s4vCNKOHCv6jm.cOH0z7p9F5sFShC4mQw9qpl0bKuF11rlF.rLEX3jBFt8up3lso0:15891:0:99999:7:::
+Dex:$6$hEjlHjyV$lbbWs8WcdmX9b6vWgdxn7ki31nfIFl.fD4Bhw5X5WO8bhkfqd0/kI5FQ46pYLYyx2isbhRzC9qZ0M3ZmIGSd40:15891:0:99999:7:::
+insaneripper:$6$MZLWKWQL$B/Ppeqmrhkv8PFCqPG2Ung8MYQ.PhypZX.yFgNTuWXou5WiTluMDgmZDqOMoPWS4cB3AR7IbvCWn11Q0JVaqj0:15891:0:99999:7:::
+dandreev:!!:15891:0:99999:7:::
+dandreev1:$6$i.tnIJ8L$c1.r3OYyUuRDzLHtx2YCGBiftJgzh1dFtpKfkeFp9Xwf6PBWxQVaj.50nmmcUhY1Gvm70Ho5yqSRn3kuegP/r0:15891:0:99999:7:::
+veidar45:$6$3Hkzhzjw$qWoBMUBfJ1c929K9jzyKA2WRpaC5qaF.f9eKZUuLdT9drH8fzHe0FeEs2wGkg07J9nUAmtdvThM0wRARx/B7S.:15891:0:99999:7:::
+sg:$6$Z0n.NCEK$yKOb5JK9C53NipIFPHS/o0WCBnPVpHopiVJDuRjIf5eQIdBvUkgPHqiryyDplIo4LT8mxIOLPZjWCaG3N.FnL.:15891:0:99999:7:::
+BLShark:$6$vVUo1oqj$TRYNfVYA5j07gq1GsymZOSMkk5iwxpdJW.wXi5tOkVCbv4BvGfN3Yfd/D.ioN5zmNI5FIikg5HgXGsw02m2F6/:15891:0:99999:7:::
+grigoo:$6$NhQhCwbs$JFeMYQut9C.DMEwyohJ0aiWLDBEFNmG/i29NsXZx06gYFy9mMzecmdraa9NepXEKaj0T.Nt2WsHQg5lgphQie0:15891:0:99999:7:::
+mtzvetanov:$6$ncTzmj7a$V6OzwyQuVgLKPXwJbKh7WCgwix6.VlGwJgKKOLLTGPiZEl2o1W5EXpMQLWwmZ4rbz56kk3zqnG6BtxRa17gJ10:15891:0:99999:7:::
+elendro:$6$GCVGr3Hb$QP7Nenk4Iv2cJTp3hUMlHQ7IaXxtAgsMXILz.Up2pjI.oEUP6.awDY/cq8HgOe339qTI.6.o5lxtVHl66Bhnv0:15891:0:99999:7:::
+chervenkov:$6$xlAmMn1S$AAHQ5kmjqfSTkVV6osoMs1erLgpoZGwHKDFjOjrB6F3LSwjewoVgPY5orcDh2UpD1JNE9Z9iMUuSnOT5Gl6H91:15891:0:99999:7:::
+demislav:$6$wJ0GGUI/$wh27SrfUikzVXsqb6nYe3rASR2WK.iJDxBlMevlVJR032Q12TYf.hZ3Li8F3T8yKRjVehioXBctli51WIAD1K/:15891:0:99999:7:::
+gstoyanovv:!!:15891:0:99999:7:::
+gstoyanov:$6$cwYAG3ro$GU.p68/a3R.5fdxtF1g47wunt8NVlI8YYU6UIQpyXeNjGZdyCFuNLGfkhMGgac9S4p545Er9mUYPCRnX3PoGi0:15891:0:99999:7:::
+mage3:$6$dx7uBBTL$qsdlvfSPURS0anCQ8IN/AF0C8AOoNiY/PiCNkTw8fWy7oOzIEo7RnryzJAZU4W3lqsc/3Hc4Od20hmydfpdiB.:15891:0:99999:7:::
+dimphd:$6$WwvmFC4A$CliV9n/LS7xF.zmaS4oNJ38U6oeg2Is0KxFcFl19JjH4E63iEwSKenI3g9DbLUgAJn0Ciz1m3MCOmOTFeG5wX0:15891:0:99999:7:::
+nikolai.velkov1:$6$EmsY2IlU$gajmx7Z.MIeMCPFUZBa2hosEIgLwWfOSLzQ4MxvCl45g7IHzkIhJIBWTlfcUA3VnlKlvChoJsJWT4vE4UQ7Xe/:15891:0:99999:7:::
+stefito3:$6$4Bt9MWFb$AzmkHLs8Qp5aW43/5AOGngjjIFg3KAlfd9l0eaEsE/92edfxaQb0CBFirIn./FERNk0EMcD.XvM2Ro1.LSXE50:15891:0:99999:7:::
+Boris:$6$7eQmOz7w$2btyMOE5zb5sk11rkb74E9K4mieW357QblTVJr5wX.Ds4ixiIXozxTRzMXHOWHiORJTgTo5kNv8VpAVSjlLEq0:15891:0:99999:7:::
+plamer:$6$4LWu6Hr/$BJKZUTls948ozh2cruxnb6iV283zrltSZNokM12sfp6EcOPVWu91gkCIsSRajRt6jZ8us/qHUV4L7YhMbOtvN1:15891:0:99999:7:::
+ridik:$6$ZpMi.OOf$2b02EGXB.1GktMttugTQgdWWguhY6rWy1uaQfYvWJ/7cVBm0FtL7LcQQ5KuYFBY1iP0Yh61p7oT.uV0hOSCLV.:15891:0:99999:7:::
+pepone:$6$UdK5hb5k$Pjq8m.BVUfzbwSddbHddSM9alOOFuPFZX7Vub4Y3AwAa9Md8lZWrB49N7UvrJXXqmA1RkBTqHgwcNzH1uF1WR/:15891:0:99999:7:::
+kamen779:$6$ZCWWeO43$qz0BVtg/fPs7MxWoLHgGeMWwgkwvoRNhC.W5vQhy6h5Wja9MZAQ/5yQ.falEmQsH2l7.0MOmMQRVYKtC4s86w1:15891:0:99999:7:::
+tm206:$6$IbayGfTA$W/2eDAnO6Ay4Mel.7UvE5yvqLtw0ckCbC.2Z4XpIRTDQB1qZ5Mi0zFLHh9gJexuX3IWT4tl.RaED115fbf2/4/:15891:0:99999:7:::
+silverboy:$6$U5HaU16A$A3L.H87XC/2TF1oH69ZmpM0VLE6dkCkjgKKQ4oJPZzzA7kOqZ54SLnA82c5uLdaldNjLmYTFkUP6Ot/6tY8nc.:15891:0:99999:7:::
+val10:$6$2ZtjqC54$LuNrZ5GpAqP2uPhTooSNdXlcCqkcXuOkuaIL5AHUJ.oZNsr3/dsXhoZGxsWu1QoH9kN126bYOJ/sBGB9YTnsc.:15891:0:99999:7:::
+iren_y:$6$bABm8CqM$9sMoXlCfKA35R.l1rF.BApiLwXTjq.0st7Z/VroEl7o.l9cW8DzhSVGW7s3dWbs7IodJH0zTszWxUl.8IJQqY0:15892:0:99999:7:::
+munata:!!:15892:0:99999:7:::
+angeloff:$6$FpINoHYe$rnRO7lGYPKC4OfRQCHP17wXwOIKEmzMjdCNPTvIqta4v7lxzC1d4xM6qF9fIQCahyUFeJ5c/9YfzGMu8UmA3W0:15892:0:99999:7:::
+joroboss:!!:15892:0:99999:7:::
+veronika:$6$kv8ajOKE$JMTnLwQNH00yFJ2Ig2WLGzm4v1uu4KL.jSJf1KFBkXlO1kWNSrHX4q2W53YP3ntgyUkY1A..h/1ngUi8QRNku0:15892:0:99999:7:::
+ro:$6$sz4REkh7$vnaEjYVL6d1cencwna8WpZF2/cgnc.0Zm0zAXAZz6i/NNmcbEPAWlKhzgJNpnojG.2Sv03sGJZ0wjb8MG6rkx0:15892:0:99999:7:::
+kotsevk:$6$P1nZ7yNN$afDz7r3JYkMPgZMO/BxC0hY4tcEqrNh7zXH2i6Xa.rLkjY6AG4zR/FC8P0I8Ee.1y4V/mk9YBnJdauUrwDvP8/:15892:0:99999:7:::
+mikell:$6$IkbVamuX$AGsbnd8.imMpJXla7.V8Gnj4MOp6ZOo/.Yq.wiCWy3h7u3l2IrDPOWuLSy6ZM9UxgWcS4nHw3PTyeFbYXiPM1/:15892:0:99999:7:::
+Ivaka:$6$9HMdjIUP$4c0H84bTkzHrRf1IkcoMcEf6/htRC2ZG9ieIds.wW.DJdb4attlLbbu73qPMGleEStoeLDDGWeMi.Ovu0dAQ10:15892:0:99999:7:::
+aangov:$6$vjmbPX5D$KzK8eVi2IxKVg39bPTgT0OMArDL5ZfxaCQRYGnm4sh1tuHgTxeNytEehzwRcKJWFgaMy7A1nnKZRUnYcgP23d0:15893:0:99999:7:::
+vivoactive:$6$4x7pVM.S$g/7EuLGDJjRjI.crvzOT6jmYA.OGMf.qM413P4Jj5Y4XWoVhxBgnKUn8N1rxIfkauByxsG88CEU1fc9C/lOep1:15893:0:99999:7:::
+s0ny123:$6$LMb7Oqmp$cwNbPSmPvp1f7WzLBMaCzxdnMbSCT8VbKErfPwcAjA/eTGRyP4Ka3KeLFHEt1DJrUVyI3NBGAhWemyv2cAwsz.:15893:0:99999:7:::
+shosh:$6$ayZvkxAt$E7eMdg1TDIh0PJ2enOg93hUHVPEJD/G5OokZmLjMBqzH1NM5zL.JAPZAr0APOpR8z3eOU0V6wOVxIl6xowUHa/:15893:0:99999:7:::
+sendtneri:$6$xu1ZGERb$COCj5VEm2a0o1PuvQfcB/6AFXkppWnqexCER92u.bLsq7CcuVboYr8bSdymU4Rsb2cp.URTCpSFUgExH6xVpH.:15893:0:99999:7:::
+vidkid:$6$VDaxWYx1$kyTmF.2l4F4BQeegvJ21D.uiHA95Xq700.Z7oK8RdQbO100cB5JMt6y1drgoxbT3QpYUU3CR7RmjFK.IK8cbA.:15893:0:99999:7:::
+sagruob:$6$c5kEB2yO$iHPGXvDNl.p92ZcABW.7wUxIyNx9sQTg9MhriFN/QmwCtJKUr6tlJMhOElyoaOx94Lo0e0HGjKBYMdaPdiHwF1:15894:0:99999:7:::
+liubenoff:!!:15894:0:99999:7:::
+gliubenov:$6$XBpmTWP5$cVnaBPbABS3b40YMU4JEqxFSabj/jZQiowTI2zPqbee2J/IKAFKY/6pZ9IeY.H/m2tw0Z5kMid6hffpT7vl4t1:15894:0:99999:7:::
+johny:$6$TYStUxzz$K5Vh3Ga2dVpeXR7ymcMSjQqILy1ZInkMLfmuq1P43foY4M6PhKd/aXEmdUjMJ6MsRNuW8/IQCVR6j3wQooSZj.:15894:0:99999:7:::
+fuzly2:$6$vvB2/m5f$LtFkZpgb/nASG4EoOdImjWFX.q.G9LAWZq4w8iPrTXu9DTUoSCU0uuTqo8nxcQy5oS6ExN0jK.iJeiZC7go.5/:15894:0:99999:7:::
+stef:$6$W046YCJo$Cmn9scpffSNX2DDq8UyacmjZPtUe2pg2t0ZHKBQ3eHPOhrdN29WRGcBiLisq3UlFXiWLZzT98iTEaeWzNJwlv1:15894:0:99999:7:::
+mims:$6$qFMB4EH.$4bbE423DUYxFzAIGpq10ttKWngIhi1R..8h1SAP5lKFUg7OrNAzWdNQkcO6QW3NiC8Hihh17ZEPF7yAvKQqtj/:15894:0:99999:7:::
+vbahtev:$6$kS2TvbTb$YofOREZqw9ifqRF17ZPwbGiQc/etpDAYMFG4HZgGbgDlHxLW4aW0qQjemQ0sLOCD8Vd1Pb4kkLg71t9125uHM0:15895:0:99999:7:::
+svv1234:$6$p/G3Zzrx$ccAuGnCVDsyeAoyaCuziJdpx3dVXiUJSP6h6VeEifAkfBblS5vOYzrjETN7eXn7mhxpkDaEGq1LuqQ6jVoGQL/:15895:0:99999:7:::
+komadrin:$6$LHfFUtqz$HoCbvutgV1HKTHz0B3ewkGQjm759mPwGfJXle7XOAffoTIsGyAnL5NBtVyjCO5Ra.HWQnJqlympb0MbPHF69q1:15895:0:99999:7:::
+marek:$6$lSHPqQ0W$mM2J6hevoQ26QjOGPquAGGjSBd9FlBdlBliaBg5VpLMKWbuTXA/8shq3Tn7eIpgyeOGdx1sQbWCmq0JsSpGR5.:15895:0:99999:7:::
+vergy:$6$wK5PxW.r$Fcac/eSJ9/T9lNQ9nB1ZLHItItItHr.uRhPOeo/J0qtpk2liMJ2s8OcPJ0EdC/wvXxTjyW3/hdLHb9vBVYOk10:15896:0:99999:7:::
+rosi:$6$mpY5NSq7$N.RY26mdqmdb9ZQlYlORj6Z0aFLZFrQa/Zbmp0qzuJu0Cv3Er.8/PQXka9YiQf01/iBTMg2N7dV4FlRZgrrn20:15897:0:99999:7:::
+istefanov:$6$gGTFF.ZK$yhpYnk/vfgc0LBtfgjwYe61tgqIuzls69gBLB6eXsItQoo4XijHZsb/tKs.6r1nPFAwx3gzM/mJS.bJMN/Wnt.:15897:0:99999:7:::
+haripetrov:$6$E2O5YSFk$U6q38Ii2FxxHf41PKwOhEzWpivlPeJN5br8tpdTwu2rG1kJ.mAuiwzFNSU2ehrEyW6kno90uMSsp8OfiSwp/O/:15897:0:99999:7:::
+future:!!:15897:0:99999:7:::
+tuxar:$6$uGT88VTd$aUhVtP9642fEYqRjrB.FZmFpyCr4NYwNRURspaMyWA9eZQdh/Gy2.FFWMQ69sj.gUgbfollG6q0K2aaRzagsh1:15897:0:99999:7:::
+Dido:$6$7AcuiZ/n$4QY2PHyOJT3DkU.5PqnafZwALo325nbHq.vOhcEvxXeoKMFNN3D7JLMQ3HPG.zuac8NMrfFaFu/Y5Q2DdwTzg0:15897:0:99999:7:::
+caesar:$6$4tpUSBst$4sO7rcmgpUeVaregWlD79zQ.xCxNCfZTOjRS0WYwlzdqeTMyrw.HHKF6xQ/gUhSBQu7wl1PKwjXLEkGMl5LjZ/:15897:0:99999:7:::
+beast:$6$tk6OvtBj$MnsxhlABUbCMP9ER2KYt3mWnSJ8v/35RlDH53Vxi5Ohqniny/TLq1Ke8NBh8qUf7vy7sxwbQCkGu/Bd/Bcj1Z0:15897:0:99999:7:::
+nesk:$6$DCv4ukgo$U9ez3pWwOFdlFTvis17ZRWo1eeY4du.plB9ofRA9CxMZ58pqt1gGwK.jfpfFYFfJEpF.eZKeydD.oGhOYDGum/:15897:0:99999:7:::
+kalinsofia:$6$BOG7NyE3$OjDXpcFrU8TZ65f8E4UlS1/JYSVJJxvebJZ/WlMNUh3Koac9OTBdGjcV8TZkoyKJ8M0q7BwvO3ITMPHkf..HW/:15897:0:99999:7:::
+georgiev.mbg:$6$A4h92SS3$OFZgNTo6ydIHGvrmankUh0Jo6jQJhW.Mp8SqsxXUHpLxdIsVRavWcoWbJicciaHFFExOzFxYTBrz4hWus5V7n/:15897:0:99999:7:::
+plam40:$6$QFfNLTQJ$TK6w2qPHYGLp7c8o0WkeOKn5T.Pa7zaHAF23TRbg2r2uzp6ZG5sfJig00akeaUjHs3B5nJJEo/qXFPqXnjdy7.:15897:0:99999:7:::
+kmalamov:$6$Zkq3dM9V$R.../tYG78L2pN2FPY/G/LF716KCYEi6SvZHC0duzuj7mnUVIUsUl0Dj5YEWN/spFLEB84/vyjl5uYRMfZJwV1:15897:0:99999:7:::
+didi:$6$5Iyd1eSs$rNTtsCghIGW5xIqBVVRGuvRuIWQKgBAilvXPd2SbeGuELTMqBZSigTFj.v0gP.in5oBaj/VIAGVcUyXAj7sq./:15897:0:99999:7:::
+loopback0:$6$mUtxBa.r$LGFeefswsN5E2XQNK05RFqGFKkU.3Bl9QIsDaxl8sABELkFeDEOjP2sDKt9zpultQ1RQFbh9GvasWAKY2hETj/:15897:0:99999:7:::
+ico:$6$6d5Y4H03$sHgkwKynVAqtz7XN1W.4J3N.XbGAvp54TpYAUa7xBtXPXvflEFak2h9DdAfwThxyyyCthk.t6w/NCWa5odVvy/:15897:0:99999:7:::
+wizkid:$6$DQnloZHR$omMz3lZyN0Sqb6q9oMtI6O4kWe3D1m9xWwyPhF8iJhkF09pID.9Cw98WOB8QT0PAEcPBysYG1Lt1mqOrZnwam.:15897:0:99999:7:::
+metaxoff:$6$Goctoa2D$DjuzvuwT6dTkptSYX5b9AbdyqQ2XTwG0ejY9rFAUrRwIn3Hohp5icRt9LTaQgs8Hf9/XfPa/YfdFwhCbKLq1f1:15897:0:99999:7:::
+VLD62:$6$j5WDktrm$8hbF8.08wveiqMTg7LhVEoN2ZnX8/9gwPa4nEVC.AsnNDoDbAp/62.sufEgUCUFZa7Q3TomKxRM8BwjPRnHl7.:15897:0:99999:7:::
+nymus:$6$L6spoBbU$srJGPL47sjNC8NmlmvNGBQw9XDcE/RHVD1R0I/VrAlTFfi96HnwJeBA6CJD9UdC8rz2AYF1skChooKkPZsraG/:15897:0:99999:7:::
+topalovs:$6$v7cye99k$ZjV/breOK.jUzfK95I1eXgaz/Wfmd97yiNXJfmxUBzoKiuPwpRKbwgpgtDWN8WaGSz48J/s44N5gQPRkuQo6z.:15897:0:99999:7:::
+dnk:$6$c3tiXn23$qMlWEGt1itN3DB3eP2Ns4tFA70DHBZNqFRPgpOX2LNLEviKllXrkMeJivbm6SsEP5YWGZ7wtNTJokAoKMjA/S.:15897:0:99999:7:::
+ronnie:!!:15897:0:99999:7:::
+fityla:$6$UCmG5dLd$qMRKgfGsq4XsIzekb1Srk17yGxu109LPRu9l.lFmmKzGepg5OhWSji78SE6UluxC0vtXGqQiQ4HNN0yQ.lLiO.:15897:0:99999:7:::
+poly:$6$jfqFgsNx$lLRtZUZK465KVJAImeoXrvF3dnVkGwCpsj5uTKVfy01ThWUyYnKh3juYMXWMiSsSNxUOTH4vm4Tp7rS7qv/lP0:15897:0:99999:7:::
+[root@grizzly ~]# less /etc/passwd
+[root@grizzly ~]# less /etc/group
+[root@grizzly ~]# less /etc/passwd
+[root@grizzly ~]# vi /etc/passwd
+[root@grizzly ~]# vi /etc/passwd
+[root@grizzly ~]# vi /etc/passwd
+[root@grizzly ~]# vi /etc/passwd
+[root@grizzly ~]# less /etc/group
+[root@grizzly ~]# ls /etc/gshadow
+/etc/gshadow
+[root@grizzly ~]# cat /etc/gshadow
+root:::
+bin:::bin,daemon
+daemon:::bin,daemon
+sys:::bin,adm
+adm:::adm,daemon
+tty:::
+disk:::
+lp:::daemon
+mem:::
+kmem:::
+wheel:::
+mail:::mail,postfix
+uucp:::
+man:::
+games:::
+gopher:::
+video:::
+dip:::
+ftp:::
+lock:::
+audio:::
+nobody:::
+users:::
+utmp:!::
+utempter:!::
+floppy:!::
+vcsa:!::
+cdrom:!::
+tape:!::
+dialout:!::
+saslauth:!::
+postdrop:!::
+postfix:!::
+sshd:!::
+tcpdump:!::
+hackman:!::
+course:!::
+iordan93:!::
+yordandar:!::
+stamopetkov:!::
+h.mohedin:!::
+user1:!::
+lamqta:!::
+statica:!::
+djordjo7:!::
+m4rt00:!::
+pesho:!::
+samodiva:!::
+krasin:!::
+svetlio:!::
+suni:!::
+jeffrey:!::
+yulimoto:!::
+marianab:!::
+stoyanov:!::
+Slavov:!::
+vlado:!::
+angie:!::
+dencho:!::
+speedmaister:!::
+solarwind:!::
+fairytale:!::
+yavor-atov:!::
+marko:!::
+admin:!::
+gyankov:!::
+butchbs:!::
+Ivan72:!::
+itsiporov:!::
+uzunov:!::
+s.metodiev:!::
+ilianmril:!::
+intelbg:!::
+Nevenka:!::
+blagovestie1:!::
+blagovestie:!::
+lyubenblagoev:!::
+milen:!::
+valcho:!::
+penkovalchev:!::
+nadska:!::
+RosenN:!::
+ze3rax:!::
+ipconfigv:!::
+ipconfig:!::
+edrenchev:!::
+compiler:!::
+gavril:!::
+gabo:!::
+ivzb:!::
+krasiga:!::
+pinkie_Pie:!::
+greynwhite:!::
+artur:!::
+tbelev:!::
+midnight:!::
+tsvetan.georgiev:!::
+shosho:!::
+topalov:!::
+komador:!::
+zhivko:!::
+spilev:!::
+dyrgel:!::
+episparh:!::
+phalaaxx:!::
+explorerv:!::
+dimp:!::
+petko9001:!::
+vladisr:!::
+teo:!::
+nasty:!::
+radtonev:!::
+livanova:!::
+konsa:!::
+asya:!::
+adrum:!::
+leona:!::
+bgotov:!::
+pgachev:!::
+informer:!::
+gogo74:!::
+wiseman:!::
+GiK986:!::
+lupo:!::
+lusmil:!::
+boyan_BM:!::
+exit:!::
+Martotko:!::
+BM_boyan:!::
+martotko1:!::
+Max:!::
+todor87:!::
+gt:!::
+kuncavia:!::
+ivanmar:!::
+shmirgel:!::
+magicwitch:!::
+rossi87:!::
+fluffyelke:!::
+ncuxoto:!::
+screen:!::
+milev:!::
+georgidimov:!::
+nikiserdar:!::
+balflear:!::
+kiril.ilarionov:!::
+anton_dutsov:!::
+icevv:!::
+KacanuH:!::
+guevara:!::
+xekc:!::
+FireBug:!::
+Niki:!::
+ivan.velichkov:!::
+yoan:!::
+nfh:!::
+xox:!::
+stuBaliyski-smolyan:!::
+kyp:!::
+mmanov:!::
+ovasilev:!::
+psotirov:!::
+alexn:!::
+lengarski:!::
+seder:!::
+svenson:!::
+valioabc:!::
+hanasd:!::
+edyyy:!::
+icoantonov:!::
+miroslavTsakov:!::
+pano:!::
+mikel:!::
+vistef:!::
+pokerman:!::
+nzrusev:!::
+spetrov:!::
+nimok:!::
+metalbig:!::
+rizo:!::
+niki:!::
+movix:!::
+d.georgiev.91:!::
+ivan.kp:!::
+mishev:!::
+jack:!::
+vvyagov:!::
+htx:!::
+stephen:!::
+shures:!::
+fuzly:!::
+iavoreo:!::
+vikipan:!::
+strahil:!::
+dominionbg:!::
+boiko:!::
+skolew:!::
+mihail_petrov:!::
+krassi.manev:!::
+Neti:!::
+vtopalov:!::
+Natali:!::
+markoni:!::
+svetlanka:!::
+bboyanov:!::
+hristo:!::
+bevalkov:!::
+nektar:!::
+samvimes:!::
+pe6o:!::
+a_boyanov:!::
+quasar:!::
+hmaleev:!::
+Vali0:!::
+st_ivan:!::
+skatatika:!::
+si:!::
+p.dobrinov:!::
+strachev:!::
+nikiman:!::
+ivaylo:!::
+te:!::
+loshlio:!::
+vorb:!::
+Dex:!::
+insaneripper:!::
+dandreev:!::
+dandreev1:!::
+veidar45:!::
+sg:!::
+BLShark:!::
+grigoo:!::
+mtzvetanov:!::
+elendro:!::
+chervenkov:!::
+demislav:!::
+gstoyanovv:!::
+gstoyanov:!::
+mage3:!::
+dimphd:!::
+nikolai.velkov1:!::
+stefito3:!::
+Boris:!::
+plamer:!::
+ridik:!::
+pepone:!::
+kamen779:!::
+tm206:!::
+silverboy:!::
+val10:!::
+iren_y:!::
+munata:!::
+angeloff:!::
+joroboss:!::
+veronika:!::
+ro:!::
+kotsevk:!::
+mikell:!::
+Ivaka:!::
+aangov:!::
+vivoactive:!::
+s0ny123:!::
+shosh:!::
+sendtneri:!::
+vidkid:!::
+sagruob:!::
+liubenoff:!::
+gliubenov:!::
+johny:!::
+fuzly2:!::
+stef:!::
+mims:!::
+vbahtev:!::
+svv1234:!::
+komadrin:!::
+marek:!::
+vergy:!::
+rosi:!::
+istefanov:!::
+haripetrov:!::
+future:!::
+tuxar:!::
+Dido:!::
+caesar:!::
+beast:!::
+nesk:!::
+kalinsofia:!::
+georgiev.mbg:!::
+plam40:!::
+kmalamov:!::
+didi:!::
+loopback0:!::
+ico:!::
+wizkid:!::
+metaxoff:!::
+VLD62:!::
+nymus:!::
+topalovs:!::
+dnk:!::
+ronnie:!::
+fityla:!::
+poly:!::
+[root@grizzly ~]# whoami
+root
+[root@grizzly ~]# PS=''
+[root@grizzly ~]# PS1=''
+
+
+
+
+
+
+
+
+
+
+
+
+
+whoami
+root
+PS='\u@\h:\w\$ '
+PS!='\u@\h:\w\$ '
+-bash: PS!=\u@\h:\w\$ : command not found
+PS1='\u@\h:\w\$ '
+root@grizzly:~# 
+root@grizzly:~# 
+root@grizzly:~# 
+root@grizzly:~# 
+root@grizzly:~# vi /etc/passwd
+root@grizzly:~# vi /etc/sh
+shadow   shadow-  shells   
+root@grizzly:~# vi /etc/shadow
+root@grizzly:~# vi /etc/group
+root@grizzly:~# useradd --help
+Usage: useradd [options] LOGIN
+
+Options:
+  -b, --base-dir BASE_DIR       base directory for the home directory of the
+                                new account
+  -c, --comment COMMENT         GECOS field of the new account
+  -d, --home-dir HOME_DIR       home directory of the new account
+  -D, --defaults                print or change default useradd configuration
+  -e, --expiredate EXPIRE_DATE  expiration date of the new account
+  -f, --inactive INACTIVE       password inactivity period of the new account
+  -g, --gid GROUP               name or ID of the primary group of the new
+                                account
+  -G, --groups GROUPS           list of supplementary groups of the new
+                                account
+  -h, --help                    display this help message and exit
+  -k, --skel SKEL_DIR           use this alternative skeleton directory
+  -K, --key KEY=VALUE           override /etc/login.defs defaults
+  -l, --no-log-init             do not add the user to the lastlog and
+                                faillog databases
+  -m, --create-home             create the user's home directory
+  -M, --no-create-home          do not create the user's home directory
+  -N, --no-user-group           do not create a group with the same name as
+                                the user
+  -o, --non-unique              allow to create users with duplicate
+                                (non-unique) UID
+  -p, --password PASSWORD       encrypted password of the new account
+  -r, --system                  create a system account
+  -s, --shell SHELL             login shell of the new account
+  -u, --uid UID                 user ID of the new account
+  -U, --user-group              create a group with the same name as the user
+  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping
+
+root@grizzly:~# useradd -m /home/jigolo jigolo
+Usage: useradd [options] LOGIN
+
+Options:
+  -b, --base-dir BASE_DIR       base directory for the home directory of the
+                                new account
+  -c, --comment COMMENT         GECOS field of the new account
+  -d, --home-dir HOME_DIR       home directory of the new account
+  -D, --defaults                print or change default useradd configuration
+  -e, --expiredate EXPIRE_DATE  expiration date of the new account
+  -f, --inactive INACTIVE       password inactivity period of the new account
+  -g, --gid GROUP               name or ID of the primary group of the new
+                                account
+  -G, --groups GROUPS           list of supplementary groups of the new
+                                account
+  -h, --help                    display this help message and exit
+  -k, --skel SKEL_DIR           use this alternative skeleton directory
+  -K, --key KEY=VALUE           override /etc/login.defs defaults
+  -l, --no-log-init             do not add the user to the lastlog and
+                                faillog databases
+  -m, --create-home             create the user's home directory
+  -M, --no-create-home          do not create the user's home directory
+  -N, --no-user-group           do not create a group with the same name as
+                                the user
+  -o, --non-unique              allow to create users with duplicate
+                                (non-unique) UID
+  -p, --password PASSWORD       encrypted password of the new account
+  -r, --system                  create a system account
+  -s, --shell SHELL             login shell of the new account
+  -u, --uid UID                 user ID of the new account
+  -U, --user-group              create a group with the same name as the user
+  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping
+
+root@grizzly:~# useradd -m^Chome/jigolo jigolo
+root@grizzly:~# ls -l /home/jig^C
+root@grizzly:~# useradd -m  jigolo
+root@grizzly:~# ls -l /home/jigolo/
+total 0
+root@grizzly:~# ls -la /home/jigolo/
+total 36
+drwx------    3 jigolo jigolo  4096 Jul 11 21:25 .
+drwxr-xr-x. 269 root   root   12288 Jul 11 21:25 ..
+-rw-r--r--    1 jigolo jigolo    18 Feb 21 23:05 .bash_logout
+-rw-r--r--    1 jigolo jigolo   176 Feb 21 23:05 .bash_profile
+-rw-r--r--    1 jigolo jigolo   124 Jul  1 20:07 .bashrc
+-rw-r--r--    1 jigolo jigolo   500 Feb 27  2012 .emacs
+drwxr-xr-x    2 jigolo jigolo  4096 Jul  1 19:57 .ssh
+root@grizzly:~# ls -la /etc/skel/
+total 28
+drwxr-xr-x.  3 root root 4096 Jul  6 03:51 .
+drwxr-xr-x. 61 root root 4096 Jul 11 21:26 ..
+-rw-r--r--.  1 root root   18 Feb 21 23:05 .bash_logout
+-rw-r--r--.  1 root root  176 Feb 21 23:05 .bash_profile
+-rw-r--r--   1 root root  124 Jul  1 20:07 .bashrc
+-rw-r--r--   1 root root  500 Feb 27  2012 .emacs
+drwxr-xr-x   2 root root 4096 Jul  1 19:57 .ssh
+root@grizzly:~# cat /home/k
+kalinsofia/      kmalamov/        konsa/           krasin/          kyp/
+kamen779/        komador/         kotsevk/         krassi.manev/    
+kiril.ilarionov/ komadrin/        krasiga/         kuncavia/        
+root@grizzly:~# cat /home/k
+kalinsofia/      kmalamov/        konsa/           krasin/          kyp/
+kamen779/        komador/         kotsevk/         krassi.manev/    
+kiril.ilarionov/ komadrin/        krasiga/         kuncavia/        
+root@grizzly:~# cat /home/komad
+komador/  komadrin/ 
+root@grizzly:~# cat /home/komadrin/.ssh/authorized_keys 
+ssh-dss AAAAB3NzaC1kc3MAAACBAN9I84iN2Sv+xo4dvljLOV7UNFAmSiefYKQGZ7eGUFXTLzLMdPdjSx+kV/gbroo0XbNDwyYBXY2pJoNxqwSXBLHDCBatD0FkDBdfi2kcuK1Cmb2rT0XdxaMMtv0OTwBKnd0PBq1aGBII0TEL2JAnnFTC/xJQQswFmlaUUTpogrm7AAAAFQCUp/BFws8g8LzAgrfKy6duQ/7DPwAAAIB/6LQ+YqfaVVPY0hmGH3wYXgrcl3/k+5W1dx3YKRVQsFkFUuctvFRiOkCwaOgwS4Z9pJemIR5bBuKjxWqYcL291Q0pEIi8uERDFw0LYxuaRmEnsNpmyAsiJNByLaxBPe5wTqgOHH0lYMlLIiOKv1bcmF7xRtcmnB8sYZhPkcnzkwAAAIEAoMKk9yTsqlcYUA7i9cHDvbPq8Caean4fAr2thOsf3jDdzD8DihrdsoLMmzyTzjIdTQU8GD0AFFxXduXOll1cQuw8XJELpUU5x0QQHGOJ6GW+0VHjqmBvT4wJjgC0RYtFyY4Zya23UvIp6CrK27FdEdDRgWaJZvFnLiIgXVL0h00= Marian Marinov <mm@1h.com> Founder and CEO
+root@grizzly:~# ls -l /home/jigolo/
+total 0
+root@grizzly:~# userdel jigolo
+root@grizzly:~# ls -l /home/jigolo/
+total 0
+root@grizzly:~# ls -la /home/jigolo/
+total 36
+drwx------    3  768  768  4096 Jul 11 21:25 .
+drwxr-xr-x. 269 root root 12288 Jul 11 21:25 ..
+-rw-r--r--    1  768  768    18 Feb 21 23:05 .bash_logout
+-rw-r--r--    1  768  768   176 Feb 21 23:05 .bash_profile
+-rw-r--r--    1  768  768   124 Jul  1 20:07 .bashrc
+-rw-r--r--    1  768  768   500 Feb 27  2012 .emacs
+drwxr-xr-x    2  768  768  4096 Jul  1 19:57 .ssh
+root@grizzly:~# grep jigolo /etc/passwd
+root@grizzly:~# useradd jigolo
+useradd: warning: the home directory already exists.
+Not copying any file from skel directory into it.
+Creating mailbox file: File exists
+root@grizzly:~# grep jigolo /etc/passwd
+jigolo:x:768:768::/home/jigolo:/bin/bash
+root@grizzly:~# userdel -r jigolo
+root@grizzly:~# ls -la /home/jigolo
+ls: cannot access /home/jigolo: No such file or directory
+root@grizzly:~# groups
+root
+root@grizzly:~# useradd -m jigolo
+root@grizzly:~# chsh -s /sbin/nologin jigolo
+Changing shell for jigolo.
+Shell changed.
+root@grizzly:~# grep jigolo /etc/passwd
+jigolo:x:768:768::/home/jigolo:/sbin/nologin
+root@grizzly:~# chsh -s /bin/bash jigolo
+Changing shell for jigolo.
+Shell changed.
+root@grizzly:~# su - jigolo
+[jigolo@grizzly ~]$ ls -la
+total 36
+drwx------    3 jigolo jigolo  4096 Jul 11 21:31 .
+drwxr-xr-x. 269 root   root   12288 Jul 11 21:31 ..
+-rw-r--r--    1 jigolo jigolo    18 Feb 21 23:05 .bash_logout
+-rw-r--r--    1 jigolo jigolo   176 Feb 21 23:05 .bash_profile
+-rw-r--r--    1 jigolo jigolo   124 Jul  1 20:07 .bashrc
+-rw-r--r--    1 jigolo jigolo   500 Feb 27  2012 .emacs
+drwxr-xr-x    2 jigolo jigolo  4096 Jul  1 19:57 .ssh
+[jigolo@grizzly ~]$ touch s.sh
+[jigolo@grizzly ~]$ ls -la
+total 36
+drwx------    3 jigolo jigolo  4096 Jul 11 21:44 .
+drwxr-xr-x. 269 root   root   12288 Jul 11 21:31 ..
+-rw-r--r--    1 jigolo jigolo    18 Feb 21 23:05 .bash_logout
+-rw-r--r--    1 jigolo jigolo   176 Feb 21 23:05 .bash_profile
+-rw-r--r--    1 jigolo jigolo   124 Jul  1 20:07 .bashrc
+-rw-r--r--    1 jigolo jigolo   500 Feb 27  2012 .emacs
+drwxr-xr-x    2 jigolo jigolo  4096 Jul  1 19:57 .ssh
+-rw-rw-r--    1 jigolo jigolo     0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ chmod 600 s.sh 
+[jigolo@grizzly ~]$ ll
+total 0
+-rw------- 1 jigolo jigolo 0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ chmod 700 s.sh 
+[jigolo@grizzly ~]$ ll
+total 0
+-rwx------ 1 jigolo jigolo 0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ chmod 750 s.sh 
+[jigolo@grizzly ~]$ ll
+total 0
+-rwxr-x--- 1 jigolo jigolo 0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ chmod 750^C.sh 
+[jigolo@grizzly ~]$ vi /etc/group
+[jigolo@grizzly ~]$ chmod --help
+Usage: chmod [OPTION]... MODE[,MODE]... FILE...
+  or:  chmod [OPTION]... OCTAL-MODE FILE...
+  or:  chmod [OPTION]... --reference=RFILE FILE...
+Change the mode of each FILE to MODE.
+
+  -c, --changes           like verbose but report only when a change is made
+      --no-preserve-root  do not treat `/' specially (the default)
+      --preserve-root     fail to operate recursively on `/'
+  -f, --silent, --quiet   suppress most error messages
+  -v, --verbose           output a diagnostic for every file processed
+      --reference=RFILE   use RFILE's mode instead of MODE values
+  -R, --recursive         change files and directories recursively
+      --help     display this help and exit
+      --version  output version information and exit
+
+Each MODE is of the form `[ugoa]*([-+=]([rwxXst]*|[ugo]))+'.
+
+Report chmod bugs to bug-coreutils@gnu.org
+GNU coreutils home page: <http://www.gnu.org/software/coreutils/>
+General help using GNU software: <http://www.gnu.org/gethelp/>
+For complete documentation, run: info coreutils 'chmod invocation'
+[jigolo@grizzly ~]$ ls
+s.sh
+[jigolo@grizzly ~]$ ll
+total 0
+-rwxr-x--- 1 jigolo jigolo 0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ chmod u-x s.sh 
+[jigolo@grizzly ~]$ ll
+total 0
+-rw-r-x--- 1 jigolo jigolo 0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ chmod g-r s.sh 
+[jigolo@grizzly ~]$ chmod u+x,g+w s.sh 
+[jigolo@grizzly ~]$ ll
+total 0
+-rwx-wx--- 1 jigolo jigolo 0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ chmod 777 s.sh ^C
+[jigolo@grizzly ~]$ chmod u+rwx,g+rwx,o+rwx s.sh 
+[jigolo@grizzly ~]$ ll
+total 0
+-rwxrwxrwx 1 jigolo jigolo 0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ logout
+root@grizzly:~# tail /etc/passwd
+wizkid:x:759:759::/home/wizkid:/bin/bash
+metaxoff:x:760:760::/home/metaxoff:/bin/bash
+VLD62:x:761:761::/home/VLD62:/bin/bash
+nymus:x:762:762::/home/nymus:/bin/bash
+topalovs:x:763:763::/home/topalovs:/bin/bash
+dnk:x:764:764::/home/dnk:/bin/bash
+ronnie:x:765:765::/home/ronnie:/bin/bash
+fityla:x:766:766::/home/fityla:/bin/bash
+poly:x:767:767::/home/poly:/bin/bash
+jigolo:x:768:768::/home/jigolo:/bin/bash
+root@grizzly:~# chgrp poly /home/jigolo/s.sh 
+root@grizzly:~# ll /home/jigolo/s.sh
+-rwxrwxrwx 1 jigolo poly 0 Jul 11 21:44 /home/jigolo/s.sh
+root@grizzly:~# su - jigolo
+[jigolo@grizzly ~]$ ll
+total 0
+-rwxrwxrwx 1 jigolo poly 0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ chmod 700 s.sh 
+[jigolo@grizzly ~]$ ll
+total 0
+-rwx------ 1 jigolo poly 0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ chmod 750 s.sh 
+[jigolo@grizzly ~]$ ll
+total 0
+-rwxr-x--- 1 jigolo poly 0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ chown poly s.sh 
+chown: changing ownership of `s.sh': Operation not permitted
+[jigolo@grizzly ~]$ logout
+root@grizzly:~# chown poly /home/jigolo/s.sh 
+root@grizzly:~# ll /home/jigolo/s.sh 
+-rwxr-x--- 1 poly poly 0 Jul 11 21:44 /home/jigolo/s.sh
+root@grizzly:~# su - jigolo
+[jigolo@grizzly ~]$ ll
+total 0
+-rwxr-x--- 1 poly poly 0 Jul 11 21:44 s.sh
+[jigolo@grizzly ~]$ cat s.sh 
+cat: s.sh: Permission denied
+[jigolo@grizzly ~]$ mv s.sh f.sh
+[jigolo@grizzly ~]$ ll
+total 0
+-rwxr-x--- 1 poly poly 0 Jul 11 21:44 f.sh
+[jigolo@grizzly ~]$ pwd
+/home/jigolo
+[jigolo@grizzly ~]$ ls -ld /home/jigolo/
+drwx------ 3 jigolo jigolo 4096 Jul 11 21:54 /home/jigolo/
+[jigolo@grizzly ~]$ rm f.sh 
+rm: remove write-protected regular empty file `f.sh'? y
+[jigolo@grizzly ~]$ mkdir -p ^C
+[jigolo@grizzly ~]$ mkdir -p j/f/g/kkk/rr/
+[jigolo@grizzly ~]$ ll
+total 4
+drwxrwxr-x 3 jigolo jigolo 4096 Jul 11 21:57 j
+[jigolo@grizzly ~]$ ll j/
+total 4
+drwxrwxr-x 3 jigolo jigolo 4096 Jul 11 21:57 f
+[jigolo@grizzly ~]$ ll j/f
+total 4
+drwxrwxr-x 3 jigolo jigolo 4096 Jul 11 21:57 g
+[jigolo@grizzly ~]$ ll j/f/g/kkk/rr/
+total 0
+[jigolo@grizzly ~]$ ll -a j/f/g/kkk/rr/
+total 8
+drwxrwxr-x 2 jigolo jigolo 4096 Jul 11 21:57 .
+drwxrwxr-x 3 jigolo jigolo 4096 Jul 11 21:57 ..
+[jigolo@grizzly ~]$ ls -l
+total 4
+drwxrwxr-x 3 jigolo jigolo 4096 Jul 11 21:57 j
+[jigolo@grizzly ~]$ touch ^C
+[jigolo@grizzly ~]$ echo 1234 > g
+[jigolo@grizzly ~]$ ll
+total 8
+-rw-rw-r-- 1 jigolo jigolo    5 Jul 11 22:02 g
+drwxrwxr-x 3 jigolo jigolo 4096 Jul 11 21:57 j
+[jigolo@grizzly ~]$ cat g 
+1234
+[jigolo@grizzly ~]$ Write failed: Broken pipe
+hackman@terion:~$ 
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           

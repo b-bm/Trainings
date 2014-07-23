@@ -1,0 +1,71 @@
+﻿19. Describe the procedure of resizing ReiserFS.
+
+Тъй като закъснях с домашното си го поствам в тема :).
+Всичко съм правил по много пъти и различни начини преди да го напиша.
+Напълно начинаещ съм.
+Линковете от, които съм взимал инфо (не само за домашното) ще ги постна по-късно като имам време, че са много и трябва да ги сортирам.
+ 
+19. Describe the procedure of resizing ReiserFS.
+ 
+Използвам CentOS 6.4 инсталиран на VirtualBox.
+ 
+Оправям Интернет връзката:
+vi /etc/sysconfig/network-scripts/ifcfg-eth0
+Променям на :
+ONBOOT=yes
+esc -> Shift +ZZ
+Рестартирам
+ 
+ 
+Тъй като няма Support по подразбиране за тази файлова система, трябва да инсталирам reiser-utils:
+ 
+Добавям ElRepo.
+ 
+rpm --import http://elrepo.org/RPM-GPG-KEY-elrepo.org
+ 
+Ъпдейтвам yum
+yum update
+ 
+rpm -Uvh http://elrepo.org/elrepo-release-6-5.el6.elrepo.noarch.rpm
+ 
+Инсталирам reiserfs-utils:
+yum install kmod-reiserfs reiserfs-utils
+ 
+Създал съм отделен 4G твърд диск, който трябва да добавя и форматирам.
+Пиша:
+ls /dev/sd*
+/dev/sda /dev/sda1 /dev/sda2 /dev/sba
+Вижда се, че имам 2 диска sda & sdb (допълнително създаденият).
+На sda имам 2 партишъна.
+ 
+За да създам партишън от sdb пиша:
+fdisk /dev/sdb
+n  (new)
+p   (primariy partition)
+Partition number (1-4):1
+[ENTER]
+[ENTER]
+w  (write partition to the disk sdb)
+След като сме създали диска, трябва да го форматираме:
+reiserfs /dev/sdb1
+Continue y/n:y
+ReiserS is successfully created on /dev/sdb1.
+Проверяваме новия партишън:
+cfdisk /dev/sdb
+FS Type: Linux ReiserFS
+Сега маунтваме (mount) новия партишън и файловата система.
+ 
+Създаваме директория и пишем:
+mkdir /dev/mapper/reise
+mount /dev/sdb1 /dev/mapper/reise
+mount
+за да ресайзнем пишем:
+umount /dev/sdb1
+resize_reisers -s -1G /dev/sdb1
+y
+mount /dev/sdb1 /dev/mapper/reiser
+df
+За намаляване или увеличаване на партишъна, стъпките са едни и същи:
+1.unmount partition
+2.resize_reiserfs -s +-[K, M, G] partition
+3.mount partition

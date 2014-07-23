@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\GreaterNumberExchanges\bin\Debug\GreaterNumberExchanges.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\GreaterNumberExchanges\bin\Debug\GreaterNumberExchanges.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\GreaterNumberExchanges\bin\Debug\GreaterNumberExchanges.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\GreaterNumberExchanges\obj\Debug\1.GreaterNumberExchanges.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\GreaterNumberExchanges\obj\Debug\GreaterNumberExchanges.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\GreaterNumberExchanges\obj\Debug\GreaterNumberExchanges.pdb

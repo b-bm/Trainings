@@ -1,0 +1,495 @@
+﻿Linux администрация homeworks:
+
+homework_lecture_02:
+
+11. Find the major and minor number of /dev/mptctl and describe what this device is for.
+In short:
+
+/dev/mptctl @ (major,minor=10,220) - character special device
+
+The “mptctl” kernel module is required to check the RAID status on a Linux server using “mpt-status” tool 
+(the original mpt-status-1.0 tool written by Matt Braithwaite).
+
+It allows one to monitor the health and status of RAID setup.
+
+MegaRAID SAS is the current high-end RAID controllers series by LSI.
+It is fully hardware RAIDs controllers supporting RAID5, at least, with SAS or SATA interfaces.
+
+http://www.lsi.com/products/storagecomponents/Pages/6GBSATA_SASRAIDCards.aspx
+
+mpt-status [ options ]
+
+FILES:
+
+/dev/mptctl:    character special device (major,minor=10,220)
+
+Major and Minor Device Numbers
+
+Devices are divided into sets called major device numbers. Eeach individual device has a minor device number.
+Major and minor device numbers identify the device to the kernel.
+The file name of the device is arbitrary and is chosen for convenience and consistency.
+As of Version 2.6.0 of the kernel, a 32-bit quantity with 12 bits set aside for the major number and
+20-bit quantity - for the minor number.
+The 2.6 kernel can accommodate a vast number of devices, while previous kernel versions were limited to 255 major and 255 minor numbers.
+
+Example:
+
+From "ls -l /dev/":
+
+crw--w----  1 root tty       4,  12 Jul  1 19:27 tty12
+
+"c" - char device; major: 4; minor: 12;
+
+The our case:
+
+10  <--> major number; char device; misc    
+220 <--> /dev/mptctl    Message passing technology (MPT) control
+
+The major number  10 - identifies the device driver of char device and
+the minor number 220 - identifies a particular device (possibly out of many) that the driver controls.
+
+Character special files or character devices:
+- through which the system transmits data one character at a time;
+- often are for stream communication;
+- usually do not support random access to data;
+- in most implementations, character devices use unbuffered input and output routines.
+
+Although all devices are listed in the /dev directory, you can create a device anywhere in the file system by using the mknod command:
+
+    mknod [-m <mode>] <file-name> [b|c] <major-number> <minor-number>
+
+    mknod /dev/mptctl c 10 220
+
+Linux Device Drivers, 2nd Edition In PDF Format:
+http://www.xml.com/ldd/chapter/book/bookindexpdf.html
+
+Tool/rpm:
+
+wget http://rpm.pbone.net/index.php3/stat/3/srodzaj/2/search/mpt-status-1.2.0-6.3.src.rpm
+
+or
+
+wget ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/home:/aevseev/CentOS_CentOS-6/x86_64/mpt-status-1.2.0-6.3.x86_64.rpm
+
+(http://rpm.pbone.net/index.php3/stat/4/idpl/21766197/dir/centos_6/com/mpt-status-1.2.0-6.3.x86_64.rpm.html)
+
+Description:
+The mpt-status software is a query tool to access the running configuration and status of LSI SCSI HBAs. 
+Currently supported and tested HBAs are the LSI 1030 SCSI RAID storage controller and LSI SAS1064 SCSI RAID storage controller.
+Since the tool uses the MPI (message passing interface), chances are high that the basic information regarding RAID status will be available for all LSI-based controllers.
+
+=======================================================================
+
+3. What is the command and its parameters to mount a windows fs in such a way that all files and dirs in it will be owned by user "naso" and group "students"
+
+1. В Windows share-вам папка Cisco. Windows машината е с адрес 192.168.1.5
+2. създаваме група students:
+[root@RedHat ~]# groupadd students
+ 
+3. създаваме потребител naso, който е участващ в група students:
+[root@RedHat ~]# useradd -G students  naso
+[root@RedHat mnt]# su naso
+[naso@RedHat mnt]$ id
+uid=500(naso) gid=501(naso) groups=501(naso),500(students) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+ 
+4. създаваме папка, в която ще маунтнем windows папката:
+[root@RedHat ~]# mkdir /mnt/materials
+ 
+5. маунтваме със съответните параметри:
+[root@RedHat mnt]#  mount -t cifs //192.168.1.5/cisco /mnt/materials/ -o username=Marty,password=1234,domain=domainname,uid=501,gid=500,file_mode=0777,dir_mode=0777
+[root@RedHat mnt]# ll
+total 8
+drwxrwxrwx. 1 501 students 8192 Jun 21 11:21 materials
+[root@RedHat mnt]# cd materials/
+[root@RedHat materials]# ll
+total 47801
+drwxrwxrwx. 0 501 students        0 Mar  5 15:32 ccna1_labs
+drwxrwxrwx. 0 501 students        0 Oct 15  2012 ccna2_labs
+drwxrwxrwx. 0 501 students        0 Mar  5 15:25 ccna3_labs
+drwxrwxrwx. 0 501 students        0 Apr 23 11:49 ccna4_labs
+-rwxrwxrwx. 0 501 students  5074173 Mar 10  2011 ccna-portable-command-guide-2nd-edition-self-study-guide.pdf
+drwxrwxrwx. 0 501 students        0 Mar  5 15:26 Cisco2
+drwxrwxrwx. 0 501 students        0 Nov 14  2012 Cisco3
+drwxrwxrwx. 0 501 students        0 Apr 23 11:49 Cisco4
+drwxrwxrwx. 0 501 students        0 Jun 27 06:47 CISCO IOS
+-rwxrwxrwx. 0 501 students 13929850 Mar  6  2011 Cisco.Press.CCIE.Routing.and.Switching.Exam.Certification.Guide.4th.Edition.Dec.2009.eBook-DDU.pdf
+-rwxrwxrwx. 0 501 students 12571941 Oct 11  2012 en_ENetwork_SLM_v4040.pdf
+-rwxrwxrwx. 0 501 students   588332 Oct 11  2012 en_ENetwork_SPTM_v4040.pdf
+-rwxrwxrwx. 0 501 students    42066 Apr  1 14:11 eswitching-skill-exam-ccna-3.pkt
+-rwxrwxrwx. 0 501 students      114 Feb  9 12:45 materials.txt
+drwxrwxrwx. 0 501 students        0 Nov 13  2012 practise
+-rwxrwxrwx. 0 501 students 18609218 Oct 11  2012 TestKing640-801V107.pdf
+drwxrwxrwx. 0 501 students        0 Mar 18  2012 TestKingWorld_Cisco
+
+=======================================================================
+
+3. What is the command and its parameters to mount a windows fs in such a way that all files and dirs in it will be owned by user "naso" and group "students".
+Windows използва основно две файлови системи - NTFS и FAT32. По-долу ще покажем опциите за монтиране на дялове с тези файлови системи към нашата Linux ОС:
+
+1. Създаваме потребител Naso (naso) с uid=1005, член на групи naso и students (gid=1006).
+2. Установяваме с кои дялове ще работим за целите на експеримента:
+
+Device    Boot      Start         End      Blocks   Id  System
+/dev/sda1   *           1        3136    25189888+   7  HPFS/NTFS
+.........
+/dev/sda6            7638        8338     5630751    b  W95 FAT32
+
+3. Създаваме входна точка. В случая ще работим с предварително създадената /media/tmp
+root@angie-desktop:~# ls -al /media/
+...
+drwxr-xr-x  2 root root  4096 2011-02-17 19:31 tmp
+
+4. Редактираме /etc/fstab
+root@angie-desktop:~# nano /etc/fstab
+добавяме реда:
+/dev/sda1    /media/tmp    ntfs    ro,uid=1005,gid=1006,locale=en_US.utf8 0 0
+
+5. Монтираме добавения дял
+root@angie-desktop:~# mount -a
+В този случай дискът (sda1) с монтиран само за четене.
+
+6. Проверяваме дали наистина собственикът и групата отговарят на заданието:
+root@angie-desktop:~# ls -al /media/tmp
+total 2099472
+drwxrwxrwx  1 naso students      20480 2012-03-04 14:09 .
+drwxr-xr-x 12 root root           4096 2013-07-15 14:03 ..
+drwxrwxrwx  1 naso students          0 2005-11-30 19:04 Acrobat3
+-rwxrwxrwx  1 naso students       9719 1998-05-11 20:01 ANSI.SYS
+-rwxrwxrwx  1 naso students        559 2005-01-13 13:25 AUTOEXEC.BAT
+-rwxrwxrwx  1 naso students        543 2002-02-18 22:16 AUTOEXEC.DOS
+-rwxrwxrwx  1 naso students        438 2000-07-27 11:27 AUTOEXEC.NS0
+-rwxrwxrwx  1 naso students       5421 2002-12-17 15:46 banner.jpg
+-rwxrwxrwx  1 naso students       1297 2003-03-20 13:34 bgmenu.jpg
+drwxrwxrwx  1 naso students          0 2010-12-30 08:47 BJPrinter
+....
+-rwxrwxrwx  1 naso students       3072 1998-08-05 11:26 template.bbl
+drwxrwxrwx  1 naso students       4096 2007-07-26 19:42 totalcmd
+-rwxrwxrwx  1 naso students      16716 2010-09-02 20:51 TREEINFO.WC
+-rwxrwxrwx  1 naso students      49152 2004-02-26 15:15 VIDEOROM.BIN
+drwxrwxrwx  1 naso students     110592 2012-03-04 11:47 WINDOWS
+drwxrwxrwx  1 naso students       4096 2003-12-10 12:42 WORD_DOS
+
+7. Коренспондиращият ред от /etc/mtab e:
+/dev/sda1 /media/tmp fuseblk ro,nosuid,nodev,allow_other,blksize=4096,default_permissions 0 0
+
+Ако във fstab не използваме ntfs, а ntfs-3g, то дискът може да бъде монтиран с опция rw по-безопасно.
+
+8. Добавяме във fstab следният ред (за диск sda6):
+/dev/sda1    /media/tmp    vfat    rw,uid=1005,gid=1006 0 0
+
+9. Монтираме диска
+root@angie-desktop:/# mount -a
+
+10. Проверка на съдържанието
+root@angie-desktop:/# ls -al /media/tmp
+total 28
+drwxr-xr-x  4 naso students 16384 1970-01-01 02:00 .
+drwxr-xr-x 12 root root      4096 2013-07-15 18:22 ..
+drwxr-xr-x  2 naso students  4096 2012-12-10 15:01 PROBA
+-rwxr-xr-x  1 naso students     0 2013-07-15 18:21 test.txt
+drwxr-xr-x  4 naso students  4096 2012-07-24 12:54 .Trash-1000
+
+11. Коренспондиращият ред от /etc/mtab e:
+/dev/sda6 /media/tmp vfat rw,uid=1005,gid=1006 0 0
+
+12. Тъй като сме използвали rw опцията, сме длъжни да проверим дали наистина може да се пише върху този диск. Установяваме, че root и naso могат да пишат върху диска, докато за останалите потребители това е забранено.
+angie@angie-desktop:/media/tmp$ touch newtest.txt
+touch: cannot touch `newtest.txt': Permission denied
+
+Тъй като заданието изисква само да се монтират дяловете със зададените потребител/група, не сме използвали опции за по-детайлна настройка като dmask, fmask и umask.
+
+Литература:
+Ubuntu Manpage: mount - mount a file system (http://manpages.ubuntu.com/manpages/lucid/man8/mount.8.html)
+NTFS - Debian Wiki (http://wiki.debian.org/NTFS)
+How do I correctly mount a NTFS partition in /etc/fstab? (http://askubuntu.com/questions/113733/how-do-i-correctly-mount-a-ntfs-partition-in-etc-fstab)
+
+=======================================================================
+
+5. Describe what is stored in /var/run & /var/lock and how the two dirs are actually used on most Linux distros.
+
+var/run basically is used to store .pid files, which contain the process id of a running program. This is commonly used in
+services or other programs that need to make their process id's available to other processes.
+
+/var/lock is used to store lock files, which are simply files used to indicate that a certain resource (a database, a file,
+a device) is in use and should not be accessed by another process. Aptitude, for example, locks its database when a package
+manager is running.
+
+Both directories contain very small throwaway files that are frequently created or destroyed, so instead of taxing your
+hard drive with all that activity, they are mounted to a ram drive. A ram drive is just a chunk of your system memory
+which the OS can treat as if it were a storage device.
+
+Description of /var/run & /var/lock and all structure in your OS you can see by typing:
+
+iskam@bonus:~# man hier
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Most Linux distributions follow the FHS ( Filesystem Hierarchy Standard) and declare it their own policy to maintain
+FHS compliance.This is description from FHS (current version is 2.3, announced on 29 January 2004):
+
+/var/lock : Lock files  http://www.pathname.com/fhs/pub/fhs-2.3.html#VARLOCKLOCKFILES
+
+Purpose
+
+Lock files should be stored within the /var/lock directory structure.
+
+Lock files for devices and other resources shared by multiple applications, such as the serial device lock files that
+were originally found in either /usr/spool/locks or /usr/spool/uucp, must now be stored in /var/lock. The naming
+convention which must be used is "LCK.." followed by the base name of the device. For example, to lock /dev/ttyS0
+the file "LCK..ttyS0" would be created. Then, anything wishing to use /dev/ttyS0 can read the lock file and act
+accordingly (all locks in /var/lock should be world-readable).
+
+The format used for the contents of such lock files must be the HDB UUCP lock file format. The HDB format is to store
+the process identifier (PID) as a ten byte ASCII decimal number, with a trailing newline. For example, if process 1230
+holds a lock file, it would contain the eleven characters: space, space, space, space, space, space, one, two, three,
+zero, and newline.
+
+/var/run : Run-time variable data  http://www.pathname.com/fhs/pub/fhs-2.3.html#VARRUNRUNTIMEVARIABLEDATA
+
+Purpose
+
+This directory contains system information data describing the system since it was booted. Files under this directory
+must be cleared (removed or truncated as appropriate) at the beginning of the boot process. Programs may have
+a subdirectory of /var/run; this is encouraged for programs that use more than one run-time file. /var/run should be
+unwritable for unprivileged users (root or users running daemons); it is a major security problem if any user can write
+in this directory.Process identifier (PID) files, which were originally placed in /etc, must be placed in /var/run.
+The naming convention for PID files is <program-name>.pid. For example, the crond PID file is named /var/run/crond.pid
+
+Requirements
+
+The internal format of PID files remains unchanged. The file must consist of the process identifier in ASCII-encoded
+decimal, followed by a newline character. For example, if crond was process number 25, /var/run/crond.pid would contain
+three characters: two, five, and newline.
+
+Programs that read PID files should be somewhat flexible in what they accept; i.e., they should ignore extra whitespace,
+leading zeroes, absence of the trailing newline, or additional lines in the PID file. Programs that create PID files
+should use the simple specification located in the above paragraph.
+
+The utmp file, which stores information about who is currently using the system, is located in this directory.
+
+System programs that maintain transient UNIX-domain sockets must place them in this directory.
+
+=======================================================================
+
+източници
+- https://en.wikipedia.org/wiki/YAFFS
+- https://en.wikipedia.org/wiki/JFFS2
+- https://en.wikipedia.org/wiki/JFFS
+- https://en.wikipedia.org/wiki/Flash_file_system
+
+Homework 2
+---------------------------------------------------------------------------------------
+4. Write down at least 3 Linux file systems optimized especially for Flash drives
+---------------------------------------------------------------------------------------
+Флаш файловите системи са такива, които са предназначени за съхранение на файлове
+върху флаш памети от различен тип. Те са широкоразпростанени в момента, поради
+големия брой мобилни устройства. Тук ще кажа, че block device layer може да емулира
+дисково устройство, така че дисковата файлова система може да бъде използвана
+във флаш устройствата, това не е оптимално решение по няколко причини.
+---------------------------------------------------------------------------------------
+1. Erasing blocks: Флаш блок паметите трябва да бъдат напълно изтрити,
+преди да бъде записана каквато и да е информация върху тях. Времето необходимо за
+изтриването им може да бъде значително, като също така се изтриват и незаписаните
+(неизползвани) блокове памет.
+
+2. Random access или случаен достъп до пеметта: Дисковите файлови системи са
+оптимизирани да редуцират или още казано да намалят "seek" времето на харддисковете
+до колкото е възможно. При флаш паметите такова нещо като "seek" време не съществува
+поради напълно различаната използвана технология.
+
+3. Wear leveling: Флаш паметите позволяват един блок да бъде многократно презаписван,
+поради тази причина флаш файловите системи са оптимизирани, писането на данни да се
+осъществява равномерно.
+---------------------------------------------------------------------------------------
+Ще представя три Линукс флаш файлови системи.
+---------------------------------------------
+Те са JFFS/JFFS2/YAFFS
+-----------------------
+JFFS е първата флаш базирана файлова система за Линукс, но бързо е била изместена от
+JFFS2, първоначално разработена за NOR flash. След това YAFFS е разработена през 2002 г.
+използваща се особено в NAND flash, като в същото време и JFFS2 е била оптимизирана
+да подържа NAND flash.
+----------------------------------------------------------------------------------------
+1. JFFS
+-------
+    Journaling Flash File System (JFFS) представлява  log-structured file system използвана в NOR флаш памети в Линукс. Флаш паметите, по специално  NOR flash трябва
+предварително да бъдат изтрити преди записването на каквата и да е информация. Процеса
+на изтриване има няколко ограничения.
+- Процеса на изтриване се осъществява със значително бавна скорост, от порядъка на 1 до 100 ms
+за блок, което е около 105 пъти по-бавно от четенето на данни от една и съща област.
+- Възможно е да се изтрие флаш памет само в големи сегменти  ( 64 KiB или повече), докато
+четенето или записването на информация се осъществява на малки блокове, най-често от порядъка
+на 512 байта.
+- Флаш паметите могат да бъдат цялостно изтривани ограничен брой пъти, като броят им е от 103 до
+106 пъти преди да започнат да се износват.
+    Тези ограничения се комбинират и се получава голяма асиметрия между процесите четене и
+запис върху флаш паметите. За разлика от тях магнитните твърди дискове предлагат почти пълна
+симетрия между четене и запис върху тях, скоростите на четене и запис са почти идентични
+тоест почти еднакви спрямо една от друга. Възможно е да се пишат и четат малки блокове или сектори от порядъка на 512 байта и на практика няма ограничения от броя на запис и презапис на данни.
+
+- JFFS enforces wear levelling by treating the flash device as a circular log. All changes to files and directories are written to the tail of the log in nodes. In each node, a header containing metadata is written first, followed by file data, if any. Nodes are chained together with offset pointers in the header. Nodes start out as valid and then become obsolete when a newer version of them is created.
+-------------------------------------------------------------------------------------------------
+2. JFFS2
+---------
+Journalling Flash File System version 2 или още казано JFFS2 е log структурирана файлова
+система използвана във флаш паметите. Тя реално е наследникът на JFFS. JFFS2 е включена в
+ядрото от версия  2.4.10 (2001-09-23), тя също е налична в няколко boot лоудъра като
+Das U-Boot, Open Firmware, the eCos RTOS и в RedBoot, най-много се използва в OpenWrt.
+    -Сега ще дам и някои от основните и характеристики. Подържа  NAND flash устройства. Като
+това е изисквала сериозна работа върху NAND устройствата имащи последователен  I/O interface
+и те немогат да бъдат memory-mapped за четене.
+    -Hard links. Това не е било възможно при JFFS, поради ограниченията в on-disk формата.
+    -Компресия, като са на разположения четири начина - zlib, rubin, rtime, и lzo.
+    -Има по-добра производителност. В случая JFFS използва паметта като purely circular log.
+         Това от своя страна предизвиква много  I/O.  garbage collection алгоритъма в JFFS2 на
+     практика прави използването му по този начин излишно.
+-------------------------------------------------------------------------------------------------
+3. YAFFS
+---------
+Като тази се разделя на още две YAFFS 1 и YAFFS 2.
+-------------------------------------------------
+    Yaffs (Yet Another Flash File System) е била направена и написана от Charles Manning
+за компанията Aleph One. YAFFS 1 представлява първата версия на тази файлова система, която
+също работи с  NAND чипове, които имат 512 байта блокове + 16 byte spare (OOB;Out-Of-Band) areas.
+На практика несъществува специална процедура за инициализиране  на YAFFS файловата система по
+време на нейното изтриване. Когато в процеса на работата с тази файлова система се открият
+повредени блокове по някаква причина YAFFS активира така наречената smart media scheme за
+маркиране на fifth byte of the block's spare area. Тези повредени блокове се маркират като
+unallocated за в бъдеще и остават практически неизползваеми. За да бъде записана каквато и да е  информация  YAFFS initially writes a whole page, която описва файлови метаданни , като
+име, път и прочие. Към новозаписания файл се прикрепя уникален идентификационен номер на дадения обект, тоест всяко пърче информация във файла съдържа този object ID. YAFFS поддържа
+дървовидна структура в RAM паметта на физическото местоположение на тази данни. Когато една данна
+вече не е налична, тоест файла е изтрит или презаписан, YAFFS маркира байта в пространството
+като свободно. Когато се използва YAFFS файловата система върху  NAND flash
+устройство, то трябва да бъде проверен всеки един блок за валидни данни. Когато тази информазия се
+пресъздаде се получава тази дървовидна структура.
+    YAFFS 2 като концепция е много подобна на YAFFS 1 и използва голяма част от кода и.
+Основната разлика идва от това, че YAFFS 2 needs to jump through significant hoops to meet the "write once" requirement of modern NAND flash. В YAFFS 2 е добавена поддръжка на checkpointing,
+което от своя страна пазвалява по-голямо време за mount.
+
+=======================================================================
+
+3. What is the command and its parameters to mount a windows fs in such a way that all files and dirs in it will be owned by user "naso" and group "students".
+
+mount  -t cifs -o username=alabastur,password=Kotka2013,uid=naso,gid=students //192.168.1.10/jc /home/komadrin/test/
+-t type device dir 
+ 
+This tells the kernel to attach the filesystem found on device (which is of type type) at the directory dir. The 
+previous contents (if any) and owner and mode of dir become invisible, and as long as this filesystem remains mounted,
+the pathname dir refers to the root of the filesystem on device.
+ 
+mount  -t cifs
+ 
+This command only works in Linux, and the kernel must support the cifs filesystem. The CIFS protocol is the successor to the 
+SMB protocol and is supported by most Windows servers and many other commercial servers and Network Attached Storage appliances as
+well as by the popular Open Source server Samba.
+ 
+username=arg 
+ 
+specifies the username to connect as. If this is not given, then the environment variable USER is used. This option can
+also take the form "user%password" or "workgroup/user" or "workgroup/user%password" to allow the password and workgroup
+to be specified as part of the username. 
+ 
+password=arg 
+ 
+specifies the CIFS password. If this option is not given then the environment variable PASSWD is used. If the password 
+is not specified directly or indirectly via an argument to mount, mount.cifs will prompt for a password, unless the guest option is specified. 
+Note that a password which contains the delimiter character (i.e. a comma ',') will fail to be parsed correctly on the command line. However, 
+the same password defined in the PASSWD environment variable or via a credentials file (see below) or entered at the password prompt will be 
+read correctly.
+ 
+uid=arg 
+sets the uid that will own all files or directories on the mounted filesystem when the server does not provide ownership information.
+It may be specified as either a username or a numeric uid. When not specified, the default is uid 0. 
+ 
+gid=arg 
+sets the gid that will own all files or directories on the mounted filesystem when the server does not provide ownership information. 
+It may be specified as either a groupname or a numeric gid. When not specified, the default is gid 0. 
+
+http://linux.die.net/man/8/mount.cifs
+http://askubuntu.com/questions/101029/how-do-i-mount-a-cifs-share
+
+=======================================================================
+
+4. Write down at least 3 Linux file systems optimized especially for Flash drives(SD cards, USB Drives, SSD disks).
+
+I. ext4 - Файлова система, която благодарение на цялостната си оптимитация дава и много добри резултати в четенето/писането и времето за достъп и при флаш устройстват.
+
+II. F2FS - специално създадена файлова система за флаш устройства от Kim Jaegeuk . Като типът на файловата система е log-structured, като за съжаление не са фиксирани някои от познатите бъгове - snowball effect.
+
+III. VFAT - "Virtual FAT", файлова система, която е на почти всяко флаш устройство поради факта, че работи коректно с всяка операционна система.
+
+Тестове с различни файлове системи с  Class 10 SD карта:
+
+         Ext2     Ext3     Ext4  Reiser3     VFat     NTFS
+Write    368      501      125      582      518      174
+Read      53       60       53       72       98      118
+
+Тестове с евтина 2GB no-name флашка:
+
+         Ext2     Ext3     Ext4  Reiser3     VFat     NTFS
+Write    434      361      156      750      564      165
+Read      50       64       48       87       51      125
+
+Горните тестове са с доста на брой малки файлове, а следващия с един голям на SD карта:
+
+         Ext2     Ext3     Ext4  Reiser3     VFat     NTFS
+Write    14.45    11.21     8.67    18.31     8.36    16.08
+Read      4.72     4.55     4.66     4.74     4.44     4.48
+
+Всички файлови системи, без значение от ОС, които са оптимизирани с флаш устройства:
+
+    CASL is a filesystem designed by Nimble Storage that uses solid-state devices to cache traditional hard disk drives.
+    ETFS - Embedded Transactional File System. Designed primarily for NAND devices by QNX Software Systems.
+    exFAT - Microsoft proprietary system intended for flash cards
+    ExtremeFFS - Internal file system for SSDs.
+    F2FS – Flash-Friendly File System. An open source Linux file system introduced by Samsung in 2012.
+    FFS2 (presumably preceded by FFS1), one of the earliest flash file systems. Developed and patented by Microsoft in the early 1990s.
+    JFFS – Original log structured Linux file system for NOR flash media
+    JFFS2 – Successor of JFFS, for NAND and NOR flash
+    LogFS – Intended to replace JFFS2, better scalability. In early development.
+    Non-Volatile File System—the "non-volatile file system" for flash memory introduced by Palm, Inc..
+    OneFS - OneFS is a file system utilized by Isilon. It supports selective placement of meta-data directly onto flash SSD.
+    RFS - Robust File System (developed and used by Samsung)
+    Segger Microcontroller Systems emFile - File system for deeply embedded applications which supports both NAND and NOR flashes. Wear leveling, fast read and write, and very low RAM usage.
+    TFAT – A transactional version of the FAT filesystem.
+    TrueFFS - Internal file system for SSDs, implementing error correction, bad block re-mapping and wear levelling.
+    UBIFS – Successor of JFFS2 optimized to utilize non-volatile DRAM
+    UFFS - Ultra low cost flash file system for embedded system
+    Unison RTOS - Fsys-Nand/Nor small footprint low cost flash file system for embedded systems
+    Write Anywhere File Layout - WAFL is an internal file system utilized by NetApp within their DataONTAP OS, originally optimized to use non-volatile DRAM
+    XCFiles – an exFAT implementation from Datalight for Wind River VxWorks and other embedded operating systems
+    YAFFS – A Log structured file system designed for NAND flash, but also used with NOR flash.
+    ZFS - Allows placing write-ahead log (ZIL) on flash, and using flash as a second-level read cache (L2ARC)
+
+Източници:
+http://en.wikipedia.org/wiki/List_of_flash_file_systems
+http://www.linuxplanet.com/linuxplanet/tutorials/7208/1
+
+=======================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,196 @@
+﻿# VIM - editor:
+# for edit mode type - "i-insert" or "v-visual"
+# for command type - ":"
+# exit here pres - "esc"
+# exit here pres - "q"
+# for undo - "u" in command mode
+# for write type "w" in command mode ; "x" - write and exit
+# then press ESC key, type : followed by x and [enter] key -> esk+:x+ente
+# :wq! overrides read-only permission (if you have the permission to override permissions, for instance when you are using the root account.
+#*****************************************************************************************
+# Пример за alias търсене на инфо за различните команди по различните секции на "man-a".
+# Показва секциите на "man-a" в които има инфо за дадената команда 
+# ~$ for i in {1..8}; do man $i дадената команда; done
+#
+# ~$ for i in {1..8}; do man $i passwd; done
+#
+#*****************************************************************************************
+#******* linux basic commands *******
+
+        cd              - change dir
+        pwd             - show current directory
+        ls              - list files & dirs
+
+        cp              - copy file
+        mv              - move/rename file
+        rm              - remove file/dir
+        ln              - link file (symbolic or hard)
+        mkdir   - create dir
+        rmdir   - remove dir
+
+        touch   - creates empty file if not existing or changes its last modified date if existing
+        echo    - prints information on the stdout
+        cat             - show the contents of a file
+        cut             - cuts a line in parts(shows only one column of a file)
+        paste   - append columns
+        tail    - shows N lines from the end of a file
+        head    - shows N lines from the beginning of a file
+        wc              - word/line count
+        nl              - number of lines
+        grep    - search for string with regular expression
+        sort    - sorting lines
+        uniq    - Locate identical lines
+        less    - view contents of a file with support for paging and search
+        more    - paging software
+        date    - show current date, set date
+
+        tar     - GNU Tar archiver
+        gzip    - GNU Zip archiver
+        bzip2   - GNU BZip2 archiver
+
+        df       - filesystem usage
+        du       - file space usage
+        sync     - flush the buffers to all disk
+        mount    - mount a device
+        umount - umount a device
+
+        wh      - check who is logged in
+        w       - check who is logged in and what cmd he is currently executing
+        ps      - show process list
+        pstree  - show process list tree
+        pgrep   - search trough the process list
+        kill    - send signal to a process
+        killall - to all processes like name
+        uptime  - check the machine uptime
+        top             - System monitor
+
+        chown   - change owner or owner and group
+        chgrp   - change group
+        chmod   - change permissions
+
+        stat    - get file system information
+        umask   - set initial create mask
+
+        lsattr  - list advanced attributes
+        chattr  - change advanced attributes
+
+        getfacl - list file system ACLs
+        setfacl - set file system ACLs
+
+        getfattr - list file attributes (man 5 attr)
+        setfattr - set file attributes (man 5 attr)
+
+# ******* security commands *******
+        id - prints your user id, user name, and all groups that you are part of
+        whoami - tells you your user name at the moment
+        useradd - add new user
+        userdel - removes existing user
+        usermod - modifies user information
+        passwd - change user passowd
+        groupadd - add new group
+        groupdel - removes existing group
+        groupmod - change group name
+        groups - show all groups in which you are member
+        gpasswd - change group password
+        chsh - chnage user shell
+        chfn - change user info
+        chown - change the owner
+        chgrp - change the group owner
+        chmod - change file permissions
+        umask - change the file creation mask
+        lsattr - list file attributes
+        chattr - change file attributes
+
+        additional chmod:
+          1 - sticky bit
+          2 - set gid
+          3 - set gid & sticky bit
+          4 - set uid
+          5 - set uid & sticky bit
+          6 - set uid & set gid
+          7 - set uid & set gid & sticky bit
+
+        additional file attributes:
+          A - noatime
+          a - append only
+          i - immutable
+          j - jurnaled (useful only with ext3)
+          s - secure delete
+          S - sync to disk
+          u - undelete (not for ext2 & ext3)
+
+# ******* some commands *******
+echo
+cat
+cut
+nl
+wc
+head
+tail
+date
+pwd
+readlink
+seq
+sort
+uniq
+df
+du
+yes
+diff
+zgrep
+zcat
+zdiff
+
+# ******* grep / sed / awk  *******
+  *** special matches: ***
+[:alnum:]  Alphanumeric characters.
+[:alpha:]  Alphabetic characters.
+[:blank:]  Space or tab characters.
+[:cntrl:]  Control characters.
+[:digit:]  Numeric characters.
+[:graph:]  Characters that are both printable and visible.  (A space is printable, but not visible, while an a is both.)
+[:lower:]  Lower-case alphabetic characters.
+[:print:]  Printable characters (characters that are not control characters.)
+[:punct:]  Punctuation characters (characters that are not letter,  digits,  control  characters,  or  space characters).
+[:space:]  Space characters (such as space, tab, and formfeed, to name a few).
+[:upper:]  Upper-case alphabetic characters.
+[:xdigit:] Characters that are hexadecimal digits.
+
+\s - space or tab
+\w - a whole word
+\d - digit
+
+\a        alarm, that is, the BEL character (hex 07)
+\cx       "control-x", where x is any ASCII character
+\e        escape (hex 1B)
+\f        formfeed (hex 0C)
+\n        linefeed (hex 0A)
+\r        carriage return (hex 0D)
+\t        tab (hex 09)
+\ddd      character with octal code ddd, or back reference
+\xhh      character with hex code hh
+\x{hhh..} character with hex code hhh..
+
+  *** sed / awk ***
+
+
+# *******  *******
+
+
+# *******  *******
+
+
+**************************************************************************
+# VIM - editor:
+#
+# for edit mode type - "i-insert" or "v-visual"
+# for command mode - ":"
+# exit here pres - "esc"
+# exit here pres - "q"
+# for undo - "u" in command mode
+# for write type "w" in command mode ; "x" - write and exit
+# then press ESC key, type : followed by x and [enter] key -> esk+:x+ente
+# :wq! overrides read-only permission (if you have the permission to override permissions, for instance when you are using the root account.
+#
+#
+**************************************************************************

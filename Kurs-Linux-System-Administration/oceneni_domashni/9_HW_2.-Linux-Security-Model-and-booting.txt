@@ -1,0 +1,32 @@
+﻿4. Write down at least 3 Linux file systems optimized especially for Flash drives(SD cards, USB Drives, SSD disks).
+
+	Solid state media, like flash memory, are similar to disks in their interfaces, but have different problems. On low level, they require special handling such as wear leveling and different error detection and correction algorithms. Typically a device such as solid-state disk handles such operations internally and therefore a regular file system can be used. However, for certain specialized installations (embedded systems, industrial applications) a file system optimized for plain flash memory is needed. I found a large number of FS specialized for flash drives.
+
+	1. JFFS/JFFS2/YAFFS (Journalling Flash File System/Journalling Flash File System version 2/Yet Another Flash File System)
+	JFFS was the first flash-specific file system for Linux, but it was quickly superseded by JFFS2, originally developed for NOR flash. Then YAFFS was released in 2002, dealing specifically with NAND flash, and JFFS2 was updated to support NAND flash too.
+	
+	2. UBIFS (Unsorted Block Image File System)
+	UBIFS is a successor to JFFS2, and competitor to LogFS, as a file system for use with raw flash memory media. Development began in earnest in 2007, with the first stable release made to Linux kernel 2.6.27 in October 2008. UBIFS has been actively developed from its initial merge. UBIFS has documentation hosted at infradead.org along with JFFS2 and MTD drivers. Some initial comparison show UBIFS with compression faster than F2FS.
+	
+	3. LogFS 
+	LogFS, another Linux flash-specific file system, is currently being developed to address the scalability issues of JFFS2. LogFS was motivated by the difficulties of JFFS2 with larger flash-memory drives. LogFS stores the inode tree on the drive; JFFS2 does not, which requires it to scan the entire drive at mount and cache the entire tree in RAM. For larger drives, the scan can take tens of seconds and the tree can take a significant amount of main memory. LogFS avoids these penalties, but it does do more work while the system is running and uses some of the drive's space for holding the inode tree.
+	
+	4. F2FS (Flash-Friendly File System)
+	The motivation for F2FS was to build a file system that from the start takes into account the characteristics of NAND flash memory-based storage devices (such as solid-state disks, eMMC, and SD cards), which have been widely being used in computer systems ranging from mobile devices to servers. F2FS was added to the Linux kernel 3.8.
+
+
+Additional info:
+Diferent file systems: http://en.wikipedia.org/wiki/List_of_file_systems
+JFFS/JFFS2/YAFFS: 
+	https://en.wikipedia.org/wiki/JFFS
+	https://en.wikipedia.org/wiki/JFFS2
+	https://en.wikipedia.org/wiki/YAFFS
+UBIFS:  https://en.wikipedia.org/wiki/UBIFS
+LogFS:  https://en.wikipedia.org/wiki/LogFS
+F2FS:   https://en.wikipedia.org/wiki/F2FS
+
+ЗАБЕЛАЖКА:
+Добро домашно според мен. Представени са повече от 3 файлови системи, оптимизирани за работа с (SD cards, USB Drives, SSD disks). 
+Представени са достатъчно източници.
+Успех
+

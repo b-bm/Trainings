@@ -1,0 +1,28 @@
+﻿Execute this: lynx --dump http://cnn.com
+   Now get only the relative path to all links that are on hostnames *.cnn.com and cnn.com included.
+
+[Deyan@localhost tmp]$ lynx --dump http://cnn.com >> /tmp/test3
+[Deyan@localhost tmp]$ grep -c [/*.cnn.com] /tmp/test3
+
+Коментар, точки и проба:
+точки: 8
+
+Добре направено домашно, можеше да има output и някой друг коментар по повод на това какво се случва, защо и как :)
+Успех!
+
+проба на grizzly:
+
+[BM_boyan@grizzly ~]$ lynx --dump http://cnn.com >> /home/BM_boyan/my_1/test_cnn.txt 
+	# с тази част( >> /home/BM_boyan/my_1/test_cnn.txt създавам файл test_cnn.txt в директория my_1 и се записва в него информацията от подадената команда )
+	
+[BM_boyan@grizzly ~]$ ls -a
+.  ..  .bash_history  .bash_logout  .bash_profile  .bashrc  .lesshst  .ssh  .viminfo  my_1
+[BM_boyan@grizzly ~]$ cd my_1
+[BM_boyan@grizzly my_1]$ ls -a
+.  ..  info1.txt  info2.txt  info3.txt  test_cnn.txt
+[BM_boyan@grizzly my_1]$ grep -c [/*.cnn.com] /home/BM_boyan/my_1/test_cnn.txt
+797
+[BM_boyan@grizzly my_1]$ cd
+[BM_boyan@grizzly ~]$
+
+

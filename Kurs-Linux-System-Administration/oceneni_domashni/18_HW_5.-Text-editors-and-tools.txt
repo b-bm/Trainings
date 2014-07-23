@@ -1,0 +1,93 @@
+﻿2. With a single regular expression get all services that have the string 'file' in their names from /etc/services and are runing only on UDP.
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+[wwwroot@grizzly ~]$ uname -a;date;uptime && whoami
+Linux grizzly.yuhu.biz 2.6.32-358.14.1.el6.i686 #1 SMP Tue Jul 16 21:12:30 UTC 2013 i686 i686 i386 GNU/Linux
+Fri Aug 16 11:31:39 EEST 2013
+ 11:31:39 up 14:54,  8 users,  load average: 0.00, 0.02, 0.00
+wwwroot
+[wwwroot@grizzly ~]$
+[wwwroot@grizzly ~]$
+[wwwroot@grizzly ~]$
+[wwwroot@grizzly ~]$
+[wwwroot@grizzly ~]$ grep --color=auto -E 'file.*(\/udp)|(\/udp).*file' /etc/services
+cvsup           5999/udp        CVSup           # CVSup file transfer/John Polstra/FreeBSD
+afs3-fileserver 7000/udp                        # file server itself
+profile         136/udp                 # PROFILE Naming System
+9pfs            564/udp                 # plan 9 file service
+bnetfile        1120/udp                # Battle.net File Transfer Protocol
+filex-lport     1887/udp                # FileX Listening Port
+simple-tx-rx    2257/udp                # simple text/file transfer
+mfserver        2266/udp                # M-files Server
+mobile-file-dl  2926/udp                # MOBILE-FILE-DL
+filecast        3401/udp                # filecast
+csvr            3417/udp                # ConServR file translation
+rfa             4672/udp                # remote file access server
+profilemac      4749/udp                # Profile for Mac
+avt-profile-1   5004/udp                # RTP media data [RFC 3551]
+avt-profile-2   5005/udp                # RTP control protocol [RFC 3551]
+boe-filesvr     6404/udp                # Business Objects Enterprise internal server
+mindfilesys     7391/udp                # mind-file system server
+isdd            8148/udp                # i-SDD file transfer
+filesphere      24242/udp               # fileSphere
+flashfiler      24677/udp               # FlashFiler
+filenet-powsrm  32767/udp               # FileNet BPM WS-ReliableMessaging Client
+filenet-tms     32768/udp               # Filenet TMS
+filenet-rpc     32769/udp               # Filenet RPC
+filenet-nch     32770/udp               # Filenet NCH
+filenet-rmi     32771/udp               # FileNet RMI
+filenet-pa      32772/udp               # FileNET Process Analyzer
+filenet-cm      32773/udp               # FileNET Component Manager
+filenet-re      32774/udp               # FileNET Rules Engine
+filenet-pch     32775/udp               # Performance Clearinghouse
+filenet-peior   32776/udp               # FileNET BPM IOR
+filenet-obrok   32777/udp               # FileNet BPM CORBA
+[wwwroot@grizzly ~]$
+[wwwroot@grizzly ~]$
+[wwwroot@grizzly ~]$
+[wwwroot@grizzly ~]$
+
+Коментар, точки и проба:
+точки: 5
+
+С посоченото решение на проблема не се получава желания резултат, както се вижда по-долу  посочените сървиси работят и под "tcp".
+В условието на задачата се изисква да работят само под "udp".
+Аз също не успях да доведа задачата до желания резултат, който в случая според мен трябва да листне "0 - сървиси" работещи под "udp".
+можеш да следиш тази тема от форума за информация: http://forums.academy.telerik.com/113361/linux-%D0%B4%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D0%BE-text-editors-and-tools-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2 
+
+Успех!
+
+проба на grizzly:
+
+[user@grizzly ~]$ grep -i '.*file.*\/tcp' /etc/services
+afs3-fileserver 7000/tcp                        # file server itself
+supfilesrv      871/tcp                         # SUP server
+supfiledbg      1127/tcp        kwdb-commn      # SUP debugging
+profile         136/tcp                 # PROFILE Naming System
+bnetfile        1120/tcp                # Battle.net File Transfer Protocol
+filex-lport     1887/tcp                # FileX Listening Port
+mobile-file-dl  2926/tcp                # MOBILE-FILE-DL
+filecast        3401/tcp                # filecast
+profilemac      4749/tcp                # Profile for Mac
+avt-profile-1   5004/tcp                # RTP media data [RFC 3551, RFC 4571]
+avt-profile-2   5005/tcp                # RTP control protocol [RFC 3551, RFC 4571]
+boe-filesvr     6404/tcp                # Business Objects Enterprise internal server
+mindfilesys     7391/tcp                # mind-file system server
+filesphere      24242/tcp               # fileSphere
+flashfiler      24677/tcp               # FlashFiler
+filenet-powsrm  32767/tcp               # FileNet BPM WS-ReliableMessaging Client
+filenet-tms     32768/tcp               # Filenet TMS
+filenet-rpc     32769/tcp               # Filenet RPC
+filenet-nch     32770/tcp               # Filenet NCH
+filenet-rmi     32771/tcp               # FileNET RMI
+filenet-pa      32772/tcp               # FileNET Process Analyzer
+filenet-cm      32773/tcp               # FileNET Component Manager
+filenet-re      32774/tcp               # FileNET Rules Engine
+filenet-pch     32775/tcp               # Performance Clearinghouse
+filenet-peior   32776/tcp               # FileNET BPM IOR
+filenet-obrok   32777/tcp               # FileNet BPM CORBA
+
+
+
+

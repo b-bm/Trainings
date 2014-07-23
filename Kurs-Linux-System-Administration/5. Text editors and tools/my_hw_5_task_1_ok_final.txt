@@ -1,0 +1,44 @@
+﻿HW - 5:
+
+1. Login on grizzly and get the home folders of the usernames that have numbers in them.
+
+[BM_boyan@grizzly ~]$ ls /home/ |grep -h '[0-9]'
+4
+GiK986
+Ivan72
+VLD62
+Vali0
+blagovestie1
+d.georgiev.91
+dandreev1
+djordjo7
+fuzly2
+gogo74
+iordan93
+kamen779
+kmalamov1
+loopback0
+m4rt00
+mage3
+martotko1
+nikolai.velkov1
+pacho10
+pacho19
+pe6ev
+pe6o
+petko9001
+plam40
+rossi87
+s0ny123
+stefito3
+svv1234
+tm206
+todor87
+user1
+val10
+veidar45
+vik16r
+ze3rax
+[BM_boyan@grizzly ~]$
+
+

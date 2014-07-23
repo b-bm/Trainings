@@ -1,0 +1,50 @@
+﻿WSA - HW - 4:
+
+2. Find and document information for the LDAP protocol. Provide information for some applications that are integrated with the LDAP protocol.
+
+LDAP or Lightweight Directory Access Protocol:
+
+The Lightweight Directory Access Protocol (LDAP; /ˈɛldæp/) is an application protocol for accessing and maintaining distributed directory information services over an Internet Protocol (IP) network.
+Directory services may provide any organized set of records, often with a hierarchical structure, such as a corporate email directory. 
+Similarly, a telephone directory is a list of subscribers with an address and a phone number.
+LDAP is specified in a series of Internet Engineering Task Force (IETF) Standard Track Request for Comments (RFCs), using the description language ASN.1. 
+The latest specification is Version 3, published as RFC 4511.
+
+For example, here is an LDAP search translated into plain English: 
+"Search in the company email directory for all people located in Boston whose name contains 'Jesse' that have an email address. Please return their full name, email, title, and description."
+A common usage of LDAP is to provide a "single sign-on" where one password for a user is shared between many services, such as applying a company login code to web pages 
+(so that staff log in only once to company computers, and then are automatically logged into the company intranet)
+
+LDAP Application Program Interface:
+
+The LDAP Application Program Interface, described by RFC 1823(http://tools.ietf.org/html/rfc1823),is an Informational RFC that specifies an application programming interface in the C programming language for version 2 of the Lightweight Directory Access Protocol. 
+Version 2 of LDAP is historic. Commonly available LDAP C APIs do not strictly adhere to this specification.
+
+List of LDAP software:
+The following is a list of software programs that can communicate with and/or host directory services via the Lightweight Directory Access Protocol (LDAP)
+
+Cross-platform:
+Apache Directory Server/Studio -> an LDAP browser and directory client for Linux, Mac OS X, and Microsoft Windows, and as a plug-in for the Eclipse development environment.
+FusionDirectory -> a web application under license GNU General Public License developed in PHP for managing LDAP directory and associated services.
+JXplorer -> a Java-based browser that runs in any operating environment.
+LDAP Account Manager -> a PHP based webfrontend for managing various account types in an LDAP directory.
+phpLDAPadmin -> a web-based LDAP administration tool for creating and editing LDAP entries in any LDAP server.
+
+Microsoft Windows:
+Active Directory Explorer -> a free LDAP client tool from Microsoft. http://en.wikipedia.org/wiki/Active_Directory_Explorer
+LDAP Admin -> a free, open source LDAP directory browser and editor. http://en.wikipedia.org/wiki/Ldap_admin
+
+info:
+http://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol
+http://en.wikipedia.org/wiki/LDAP_Application_Program_Interface
+http://tools.ietf.org/html/rfc1823
+http://www.ietf.org/rfc/rfc1777.txt
+http://en.wikipedia.org/wiki/List_of_LDAP_software
+http://en.wikipedia.org/wiki/Ldap_admin
+
+http://msdn.microsoft.com/en-us/library/windows/desktop/aa367008%28v=vs.85%29.aspx
+http://msdn.microsoft.com/en-us/library/windows/desktop/aa367036%28v=vs.85%29.aspx
+
+http://weblogic-wonders.com/weblogic/ldap-server/
+https://h20392.www2.hp.com/portal/swdepot/displayProductInfo.do?productNumber=J4269AA
+

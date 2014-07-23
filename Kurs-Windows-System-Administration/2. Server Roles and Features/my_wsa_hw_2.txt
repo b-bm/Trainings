@@ -1,0 +1,12 @@
+﻿WSA - HW - 2:
+
+5. Find and document as much as possible for Windows PowerShell. Try to compare PowerShell with some classic Unix/Linux shells.
+
+информация за Windows PowerShell: 
+
+http://en.wikipedia.org/wiki/Windows_PowerShell
+http://technet.microsoft.com/en-us/library/bb978526.aspx
+http://technet.microsoft.com/en-us/library/ee221100.aspx
+http://www.powershellpro.com/powershell-tutorial-introduction/tutorial-powershell-cmdlet/
+http://blogs.technet.com/b/musings_of_a_technical_tam/archive/2012/06/04/windows-powershell-self-training-guide.aspx
+

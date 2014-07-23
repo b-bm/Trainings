@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\ZiroSubset\bin\Debug\ZiroSubset.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\ZiroSubset\bin\Debug\ZiroSubset.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\ZiroSubset\bin\Debug\ZiroSubset.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\ZiroSubset\obj\Debug\9.ZiroSubset.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\ZiroSubset\obj\Debug\ZiroSubset.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\ZiroSubset\obj\Debug\ZiroSubset.pdb

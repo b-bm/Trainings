@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\ZerosOfFactorialN\bin\Debug\ZerosOfFactorialN.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\ZerosOfFactorialN\bin\Debug\ZerosOfFactorialN.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\ZerosOfFactorialN\bin\Debug\ZerosOfFactorialN.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\ZerosOfFactorialN\obj\Debug\12.ZerosOfFactorialN.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\ZerosOfFactorialN\obj\Debug\ZerosOfFactorialN.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\6. Loops\ZerosOfFactorialN\obj\Debug\ZerosOfFactorialN.pdb

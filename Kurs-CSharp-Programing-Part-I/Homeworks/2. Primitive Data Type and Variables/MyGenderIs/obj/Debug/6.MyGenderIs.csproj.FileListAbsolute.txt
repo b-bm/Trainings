@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MyGenderIs\bin\Debug\MyGenderIs.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MyGenderIs\bin\Debug\MyGenderIs.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MyGenderIs\bin\Debug\MyGenderIs.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MyGenderIs\obj\Debug\MyGenderIs.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MyGenderIs\obj\Debug\MyGenderIs.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\MyGenderIs\obj\Debug\6.MyGenderIs.csprojResolveAssemblyReference.cache

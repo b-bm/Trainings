@@ -1,0 +1,8 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\AssignsNullValues\bin\Release\AssignsNullValues.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\AssignsNullValues\bin\Release\AssignsNullValues.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\AssignsNullValues\bin\Release\AssignsNullValues.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\AssignsNullValues\obj\Release\AssignsNullValues.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\AssignsNullValues\obj\Release\AssignsNullValues.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\AssignsNullValues\bin\Release\AssignsNullValues.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\AssignsNullValues\obj\Release\AssignsNullValues.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\AssignsNullValues\obj\Release\AssignsNullValues.pdb

@@ -1,0 +1,12 @@
+﻿3. Describe the SMACK security model.
+
+ИЗТОЧНИЦИ - 1:
+https://en.wikipedia.org/wiki/Smack
+http://elinux.org/Security#SMACK
+http://schaufler-ca.com/home
+
+SMACK - Simple Mandatory Access Control Kernel. This is a lightweight implementation of MAC in the Linux kernel. 
+Smack is a Linux kernel security module that protects data and process interaction from malicious manipulation using a set of custom mandatory access control rules, with simplicity as its main design goal.
+It has been officially merged since the Linux 2.6.25 release, and was the main access control mechanism for the MeeGo mobile Operating System.
+It is also used to sandbox HTML5 web applications in the Tizen architecture, in the commercial Wind River Linux solutions for embedded device development, and in Philips Digital TV products.
+

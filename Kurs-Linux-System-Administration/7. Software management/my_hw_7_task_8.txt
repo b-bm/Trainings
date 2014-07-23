@@ -1,0 +1,84 @@
+﻿HW - 7:
+
+8. Describe what you have to do in order to start using autoconf for your project.
+
+Autogen.sh генерира configure скрипта, а той ползва по-малки скриптчета, за да провери наличието на стандартни библиотеки, стандартни тулове дали ги има в системата ни.
+Темплейта configure.in или configure.ac, които също могат да генерират configure скрипта.
+Autoconf-a се използва за двата темплейта (configure.in или configure.ac) т.е. трябва да имаме тези темплейти, за да използва ме autoconf.
+
+*** Running The Configure Script
+
+A recipe that uses the configure script that autoconf generates can start like this:
+
+        $BDIR/config.h $BDIR/config.aap :
+                                configure config.arg config.h.in config.aap.in
+            :sys ./configure `file2string("config.arg")`
+            :move {force} config.h config.aap config.log
+                                              config.cache config.status $BDIR
+        config.arg:
+            :touch {exist} config.arg
+
+        :update $BDIR/config.aap
+        :include $BDIR/config.aap
+
+What happens here is that the "config.aap" target is updated before any of the building is done. 
+This is required, because running the configure script will generate or update the "config.aap" file that influences how the building is done.
+
+*** Remembering Configure Arguments
+
+The arguments for configure are stored in the "config.arg" file. This makes it easy to run configure again with the same arguments. 
+The file is read with the file2string() function. 
+There should be a "config.txt" file that explains all the possible configure arguments, with examples that can be copied into "config.arg". 
+Example:
+
+        # Select the library to be used for terminal access.  When omitted a
+        # series of libraries will be tried.  Useful values:
+            --with-tlib=curses
+            --with-tlib=termcap
+            --with-tlib=termlib
+
+The user can now copy one of the example lines to his "config.arg" file. Example:
+
+        # select specific terminal library
+            --with-tlib=termcap
+
+Comment lines can be used, they must start with a "#". Note: a comment after an argument doesn't work, it will be seen as an argument.
+
+When updating to a new version of the program, the same "config.arg" file can still be used. 
+A "diff" between the old and the new "config.txt" will show what configure arguments have changed.
+
+*** Variants And Configure
+
+"config.aap" and "config.h" are put in $BDIR, because they depend on the current system. 
+They might also depend on the variant to be built. In that case the :variant statement must be before the use of $BDIR. 
+However, if the variant is selected by running configure, the variant must come later. "config.aap" and "config.h" are then updated when selecting another variant.
+
+For the program to find "config.h" in $BDIR you must add an option to the C compiler. 
+And you have to notify the compiler that the file exists, so that it will be included:
+
+        INCLUDE += -I$BDIR
+        DEFINE += -DHAVE_CONFIG_H
+
+The "config.cache", "config.log" and "config.status" files are also moved to $BDIR. 
+This means they are not available when running "./configure" again., 
+This may be a bit slower, since the cache isn't used, but it is much more reliable. And you can view the log of each variant that was build.
+
+*** Running Autoconf
+
+For a developer there also needs to be a method to generate the configure script from configure.in. 
+This needs to be done even before configure is run. Prepending this to the example above should work:
+
+        configure {signfile = mysign} : configure.in
+            :sys autoconf
+
+Normally the "configure" script is distributed with the program, so that a user does not need to install and run autoconf. 
+The "{signfile = mysign}" attribute on the target is used to avoid running autoconf when the user builds the program and the "configure" and "configure.in" files are still as they were distributed. 
+The signatures in the "mysign" file, which you must include in the distribution, will match and Aap knows that "configure" is up-to-date. 
+If using the "mysign" file was omitted, there would be no signature for the "configure" target and Aap would decide to run autoconf. 
+When you change "configure.in" its signature will be different from what is stored in "mysign" and autoconf will be run. 
+
+
+Източници:
+http://www.a-a-p.org/exec/user-autoconf.html
+http://www.nondot.org/sabre/Mirrored/autoconf-2.12/autoconf_2.html
+http://forums.bgdev.org/?showtopic=11029

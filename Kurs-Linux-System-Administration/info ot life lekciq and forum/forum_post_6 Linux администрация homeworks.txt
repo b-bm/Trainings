@@ -1,0 +1,243 @@
+﻿Linux администрация homeworks:
+
+homework_lecture_06:
+
+от пост -> http://forums.academy.telerik.com/115168/lsa-6-networking-homework
+
+2. Write a RedHat based configuration file(s) that will add the following two networks as static routes on eth1:
+10.18.1.0/24
+192.168.0.0/23
+
+Static route configuration is stored in a /etc/sysconfig/network-scripts/route-interface file.
+For example, static routes for the eth1 interface would be stored in the /etc/sysconfig/network-scripts/route-eth1 file.
+The route-interface file has two formats: IP command arguments and network/netmask directives.
+
+IP Command Arguments Format
+Define a default gateway on the first line. This is only required if the default gateway is not set via DHCP:
+
+default X.X.X.X dev interface
+
+Define a static route. Each line is parsed as an individual route:
+
+X.X.X.X/X via X.X.X.X dev interface
+
+For example lets say our default gateway is 192.168.0.1. 
+To configure routing on networks 10.18.1.0/24 and 192.168.0.0/23 we need to edit the file /etc/sysconfig/network-scripts/route-eth1
+
+default 192.168.0.1 dev eth1
+10.18.1.0/24 via 192.168.0.1 dev eth0
+192.168.0.0/23 via 192.168.0.1 dev eth0
+
+After we safe the file, we need to restart the network using command:
+
+/etc/init.d/network restart
+
+after that the changes will take effect.
+
+Бих искал да попитам дали някой е писал по:
+3. Write a RedHat based configuration file(s) that will create a bridge device from eth0 and eth1
+ето и примерна конфигурация според мен:
+
+1. First we need to install the utilities:
+
+yum install bridge-utils
+
+yum install tunctl
+
+2. Disable NetworkManager and enable network at boot time:
+chkconfig NetworkManager off
+chkconfig –levels 35 network on
+/etc/init.d/NetworkManager stop
+/etc/init.d/network restart
+
+3. Create br0 configuration
+nano /etc/sysconfig/network-scripts/ifcfg-br0
+    DEVICE=br0
+    TYPE=Bridge
+    BOOTPROTO=static
+    DNS1=192.168.0.1
+    GATEWAY=192.168.0.1
+    IPADDR=192.168.0.100
+    NETMASK=255.255.255.0
+    ONBOOT=yes
+
+4. Modify eth0 configuration:
+nano /etc/sysconfig/network-scripts/ifcfg-eth0
+    DEVICE=eth0
+    HWADDR=00:1e:90:f3:f0:02
+    ONBOOT=yes
+    TYPE=Ethernet
+    IPV6INIT=no
+    USERCTL=no
+    BRIDGE=br0
+    
+    OR (I am not sure which way is true)
+    
+    DEVICE=eth0
+    TYPE=Ethernet
+    BRIDGE=br0
+    ONBOOT=yes
+    
+5. Modify eth1 configuration:
+    analogical to 4.
+6./etc/init.d/network restart
+
+by skolew
+
+--> Здравей,
+Понеже и аз писах по т.2 смятам че не си направил нищо, без да претендирам че аз съм прав
+1. В условието на задачате се иска да добавим статични пътища към интерфейса eth1, а не eth0, както е в твоя случай.
+2. В условието на задачата не става дума за пътят по подразбиране. Обикновено е добре да се задава глобално в /etc/sysconfig/network.
+3. При наличие на път по подразбиране, файла "/etc/sysconfig/network-scripts/route-eth1" в дадения от теб вариант, се обезсмисля, защото така или иначе трафика ще мине през указания по подразбиране път и асоциирания с него интерфейс.
+
+Моят вариант за т.2 от домашното е следният, без претенции че е работил някъде:
+--------------------------
+We have to create or modify the following file: /etc/sysconfig/network-scripts/route-eth1 as follows:
+ 
+10.18.1.0/24 dev eth1
+192.168.0.0/23 dev eth1
+
+by explorerv
+
+	|--> За eth0 съм съгласен, просто не съм го променил при мен е eth0 просто нямам eth1 и съм пропуснал да го редактирам.
+		 Което си е чиста грешка,относно default gateway-я, според мен няма как да бъде пропуснат.
+		 Така или иначе този трафик, трябва да излезне на някъде, поне според мен.
+		 Затова и отворих темата за да дискутираме. ** 	by skolew **
+	|--> Доколкото ми е известно статичните пътища са алтернатива на пътя по подразбиране. 
+		 Затова препоръчват пътя по подразбиране да се задава глобално, на ниво система, а не на интерфейс. 
+		 Защото иначе става излишно повторение:
+
+		 default 192.168.0.1 dev eth1
+		 10.18.1.0/24 via 192.168.0.1 dev eth1
+		 192.168.0.0/23 via 192.168.0.1 dev eth1
+		 -----------------------
+
+		 При наличието на първия ред, останалите са излишни. ** by explorerv **
+	|--> 
+
+-->
+============================================================================================================
+
+# 11. Describe the difference between dhclient and dhcpcd.
+
+# One of the first differences that comes to mind is that dhcpcd is compliant to RFC2131 and by default does not need configuration to work as a daemon. 
+# On the other hand, dhclient by ISC (http://www.isc.org/downloads/dhcp/) could use the configuration in /etc/dhclient.conf and thus be used in more complex situations (According to the Novell's Suse Linux Adminguide - http://www.novell.com/documentation/suse91/suselinux-adminguide/html/ch14s10.html). 
+# According to the manual page for the dhclient configuration file (man dhclient.conf), it can be used to configure the behaviour of the client in a wide variety of ways, for example controlling the defaults to use if the server does not provide certain information, values with which to override information provided by the server, or values to prepend or append to information provided by the server. 
+# Of these those dhcpcd could not manage only with the defaults case. The dhclient.conf configuration file can also be preinitialized with addresses to use on networks that dont have DHCP servers.
+# From the man page of dhclient we can also see that it is possible to specify interfaces by name in the dhclient.conf file. 
+# If interfaces are specified in this way, then the client will only configure interfaces that are either specified in the configuration file or on the command line, and will ignore all other interfaces.
+# Other difference of dhclient would be the capability to use the option -1 (try once to get a lease and exit with code 2 on failure), which would make the usage in scripts more sensible.  
+# One of the main differences between the two would be that dhclient reaches out to a server only once to request and validate a client's IP address. 
+# In contrast dhcpcd runs in background and actively manages re-requests after expired lease time and without the need to be called again. 
+# For example a bit more explained in this quote from dhcpcd's man page in Debian - "If dhcpcd failed to obtain a lease, it will probe for a valid IPv4LL address (aka Zeroconf, aka APIPA). 
+# Once obtained it will probe every 10 seconds for a DHCP server to get a proper address".  
+# One functionality that dhcpcd has (and dhclient has not) would be the option "-T" or "--test" - On receipt of discover messages, simply print the contents of the DHCP message to the console. dhcpcd will not configure the interface, touch any files or restart any services. For example below:
+
+root@owncloud:~# /sbin/dhcpcd -T eth0
+IPADDR='192.168.1.2'
+NETMASK='255.255.255.0'
+NETWORK='192.168.1.0'
+BROADCAST='192.168.1.255'
+ROUTES=''
+GATEWAYS='192.168.1.1'
+DNSDOMAIN='example.org'
+DNSSERVERS='192.168.1.1'
+DHCPSID='192.168.1.1'
+LEASETIME='216000'
+RENEWALTIME='108000'
+REBINDTIME='189000'
+INTERFACE='eth0'
+CLASSID='dhcpcd 3.2.3'
+CLIENTID='ff:65:74:68:30:00:01:00:01:19:a8:bd:3b:02:08:20:e5:3f:40'
+DHCPCHADDR='02:08:20:e5:3f:40'
+
+# dhcpcd-1.x and 2.x compatible variables
+DNS='192.168.1.1'
+GATEWAY='192.168.1.1'
+
+# Interestingly in RH based distributions any attempt to install the package "dhcpcd" gives the following result:
+
+[root@localhost ~]# yum install dhcpcd
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.telepoint.bg
+ * extras: mirror.telepoint.bg
+ * updates: mirror.telepoint.bg
+Setting up Install Process
+Package 12:dhclient-4.1.1-34.P1.el6.centos.i686 already installed and latest version
+Nothing to do
+
+# With the following example we used dhclient to assing addresses from our DHCP server to the newly added eth2 interface with the option -d for forcing dhclient to run as a foreground process (just to see its output):
+
+[root@localhost ~]# dhclient -d eth2
+Internet Systems Consortium DHCP Client 4.1.1-P1
+Copyright 2004-2010 Internet Systems Consortium.
+All rights reserved.
+For info, please visit https://www.isc.org/software/dhcp/
+
+Listening on LPF/eth2/08:00:27:44:7b:cc
+Sending on   LPF/eth2/08:00:27:44:7b:cc
+Sending on   Socket/fallback
+DHCPREQUEST on eth2 to 255.255.255.255 port 67 (xid=0x731a0118)
+DHCPACK from 192.168.1.1 (xid=0x731a0118)
+bound to 192.168.1.122 -- renewal in 38157 seconds.
+^Z
+[1]+  Stopped                 dhclient -d eth2
+[root@localhost ~]# ifconfig eth2
+eth2      Link encap:Ethernet  HWaddr 08:00:27:44:7B:CC  
+          inet addr:192.168.1.122  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: fe80::a00:27ff:fe44:7bcc/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:296 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:90 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:111922 (109.2 KiB)  TX bytes:8208 (8.0 KiB)
+
+# Sources:
+#
+# http://www.novell.com/documentation/suse91/suselinux-adminguide/html/ch14s10.html
+# http://www.phystech.com/download/dhcpcd_man.html
+# http://superuser.com/questions/393887/dhclient-and-dhcpcd-the-real-difference
+# http://www.ietf.org/rfc/rfc2131.txt
+# man dhcpcd & man dhcpcd-bin(on Debian)
+# man dhclient & man dhclient.conf (Cent/SL)
+#
+# Thanks for reading
+#
+# EOF
+** by ttanev **
+
+-->
+============================================================================================================
+
+============================================================================================================
+
+============================================================================================================
+
+============================================================================================================
+
+============================================================================================================
+
+============================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

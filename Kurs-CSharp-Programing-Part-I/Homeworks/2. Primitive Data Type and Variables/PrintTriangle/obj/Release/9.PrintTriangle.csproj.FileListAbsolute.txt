@@ -1,0 +1,12 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\bin\Release\PrintTriangle.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\bin\Release\PrintTriangle.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\bin\Release\PrintTriangle.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\obj\Release\9.PrintTriangle.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\obj\Release\PrintTriangle.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\obj\Release\PrintTriangle.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\bin\Release\PrintTriangle.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\obj\Release\PrintTriangle.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\obj\Release\PrintTriangle.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\bin\Release\PrintTriangle.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\bin\Release\PrintTriangle.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\PrintTriangle\obj\Release\9.PrintTriangle.csprojResolveAssemblyReference.cache

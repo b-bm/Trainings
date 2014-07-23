@@ -1,0 +1,97 @@
+﻿Как да извлечем всички команди за дадена помощна категория/секция от man?
+--> http://forums.academy.telerik.com/106441/%D0%BA%D0%B0%D0%BA-%D0%B8%D0%B7%D0%B2%D0%BB%D0%B5%D1%87%D0%B5%D0%BC-%D0%B2%D1%81%D0%B8%D1%87%D0%BA%D0%B8-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B8-%D0%B4%D0%B0%D0%B4%D0%B5%D0%BD%D0%B0-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%BD%D0%B0-%D0%BA%D0%B0%D1%82%D0%B5%D0%B3%D0%BE%D1%80%D0%B8%D1%8F-%D1%81%D0%B5%D0%BA%D1%86%D0%B8%D1%8F
+
+Докато гледах лекциите пробвах man man и ми изписа 9 помощни категории:
+
+       1   Executable programs or shell commands
+       2   System calls (functions provided by the kernel)
+       3   Library calls (functions within program libraries)
+       4   Special files (usually found in /dev)
+       5   File formats and conventions eg /etc/passwd
+       6   Games
+       7   Miscellaneous  (including  macro  packages  and  conventions), e.g.
+           man(7), groff(7)
+       8   System administration commands (usually only for root)
+       9   Kernel routines [Non standard]
+
+Исках да прегледам кои са командите в тази Non standard категория като пробвах:
+
+$man -s 9
+$What manual page do you want?
+
+Гугнах с "linux man show commands for a section" и намерих
+
+http://man7.org/linux/man-pages/dir_all_by_section.html, но там са само стандартните секции.
+
+Подвизавам се на инсталирано Ubuntu 12.04.
+
+-------------------------------------------
+Пробвай "man missing"
+
+На Centos не излиза секция 9
+
+-------------------------------------------
+Благодаря, с твоето предложение намерихме деветката. Ето какво върна
+Section 9 - Kernel routines
+       Bug#102724
+              Mandrake  seems  to  deliver section 9 manual pages, though their source is obscure and
+              they do seem to be out-dated.  Nevertheless, some section 9  manpages  would  be  nice,
+              indeed.
+
+       Bug#179475
+              kapmd(9) - kernel APM thread
+              keventd(9) - manage hotplug events
+              khubd(9) - kernel USB hub daemon thread
+              kjournald(9) - maintain the filesystem journal
+              ksoftirqd(9) - software handling of incoming IRQs
+              kswapd(9) - kernel swap daemon thread
+              kupdated(9) - flush the journal
+              scsi_eh(9) - kernel SCSI error handler thread
+
+-------------------------------------------
+Трябва да дадеш команда, за която търсиш помощ, например:
+
+man passwd
+
+(ще ти даде описание на командата passwd)
+
+man 5 passwd
+
+(ще ти даде описание на passwd от гледна точка на файлова система,  в случая ще ти даде описание на файла passwd, в който се съхраняват паролите и т.н.)
+
+-------------------------------------------
+Да, съгласен съм, че с команда става. Въпросът ми е когато не знам командата и искам да рагледам всички команди, намиращи се в секция 4 например. Тогава man би трябвало да ми върне лист като този по-долу
+Section 4
+...
+kmem(4) - system memory, kernel memory and system ports
+lp(4) - line printer devices
+mem(4) - system memory, kernel memory and system ports
+mouse(4) - serial mouse interface
+msr(4) - x86 CPU MSR access device
+null(4) - data sink
+port(4) - system memory, kernel memory and system ports
+ptmx(4) - pseudoterminal master and slave
+pts(4) - pseudoterminal master and slave
+ram(4) - ram disk device
+random(4) - kernel random number source devices
+...
+
+-------------------------------------------
+Може би на някой Линукс ще има такава опция, аз не съм срещала. От тук можеш да направиш справка, но това не е чрез man, а от интернет:
+
+http://man7.org/linux/man-pages/dir_all_by_section.html
+
+-------------------------------------------
+For example, if you just wanted to get a list of all man pages for all executable commands (section 1):
+
+whatis -s 1 -r .
+
+-------------------------------------------
+Yep, този output търсех, мерси много.
+
+
+
+
+
+
+

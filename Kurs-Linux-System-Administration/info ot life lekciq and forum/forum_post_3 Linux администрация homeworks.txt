@@ -1,0 +1,676 @@
+﻿Linux администрация homeworks:
+
+homework_lecture_03:
+
+6.Describe the contents of the following files from the /proc file system: modules, filesystems, diskstats, mounts.
+===================================================================================================================
+                                            Release 1.10 by unknown
+
+ Proc - process information pseudo-file system.
+ The proc file system is a pseudo-file system which is used as an interface to kernel data structures.
+ It is commonly mounted
+ at /proc.Most of it is read-only, but some files allow kernel variables to be changed.
+
+The following outline gives a quick tour through the /proc hierarchy
+
+root@1:~# man proc
+
+/proc/modules
+===========
+   A text list of the modules that have been loaded by the system.   
+   
+   This file displays a list of all modules loaded into the kernel. Its contents vary based on the configuration and use of your system,but it should be organized in a similar manner to this sample /proc/modules file output:
+  -----------------------------------------------------------------------
+   root@1:~# cat /proc/modules
+   
+   nfs      170109  0 -          Live 0x129b0000
+   lockd    51593   1 nfs,       Live 0x128b0000
+   nls_utf8 1729    0 -          Live 0x12830000
+   vfat     12097   0 -          Live 0x12823000
+   fat      38881   1 vfat,      Live 0x1287b000
+   autofs4  20293   2 -          Live 0x1284f000
+   sunrpc   140453  3 nfs,lockd, Live 0x12954000
+   3c59x    33257   0 -          Live 0x12871000
+   uhci_hcd 28377   0 -          Live 0x12869000
+   md5      3777    1 -          Live 0x1282c000
+   ipv6     211845 16 -          Live 0x128de000
+   ext3     92585   2 -          Live 0x12886000
+   jbd      65625   1 ext3,      Live 0x12857000
+   dm_mod   46677   3 -          Live 0x12833000
+   -------------------------------------------------------------------------
+
+ * The first column contains the name of the module.
+ * The second column refers to the memory size of the module, in bytes.
+ * The third column lists how many instances of the module are currently loaded. A value of zero
+ represents an unloaded module.
+ * The fourth column states if the module depends upon another module to be present in order to function,
+ and lists those other modules.
+ * The fifth column lists what load state the module is in: Live, Loading, or Unloading are the only
+ possible values.
+ * The sixth column lists the current kernel memory offset for the loaded module. This information can be
+ useful for debugging purposes,or for profiling tools such as oprofile.
+
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Reference_Guide/s2-proc-modules.html
+=======================================================================================================================
+
+ /proc/mounts
+===========
+    This file provides a list of all mounts in use by the system:
+    Before kernel 2.4.19, this file was a list of all the file systems currently mounted on the system.
+    With the introduction of per-process mount namespaces in Linux 2.4.19, this file became a link to
+    /proc/self/mounts, which lists the mount points of the process's own mount namespace.The format of
+    this file is documented in fstab.
+    ------------------------------------------------------------------------
+    root@1:~# cat /proc/mounts
+    
+    rootfs / rootfs rw 0 0
+    /proc /proc proc rw,nodiratime 0 0
+    none /dev ramfs rw 0 0
+    /dev/mapper/VolGroup00-LogVol00 / ext3 rw 0 0
+    none /dev ramfs rw 0 0
+    /proc /proc proc rw,nodiratime 0 0
+    /sys /sys sysfs rw 0 0
+    none /dev/pts devpts rw 0 0
+    usbdevfs /proc/bus/usb usbdevfs rw 0 0
+    /dev/hda1 /boot ext3 rw 0 0
+    none /dev/shm tmpfs rw 0 0
+    none /proc/sys/fs/binfmt_misc binfmt_misc rw 0 0
+    sunrpc /var/lib/nfs/rpc_pipefs rpc_pipefs rw 0 0
+    ---------------------------------------------------------------------
+
+The output found here is similar to the contents of /etc/mtab, except that /proc/mount is more up-to-date.
+
+ * The first column specifies the device that is mounted,
+ * the second column reveals the mount point, and the third column tells the file system type,
+ * the fourth column tells you if it is mounted read-only (ro) or read-write (rw).
+ * The fifth and sixth columns are dummy values designed to match the format used in /etc/mtab.
+ 
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Reference_Guide/s2-proc-mounts.html
+======================================================================================================================
+
+ /proc/filesystems
+==============
+ 
+    A text listing of the file systems which are supported by the kernel, namely file systems which were compiled into
+    the kernel or whose kernel modules are currently loaded. If a file system is marked with "nodev", this means that it
+    does not require a block device to be mounted (e.g., virtual file system, network file system).
+
+    Incidentally, this file may be used by mount when no file system is specified and it didn't manage to determine the
+    file system type.Then file systems contained in this file are tried (excepted those that are marked with "nodev").
+    
+    This file displays a list of the file system types currently supported by the kernel. Sample output from a generic
+    /proc/filesystems file looks similar to the following:
+    ----------------------------------------------
+    * root@1:~# cat /proc/filesystems
+    
+    nodev   sysfs
+    nodev   rootfs
+    nodev   bdev
+    nodev   proc
+    nodev   sockfs
+    nodev   binfmt_misc
+    nodev   usbfs
+    nodev   usbdevfs
+    nodev   futexfs
+    nodev   tmpfs
+    nodev   pipefs
+    nodev   eventpollfs
+    nodev   devpts
+            ext2
+    nodev   ramfs
+    nodev   hugetlbfs
+            iso9660
+    nodev   mqueue
+            ext3
+    nodev   rpc_pipefs
+    nodev   autofs4
+    --------------------------------------------------
+
+ * The first column signifies whether the file system is mounted on a block device. Those beginning with nodev are not mounted on a device.
+ * The second column lists the names of the file systems supported.
+ * The mount command cycles through the file systems listed here when one is not specified as an argument.
+ 
+ https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/4/html/Reference_Guide/s2-proc-filesystems.html
+ ============================================================================================================================
+ 
+ 
+  /proc/diskstats
+ ============
+    This file contains disk I/O statistics for each disk device .See the Linux kernel source file Documentation/iostats.txt
+    for further information ( or just see iostats.txt in Internet  http://www.mjmwired.net/kernel/Documentation/iostats.txt ).
+    
+    Each line inside /proc/diskstats is having the following info format:
+    
+    * for sda (Full disk)
+    ----------------------------------------------------------------------------------------------------
+    svetlyo@1:~$ cat /proc/diskstats | grep 'sda '
+    
+       8       0 sda 2461810 61427 148062742 6482992 660009 1544934 67900384 45642376 0 7162961 52128751
+    ----------------------------------------------------------------------------------------------------
+
+    Meaning:(fields starting after the device name)
+
+   Field 1  -- # of reads issued
+   Field 2  -- # of reads merged
+   Field 3  -- # of sectors read
+   Field 4  -- # of milliseconds spent reading
+   Field 5  -- # of writes completed
+   Field 6  -- # of writes merged
+   Field 7  -- # of sectors written
+   Field 8  -- # of milliseconds spent writing
+   Field 9  -- # of I/Os currently in progress
+   Field 10 -- # of milliseconds spent doing I/Os
+   Field 11 -- weighted # of milliseconds spent doing I/Os
+
+   * or for hda1 (Partition only)
+   -------------------------------------------------
+    svetlyo@1:~$ cat /proc/diskstats | grep 'hda1 '
+      
+       3       1 hda1 25838 525266 1505217 12041736
+   -------------------------------------------------
+
+   Field 1 -- # of reads issued - Total number of reads issued to this partition.
+   Field 2 -- # of sectors read - Total number of sectors requested to be read from this partition.
+   Field 3 -- # of writes issued - Total number of writes issued to this partition.
+   Field 4 -- # of sectors written - Total number of sectors requested to be written to this partition
+
+                                                           THE END
+                                                =================
+                                             Email:give_me@bonus.eu
+											 
+============================================================================================================
+
+4. Describe the SELinux security model.
+ 
+ 
+Security Enhanced Linux (SELinux) is a security model that offers the potential to compartmentalize and secure every component of a Linux system:
+- processes
+- files
+- directories
+- users
+- devices and etc.
+ 
+Instead of the all-or-nothing, either-you-have-root-privilege-or-you-don’t approach to security in traditional Linux and UNIX systems, SELinux allows much finer granularity in how permissions to run and alter components on the computer are handed out.
+ 
+With SELinux, you can drastically limit the damage caused by a person who cracks one part of a Linux system.
+ 
+The SELinux project aims at providing MAC functionality into the Linux kernel. By implementing rules for what all operating system components can and can’t do, an application that has security flaws or has been taken over for malicious intent can be contained. In other words, gaining control of one component of a system doesn’t allow a cracker to take over the entire computer.
+ 
+Despite the fact that SELinux is complex, many of the bugs have been worked out of it in recent releases, and the default settings are quite easy to work with. I would recommend enabling SELinux on a server you are testing, to prepare to one day enable SELinux to protect your Internet servers.
+ 
+Using policy configuration files, SELinux implements two different security models: 
+- Type Enforcement (TE)
+- Role-Based Access Control (RBAC)
+ 
+With SELinux enabled, Linux users still have their accounts defined through definitions in the /etc/passwd file. A user who is also assigned a role in SELinux is referred to as a defined user.
+ 
+There are many tools for checking the status of SELinux on your CentOS system. To check whether or not SELinux is enabled, type the following:
+ 
+# sestatus -v
+SELinux status: enabled/disabled
+ 
+The values set in the /etc/selinux/config file determine which type of policy is on and whether or not SELinux is:
+- Enforcing
+- Permissive
+- Disabled
+ 
+Final words: SELinux adds a new layer of security on top of existing Linux security methods. As a systems administrator, you can choose whether or not to turn on SELinux. You can also choose which of your system services are protected by SELinux.
+ 
+-----------------------------------------------------------------------
+Source and further reading:
+The book of CentOS Bible
+Authors are Timothy Boronczyk & Christopher Negus
+Published by Wiley Publishing, Inc., 2009
+
+============================================================================================================
+
+4. Describe the SELinux security model.
+
+SELinux is based on the concept of Mandatory Access Control. Under MAC, administrators control all interactions of software on the system. The concept of least privilege is used, by default applications and users have no rights, as all rights must be granted by an administrator as part of the system's security policy.
+This contrasts with the Discretionary Access Control concept that is the standard Linux security model. Under DAC, files are owned by a user and that user has full control over them. An attacker who penetrates an account can do anything with the files owned by that user. For example, an attacker penetration a web server has full control over all files owned by the webserver account. Worse, if an application runs under the context of the root user, an attacker penetrating it now has full control over the entire system.
+MAC in effect provides each application with a virtual sandbox that only allows the application to perform the tasks it is designed for and explicitly allowed in the security policy to perform. For example, the webserver process may only be able to read web published files and serve them on a specified network port. An attacker penetrating it will not be able to perform any activities not expressly permitted to the process by the security policy, even if the process is running as the root user.
+Standard Unix permissions are still present on the system, and will be consulted before the SELinux policy when access attempts are made. If the standard permissions would deny access, access is simply denied and SELinux is not involved. If the standard file permissions would allow access, the SELinux policy is consulted and access is either allowed or denied based on the security contexts of the source process and the targeted object.
+
+Security Contexts
+
+SELinux makes access decisions by checking the security context of the subject (a process associated with a user) against the action attempted (e.g. a file read) and the security context of the object (such as a file or network port).
+A security context consists of three components: a user identity, a role, and a type (also known as a domain).
+
+User Identities
+
+A user identity indicates the SELinux user account associated with a subject or object. These should not be confused with the standard Linux user accounts in /etc/passwd, the Linux accounts are mapped to a corresponding SELinux account but this does not need to be a one-to-one relationship.
+The standard strict policy does not specifically restrict access based on user accounts, but thie functionality exists and could be added as custom policy for specialized installations that require it. User accounts are however used to determine what roles a specific user is permitted to assume.
+
+Roles
+
+A role defines a set of permissions granted to a user. Users can change roles to any role permitted to their user identity by using the newrole command. Roles are conventionally named with an "_r" suffix.
+The strict policy assigns all users to the user_r role. Administrators are given the staff_r role, and are allowed to transition from that role to the sysadm_r role. Under SeLinux, the root account alone gives no special privileges, instead the sysadm_r role is used to perform administration duties. The SELinux implementation in Fedora Core modifies the su command to automatically transition to the sysadm_r role when assuming the root identity without requiring a specific newrole command to be issued.
+Most files on the system do not require a role, but every object must have all three parts of a security context. These files are assigned the role of object_r as a default.
+
+Domains and Types
+
+Domains and types are synonyms, typically the term "domain" is used when referring to processes and the term "type" is used referring to objects. Types are denoted by a "_t" suffix to distinguish them from user identites and roles.
+Types are the primary method used by SELinux to make authorization decisions. The strict policy defines relatively few users and roles, but contains hundreds of types.
+
+Security Policies
+
+The heart of SELinux is the security policy. The policy assigns files to a security context, declares what processes are given what rights to these contexts, and handles transitions between security contexts. For example, when the init_t context launches Apache, the policy forces a transition to the httpd_t security domain.
+Fedora Core ships with two distinct security policies, known as targeted and strict.
+-The targeted policy confines only certain daemons known to be security issues, such as httpd and named, with the rest of the system running in an unconfined security context. This is the only policy supported by Red Hat for use on Red Hat Enterprise Linux.
+- The strict policy is intended to fully implement SELinux controls on the entire system. Currently use of this policy is unsupported and considered developmental.
+
+ Access Decisions
+
+Access decisions are made when a process running in a specified domain attempts to perform an action on a subject of a specified type. Policy is checked to determine if the desired operation is permitted.
+
+Transition Decisions
+
+Transition decisions determine what domain or type newly created processes or files are assigned to.
+Executing a program in a child process may result in the new process running under a different domain than the parent process, if the program is defined as a domain entry point in the policy.
+Newly created files are by default assigned the same type as their parent directory, but policy can override this behavior and specify a type to be assigned to specified files upon their creation.
+
+Използвана литература:
+http://my.safaribooksonline.com/book/operating-systems-and-server-administration/linux/0596007167/overview-of-the-selinux-security-model/selinux-chp-2#X2ludGVybmFsX0h0bWxWaWV3P3htbGlkPTA1OTYwMDcxNjclMkZzZWxpbnV4LWNocC0yJnF1ZXJ5PQ==
+
+http://www.engardelinux.org/doc/guides/selinux-quick-start-guide/selinux-quick-start-guide/x19.shtml
+
+http://selinuxproject.org/page/SELinux_models
+
+============================================================================================================
+
+6. Describe the contents of the following files from the /proc file system: modules, filesystems, diskstats, mounts.
+ 
+The proc  file  system acts as an interface to internal data structures in the
+104 kernel. It  can  be  used to obtain information about the system and to change
+105 certain kernel parameters at runtime (sysctl).
+ 
+File Usage
+----- ------
+/proc/modules     Kernel modules currently loaded. Typically its output is the same as that given by the 'lsmod' command. 
+ 
+/proc/filesystems 2 columns list of supported filesystems.
+The first column signifies whether the file system is mounted on a block device. 
+Those beginning with nodev are not mounted on a device. 
+The second column lists the names of the file systems supported.
+The mount command cycles through the file systems listed here when one is not specified as an argument.
+ 
+/proc/fs Directory about file system parameters, currently nfs/exports. Contains file system data. 
+This subdirectory contains specific file system, file handle, inode, dentry and quota information.
+ 
+/proc/diskstats Disk stats for both
+full disk (11 fields)   or     parthition only (4 filelds) as follows:
+Field 1   -- # of reads issued Field  1 -- # of reads issued    - Total number of reads issued to this partition.
+Field 2   -- # of reads merged Field  2 -- # of sectors read    - Total number of sectors requested to be read from this partition.
+Field 3   -- # of sectors read Field  3 -- # of writes issued   - Total number of writes issued to this partition.
+Field 4   -- # of milliseconds spent reading Field  4 -- # of sectors written - Total number of sectors requested to be written to this partition.
+Field 5   -- # of writes completed
+Field 6   -- # of writes merged
+Field 7   -- # of sectors written
+Field 8   -- # of milliseconds spent writing
+Field 9   -- # of I/Os currently in progress
+Field 10  -- # of milliseconds spent doing I/Os
+Field 11  -- weighted # of milliseconds spent doing I/Os
+ 
+/proc/<pid>/io IO statistics for each running process.
+ 
+/proc/mounts       This file provides a list of all mounts in use by the system.
+The output found here is similar to the contents of /etc/mtab, except that /proc/mount is more up-to-date.
+The first column specifies the device that is mounted, 
+the second column reveals the mount point, and 
+the third column tells the file system type, and 
+the fourth column tells you if it is mounted read-only (ro) or read-write (rw). 
+The fifth and sixth columns are dummy values designed to match the format used in /etc/mtab.
+ 
+Info Sources:
+http://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/proc.html
+http://tipstricks.itmatrix.eu/?p=301
+https://www.kernel.org/doc/Documentation/filesystems/proc.txt
+http://www.cs.fsu.edu/~baker/devices/lxr/http/source/linux/Documentation/filesystems/proc.txt
+http://www.centos.org/docs/5/html/5.1/Deployment_Guide/s2-proc-modules.html
+http://www.centos.org/docs/5/html/5.1/Deployment_Guide/s2-proc-filesystems.html
+http://www.centos.org/docs/5/html/5.1/Deployment_Guide/s2-proc-mounts.html
+
+============================================================================================================
+
+4. Describe the SELinux security model
+
+Linux Security Modules (LSM) is an extension of the Linux kernel which allows security systems to be easily added to the kernel. SELinux is implemented as a LSM, and utilises the LSM kernel interface.
+ 
+NSA Security-Enhanced Linux (SELinux) was originally developed by the National Security Agency - USA (NSA), with cooperation from contractors such as MITRE and NAI Labs.
+SELinux is an implementation of a flexible and fine-grained mandatory access control (MAC) architecture called Flask in the Linux kernel. 
+After its public release at the end of 2000, it was adopted by the open source community. 
+SELinux can enforce an administratively-defined security policy over all processes and objects in the system, basing decisions on labels containing a variety of security-relevant information. 
+The architecture cleanly separate
+- the policy decision-making logic from
+- the policy enforcement logic.
+The policy decision-making logic is encapsulated within a single component known as the security server with a general security interface.
+A wide range of security models can be implemented as security servers without requiring any changes to any other component of the system.
+
+RedHat and Tresys Technology have major roles in SELinux development, but the NSA is still involved too.
+
+Flask Concepts
+----------------
+- Every subject (process) and object (e.g. file, socket, IPC object, etc) in the system is assigned a collection of security attributes, known as a security context;
+- The content and format of a security context depends on the particular security model, so a security context is only interpreted by the security server;
+- In order to better encapsulate security contexts and to provide greater efficiency, the policy enforcement code of SELinux typically handles security identifiers (SIDs) rather than security contexts;
+- A small set of SID values are reserved for system initialization or predefined objects; these SID values are referred to as initial SIDs. 
+Kernel SIDs are not exported to userspace; the kernel only returns security contexts to userspace. 
+However, userspace policy enforcers may have their own SID mappings maintained by the userspace AVC that is included in libselinux.
+
+When a security decision is required, the policy enforcement code passes
+- a pair of SIDs (typically the SID of a subject and the SID of an object, but sometimes a pair of subject SIDs or a pair of object SIDs), and
+- an object security class to the security server.
+
+The object security class indicates the kind of object, e.g. a process, a regular file, a directory, a TCP socket, etc. 
+The security server looks up the security contexts for the SIDs. 
+It then bases its decision on the attributes within the security contexts and the object security class. 
+The security server provides two major kinds of security decisions to the policy enforcement code: labeling decisions and access decisions.
+
+Example - Objects and Subjects:
+--------------------------------
+cat /var/log/syslog | grep SELinux
+
+cat is subject to grep; grep is object to cat;
+cat <-> user process; grep <-> targeted object.
+
+Security Model
+================
+
+The example security server implements a security model that is a combination of
+- a Type Enforcement (TE) model,
+- a Role-Based Access Control (RBAC) model, and optionally
+- a Multi-Level Security (MLS) model.
+The TE model provides fine-grained control over processes and objects in the system, and the RBAC model provides a higher level of abstraction to simplify user management. 
+The optional MLS model is not (yet) documented.
+
+Type Enforcement (TE) Model
+-------------------------------
+Type Enforcement is the primary mechanism of access control used in the targeted policy.
+
+A traditional TE model binds a security attribute called a domain to each process, and it binds a security attribute called a type to each object. 
+The traditional TE model treats all processes in the same domain identically and it treats all objects that have the same type identically. 
+Hence, domains and types can be viewed as security equivalence classes. 
+A pair of access matrices specify how domains can access types and how domains can interact with other domains. 
+Each user is authorized to operate in certain domains.
+
+Differences between A traditional TE model and the SELinux TE model:
+
+1 - The SELinux TE model uses a single type attribute in the security context for both processes and objects.
+A domain is simply a type that can be associated with a process. 
+A single type can be used both as the domain of a process and as the type of a related object, e.g. the /proc/PID entries for a process. 
+A single access matrix specifies how types can access or interact with other types in terms of the permissions defined by the Flask architecture. 
+The SELinux TE model does not internally distinguish domains from types.
+
+2 - The SELinux TE model uses the security class information provided by the Flask architecture - a transition or access decision is based on a type pair and on the security class. 
+Hence, the policy can treat objects that have the same type but different security classes differently. 
+For example, the policy can distinguish a TCP socket created by a domain from a raw IP socket created by the same domain.
+
+3 - The SELinux TE model does not directly associate users with domains. 
+Instead, SELinux uses the RBAC model to provide an additional layer of abstraction between users and domains.
+
+Role-Based Access Control (RBAC) model
+-----------------------------------------
+Not used in the default targeted policy.
+
+A traditional RBAC model authorizes users to act in certain roles, and assigns a set of permissions to each role. 
+The SELinux RBAC model authorizes each user for a set of roles, and authorizes each role for a set of TE domains. 
+A role dominance relationship can optionally be specified in the RBAC configuration to define a hierarchy among roles.
+The SELinux RBAC model maintains a role attribute in the security context of each process. 
+For objects, the role attribute is typically set to a generic object_r role and is unused. 
+Role transitions for processes are controlled through a combination of the RBAC and TE models.
+
+Multi-Level Security (MLS)
+----------------------------
+Not commonly used and often hidden in the default targeted policy.
+
+User Identity Model
+----------------------
+The Linux user identity attributes are unsuitable for use by SELinux. 
+By using a separate user identity attribute, the SELinux mandatory access controls remain completely orthogonal to the existing Linux access controls. 
+Linux uids can be changed at any time via the set*uid calls, providing no control over the inheritance of state or the initialization of the process in the new identity. 
+Linux uids can be arbitrarily changed by superuser processes.
+Since the SELinux user identity is independent of the Linux uid, it is possible to maintain separate user identity spaces for SELinux and Linux, with an appropriate mapping. 
+For example, it may be desirable to map most Linux users to a single SELinux user that is unprivileged. 
+This approach is suitable when it is not necessary to separate these users via the SELinux policy.
+
+When converting
+------------------
+an existing system to using SELinux, the extended attribute values for all files are typically initialized by a utility called "setfiles"...
+
+Displaying security context: ls -Z ; id -Z; ps -eZ;
+The -Z switch will work with most utilities to show SELinux security contexts (e.g, 'ls -Z', 'ps axZ' etc).
+In addition to the standard file permissions and ownership, we can see the SELinux security context fields: system_u:object_r:httpd_sys_content_t. 
+This is based upon user:role:type:mls.
+
+An example, allowing access to a Port:
+--------------------------------------------
+By default, the SELinux policy will only allow services access to recognized ports associated with those services. 
+If we wanted to allow Apache to listen on tcp port 83, we can add a rule to allow that using the 'semanage' command:
+
+# semanage port -a -t http_port_t -p tcp 83
+
+The performance overhead of using SELinux is approximately 7%.  
+
+Links:
+https://www.ibm.com/developerworks/library/l-selinux/
+http://www.nsa.gov/research/_files/selinux/papers/policy2/t1.shtml
+http://wiki.centos.org/HowTos/SELinux#head-430e52f7f8a7b41ad5fc42a2f95d3e495d13d348
+http://ru.d-ws.biz/articles/selinux-theory.shtml
+
+============================================================================================================
+
+7. List all opend files using only the /proc fs.
+
+# /proc is a mount point for the proc file system,  which  provides information for the executed processes directly from the running kernel. 
+This pseudo-file system is described in more detail with the command  "man proc". An excerpt is quoted below:
+# "/proc/[pid]/fd
+# This is a subdirectory containing one entry for each file  which
+# the process has open, named by its file descriptor, and which is
+# a symbolic link to the actual file.  Thus, 0 is standard  input,
+# 1 standard output, 2 standard error, etc.
+
+# Another nice explanation of /proc file system could be found on the website with an article for lsof command after this quote below:
+#
+# "/proc is a directory in which the files are really just views of the kernel and process tree. 
+The files and directories don't exist on disk, so when you're reading and writing to them, you're really getting information from the operating system itself. 
+Most of the information relative to lsof is stored in directories named after the PID of the process, so /proc/1234 would have information on PID 1234. 
+Within each process directory in the /proc directory are files that can give an application a glimpse into the memory space of the process, a list of the file descriptors, a symbolic link to the file on disk, and other system information. 
+The lsof utility uses this information and other knowledge about the kernel's internals to produce its output. Later on I'll tie the output of lsof to information in the /proc directory."
+
+#Source - http://www.ibm.com/developerworks/aix/library/au-lsof.html
+
+#So, even without using lsof, we still can list all files opened by a process with long listing the contents of /proc/ProcessID_number/fd
+#For example, if our apache2 instance has a PID of 17285 with ls we can list all open files from this process with the command below:
+
+root@rewind:/# ls -l /proc/17285/fd
+total 0
+lr-x------ 1 root root 64 Jul 26 16:00 0 -> /dev/null
+l-wx------ 1 root root 64 Jul 26 16:00 1 -> /dev/null
+l-wx------ 1 root root 64 Jul 26 16:00 2 -> /var/log/apache2/error.log
+lrwx------ 1 root root 64 Jul 26 16:00 3 -> socket:[218270]
+lrwx------ 1 root root 64 Jul 26 16:00 4 -> socket:[218271]
+lr-x------ 1 root root 64 Jul 26 16:00 5 -> pipe:[217501]
+l-wx------ 1 root root 64 Jul 26 16:00 6 -> pipe:[217501]
+l-wx------ 1 root root 64 Jul 26 16:00 7 -> /var/log/apache2/other_vhosts_access.log
+l-wx------ 1 root root 64 Jul 26 16:00 8 -> /run/apache2/ssl_mutex (deleted)
+
+#In this output we have more than what we need, so to see only the opened files from this process, we can pipe this output to grep and thus to reduce the output to only files which path belongs to / with the following command:
+
+root@rewind:/# ls -l /proc/17285/fd | grep /
+lr-x------ 1 root root 64 Jul 26 16:00 0 -> /dev/null
+l-wx------ 1 root root 64 Jul 26 16:00 1 -> /dev/null
+l-wx------ 1 root root 64 Jul 26 16:00 2 -> /var/log/apache2/error.log
+l-wx------ 1 root root 64 Jul 26 16:00 7 -> /var/log/apache2/other_vhosts_access.log
+l-wx------ 1 root root 64 Jul 26 16:00 8 -> /run/apache2/ssl_mutex (deleted)
+
+# To list all opened files for all processes the only difference to the above command would be to put wildcard (*) in place of the apache's PID and another wildcard for all files inside all fd/ directories and thus avoid seeing output for empty fd/ directories.
+
+root@rewind:/# ls -l /proc/*/fd/*
+
+#Which gives quite extensive output, quite fast. Of course we can get all this info in a file or in less for easier viewing:
+
+root@rewind:/# ls -l /proc/*/fd/* > ~/lsoutput
+
+# with file or the following with less:
+
+root@rewind:/# ls -l /proc/*/fd/* | less
+
+# We can even further reduce the output for our needs, like excluding the quite common /dev output, sockets, pipes and so on, for example:
+
+root@rewind:/# ls -l /proc/*/fd/* | grep -v "\/dev\/\|socket:\|anon_inode:\|pipe:"
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/10 -> /run/samba/serverid.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/11 -> /var/cache/samba/netsamlogon_cache.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/12 -> /var/cache/samba/winbindd_cache.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/13 -> /run/samba/gencache.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/14 -> /run/samba/gencache_notrans.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/15 -> /var/lib/samba/group_mapping.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/16 -> /var/lib/samba/passdb.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/17 -> /var/lib/samba/account_policy.tdb
+l-wx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/2 -> /var/log/samba/log.wb-BUILTIN
+l-wx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/24 -> /var/log/samba/log.wb-BUILTIN
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/3 -> /run/samba/messages.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/7 -> /var/lib/samba/secrets.tdb
+l-wx------ 1 root       root       64 Jul 26 11:42 /proc/16776/fd/9 -> /run/samba/winbindd.pid
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/10 -> /run/samba/serverid.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/11 -> /var/cache/samba/netsamlogon_cache.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/12 -> /var/cache/samba/winbindd_cache.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/13 -> /run/samba/gencache.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/14 -> /run/samba/gencache_notrans.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/15 -> /var/lib/samba/group_mapping.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/16 -> /var/lib/samba/passdb.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/17 -> /var/lib/samba/account_policy.tdb
+l-wx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/2 -> /var/log/samba/log.winbindd-idmap
+l-wx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/24 -> /var/log/samba/log.winbindd-idmap
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/3 -> /run/samba/messages.tdb
+lrwx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/7 -> /var/lib/samba/secrets.tdb
+l-wx------ 1 root       root       64 Jul 26 11:42 /proc/16777/fd/9 -> /run/samba/winbindd.pid
+l-wx------ 1 root       root       64 Jul 26 09:44 /proc/1726/fd/3 -> /var/lib/dhcp/dhclient.eth0.leases
+l-wx------ 1 root       root       64 Jul 26 16:00 /proc/17285/fd/2 -> /var/log/apache2/error.log
+l-wx------ 1 root       root       64 Jul 26 16:00 /proc/17285/fd/7 -> /var/log/apache2/other_vhosts_access.log
+...
+truncated
+...
+
+# With "grep -v" or "grep --invert-match", according to grep's manual we can invert the sense of matching, thus exclude what we do not need in the above output of ls. 
+In the example above we used quotes to exclude sequentially all output from /dev (null,urandom), sockets, pipes and anon_inodes. 
+For every forward slash (/) in /dev and for every separator (|) we need to include one backward slash (\) between the parameters we're excluding in the quotes after "grep -v". 
+The downside of this method is if we have a file with a name that includes some of the parameters it will not show up in the output of this command.
+
+# Used literature - manual pages for grep, ps, hier, ls and the following webpages:
+# http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-3.html
+# http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-4.html
+# http://www.ibm.com/developerworks/aix/library/au-lsof.html
+
+#Thanks for getting through here! :)
+
+============================================================================================================
+
+1. Describe the MAC security model.
+
+В компютърната сигурност MAC (mandatory access control) се отнася до типа на контрол на достъпа, чрез който операционната система ограничава способността на потребителя за достъп или изпълнение на някакъв тип операции на машината. 
+На практика това действие представлява някакъв процес или тред;
+тези обекти, които биват манипулирани представляват някаква структура, като например файлове, директории TCP/UDP портове, споделени сегменти на паметта и др. 
+Тези обекти разполагат с някакви елементи за сигурност. 
+Когато някой поиска да получи достъп до даден обект,се генерира разрешаващо или забраняващо правило приложено от ядрото на операционната система, по този начин то се допитва до тези елементи за сегурност и на тяхна база ядрото взема решение дали да даде или откаже достъп до изискваната информация или ресурс. 
+Всяка операция или запитване за достъп до определен ресурс ще бъде проверяван от уторизиращо правило известно като политика, за да се определи дали е разрешена манипулацията с изискваната информация. 
+Системите за управление на базата данни и техните контролни механизми могат да използват и mandatory access control.
+С mandatory access control, тази политика за сигурност е задължително управлявана от администратора, а потребителите не са в състояние да достъпват до тези политики за сигурност, тоест като пример бих дал достъп до определен файл от определен потребител, който иначе е ограничен по това отношение от администратора. 
+MAC потдържащ дадена система, позволява на администратора да прилага определени политики за сигурност в цялата система. 
+За разлика от DAC тук потребителите немогат да отменят или променят тези политики, случайно или умишлено. 
+Това позволява на администраторите да гарантират сигурноста на политиките за всички потребители.
+Съществуват така наречениете MAC label, който представляват защитен елемент, които могат да се прилагат върху обекти в цялата система.
+При сетване на label, администраторът трябва да е наясно какво точно трябва да се направи и един вид да прецени възможните пропуски в сигурността които могат да се получат, за да се предотврати неочаквано или нежелано поведение на системата. 
+Security label върху даден обект се използва като част от сигурността за контрол на достъпа от политиките. 
+С някой политики label съдържа цялата информация необходима за вземане на решения.
+С други политики label може да се обработва като част от по-голям набор от правила, например сетването на label на biba/low, върху даден файл ще представлява label потдържан от Biba security policy модул със стойност “low”.
+--------------------------------------------------------------------------------------------------------
+Label Configuration
+---------------------------------
+Командите, които ще напиша представляват интерфейс за конфигурация на дадения обект. 
+Всички конфигурации могат да бъдат направени посредстов  setfmac и setpmac. 
+setfmac се използва за да се конфигурират  MAC labels в системния обект, докато setpmac  се използва за кнфигуриране на labels на системните subjects. 
+Пример за това:
+
+--- # setfmac biba/high test
+-----------------------------
+Ако конфигурацията е успешна, промпта няма да върне грешка. 
+Една от основните грешки, който могат да бъдат върнати е отказан достъп Permission denied, което обикновенно се случва когато label се сетва или модифицира от обект, който практически е ограничен в това отношение. 
+Системния администратор може да използва следните команди за де се преодолее тази грешка.
+--------------------------------------------------------------------------------------------------------
+# setfmac biba/high test
+Permission denied
+# setpmac biba/low setfmac biba/high test
+# getfmac test
+test: biba/high
+--------------------------------------------------------------------------------------------------------
+setpmac може да бъде използван за определяне на приоритет на  policy module's settings, като се зададе
+различен label.
+--------------------------------------------------------------------------------------------------------
+Common Label Types
+-------------------
+За политиките  mac_biba,  mac_mls и  mac_lomac, може да бъдат използвани  simple labels. 
+Те могат да бъдат high, equal, и low, където:
+- low  label се счита за най-ниския label за създаване на обект или subject. 
+Задаването на objects или subjects по този начин може да блокира техния достъп до objects или subjects маркипани като high.
+- equal label трябва да бъде задаван само за обекти считани за изключени или нефигуриращи в политиките.
+- high label, предоставя на objects или subjects най-високите възможни настройки.
+--------------------------------------------------------------------------------------------------------
+Users and Label Settings
+-------------------------
+Потребителите са задължени да имат labels, по този начин техните файлове и процеси да взаимодействат с политиките за сигурност. 
+Това се конфигурира в login.conf използвайки  login classes.
+Всеки модул на дадена политика, който използва  labels ще приложи user class настройки.
+Тук ще дам пример за това вписване, съдържащ всяка настройка за политика показана по долу.
+--------------------------------------------------------------------------------------------------------
+default:\
+    :copyright=/etc/COPYRIGHT:\
+    :welcome=/etc/motd:\
+    :setenv=MAIL=/var/mail/$,BLOCKSIZE=K:\
+    :path=~/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:\
+    :manpath=/usr/share/man /usr/local/man:\
+    :nologin=/usr/sbin/nologin:\
+    :cputime=1h30m:\
+    :datasize=8M:\
+    :vmemoryuse=100M:\
+    :stacksize=2M:\
+    :memorylocked=4M:\
+    :memoryuse=8M:\
+    :filesize=8M:\
+    :coredumpsize=8M:\
+    :openfiles=24:\
+    :maxproc=32:\
+    :priority=0:\
+    :requirehome:\
+    :passwordtime=91d:\
+    :umask=022:\
+    :ignoretime@:\
+    :label=partition/13,mls/5,biba/10(5-15),lomac/10[2]:
+
+To set the user class default label which will be enforced by MAC, use label. 
+Потребителите няматразрешение да модифизират тези стойности. 
+В реална конфигурация, администратора никога няма да включи всички policy модули.
+
+Източник:
+http://www.freebsd.org/doc/en/books/handbook/mac-understandlabel.html
+
+============================================================================================================
+
+
+
+
+
+============================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+

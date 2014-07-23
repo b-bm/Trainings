@@ -1,0 +1,40 @@
+﻿HW - 7:
+
+10. Create a C application which uses autoconf to configure config.h. 
+Use autoconf to check if on the machine we have stdio.h, stdlib.h and string.h. 
+The example C code may be(but is not required to be) this:
+
+#include 'config.h'
+int main() {
+    printf(MY_STRING);
+}
+
+#ifndef _MY_CONFIG_H
+#define _MY_CONFIG_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MY_STRING "It works\n"
+#endif
+
+==================================
+ПРОВЕРИ ТОВА:
+
+http://forums.academy.telerik.com/116833/lsa-software-management-%D0%B4%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D0%BE-10-%D0%B7%D0%B0%D0%B4
+Ако решавате задача 10 от домашното за лекция 7, то заменете първия ред от примера (използващ директивата include) със следния ред:
+
+#include "config.h"
+
+Така написана директивата include ще търси в текущата директория файл config.h със следното примерно съдържание:
+
+#ifndef _MY_CONFIG_H
+#define _MY_CONFIG_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MY_STRING "It works\n"
+#endif
+ 
+Аз поне така разбирам условието на задача 10?
+
+

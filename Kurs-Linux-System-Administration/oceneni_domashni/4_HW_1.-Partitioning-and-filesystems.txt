@@ -1,0 +1,44 @@
+﻿Increasing the size of a ReiserFS system: = 19. Describe the procedure of resizing ReiserFS. ??
+
+can be increased in size while mounted or unmounted
+Open a termina console,then log in as root user or equvalent.
+
+Increase the size of the fs on the device called /dev/sda2, using on of the following methods: to extend he fs to the maximum available size of the device - resize_reiserfs /dev/sda2
+when no size is specified, this increases the volume to the full size of the partition. 
+to extend the fs to a spec. size - resize_reiserfs -s size /dev/sda2
+replace size with a desirable siez in bytes. u can also specify units on the value, such as 50000k, 250M, 2G and so on. U can specify an increase to the current size by prefixing the value with (+) sign:
+resize_reiserfs -s +500M /dev/sda2
+wait until completed
+
+To mount ReiserFS for device ... at mount point ---:
+mount -t reiserfs ... ---
+Verify:
+df -h
+
+
+Decreasing the size of ReiserFS:
+it can be done only if the volume is unmounted. 
+-Unmount the device: umount /mnt/point
+If the partition you are attempitng to decrease in size contains system files such as /, unmount is possible only when booting from a bootable CD or other.
+Devreasing the size of the file system on a device called /dev/--- :
+resize_reiserfs -s size /dev/---
+Replace sizewith desired size in byes (ot M, G, Kbytes so on) and adding (-):
+resize_reiserfs -s -500M /dev/---
+wait until it is completed.
+Mount the file system :
+mount -t reiserfs /dev/--- /mnt/point
+Verify:
+df -h
+
+When want to use free space from VG:
+lvextended -L+5G /dev/vg(number)/lv_slot_(something)
+df -h
+
+resize with it still mounted:
+resize_reiserfs -f /dev/vg(num)/lv_slot_(smth)
+df -h 
+
+КОМЕНТАР КЪМ ОЦЕНКА:
+
+Сравнително добро домашно, изчерпателно не видях само източник на информацията. Би било добре да се посочва.
+Успех за напред.

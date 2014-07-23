@@ -1,0 +1,266 @@
+﻿Getting the basics
+1. Working with your network interfaces
+1.1. ethtool / mii-tool
+1.2. ifconfig
+1.3. iproute2
+2. Routing
+2.1. route
+2.2. iproute2
+2.3. becoming a router / enable forwarding
+3. ipmask
+4. ipcalc
+5. Aliases
+6. Configuration files
+
+
+Working with Wireless:
+1. Basics
+1.1. iwconfig
+1.2. iwlist
+2. WPA/WPA2 authentication - wpa_supplicant
+
+
+List all network interfaces:
+	ifconfig -a
+
+List only network interfaces that are UP:
+	ifconfig
+
+List all network interfaces with iproute2:
+	ip addr list
+	ip addr show
+	ip addr
+	ip a l
+	ip a s
+	ip a
+
+List all current routes:
+	route -n (the -n is for do not resolve IPs)
+
+Adding a routes with route:
+	route add -net 192.168.22.0/24 gw 10.2.0.1 dev eth0
+	route add -host 10.2.0.128  dev eth0
+
+Adding default gw with route:
+	route add default gw 10.2.0.1
+
+List all current routes with iproute2:
+	ip route show
+	ip route list
+	ip route
+	ip r s
+	ip r l
+	ip r
+
+Adding routes with iproute2:
+	ip route add 192.168.22.0/24 via 10.2.0.1 dev eth0
+	ip r a 192.168.22.0/24 via 10.2.0.1 dev eth0
+	ip route add 10.2.0.128 dev eth0
+	ip r a 10.2.0.128 dev eth0
+
+Adding default gw with iproute2:
+	ip route add 0/0 via 10.2.0.1
+	ip r a default via 10.2.0.1
+
+Configure network interface with ifconfig:
+	ifconfig eth0 10.2.0.254 netmask 255.255.255.0
+
+Metrics - the lower the metric, the more preferable this route becomes
+
+Configure network interface with iproute2:
+	ip address add 10.2.0.254/24 dev eth0
+	ip link set eth0 up
+	ip route add 10.2.0.0/24 dev eth0
+
+Adding network interface aliases with ifconfig:
+	ifconfig eth0:x 10.2.0.19 netmask 255.255.255.0
+
+Adding network interface aliases with iproute2:
+	ip a a 10.2.0.19/24 dev eth0 label eth0:0
+	ip r a 10.2.0.0/24 dev eth0
+
+Looking up your ARP table with arp:
+	arp -n
+
+Looking up your ARP table with iproute2:
+	ip neigh list
+	ip neigh 
+	ip n l
+	ip n
+
+What is the route that my machine will choose to ip xx.xxx.xx.xxx:
+	ip route get xx.xxx.xx.xxx
+
+Update the switch MAC table:
+	arping -U -I eth0 -c3 interface_ip
+
+Enable forwarding:
+ echo 1 > /proc/sys/net/ipv4/ip_forward /  sysctl net.ipv4.ip_forward=1
+
+Routing tables
+ /etc/iproute2/rt_tables
+ ip rule list
+ ip rule
+ ip ru l
+ ip ru
+
+
+Configuration files:
+RedHad based distros: /etc/sysconfig/network-scripts
+	ifcfg-eth0   --> БЕЛЕЖКА: Прочети в интернет info за това "ifcfg-......" !!! препоръка от hackman 2_video_2_Networking -> 11:50 мин.
+DEVICE=eth0
+IPADDR=10.2.0.254
+NETMASK=255.255.255.0
+NETWORK=10.2.0.0
+BROADCAST=10.2.255.255
+ONBOOT=yes
+
+Debian based distros: /etc/network/interfaces
+auto lo
+iface lo inet loopback
+allow-hotplug eth0
+iface eth0 inet dhcp
+
+All distros:
+  /etc/nsswitch.conf	- Libc resolver configuration
+  /etc/resolv.conf		- Libc resolv server configuration
+  /etc/host.conf		- Additional Libc resolver configuration
+Local resolver files
+  /etc/hosts			- ip to name mappings
+  /etc/services			- port to service name mappings
+  /etc/networks			- ip network to name mappings
+  /etc/protocols		- Internet protocols as gathered from http://www.iana.org/assignments/protocol-numbers
+
+
+
+Configuring your Wireless on the terminal:
+
+ip link set wlan0 up / ifconfig wlan0 up
+iwlist wlan0 scan
+
+NO ENCRYPTION:
+iwconfig wlan0 essid Hackman channel 11 
+
+WEP crypto:
+iwconfig wlan0 essid Hackman channel 11 key YOUR_KEY / iwconfig wlan0 essid Hackman channel 11 key s:password
+
+WPA crypto:
+root@terion:~# wpa_passphrase Hackman
+# reading passphrase from stdin
+p1lotIzpitat3l
+
+network={
+        ssid="Hackman"
+        #psk="p1lotIzpitat3l"
+        psk=f7579acd88efa1b9b6a77535fa20e2e83a12953cffd71a582b65b882c27e10d1
+}
+
+# Copy the above output to your /etc/wpa_supplicant.conf
+
+root@terion:~# wpa_supplicant -D wext -i wlan0 -c /etc/wpa_supplicant.conf
+wlan0: Trying to associate with 7c:d1:c3:af:2b:39 (SSID='Hackman' freq=2412 MHz)
+ioctl[SIOCSIWFREQ]: Device or resource busy
+wlan0: Association request to the driver failed
+wlan0: Associated with 7c:d1:c3:af:2b:39
+wlan0: WPA: Key negotiation completed with 7c:d1:c3:af:2b:39 [PTK=CCMP GTK=TKIP]
+wlan0: CTRL-EVENT-CONNECTED - Connection to 7c:d1:c3:af:2b:39 completed (auth) [id=0 id_str=]
+
+-B for starting the supplicant into background
+
+Setup IP, dynamic or static :)
+
+VLANs
+ - vconfig
+ - add vlan
+root@terion:/proc/net/vlan# vconfig add eth0 12
+Added VLAN with VID == 12 to IF -:eth0:-
+
+ - list vlans
+root@terion:/proc/net/vlan# cat config 
+VLAN Dev name    | VLAN ID
+Name-Type: VLAN_NAME_TYPE_RAW_PLUS_VID_NO_PAD
+eth0.12        | 12  | eth0
+
+ - remove vlan
+root@terion:/proc/net/vlan# vconfig rem eth0.12
+Removed VLAN -:eth0.12:-
+
+
+Bridging
+ - brctl
+ - list bridges
+root@terion:~# brctl show
+bridge name     bridge id               STP enabled     interfaces
+ - create bridge
+root@terion:~# brctl addbr lsa1
+ - add devices to a bridge
+root@terion:~# brctl addif lsa1 eth0.4
+root@terion:~# brctl addif lsa1 eth0.5
+root@terion:~# brctl addif lsa1 eth0.6
+root@terion:~# brctl addif lsa1 eth0.7
+root@terion:~# brctl show
+bridge name     bridge id               STP enabled     interfaces
+lsa1            8000.f0def1810a2a       no              eth0.4
+                                                        eth0.5
+                                                        eth0.6
+                                                        eth0.7
+
+Bonding
+ - Bonding modes
+	* balance-rr	-
+	* active-backup -
+	* balance-xor	- XOR ( source and destination mac % slave count )
+	* broadcast		- fault tolerance
+	* 802.3ad		- link aggregation
+	* balance-tlb	- transmit load balancing
+	* balance-alb	- active load balancing (transmit and receive)
+ - ifenslave
+ - /proc/net/bonding
+root@terion:fed:/proc/net/bonding# cat bond0 
+Ethernet Channel Bonding Driver: v3.7.1 (April 27, 2011)
+
+Bonding Mode: load balancing (round-robin)
+MII Status: up
+MII Polling Interval (ms): 0
+Up Delay (ms): 0
+Down Delay (ms): 0
+
+Slave Interface: eth0.6
+MII Status: up
+Speed: Unknown
+Duplex: Unknown
+Link Failure Count: 0
+Permanent HW addr: f0:de:f1:81:0a:2a
+Slave queue ID: 0
+
+Slave Interface: eth0.7
+MII Status: up
+Speed: Unknown
+Duplex: Unknown
+Link Failure Count: 0
+Permanent HW addr: f0:de:f1:81:0a:2a
+Slave queue ID: 0
+
+
+Firewall concepts  --> ЛЕКЦИЯ 05.09.2013
+1. Stateless vs Statefull Firewall
+2. Different tables
+3. Different chains
+4. Listing your current firewall:
+	for i in filter nat mangle; do iptables -L -nvt $i; done
+5. modules
+
+--> ИНФО СЪДЪРЖАНИЕ - ВИДЕА:
+Видео - 1:
+
+
+Видео - 2:
+
+
+
+
+
+
+
+
+

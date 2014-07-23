@@ -1,0 +1,9 @@
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationTwo\bin\Debug\BitOperationTwo.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationTwo\bin\Debug\BitOperationTwo.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationTwo\bin\Debug\BitOperationTwo.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationTwo\obj\Debug\11.BitOperationTwo.csprojResolveAssemblyReference.cache
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationTwo\obj\Debug\BitOperationTwo.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationTwo\obj\Debug\BitOperationTwo.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationTwo\bin\Debug\BitOperationTwo.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationTwo\obj\Debug\BitOperationTwo.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\BitOperationTwo\obj\Debug\BitOperationTwo.pdb

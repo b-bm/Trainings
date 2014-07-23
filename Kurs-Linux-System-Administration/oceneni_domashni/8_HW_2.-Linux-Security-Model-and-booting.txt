@@ -1,0 +1,145 @@
+﻿10. Configure GRUB to load a kernel and its initrd from the Network.
+
+
+В частния пример разглеждаме как се процедира при гореспоменатата ситуация, openSUSE дистрибуция и GRUB 1. В първият вариант е с ръчно въвеждане на командите в GRUB, във втория с предварително конфигуриран GRUB.
+
+1. Ръчна инсталация.
+
+Тъйкато GRUB компилиран по подразбиране e без мрежова поддръжка, първо трябва да го рекомпилираме. За тази цел инсталираме сорс пакетът на GRUB от инсталационното DVD.
+
+# rpm -Uvh /media/cdrom/suse/src/grub-0.92-69.src.rpm
+
+(Използваме rpm -Uvh тъй като с този параметър се задава да се деинсталира стара версия, ако има такава, и да се инсталира нова. Предпочитам да го, защото работи и без да има стара инсталирана версия на дадения пакет)
+
+След което ще намерим .tar архив в директорията /usr/src/packages/SOURCES/. Файлът netboot/README.netboot в този архив съдържа параметрите за да се компилира поддръжката на различни мрежови карти. Извличаме този файл в директорията /tmp.
+
+# tar -xOjf /usr/src/packages/SOURCES/grub-0.92.tar.bz2 grub-*/netboot/README.netboot >/tmp/README.netboot
+
+(Използваме параметрите -x за извличане на файл(ове) от архив; -O извличане към стандартен output - ползваме го само заради параметъра -x; Филтирай архива през bzip2; -f посочваме конкретния файл от архива.)
+
+От току-що разархивирания файл черпим информация какво трябва да правим за да подараме нашата мрежова карта. Примерно за мрежова карта Intel Ethernet Pro 100 се изисква параметърът "--enable-eepro100". Препоръчително е да активираме само драйвърите, които наистина ни трябват, защото с твърде много компилирани драйъви за мрежови карти GRUB може да се чупи.
+
+Редактираме файлът /usr/src/packages/SPECS/grub.spec с ASCII редактор по избор и добавяме параметъра за нашата мрежова карта:
+
+%build
+%ifarch x86_64
+  export CC='cc -m32'
+  CFLAGS="$CFLAGS $RPM_OPT_FLAGS -DNDEBUG -W -Wall
+-Wpointer-arith -fno-asynchronous-unwind-tables"  
+./configure \
+--prefix=/usr --infodir=%{_infodir} --mandir=%{_mandir} --datadir=/usr/lib/grub \
+--disable-auto-linux-mem-opt --enable-diskless --enable-eepro100
+%else
+  CFLAGS="$CFLAGS $RPM_OPT_FLAGS -DNDEBUG -W -Wall -Wpointer-arith" 
+./configure    --prefix=/usr --infodir=%{_infodir} --mandir=%{_mandir} --datadir=/usr/lib/grub \ 
+--disable-auto-linux-mem-opt --enable-diskless --enable-eepro100
+%endif
+make
+
+Запазваме промените и рекомпилираме:
+
+# rpm -bb /usr/src/packages/SPECS/grub.spec
+
+И инсталираме пакетът:
+
+# rpm -Uhv /usr/src/packages/RPMS/i386/grub-0.92-69.i386.rpm
+
+Създаваме GRUB bootable дискета:
+
+# cd /usr/lib/grub/
+# dd if=stage1 of=/dev/fd0
+# dd if=stage2 of=/dev/fd0 seek=1
+
+(С изпълнението на гореспоменатите команди първо и второ ниво на GRUB са копирани директно сектор по сектор на дискетата)
+
+Приемаме, че инсталационният диск е моунтнат в //192.168.0.1/pub/ на машина с пуснато TFTP.
+
+Буутваме флопито на машината която искаме да инсталираме и задаваме клиентския IP адрес, межовата маска, и адреса на сървъра:
+
+grub > ifconfig --address=192.168.0.2 --mask=255.255.255.0 --server=192.168.0.1
+
+След което задаваме на GRUB, че boot файловте трябва да бъдат заредени от мрежата:
+
+grub > root (nd)
+
+(ND е абревиатура от Network Drive)
+
+След което кернелът се зарежда. Директорията с инсталационните файлове се задават на linuxrc с отделна команда:
+
+grub > kernel /linux install=ftp://192.168.0.1/pub/
+
+
+След което се зарежда initrd
+
+
+grub > initrd /initrd
+
+
+И на края стартираме системата с:
+
+grub > boot
+
+
+
+2. Автоматична инсталация
+
+Процесът може да бъде улеснен много като запазим boot меню на дискетата.
+Направата на boot дискета в дадения случай е малко по-сложен процес.
+Първо правим файлова система на флопито:
+
+
+mke2fs -m 0 /dev/fd0
+(-m задаваме запазените блокове в проценти)
+
+Манутваме флопито и копираме файловете:
+
+# mount /media/floppy/
+# cp /usr/lib/grub/stage1 /usr/lib/grub/stage2 /media/floppy/
+
+След което копираме menu.lst в /media/floppy/
+
+# cp /boot/grub/menu.lst /media/floppy/
+
+Отваряме го с текстов редактор:
+
+# nano /media/floppy/menu.lst
+
+И го редактираме да изглежда по следния начин:
+
+dhcp
+gfxmenu (nd)/message
+color white/blue black/light-gray
+default 1
+timeout 8
+title SuSE Linux Installation
+   kernel (nd)/linux insmod=e100 install=ftp://192.168.0.1/pub/
+   initrd (nd)/initrd
+title Booting from local hard disk
+   root (hd0)
+   chainloader +1
+
+За да направим флопито bootable, изпълняваме командата grub в shell-а:
+
+# grub
+
+След като сме в GRUB shell-а, въвеждаме следната команда, коят ще запише файлът stage1 от флопито в неговия boot sector и ще добави stage2 и menu.lst като параметри.
+
+grub > install (fd0)/stage1 (fd0) (fd0)/stage2 p (fd0)/menu.lst
+
+След което излизаме от GRUB и ънмоунтваме дискетата:
+
+grub > quit
+# umount /media/floppy
+
+Ако всичко е минало наред, би трябвало boot конфигурацията да бъде заредена от дискетата.
+
+ЗАБЕЛЕЖКА:
+Добро домашно. Много изчерпателно е представено заданието, обяснени са всички стъпки много подробно. 
+Не е представен източник. 
+Аз ресърчвах от тук: http://tr.opensuse.org/SDB:Booting_from_the_Network_with_GRUB
+Успех
+
+
+
+
+

@@ -1,0 +1,5 @@
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\SumAccuracyOf\bin\Debug\SumAccuracyOf.exe.config
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\SumAccuracyOf\bin\Debug\SumAccuracyOf.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\SumAccuracyOf\bin\Debug\SumAccuracyOf.pdb
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\SumAccuracyOf\obj\Debug\SumAccuracyOf.exe
+C:\Users\ghost\documents\visual studio 2012\Projects\4. Input-Output Console\SumAccuracyOf\obj\Debug\SumAccuracyOf.pdb

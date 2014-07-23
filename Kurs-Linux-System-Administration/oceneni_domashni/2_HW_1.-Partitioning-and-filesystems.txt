@@ -1,0 +1,56 @@
+﻿6. Write down the commands needed to create SW RAID10 with 4 SATA drives. How will you add one more drive as hot-spare?
+
+Имаме сървър със 6 диска
+На /dev/vda е инсталиран CentOS
+
+Сървърът има и 5 еднакви диска - /dev/vdb, /dev/vdc, /dev/vdd, /dev/vde, и /dev/vdf, с които ще създадем RAID масив
+
+С cfdisk създаваме по един partition на всеки от петте диска:
+
+cfdisk /dev/vdb
+
+Натискаме на New
+
+Избираме максималния размер, partiton type - primary
+
+За partition Type и избираме Linux raid autodetect
+
+Натискаме Write и след това Quit
+
+Повтаряме същите стъпки за /dev/vdc, /dev/vdd, /dev/vde, и /dev/vdf
+
+С тази команда създаваме софтуерен RAID10 от 4 диска:
+
+mdadm --create /dev/md0 --level=10 --raid-devices=4 /dev/vdb1 /dev/vdc1 /dev/vdd1 /dev/vde1
+
+Може да наблюдаваме процеса с командата:
+
+[root@localhost ~]# cat /proc/mdstat 
+
+Personalities : [raid6] [raid5] [raid4] [raid10] 
+md0 : active raid10 vde1[3] vdd1[2] vdc1[1] vdb1[0]
+      10476544 blocks super 1.2 512K chunks 2 near-copies [4/4] [UUUU]
+      [===>.................]  resync = 15.2% (1600000/10476544) finish=0.7min speed=200000K/sec
+unused devices: <none>
+
+С тази команда добавяме петия диск като hot spare. RAID10 е винаги от четен брой дискове, за RAID 5 и 6 трябва изрично да се зададе че добавяме hot-spare, а не разширяваме масива:
+
+mdadm --add /dev/md0 /dev/vdf1
+
+Накрая запазваме конфигурацията:
+
+mdadm --detail --scan >> /etc/mdadm/mdadm.conf
+
+КОМЕНТАР КЪМ ОЦЕНКА:
+
+Добро домашно, сравнително изчерпателно не видях само източник на информацията. Би било добре да се посочва. Също така може да имаш предвид и това за добавянето на hot-spare диска:
+За да можем да добавим hot-spare диска, той трябва да е форматиран както вече съществуващите такива в масива.
+Копираме партишън таблицата от съществуващо, изправно устройство в масива.
+sfdisk -d /dev/sdb > table
+Форматираме новото устройство с нея:
+sfdisk /dev/sdf < table
+# partition table of /dev/sdf
+Добавяме устройството в масива:
+mdadm --add /dev/md0 /dev/sdf1
+Успех за напред
+

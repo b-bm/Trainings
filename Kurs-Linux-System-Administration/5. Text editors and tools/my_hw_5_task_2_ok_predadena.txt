@@ -1,0 +1,120 @@
+﻿HW - 5:
+
+ГРЕШНА Е СЪРВИСИТЕ ИЗЛИЗАТ И НА TCP А НЕ ТРЯБВА !!!
+
+2. With a single regular expression get all services that have the string 'file' in their names from /etc/services and are runing only on UDP.
+
+[user@grizzly ~]$ grep -n -o -i '.*file.*\/udp' /etc/services
+434:afs3-fileserver 7000/udp
+717:profile         136/udp
+1876:bnetfile        1120/udp
+3345:filex-lport     1887/udp
+5322:mobile-file-dl  2926/udp
+6228:filecast        3401/udp
+8104:profilemac      4749/udp
+8226:avt-profile-1   5004/udp
+8229:avt-profile-2   5005/udp
+8996:boe-filesvr     6404/udp
+9308:mindfilesys     7391/udp
+10519:filesphere      24242/udp
+10529:flashfiler      24677/udp
+10636:filenet-powsrm  32767/udp
+10638:filenet-tms     32768/udp
+10640:filenet-rpc     32769/udp
+10642:filenet-nch     32770/udp
+10644:filenet-rmi     32771/udp
+10646:filenet-pa      32772/udp
+10648:filenet-cm      32773/udp
+10650:filenet-re      32774/udp
+10652:filenet-pch     32775/udp
+10654:filenet-peior   32776/udp
+10656:filenet-obrok   32777/udp
+[user@grizzly ~]$
+===================================================================
+
+***** ПРАВИЛНО РЕШЕНИЕ НА ПРОБЛЕМА *****
+sed/regex 0wnage
+
+[WonderGen ~ # 0] tac services|sed -ne ‘/^[^#].*file.*\s.*\/udp.*/{N;/\(^[^#]*\s.*\)\/udp\(.*\)#*.*\n\1\/tcp\2/!{s/\n.*//p}}’|wc -l
+0
+[WonderGen ~ # 0] tac services|sed -ne ‘/^[^#].*file.*\s.*\/udp.*/{N;/\(^[^#]*\s.*\)\/udp\(.*\)#*.*\n\1\/tcp\2/!{s/\n.*//p}}’
+[WonderGen ~ # 0]
+# there are no services which are not commented, containing file in their name and running only in udp
+
+[WonderGen ~ # 0] tac services|sed -ne ‘/^[^#]*\s.*\/udp.*/{N;/\(^[^#]*\s.*\)\/udp\(.*\)#*.*\n\1\/tcp\2/!{s/\n.*//p}}’
+mandelspawn 9359/udp mandelbrot # network mandelbrot
+router 520/udp route routed # local routing process
+syslog 514/udp
+
+who 513/udp whod # who’s logged in to machines
+comsat 512/udp biff # notify users of new mail received
+igmpv3lite 465/udp smtps ssmtp # IGMP over UDP for SSM
+test2 37/udp timserver
+test 18/udp
+[WonderGen ~ # 0]tac services|sed -ne ‘/^[^#]*\s.*\/udp.*/{N;/\(^[^#]*\s.*\)\/udp\(.*\)#*.*\n\1\/tcp\2/!{s/\n.*//p}}’|wc -l
+8
+[WonderGen ~ # 0]
+# there are 8 services running only in udp
+
+########################################################################
+# Explanations:
+#
+# tac services|sed -ne ‘/^[^#]*\s.*\/udp.*/{N;/\(^[^#]*\s.*\)\/udp\(.*\)#*.*\n\1\/tcp\2/!{s/\n.*//p}}’|wc -l
+#
+# this will count/print all services which are running only in udp. We asume that the services file have the following structure:
+# tcpmux 1/tcp # TCP port service multiplexer
+# tcpmux 1/udp
+# compressnet 2/tcp # Management Utility
+# compressnet 2/udp
+#
+# – if one service can run in tcp and udp, the udp record will be on 2nd line
+#
+# tac – reversed cat
+# tac services|sed -ne ‘/^[^#] – search for lines which don’t start with #
+# tac services|sed -ne ‘/^[^#]*\s.* – search for lines which don’t start with # and have(or not) some chars followed by
+# space char and have(or not) something after it
+# tac services|sed -ne ‘/^[^#]*\s.*\/udp.* – search for lines which don’t start with # and have(or not) some chars
+# followed by space char and have(or not) something after it then /udp followed(or not) by something
+# tac services|sed -ne ‘/^[^#]*\s.*\/udp.*/{ – start executing commands
+#
+# The idea is to match 2 concecutive lines, actually to find couples
+# which don’t match
+#
+# tac services|sed -ne ‘/^[^#]*\s.*\/udp.*/{N; – add the next line to the current one and they will be used as
+# single one for test, the two lines are separated by \n
+# tac services|sed -ne ‘/^[^#]*\s.*\/udp.*/{N;/\(^[^#]*\s.*\)\/udp – the same as the previous one but in the new
+# concatenated line we want to save the part before /udp for later use
+# tac services|sed -ne ‘/^[^#]*\s.*\/udp.*/{N;/\(^[^#]*\s.*\)\/udp\(.*\)#*.*\n – in the first part(up to the \n) of the new
+# concatenated line save the parts before /udp and after /udp up to
+# ‘#’(may exist or not) and may be followed or not by chars
+#
+# this is to avoid lines like
+# qrh 752/udp passwd_server # Kerberos passwd server
+# qrh 752/tcp passwd_server
+# which are different not only by /tcp /udp but also by the comment
+#
+# tac services|sed -ne ‘/^[^#]*\s.*\/udp.*/{N;/\(^[^#]*\s.*\)\/udp\(.*\)#*.*\n\1\/tcp\2/ – in the new concatenated line
+# compare the parts before and after /udp in the first part (up to the \n)
+# with the parts before and after /tcp in the second part
+#
+# tac services|sed -ne ‘/^[^#]*\s.*\/udp.*/{N;/\(^[^#]*\s.*\)\/udp\(.*\)#*.*\n\1\/tcp\2/! – VERY IMPORTANT – reverse the
+# selection
+#
+# tac services|sed -ne ‘/^[^#]*\s.*\/udp.*/{N;/\(^[^#]*\s.*\)\/udp\(.*\)#*.*\n\1\/tcp\2/!{ – start executing commands
+# on the new concatenated line
+#
+# tac services|sed -ne ‘/^[^#]*\s.*\/udp.*/{N;/\(^[^#]*\s.*\)\/udp\(.*\)#*.*\n\1\/tcp\2/!{s/\n.*//p}} – on the concatenated
+# line replace \n and everything after it with nothing and print it
+#
+
+
+
+
+
+
+
+
+
+
+
+

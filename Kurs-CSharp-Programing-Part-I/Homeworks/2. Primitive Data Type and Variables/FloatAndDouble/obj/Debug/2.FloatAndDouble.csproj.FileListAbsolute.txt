@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatAndDouble\bin\Debug\FloatAndDouble.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatAndDouble\obj\Debug\2.FloatAndDouble.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatAndDouble\bin\Debug\FloatAndDouble.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatAndDouble\bin\Debug\FloatAndDouble.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatAndDouble\obj\Debug\FloatAndDouble.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\2. Primitive Data Type and Variables\FloatAndDouble\obj\Debug\FloatAndDouble.pdb

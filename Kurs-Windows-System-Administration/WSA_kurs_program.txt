@@ -1,0 +1,40 @@
+﻿== Програма - Windows System Administracion ==
+
+Инсталиране и конфигуриране на Windows OS
+
+Инсталиране и конфигуриране на роли и услуги
+
+Мрежови настройки
+
+Модел на сигурност
+
+Въведение в администрирането на директорийни услуги (Active Directory)
+
+Управление на групови политики (Group Policy)
+
+Работа с DNS клиенти и сървъри (Domain Name System)
+
+Работа с DHCP клиенти и сървъри (Dynamic Host Configuration Protocol)
+
+Работа с услуги за отдалечен достъп
+
+Настройване на файлови услуги и услуги за принтиране
+
+Автоматизиране на инсталацията на Windows OS
+
+Web Server (IIS)
+
+Remote Desktop Services (RDS)
+
+Виртуализация с Hyper-V
+
+Управление на актуализациите и сигурността (Patching and Security management)
+
+Резервни копия и възстановяване на Windows OS (Backup and Recovery)
+
+Наблюдаването на производителността (Monitoring server performance)
+
+Автоматизиране на административни задачи (Automating Windows Administration)
+
+Организиране на поддръжката (Organize your support model)
+

@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\CheckTypeOfInputValue\bin\Debug\CheckTypeOfInputValue.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\CheckTypeOfInputValue\bin\Debug\CheckTypeOfInputValue.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\CheckTypeOfInputValue\bin\Debug\CheckTypeOfInputValue.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\CheckTypeOfInputValue\obj\Debug\8.CheckTypeOfInputValue.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\CheckTypeOfInputValue\obj\Debug\CheckTypeOfInputValue.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\CheckTypeOfInputValue\obj\Debug\CheckTypeOfInputValue.pdb

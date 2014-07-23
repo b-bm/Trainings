@@ -1,0 +1,13 @@
+﻿11. Describe the difference between dhclient and dhcpcd.
+
+dhcpcd - Dynamic Host Configuration Protocol Server
+dhcpd, implements the Dynamic Host Configuration Protocol (DHCP) and the Internet Bootstrap Protocol (BOOTP). DHCP allows hosts on a TCP/IP network to request and be assigned IP addresses, and also to discover information about the network to which they are attached. BOOTP provides similar functionality, with certain restrictions.
+
+dhclient - Dynamic Host Configuration Protocol Client
+dhclient provides a means for configuring one or more network interfaces using the Dynamic Host Configuration Protocol, BOOTP protocol, or if these protocols fail, by statically assigning an address.
+
+If we can make parallel with client server technology, dhcpcd is the server and dhclient is the client.
+
+ЗАБЕЛЕЖКА:
+Добро домашно, но не е зле да се посочва и източникът на информация
+Успех!

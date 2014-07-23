@@ -1,0 +1,8 @@
+Just to elaborate on Bhavin's excellent answer - editing the solution file works but you may still get the incompatible error (as David reported) if you had .NET 4.5 selected as the default .NET version in your VS2012 project and your VS2010 enviroment doesn't support that.
+
+To quickly fix that, open the VS2012 .csproj file in a text editor and change the TargetFrameworkVersion down to 4.0 (from 4.5). VS2010 will then happily load the "edited" solution and projects.
+
+You'll also have to edit an app.config files that have references to .NET 4.5 in a similar way to allow them to run on a .NET 4.0 environment.
+
+
+Thanks for this tip! Works even for downgrading an ASP.NET web api project. In addition to adapting Format Version 12.00 to Format Version 11.00 in sln and adjusting TargetFrameworkVersion element in csproj from 4.5 > 4.0; I had to remove httpRuntime element in web.config and adjust compilation targetFramework attribute in web.config from 4.5 > 4.0

@@ -1,0 +1,23 @@
+﻿19. Describe the procedure of resizing ReiserFS.
+
+A ReiserFS file system can be increased in size while mounted or unmounted, but can be decreased in size only why unmounted.
+It is recommended to perform a back-up before resizing a file system to avoid data losss.
+Procedure:
+
+1. Log on as root user.
+2. Unmount the device (for decreasing the size):
+	umount mountpoint
+3. Increase or decrease the size of the file system:
+	resize_reiserfs -s size filesystem
+	or
+	resize_reiserfs filesystem - to extend the file system size to the maximum available size of the device
+4. Mount the device (if previously unmounted):
+	mount -t reiserfs filesystem mountpoint
+5. Check if the resize is successfull( check disk space):
+	df -h
+
+	
+КОМЕНТАР КЪМ ОЦЕНКА:
+
+Сравнително добро домашно, от написаното става ясно какво се случва, но можеше да бъде обяснено и малко по подробно. Не видях само източник на информацията. Би било добре да се посочва.
+Успех за напред

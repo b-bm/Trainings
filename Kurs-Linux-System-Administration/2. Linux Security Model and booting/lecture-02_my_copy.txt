@@ -1,0 +1,255 @@
+﻿I. Booting and Boot loaders:
+
+1. Boot loaders
+
+* LILO -> бележка: ( локален буут лоудър)
+-> И за 3-те буут лоудъри(LILO, GRUB, GRUB2) важно инфо за грaфичния интерфейс ( част 1 - видео 2 = 5.18 мин. до ~ 11.30 мин. ) !!! //
+
+ - config - /etc/lilo.conf
+image = /boot/bzImage-3.8.2-terion
+root = /dev/sda2
+label = Terion-3.8.2
+read-only
+ - filename size limit 8 (only older lilo verions)
+ - serial console configuration
+serial=0,9600n8
+timeout=100
+
+* GRUB -> бележка: ( локален буут лоудър)
+-> LVM тук не работи добре или изобщо !!! //
+
+ - config - /boot/grub/menu.lst
+title CentOS (2.6.18-348.el5)
+     root (hd0,0)
+kernel /vmlinuz-2.6.18-348.el5 ro root=/dev/main/root rhgb quiet crashkernel=128M@16M panic=5
+initrd /initrd-2.6.18-348.el5.img
+ - serial console configuration
+serial --unit=1 --speed=19200
+terminal --timeout=8 console serial
+kernel /vmlinuz-2.6.18-348.el5 ro root=/dev/main/root rhgb quiet crashkernel=128M@16M panic=5 console=tty0 console=ttyS1,19200n8
+
+* GRUB2 -> бележка: ( локален буут лоудър) GRUB2 е много по функционален от GRUB ; 
+-> GRUB2 е разделен на 3 части. Първата се слага в първите 512 байта на харда това е самия буут лоудър. Тази част има за цел да разпознава пъртишъни и супер прости файлови системи, от които да зареди Втората част на буут лоудъра. 
+Първата част се нарича Stage 1 това е файла, който се записва в MBR(master boot record-a). Втората част се нарича Stage 2 тези файлове се държат в boot директорията. 
+Stage 2 дава интерфейса с comand prompt и възможността за edit на менютата, както и всичко останало. Ако не може да се прочете boot partition-a т.е ако буут лоудър-а не може да прочете boot partition-a Stage 2 няма да се зареди  и ние няма да имаме нищо !!! 
+Третата част (Stage 3) е конфигурационния файл т.е "grub.cfg"
+Stage 2 е разцепен също на няколко части ( подробности в част 1 - видео 1 = 28.00 мин.) LVM тук работи за разлика от при GRUB. //
+
+ - config - /boot/grub2/grub.cfg
+ - very flexible configuration
+ - very complex configuration
+
+* ISOlinux
+
+ - config - /isolinux.cfg
+label 2
+kernel /kernel/memdisk
+append initrd=/images/bootnuke.imz
+ - filename size limit 8
+ - serial console setup
+serial 0 9600 0xab3
+
+* PXEboot -> бележка: ( мрежов буут лоудър -> "PXEboot" = Pre boot extension environment) 
+-> Повече инфо част 1 - видео 2 = 17.00 мин. до ~ 22.05 мин. //
+
+ - config - /tftpboot/pxelinux.cfg/default
+LABEL centos64
+KERNEL centos/x86/6.4/vmlinuz
+APPEND initrd=centos/x86/6.4/initrd.img text
+ - filename size limit 8
+
+IMPORTANT - video resolutions and backgrounds with boot loaders are not compatible with serial consoles and are big overhead with KVMs
+
+Kernel image - This is the compiled kernel binary file. It is the first thing that the boot loader search for.
+
+Init RAM FS image (initrd) - Initrd is a compressed file that is used to store additional user space tools or drivers needed for booting.
+It is required for systems that need to boot of LVM or SW RAID partitions. In the most cases it is used only to make a single kernel more
+portable between machines and support big number of drivers. The initrd file contains its own directory tree and usually only the drivers
+that are needed for the machine where it runs.
+
+Initrd files are pushed to the memory and extracted there. During boot, they reside in the memory and their files are referenced from there.
+
+How to gain local root access to any linux machine:
+init=/bin/bash (at the end of the parameters line)
+mount -o remount,rw /
+
+Note: Some older kernels(before 3.0) have a limit of 8 kernel parameter on the parameters line.
+
+2. Linux boot procedure:
+
+BIOS
+ -> Storage device
+    -> boot loader
+       -> Kernel
+         -> /sbin/init
+BIOS 
+ -> Storage device 
+  -> boot loader 
+   -> Kernel 
+    -> Initrd 
+	 -> /sbin/init 
+	  -> load modules 
+	   -> execute custom init scripts 
+	    -> chroot to /dev/root
+		
+-> бележка: част 1 - видео 2 = 25.12 мин. до ~ 28.00 мин.
+ \
+ | -mnt/root/ 
+            |
+
+бележка: END //			
+
+3. The init system
+
+1. What is INIT and why we need it?
+2. RunLevels
+0 - halt
+6 - reboot
+3. What is a terminal?
+4. What is a shell?
+
+The three INIT systems:
+1. The old and wise System V
+ - config /etc/inittab
+2. New and compatible with System V - UpStart
+ - config /etc/init.conf & /etc/init/*.conf
+3. The new and totally fucked SystemD
+ - config /etc/systemd/*
+
+Execution differences between the three init systems:
+
+* System V sequential:
+
+  Kernel -> init -> app1 -> app1 -> app3 ... -> login
+
+* System V parallel:
+
+  Kernel -> init -> app1 -> app2 ----> app3 -> app6 ----> app7 -> login
+                                   |-> app4 |-> app8
+                                   \-> app5 |-> app9
+                                                           \-> app10
+
+* Upstart:
+
+  Kernel -> init -> app1 -> app2 ----> app3
+                                   |-> app4
+                                   |-> app5
+                                   |-> app6 -> login
+                                   |-> app7
+                                   |-> app8
+                                   \-> app9
+
+* Systemd (massively parallel):
+
+  Kernel -> init --> app1
+                 |-> app2
+                 |-> app4
+                 |-> app5
+                 |-> haldaemon     //-> (hardware abstraction layer)
+                 |-> app7 -> login
+                 |-> messagebus
+                 \-> app9
+
+
+4. Init scripts and configuration:
+
+System V
+ - config /etc/inittab
+ - Old(Unix) scripts structure
+/etc/rc.d/rc.M rc.S and so on
+ - New scripts structure
+/etc/init.d/* - init scripts
+/etc/rc*.d - directories containing links to the init scripts
+ - Comands used for management: init, telinit, cp, mv, ln, rm
+
+UpStart
+ - config /etc/init.conf & /etc/init/*.conf
+ - Commands used for management: start, stop, status, initctl
+ 
+SystemD
+ - config /etc/systemd/*
+ - /lib/systemd/*
+ - Change the default target: ln -s /usr/lib/systemd/system/multi-user.target /etc/systemd/system/default.target
+ - Commands used for management: systemctl, systemd-sysv-convert
+
+
+
+II. Linux Security Model -> бележка: ( част 2 - видео 1 = 13.17 мин. до ~  мин. ) !!! //
+Linux Security Model-а продължава в "additional" в файл "fs-permissions.txt" 
+Инфото в "fs-permissions.txt" е в -> 3. Processes and shells - видео 1 от 08.00 мин. до ~ 01.48.20 ч. + видео 2 до ~ 08.33 мин. //
+
+1. Linux has users and groups
+ - /etc/passwd
+ - /etc/group - since 1992
+ - /etc/shadow
+ - root and everyone else :)
+
+2. File system security
+ - read
+ - write
+ - execute (search for directories)
+ - user(owner) permissions
+ - group(owning group) permissions
+ - everyone else
+
+3. Advanced FS permissions
+ - File/Directory attributes
+ - POSIX ACLs
+
+4. What is a process?
+ - Forground
+ - Background
+ - Daemon
+
+5. Process security
+ - Real UID/GID
+ - Effective UID/GID
+ - Saved UID/GID
+
+6. Capabilities
+ - CAP_SYS_ADMIN - the new root
+ - Permitted (formerly known as forced): These capabilities are automatically permitted to the thread, regardless of the thread's inheritable capabilities.
+ - Inheritable (formerly known as allowed): This set is ANDed with the thread's inheritable set to determine which inheritable capabilities are enabled in the permitted set of the thread after the execve(2).
+ - Effective: If this bit is set, then during an execve(2) all of the new permitted capabilities for the thread are also raised in the effective set.
+ - Transformation of Capabilities During execve()
+   During an execve(2), the kernel calculates the new capabilities of the process using the following algorithm:
+
+           P'(permitted) = (P(inheritable) & F(inheritable)) | (F(permitted) & cap_bset)
+
+           P'(effective) = F(effective) ? P'(permitted) : 0
+
+           P'(inheritable) = P(inheritable) [i.e., unchanged]
+
+--> ИНФО СЪДЪРЖАНИЕ - ВИДЕА:
+Видео - 1:
+00:20 тестове
+07:50 начало 
+08:30 какво е било миналия път 
+09:00 Lilo 
+16:10 Grub 
+24:45 Grub2 
+42:00 конфигурация за serail console 
+45:20 ISOLinux 
+47:00 PXEboot 
+52:15 Как се бутва 
+58:20 init system 
+1:15:03﻿ init конфурация 
+1:42:40 Край(+ частни въпроси + тестове)
+
+Видео - 2:
+02:30 начало 
+02:45 Upstart 
+05:52 SystemD 
+13:15 Linux Security 
+14:45 etc/passwd 
+18:45 etcshadow 
+21:21 etc/group 
+23:00 id команда 
+36:00 passwd﻿+ useradd 
+42:00 groups 
+43:20 sh* команди 
+45:00 permissions 
+1:02:00 chmod 
+1:23:20 край 
+1:24:00 въпроси 
+

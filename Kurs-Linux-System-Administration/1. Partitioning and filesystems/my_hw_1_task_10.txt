@@ -1,0 +1,18 @@
+﻿10. Find a tool that can be used to monitor and configure LSI RAID controller. Give one example command for monitoring and one for configuration.
+
+MegaCli command line configuration utility for LSI-based RAID controllers:
+
+example command for monitoring: 
+-> Display all information about all RAID adapter / settings: # MegaCli -AdpAllinfo -aALL
+-> Display information about all physical drives: # MegaCli -PDList -aALL 
+-> Display information about all logical / virtual drives: # MegaCli -LDGetProp -LALL -aALL
+
+example command for configuration: 
+-> Output RAID controller events to a file named raid_events.log: # MegaCli -AdpEventLog -GetEvents -f raid_events.log -aALL
+-> Macke the front LED of the drive to blink to help locate a particular drive:  
+# MegaCli -AdpSetProp \{UseDiskActivityforLocate -1\} -aALL # might be optional on some drives / enclosures
+# MegaCli -PdLocate -start -physdrv\[E:S\] -aALL
+-> Stop the blinking: # MegaCli -PdLocate -stop -physdrv\[E:S\] -aALL
+
+източник на информацията: http://thatlinuxbox.com/blog/article.php/lsi-megaraid-megacli
+

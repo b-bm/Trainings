@@ -1,0 +1,14 @@
+http://social.technet.microsoft.com/Forums/scriptcenter/en-US/93a488b3-56ae-4193-8119-caca0ddbffdb/no-powershell-experience-need-help-with-gathering-information-from-multiple-servers?forum=ITCG
+
+
+@{Expression={$_.Size/1GB};FormatString="{0:N2}";label="Size"}
+
+$colitems = get-wmiobject -class "win32_logicaldisk"
+get-wmiobject -class Win32_LogicalDisk -computername $computer -namespace $namespace -Filter "DriveType=3" | Format-table -Property $computer, DeviceID, VolumneName, @{Expression={$_.Size/1GB};FormatString="{0:N2}";label="Size"}, @{Expression={$_.Freespace/1GB};FormatString="{0:N2}";label="Freespace"} -Autosize
+
+
+
+
+
+
+

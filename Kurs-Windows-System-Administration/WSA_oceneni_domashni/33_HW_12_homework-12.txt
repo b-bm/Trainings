@@ -1,0 +1,2 @@
+Видеото за домашното от лекция 13. Virtualization with Hyper-V and Remote Desktop Services можете да намерите тук:
+http://informerbg.wordpress.com/2014/03/23/wsa-hw-12/

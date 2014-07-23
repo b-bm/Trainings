@@ -1,0 +1,158 @@
+ /etc/dhcpd.conf file follows:
+
+
+    # Sample dhcpd.conf file
+    # Only check the bootptab file’s modification time (to learn if we need
+to re-read the file)
+    # if more than 60 seconds have passed since the last time we actually
+read the bootptab file.
+    readtabinterval 60
+    # Only check the configuration file’s modification time (to learn if
+we need to re-read the file)
+    # if more than 60 seconds have passed since the last time we actually
+read the configuration file.
+    readconfinterval 60
+    # flush lastbinding changes from cache to disk every 10 changes or
+60 seconds, whichever comes first.
+    flushitems 10
+    flushinterval 60
+    # reclaim expired bindings every 300 seconds
+    gcinterval 300
+    # delay DHCPOFFERs by 1000 microseconds (1 millisecond) 
+    delay_reply_dhcpoffer 1000
+    # report any Server Identifier Option values we see other than my_ip_addr
+and the following known DHCP servers
+    known_server_identifier  192.120.245.1
+    known_server_identifier  192.120.245.2
+    # We serve dynamic IP addresses on four networks.
+    #
+    #   On plaidnet we’ll serve both dhcp and bootp clients.  The clients
+need not be in our bootptab.
+    #   The network is directly attached (no BootP Relay Agents every involved).
+    network plaidnet    192.120.245.0 255.255.255.0   both
+    #
+    #   Clients on scramblenet must be registered use dhcp to get a dynamic
+address.  
+    #   There’s one relay agent involved.
+    network scramblenet 128.112.192.0 255.255.252.0   dhcp|registered    128.112.192.7
+255.255.252.0
+    #
+    #   Clients on foobar must use bootp and not appear in bootptab to
+get a dynamic address.
+    #   There are two bootp relay agents that may relay requests to us.
+    network foobar      128.112.208.0 255.255.252.0   bootp|unregistered 128.112.208.1
+255.255.252.0  128.112.210.36 255.255.252.0
+    #
+    #   Clients on gumby may use bootp or dhcp to get a dynamic address,
+but must appear in bootptab
+    #   with a :ro: tag. There’s just one bootp relay agent.
+    network gumbynet    192.120.216.0 255.255.255.0   both|roaming       128.112.216.1
+255.255.252.0
+    #
+    #   Clients behind 128.112.22.89 are served by several dynamic pools. 
+
+    #   They must speak dhcp to get a dynamic address.
+    #   Those that do not appear in bootptab are served by both the flyers
+and walkers pools.
+    #   Those that are appear in bootptab without a :ro: tag are served
+by both the floaters and walkers pools.
+    #   Those that are appear in bootptab wit a :ro: tag are served by
+both the wanderers and walkers pools.
+    #   There’s only one bootp relay agent.
+    network wanderers   128.112.20.0 255.255.255.0   dhcp|roaming        128.112.22.89
+128.112.252.0
+    network floaters    128.112.21.0 255.255.255.0   dhcp|registered     128.112.22.89
+128.112.252.0
+    network flyers      128.112.80.0 255.255.255.128 dhcp|unregistered   128.112.22.89
+128.112.252.0
+    network walkers     128.112.84.0 255.255.255.0   dhcp                128.112.22.89
+128.112.252.0
+    #    Clients behind 10.17.0.9 are served by several dynamic pools.
+    #    They must speak dhcp to get a dynamic address.
+    #    Those that are appear in bootptab are served by the wallace pool.
+    #       The wallace pool contains IP address that fall into ranges:
+10.17.0.0/24, 10.17.2.0/23, and 10.17.4.0/24.
+    #    Those that do not appear in bootptab are served by the gromit
+pool.
+    #       The gromit pool contains IP address that fall into the range:
+10.17.1.0/24.
+    network     wallace     10.17.0.0    255.255.255.0   dhcp|registered     10.17.0.9
+255.255.0.0
+    networkalso wallace     10.17.2.0    255.255.254.0
+    networkalso wallace     10.17.4.0    255.255.255.0
+    network     gromit      10.17.1.0    255.255.255.0   dhcp|unregistered   10.17.0.9
+255.255.0.0
+    # This server has two interfaces.
+    #
+    # the server is directly attached to network 192.120.245.0 and serves
+dynamic addresses on it 
+    gateway 192.120.245.117 255.255.255.0 plaidnet
+    #
+    # the server is directly attached to network 192.120.240.0 
+    # network 192.120.253.0/255.255.255.128 runs on the same wire
+    # we do not serve dynamic addresses on either network
+    gateway 192.120.240.12  255.255.255.0
+    proxy   192.120.240.12  192.120.253.0 255.255.255.128
+    # Describe all the Bootp Relay Agents that may relay requests to this
+server.
+    #
+    # there is one relay agent for network 128.112.192.0 and we serve dynamic
+addresses for that network
+    gateway 128.112.192.7 255.255.252.0 scramblenet
+    #
+    # there two relay agents for network 128.112.208.0, we serve dynamic addresses
+for that network
+    gateway 128.112.208.1  255.255.252.0 foobar
+    gateway 128.112.210.36 255.255.252.0 foobar
+    #
+    # there is one relay agent for network 128.112.112.0, we do not serve
+dynamic addresses on it
+    gateway 128.112.112.1 255.255.252.0
+    #
+    # there are two relay agents for network 140.180.128.0, and we do not
+serve dynamic addresses on it
+    gateway 140.180.128.1 255.255.192.0
+    gateway 140.180.163.3 255.255.192.0
+    #
+    # there is one relay agent for network 128.112.216.0, and we serve dynamic
+addresses on it
+    gateway 128.112.216.1 255.255.252.0 gumbynet
+    #
+    # there is one relay agent for network 128.112.16.0
+    # the same wire runs three secondary IP networks (128.112.17.0, 128.112.18.0,
+and 140.180.128.0)
+    gateway 128.112.16.32 255.255.255.0
+    proxy   128.112.16.32 128.112.17.0 255.255.255.0
+    proxy   128.112.16.32 128.112.18.0 255.255.255.0
+    proxy   128.112.16.32 140.180.128.0 255.255.192.0
+    # the three previous statements could also be written as follows:
+    # proxy   128.112.16.32 128.112.17.0 255.255.255.0 128.112.18.0 255.255.255.0 140.180.128.0
+255.255.192.0
+    #
+    # there is one relay agent for network 128.112.20.0
+    # the same wire runs two secondary IP networks (128.112.80.0 and 128.112.84.0)
+    # we serve dynamic IP addresses on the networks.
+    gateway 128.112.22.89 255.255.252.0  wanderers floaters flyers walkers
+    proxy   128.112.22.89 128.112.80.0 255.255.255.128
+    proxy   128.112.22.89 128.112.84.0 255.255.255.0
+    #
+    # There is one relay agent for network 10.17.0.0, and we serve dynamic
+addresses on it
+    gateway 10.17.0.9 255.255.0.0 wallace gromit
+    # Enable Client Steering for DHCPOFFER packets containing dynamic IP
+addresses
+    client_steering_enable client_steering_enable_dhcpoffer_dynamic
+    #
+    # Specify the threshholds used by the Client Steering feature, if it
+is enabled.
+    #
+    # If we are the client’s most preferred server, we will respond when
+bootp_secs >= 0 (seconds).
+    # If we are the client’s second-most preferred server, we will respond
+when bootp_secs >= 3 (seconds).
+    # If we the client’s third-most preferred server, we will respond when
+bootp_secs >= 6 (seconds).
+    client_steering_delay_secs 0 3 6
+    # Assign a server number to myself for use by the Client Steering feature,
+if it is enabled.
+    client_steering_server_myself 2

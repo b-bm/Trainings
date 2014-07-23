@@ -1,0 +1,6 @@
+c:\users\ghost\documents\visual studio 2012\Projects\6. Loops\PrintNumbersFromOneToN\bin\Debug\PrintNumbersFromOneToN.exe.config
+c:\users\ghost\documents\visual studio 2012\Projects\6. Loops\PrintNumbersFromOneToN\bin\Debug\PrintNumbersFromOneToN.exe
+c:\users\ghost\documents\visual studio 2012\Projects\6. Loops\PrintNumbersFromOneToN\bin\Debug\PrintNumbersFromOneToN.pdb
+c:\users\ghost\documents\visual studio 2012\Projects\6. Loops\PrintNumbersFromOneToN\obj\Debug\1.PrintNumbersFromOneToN.csprojResolveAssemblyReference.cache
+c:\users\ghost\documents\visual studio 2012\Projects\6. Loops\PrintNumbersFromOneToN\obj\Debug\PrintNumbersFromOneToN.exe
+c:\users\ghost\documents\visual studio 2012\Projects\6. Loops\PrintNumbersFromOneToN\obj\Debug\PrintNumbersFromOneToN.pdb

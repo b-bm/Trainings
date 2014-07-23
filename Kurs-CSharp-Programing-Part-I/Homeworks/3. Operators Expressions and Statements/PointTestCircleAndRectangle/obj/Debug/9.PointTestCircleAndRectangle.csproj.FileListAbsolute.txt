@@ -1,0 +1,9 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointTestCircleAndRectangle\bin\Debug\PointTestCircleAndRectangle.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointTestCircleAndRectangle\bin\Debug\PointTestCircleAndRectangle.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointTestCircleAndRectangle\bin\Debug\PointTestCircleAndRectangle.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointTestCircleAndRectangle\obj\Debug\9.PointTestCircleAndRectangle.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointTestCircleAndRectangle\obj\Debug\PointTestCircleAndRectangle.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointTestCircleAndRectangle\obj\Debug\PointTestCircleAndRectangle.pdb
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointTestCircleAndRectangle\bin\Debug\PointTestCircleAndRectangle.exe.config
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointTestCircleAndRectangle\obj\Debug\PointTestCircleAndRectangle.exe
+C:\Users\BOYAN\Documents\Visual Studio 2012\Projects\3. Operators Expressions and Statements\PointTestCircleAndRectangle\obj\Debug\PointTestCircleAndRectangle.pdb

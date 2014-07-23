@@ -1,0 +1,73 @@
+﻿Структура на linux:
+
+/ -> slash 
+	bin -> директория за бикновени програми за обикновенните потребители
+	boot -> директория за кърнел, boot loader, initrd (поне 200MB)
+	chroot -> директория за
+	dev -> директория за device файлове
+	etc -> директория за повечето конфигурации на linux
+	home -> дир. на обикновенните потребители
+	lib -> директория за основни библиотеки на linux, libc - мн.важна библиотека
+	lost+found -> директория за
+	media -> директория за монтиране на други devices( устройства като USB flash ) -> автоматизирана
+	mnt -> директория за монтиране на други devices -> ръчно
+	opt -> директория за опционален софтуер ( нещо, което не идва с дистрибуцията, някакви дайвери и др. )
+	proc -> директория за информация за процеси, настройка на ядрото и др.
+	root -> директория на админа
+	sbin -> директория за програми на админа.
+	selinux -> директория за
+	srv -> директория за
+	str -> директория за
+	sys -> директория за файлове с достъп до информация от кърнела
+	tmp -> директория за temp. файлове
+	usr -> директория за user доп.програми, доп.настройки, игри, библиотеки
+	var -> директория за файлове, които се променят много често не ясно какви са точно.
+
+[ted@bmbiosystems ~]$ ls -l /|less
+total 88
+dr-xr-xr-x  2 root root  4096 Jul 24 16:06 bin
+dr-xr-xr-x  3 root root  4096 Jul 24 16:05 boot
+drwxr-xr-x  8 root root  2120 Sep  9 10:19 dev
+drwxr-xr-x 62 root root  4096 Oct 28 15:58 etc
+drwxr-xr-x  3 root root  4096 Sep 15 13:17 home
+dr-xr-xr-x  9 root root  4096 Jul 24 16:06 lib
+dr-xr-xr-x  7 root root 12288 Jul 24 16:05 lib64
+drwx------  2 root root 16384 Jul 24 16:04 lost+found
+drwxr-xr-x  2 root root  4096 Sep 23  2011 media
+drwxr-xr-x  2 root root  4096 Sep 23  2011 mnt
+drwxr-xr-x  2 root root  4096 Sep 23  2011 opt
+dr-xr-xr-x 31 root root     0 Sep  9 10:19 proc
+dr-xr-x---  2 root root  4096 Oct 15 21:18 root
+dr-xr-xr-x  2 root root  4096 Jul 24 16:05 sbin
+drwxr-xr-x  2 root root  4096 Sep 23  2011 selinux
+drwxr-xr-x  2 root root  4096 Sep 23  2011 srv
+drwxr-xr-x  7 root root     0 Sep  9 10:19 sys
+drwxrwxrwt  3 root root  4096 Oct 28 16:03 tmp
+drwxr-xr-x 13 root root  4096 Jul 24 16:06 usr
+drwxr-xr-x 20 root root  4096 Jul 24 16:06 var
+
+[BM_boyan@grizzly ~]$ ls -l /|less
+total 106
+dr-xr-xr-x.   2 root    root     4096 Sep  6 00:23 bin - директория за бикновени програми за обикновенните потребители
+dr-xr-xr-x.   5 root    root     1024 Sep  3 23:04 boot - директория за кърнел, boot loader, initrd (поне 200MB)
+drwxr-xr-x    3 root    root     4096 Sep 18 20:43 chroot - директория за
+drwxr-xr-x   16 root    root     3480 Sep 22 14:29 dev - директория за device файлове
+drwxr-xr-x.  77 root    root     4096 Oct 25 15:02 etc - директория за повечето конфигурации на linux
+drwxr-xr-x. 336 root    root    12288 Oct 11 22:29 home - дир. на обикновенните потребители
+dr-xr-xr-x.  14 root    root    12288 Sep  3 23:04 lib - директория за основни библиотеки на linux, libc - мн.важна библиотека
+drwx------.   2 root    root    16384 Jul  1 19:19 lost+found - директория за
+drwxr-xr-x.   2 root    root     4096 Sep 23  2011 media - директория за монтиране на други devices( устройства като USB flash ) -> автоматизирана
+drwxr-xr-x.   2 root    root     4096 Sep 23  2011 mnt - директория за монтиране на други devices -> ръчно
+drwxr-xr-x.   2 root    root     4096 Sep 23  2011 opt - директория за опционален софтуер (нещо, което не идва с дистрибуцията, някакви дайвери и др.)
+dr-xr-xr-x  212 root    root        0 Sep 17 16:38 proc - директория за информация за процеси, настройка на ядрото и др.
+dr-xr-x---.  10 root    root     4096 Oct 26 18:26 root - директория на админа
+dr-xr-xr-x.   2 root    root     4096 Sep 19 21:39 sbin - директория за програми на админа.
+drwxr-xr-x.   2 root    root     4096 Jul  1 19:19 selinux - директория за
+drwxr-xr-x.   2 root    root     4096 Sep 23  2011 srv - директория за
+drwxr-xr-x    2 hackman hackman  4096 Oct 10 19:45 str - директория за
+drwxr-xr-x   13 root    root        0 Sep 17 16:38 sys - директория за файлове с достъп до информация от кърнела
+drwxrwxrwt.  30 root    root    12288 Oct 28 22:32 tmp - директория за temp. файлове
+drwxr-xr-x.  12 root    root     4096 Jul  1 19:19 usr - директория за user доп.програми, доп.настройки, игри, библиотеки
+drwxr-xr-x.  20 root    root     4096 Oct  4 11:46 var - директория за файлове, които се променят много често не ясно какви са точно.
+
+

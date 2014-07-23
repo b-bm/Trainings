@@ -1,0 +1,6 @@
+﻿3. On grizzly, parse /var/spool/mail/root and give me the timestamps of every e-mail that has 'SECURITY information' in its subject.
+ 
+sudo grep -n -i '[SECURITY information]' /var/spool/mail/root
+
+
+

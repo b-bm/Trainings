@@ -1,0 +1,1117 @@
+﻿Linux администрация homeworks:
+Здравейте колеги, предлагам да отворим една тема в този раздел за домашните.Мисля, че е добре който сметне за добре да публикува решението на избраната от него домашна.Така ще получим поглед върху повече теми и ще бъде полезно за всички.Естествено условието е да е минал срока за подаване на съответното домашно, за да няма мързелуване преписвайки и преправяйки някое от публикуваните вече :)Предлагам, ако е късо да се поства директно тук или линк към txt файл някъде,където  на всеки е удобно!
+
+Ето го моето за първата лекция, като уточнявам от коя лекция е:
+
+homework_lecture_01
+
+ 
+
+17. Find all possible command line tools related to XFS administration (at least 5).
+
+*XFS is a 64-bit file system. It supports a maximum file system size of 8 exbibytes minus one (i.e. 263-1 bytes), though this is subject to block limits imposed by the host operating system. 32-bit Linux systems limit both file and file system size to 16 tebibytes.XFS is very good file system under Linux. Especially suited for enterprise environments.
+Famous release openSUSE, xfs file system is recommended.
+
+01.mkfs.xfs: Creating the XFS file system.
+02.xfs_admin: adjust the various parameters of the xfs file system.
+03.xfs_copy: copy the contents of the xfs file system to one or more target systems (parallel)
+04.xfs_db: debugging or testing xfs file system (Check file system fragmentation)
+05.xfs_check: detection xfs file system integrity.
+06.xfs_bmap: View of a file block mapping.
+07.xfs_repair: try to repair damaged XFS file system.
+08.xfs_fsr: Defragmentation.
+09.xfs_quota: management xfs file system disk quota.
+10.xfs_metadump: xfs file system metadata (metadata) are copied to a file.
+11.xfs_mdrestore: to recover from a file will be metadata (metadata) to the XFS file system.
+12.xfs_growfs: adjust the xfs file system size (only extend)
+
+*Specific applications:
+
+View the file block position: xfs_bmap-v sarubackup.tar.bz2
+Check for fragmentation status: xfs_db-c frag-r / dev/sda1
+File defragmentation: xfs_fsr sarubackup.tar.bz2
+Disk Defragmenter: xfs_fsr / dev/sda1
+
+*debian / ubuntu packages:
+xfsprogs
+xfsdump
+
+Edit:Изгубих линка някъде, но за напред ще публикувам и линка:)
+
+=========================================================================================
+
+ Аз съм писал по същата тема, ето го и моето домашно:
+17. Find all possible command line tools related to XFS administration (at least 5).
+ 
+01. xfsctl
+02. mount
+03. mkfs.xfs
+04. xfs_info
+05. xfs_admin
+06. xfsdump
+07. xfsrestore
+08. fsck.xfs
+09. xfs_bmap
+10. xfs_check
+11. xfs_copy
+12. xfs_db
+13. xfs_freeze
+14. xfs_fsr
+15. xfs_io
+16. xfs_logprint
+17. xfs_mdrestore
+18. xfs_metadump
+19. xfs_ncheck
+20. xfs_quota
+21. xfs_repair
+22. xfs_rtcp
+ 
+http://linux.die.net/man/5/xfs за повече инфо.
+
+=========================================================================================
+
+Ето и моето домашно. Темата е същата - номер 17. Като гледам и използваният източник е същия като на Робот Андроид.
+Homework 01 - 17. Find all possible command line tools related to XFS administration (at least 5).
+
+xfs_admin - change parameters of an XFS filesystem. Devices that are mounted cannot be modified. The filesystem must be unmounted before xfs_admin or xfs_db can convert parameters. A number of parameters of a mounted filesystem can be examined and modified using the xfs_growfs command.  
+Synopsis:
+xfs_admin [ -eflpu ] [ -c 0|1 ] [ -L label ] [ -U uuid ] device
+
+xfs_growfs, xfs_info - expand an XFS filesystem. xfs_growfs expands an existing XFS filesystem. The mount-point argument is the pathname of the directory where the filesystem is mounted. The filesystem must be mounted to be grown. The existing contents of the filesystem are undisturbed, and the added space becomes available for additional file storage.
+xfs_info is equivalent to invoking xfs_growfs with the -n option
+Synopsis:
+xfs_growfs [ -dilnrxV ] [ -D size ] [ -e rtextsize ] [ -L size ] [ -m maxpct ] [ -t mtab ] [ -R size ] mount-point
+xfs_info [ -t mtab ] mount-point
+
+xfs_fsr - filesystem reorganizer for XFS. xfs_fsr improves the organization of mounted filesystems. The reorganization algorithm operates on one file at a time, compacting or otherwise improving the layout of the file extents (contiguous blocks of file data).
+Synopsis:
+xfs_fsr [-v] [-t seconds] [-f leftoff] [-m mtab]
+xfs_fsr [-v] [xfsdev | file] ...
+
+xfs_repair  repairs corrupt or damaged XFS filesystems. The filesystem is specified using the device argument which should be the device name of the disk partition or volume containing the filesystem. If given the name of a block device, xfs_repair will attempt to find the raw device associated with the specified block device and will use the raw device instead.
+Synopsis:
+xfs_repair [ -dfLnPv ] [ -m maxmem ] [ -c subopt=value ] [ -o subopt[=value] ] [ -t interval ] [ -l logdev ] [ -r rtdev ] device
+xfs_repair -V
+
+xfs_check is the filesystem consistency checking command. 
+Synopsis:
+xfs_check [ -i ino ] ... [ -b bno ] ... [ -f ] [ -s ] [ -v ] [ -l logdev ] device
+
+xfsrestore - XFS filesystem incremental restore utility. xfsrestore restores filesystems from dumps produced by xfsdump. Two modes of operation are available: simple and cumulative.
+The default is simple mode. xfsrestore populates the specified destination directory, dest, with the files contained in the dump media. The -r option specifies the cumulative mode.
+Synopsis:
+xfsrestore -h
+xfsrestore [ options ] -f source [ -f source ... ] dest
+xfsrestore [ options ] - dest
+xfsrestore -I [ subopt=value ... ] 
+
+xfs_db - debug an XFS filesystem. 
+Synopsis:
+xfs_db [ -c cmd ] ... [ -i|r|x|F ] [ -f ] [ -l logdev ] [ -p progname ] device
+xfs_db -V 
+
+xfs_metadump is a debugging tool that copies the metadata from an XFS filesystem to a file. The source argument must be the pathname of the device or file containing the XFS filesystem and the target argument specifies the destination file name. If target is -, then the output is sent to stdout. This allows the output to be redirected to another program such as a compression application.
+xfs_metadump should only be used to copy unmounted filesystems, read-only mounted filesystems, or frozen filesystems. Otherwise, the generated dump could be inconsistent or corrupt. 
+Synopsis:
+xfs_metadump [ -efgow ] [ -l logdev ] source target
+
+xfs_mdrestore is a debugging tool that restores a metadata image generated by xfs_metadump to a filesystem. The source argument specifies the location of the metadump image and the target argument specifies the destination for the filsystem image. If the source is -, then the metadata image is read from stdin. This allows the output of be another program such as a compression application to be redirected to xfs_mdrestore. The target can be either a file or a device.
+xfs_mdrestore should not be used to restore metadata onto an existing filesystem unless you are completely certain the target can be destroyed. 
+Synopsis:
+xfs_mdrestore [ -g ] source target
+
+xfs_freeze - suspends and resumes access to an XFS filesystem. xfs_freeze halts new access to the filesystem and creates a stable image on disk. xfs_freeze is intended to be used with volume managers and hardware RAID devices that support the creation of snapshots.
+Synopsis:
+xfs_freeze -f | -u mount-point
+
+xfs_copy - copy the contents of an XFS filesystem. xfs_copy should only be used to copy unmounted filesystems, read-only mounted filesystems, or frozen filesystems. Otherwise, the generated filesystem would be inconsistent or corrupt. 
+Synopsis:
+xfs_copy [ -bd ] [ -L log ] source target1 [ target2 ... ] 
+xfs_logprint - print the log of an XFS filesystem. 
+
+xfs_io - debugging tool li aimed at examining the regular file I/O paths rather than the raw XFS volume itself. These code paths include not only the obvious read/write/mmap interfaces for manipulating files, but also cover all of the XFS extensions (such as space preallocation, additional inode flags, etc). 
+Synopsis:
+xfs_io [ -adFfmrRstx ] [ -c cmd ] ... [ -p prog ] file 
+
+xfsdump - XFS filesystem incremental dump utility. xfsdump backs up files and their attributes in a filesystem. The files are dumped to storage media, a regular file, or standard output. Options allow the operator to have all files dumped, just files that have changed since a previous dump, or just files contained in a list of pathnames.
+Synopsis:
+xfsdump -h
+xfsdump [ options ] -f dest [ -f dest ... ] filesystem
+xfsdump [ options ] - filesystem
+xfsdump -I [ subopt=value ... ]
+
+xfsinvutil - xfsdump inventory database checking and pruning utility.
+Synopsis:
+xfsinvutil [-F|-i] [-m media_label] -M mount_point mm/dd/yyyy
+xfsinvutil [-F|-i] [-m media_label] -u UUID mm/dd/yyyy
+xfsinvutil -i
+xfsinvutil -C
+
+xfs_logprint - print the log of an XFS filesystem.
+Synopsis:
+xfs_logprint [ options ] device
+
+xfs_quota is a utility for reporting and editing various aspects of filesystem quota. xfs_quota commands may be run interactively (the default) or as arguments on the command line.
+Synopsis:
+xfs_quota [ -x ] [ -p prog ] [ -c cmd ] ... [ -d project ] ... [ path ... ] 
+
+mkfs.xfs - construct an XFS filesystem by writing on a special file using the values found in the arguments of the command line.
+Synopsis:
+mkfs.xfs [ -b block_size ] [ -d data_section_options ] [ -f ] [ -i inode_options ] [ -l log_section_options ] [ -n naming_options ] [ -p protofile ] [ -q ] [ -r realtime_section_options ] [ -s sector_size ] [ -L label ] [ -N ] [ -K ] device 
+
+http://linux.die.net/man/5/xfs
+
+=========================================================================================
+
+Ето и моето. Изрязал съм outputs от командите, за да не развявам чаршафи.
+Тема:  6. Write down the commands needed to create SW RAID10 with 4 SATA drives. How will you add one more drive as hot-spare?
+
+Четирите устройства, с които ще създадем масива са: sdb, sdc, sdd и sde.
+Препоръчително е те да бъдат еднакво форматирани (разцепени на еднакви по големина дялове, с еднакъв FS-TYPE) преди да бъде създаден масива. По принцип е възможно той да бъде създаден директно върху дисковете (без те да са разцепени на дялове), но не се препоръчва, тъй като може да създаде проблеми при подмяна на някое от устройствата. FS-TYPE на устройствата(дяловете) трябва да бъде Non-FS или Linux RAID auto (FD). За да мине всичко гладко предварително сме взели root права.
+
+1. Инсталиране на mdadm.
+yum install mdadm
+
+2. Създаване на масива.
+mdadm --create --verbose --level=10 --metadata=1.2 --chunk=256 --raid-devices=4 /dev/md0 /dev/sdb1 /dev/sdc1 /dev/sdd1 /dev/sde1
+
+Забележка: Опциите --metadata и --chunk не са задължителни, но в противен случай може да се появят warning-и. --verbose също не е задължителна опция, тя само дава повече инфо за случващото се, при изпълнение на командата.
+
+3. Проверка.
+cat /proc/mdstat
+
+4. Добавяне на ново устройство като hot-spare.
+
+4.1 За целта имаме устройство /dev/sdf. За да можем да добавим устройството, то трябва да е форматирано както вече съществуващите такива в масива.
+Копираме партишън таблицата от съществуващо, изправно устройство в масива.
+sfdisk -d /dev/sdb > table
+
+4.2 Форматираме новото устройство с нея:
+sfdisk /dev/sdf < table
+# partition table of /dev/sdf
+
+4.3 Добавяме устройството в масива (няма нужда да спираме масива):
+mdadm --add /dev/md0 /dev/sdf1
+
+4.4 Проверка:
+cat /proc/mdstat
+(Добавеното като резервно устройство е отбелязано с (S):
+
+5. Литература.
+5.1 https://wiki.archlinux.org/index.php/RAID - Kак се създава подготвят устройства за създаване на масив, как се създават, спират и премахват масиви, как се добавят устройства към тях и др.
+5.2 man mdadm - ръководствата са достъпни и онлайн на http://linux.die.net/
+5.3 http://doc.opensuse.org/products/draft/SLES/SLES-storage_sd_draft/raidmdadm.html - Създаване на SW RAID, Nested RAID.
+5.4 http://zackreed.me/articles/48-adding-an-extra-disk-to-an-mdadm-array - Добавяне на устройства към масив, преоразмеряване на масива.
+5.5 http://www.howtoforge.com/how-to-set-up-software-raid1-on-a-running-system-incl-grub2-configuration-debian-squeeze - Създаване на RAID на работеща система. Малко повече информация при инсталиране на mdadm.
+
+=========================================================================================
+
+Одобрявам темата, много добра идея.
+Ето и моята домашна, темата е 20-та:
+
+20. Describe the procedure of replacing a HDD containing partition part of a volume group(LVM).
+
+    1. To replace an HDD containing patition part of a volume group first we need to make sure that physical volume isnt`t used by any logcal volumes.
+This can be done by runing the command "pvdisplay /dev/sda1" where "sda1" is the disk partition. If the physical volume is used we need to migrate the
+data on another physycal volume, this is done by runing the command "pvmove".
+    2. After that we need to remove the partition from the volume group runing the command "vgreduce":
+        vgreduce my_volume_group /dev/sda1
+    3. After we replace the hdd we must add the new physical volume to the volume group using the command "vgextend":
+        vgextend my_volume_group /dev/sdc1
+
+NOTE: To do that procedure we need to have created and activated volume group this is done by the command described bellow:
+
+    1. To create a volume group:
+        vgcreate my_volume_group /dev/sda1 /dev/sdb1 where  "my_volume_group" is the name of the volume group.
+    2. Activating the volume groups, so we can access the Volume Groups and Logical Volumes:
+        vgchange -a y my_volume_group where "my_volume_group" is the name of the volume group.
+    3. To deactivate volume group we can run the command:
+        vgchange -a n my_volume_group
+    and after that we even can remove the volume group using the command:
+        vgremove my_volume_group
+
+А ето и източникът: http://www.redhat.com/mirrors/LDP/HOWTO/html_single/LVM-HOWTO/ (това е цялата документация, не е само за заместването на даден диск).
+
+=========================================================================================
+
+Ето и моето домашно №19. Describe the procedure of resizing ReiserFS.
+----------------------------------------------------------------------
+Файловата система на сървър е консумирала цялото налично свободно пространство
+Допълнителна памет е добавена към наличния диск и сега дяла на файловата система трябва да се разшири. В ситуацията имаме дял от 1GB, което ни представлява допълнителната памет с която ще разширим файловата система. В дадената ситуация дялът не е монтиран.
+
+Хубаво е да направим резервно копие на данните, независимо че процеса
+протича без проблеми.
+Тук е добре да отбележа, че типа на файловага система е ReiserFS, а изтаползвана команда е resize_reiserfs, като за файловите системи Ext2, Ext3, Ext4 командата е resize2fs.
+Тук ще кажа, че ако устройството с файлова система resize_reiserfs е монтирано трябва да се демонтира.
+----------------------------------------------------------------------
+linux-localhost:~ # fdisk -l
+Disk /dev/sdb: 2147 MB, 2147483648 bytes
+255 heads, 63 sectors/track, 261 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1               1         131     1052226   83  Linux
+-----------------------------------------------------------------------
+- Тук имаме начало и край на секторите, в случая когато изтрием дяла ще се използва същото начало, но кроят ще бъде по-голям поради допълнителната използвана памет.
+-----------------------------------------------------------------------
+използвоме първо командата "fdisk" за разделяне на дялове
+-----------------------------------------------------------------------
+linux-localhost:~ # fdisk /dev/sdb
+
+Command (m for help): d
+Selected partition 1
+
+
+Command (m for help): n
+Command action
+   e   extended
+   p   primary partition (1-4)
+p
+Partition number (1-4): 1
+First cylinder (1-261, default 1):
+Using default value 1
+Last cylinder or +size or +sizeM or +sizeK (1-261, default 261):
+Using default value 261
+
+Command (m for help): w
+The partition table has been altered!
+
+- WARNING: Re-reading the partition table failed with error 16: Device or resource busy.
+  The kernel still uses the old table.
+  The new table will be used at the next reboot.
+  Syncing disks.
+
+
+linux-localhost:~ # partprobe << тази команда казва на ядрото че са настъпили промени в таблицата на партишъните, с нейна помощ тези таблици се препрочитат.
+----------------------------------------------------------------------------------------
+Тук правим рестарт за да имаме възможността да преоразмерим партишъна
+----------------------------------------------------------------------------------------
+linux-localhost:~ # fdisk -l /dev/sdb      << Тук се показва новия сектор за край 261*
+
+Disk /dev/sdb: 2147 MB, 2147483648 bytes
+255 heads, 63 sectors/track, 261 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1               1         261     2096451   83  Linux
+
+linux-localhost:/ # resize_reiserfs /dev/sdb1
+resize_reiserfs 3.6.19 (2003 www.namesys.com)
+
+ReiserFS report:
+blocksize             4096
+block count           524112 (263056)
+free blocks           515885 (254836)
+bitmap block count    16 (9)
+
+Syncing..done
+
+
+resize_reiserfs: Resizing finished successfully.
+----------------------------------------------------------------------------------------
+За понижаване на използвана памет.
+
+Друг пример, тук отделям внимание само на частта на преоразмеряването.
+Ситуацията е следната,имаме (2GB) дисково пространство с файлова система ReiserFS създадена
+в /dev/hda3 и монтирана в /mnt. За да свием наличната памет трябва да го демонтираме първо,
+след което пускаме командата resize_reiserfs с параметър на паметта (-1GB).
+Като допълнение показвам синопсиса на командата!
+-----------------------------------------------------------------------------------------
+resize_reiserfs [ -s [+|-]size[K|M|G] ]
+                [ -j dev ]
+                [ -fqv ] device
+ето и начина на понижаване на паметта на устройството.
+-----------------------------------------------------------------------------------------
+umount /mnt
+resize_reiserfs -s -1G /dev/hda3
+mount /dev/hda3 /mnt
+-----------------------------------------------------------------------------------------
+
+=========================================================================================
+
+Добра идея.
+Поствам и моето домашно, както е в предадения текстов файл:
+# Selected the task to (8.) Write down the commands needed to create SW RAID60 with 10 SATA drives. How will you start the array on the next reboot?
+
+#Prepared a virtual appliance with one 10G system drive and 10x1G virtual drives on SSD drive mounted on the local /var/lib/libvirt/images folder with the following:
+
+root@rewind# virt-install --name CentOS_raid60 --ram=4096 --cpu host --vcpus=2 --cdrom=/data/CentOS-6.4-x86_64-bin-DVD1.iso --os-type=linux --os-variant=rhel6 --disk path=/var/lib/libvirt/images/centos_raid60.img,size=10,bus=virtio,sparse=false,cache=writeback,format=qcow2 --disk path=/var/lib/libvirt/images/raid-drive0,size=1,bus=virtio,cache=writeback,format=qcow2 --disk path=/var/lib/libvirt/images/raid-drive1,size=1,bus=virtio,cache=writeback,format=qcow2 --disk path=/var/lib/libvirt/images/raid-drive2,size=1,bus=virtio,cache=writeback,format=qcow2 --disk path=/var/lib/libvirt/images/raid-drive3,size=1,bus=virtio,cache=writeback,format=qcow2 --disk path=/var/lib/libvirt/images/raid-drive4,size=1,bus=virtio,cache=writeback,format=qcow2 --disk path=/var/lib/libvirt/images/raid-drive5,size=1,bus=virtio,cache=writeback,format=qcow2 --disk path=/var/lib/libvirt/images/raid-drive6,size=1,bus=virtio,cache=writeback,format=qcow2 --disk path=/var/lib/libvirt/images/raid-drive7,size=1,bus=virtio,cache=writeback,format=qcow2 --disk path=/var/lib/libvirt/images/raid-drive8,size=1,bus=virtio,cache=writeback,format=qcow2 --disk path=/var/lib/libvirt/images/raid-drive9,size=1,bus=virtio,cache=writeback,format=qcow2
+
+# Brief explanation of the options used in this virt-install command (not interesting, continue below for the RAID60 setup after CentOS installation):
+#--name option - self-explanatory, the name we use for this setup. This is one of the mandatory virt-install parameters according to its manual.
+#--ram - Also mandatory option, I've set 4096MB of ram for this guest since I've plenty of free ram for this setup
+#--cpu - According to virt-install manual this option is not mandatory, but in our case with including it, we're providing the guest setup to take advantage of many of the host CPU features and thus achieve better performance.
+#--vcpus - Number of the virtual CPUs to configure for the guest, not mandatory also.
+#--cdrom - this option provides the path to the ISO image we will use for this CentOS 6.4 setup
+#--os-type and --os-variant - recommended from manual page for better compatibility, in our case not necessary because of auto-detection. Used just in case.
+#--disk (mandatory if either --filesystem or --nodisk are not provided) - In my case I've used the following options:
+#    path= - path where we need to create the virtual drives
+#    size= - size of the drive in GB
+#    bus= - bus type for the virtual controller (better performance with virtio, since it is paravirtualized)
+#    sparse=false - full allocation of the disk for faster installation (option provided only for the system drive)
+#    format=qcow2 - format with the capability for snapshots and less usage in case the whole drive is not used (not in our case with full allocation)
+#    cache=writeback - instruct the hypervisor to use system cache (RAM) for all reads from and writes to the virtual drives
+
+#After the installation we have /dev/vda as the system drive and /dev/vdb to /dev/vdk (10 drives) with 1GB size each for our RAID60 setup. This is not wise at all from any perspective, because all virtual drives are on the same host SSD drive. But since it is a flash storage and for the sake of the test it will do.
+#So we start with creating the first RAID6 array with drives /dev/vdb to /dev/vde:
+
+[root@centos-raid60 admin]# mdadm --create /dev/md0 --level=6 --raid-devices=5 /dev/vdb /dev/vdc /dev/vdd /dev/vde /dev/vdf
+Continue creating array? y
+mdadm: Defaulting to version 1.2 metadata
+mdadm: array /dev/md0 started
+
+#And then the second array from vdg to vdk with the following similar command:
+
+[root@centos-raid60 admin]# mdadm --create /dev/md1 --level=6 --raid-devices=5 /dev/vdg /dev/vdh /dev/vdi /dev/vdj /dev/vdk
+Continue creating array? y
+mdadm: Defaulting to version 1.2 metadata
+mdadm: array /dev/md1 started.
+
+#Waiting for the two arrays to become active:
+
+[root@centos-raid60 admin]# cat /proc/mdstat
+Personalities : [raid6] [raid5] [raid4]
+md1 : active raid6 vdk[4] vdj[3] vdi[2] vdh[1] vdg[0]
+      3142656 blocks super 1.2 level 6, 512k chunk, algorithm 2 [5/5] [UUUUU]
+      
+md0 : active raid6 vdf[4] vde[3] vdd[2] vdc[1] vdb[0]
+      3142656 blocks super 1.2 level 6, 512k chunk, algorithm 2 [5/5] [UUUUU]
+      
+unused devices: <none>
+
+#Creating the RAID60 array from the two RAID6 arrays:
+
+[root@centos-raid60 admin]# mdadm --create /dev/md2 -v --level=0 --raid-devices=2 /dev/md0 /dev/md1
+mdadm: chunk size defaults to 512K
+mdadm: Defaulting to version 1.2 metadata
+mdadm: array /dev/md2 started.
+
+#Creating filesystem for the new array with the help of this script calculator for the recommended stride and stripe-width settings - http://busybox.net/~aldot/mkfs_stride.html:
+
+[root@centos-raid60 admin]# mkfs.ext4 -b 4096 -E stride=8,stripe-width=80
+mke2fs 1.41.12 (17-May-2010)
+/dev/md2 alignment is offset by 516096 bytes.
+This may result in very poor performance, (re)-partitioning suggested.
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+Stride=8 blocks, Stripe width=80 blocks
+393216 inodes, 1571072 blocks
+78553 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=1610612736
+48 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks:
+    32768, 98304, 163840, 229376, 294912, 819200, 884736
+
+Writing inode tables: done                            
+Creating journal (32768 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+This filesystem will be automatically checked every 30 mounts or
+180 days, whichever comes first.  Use tune2fs -c or -i to override.
+
+#Saving this array config:
+
+[root@centos-raid60 admin]# mdadm --detail --scan >> /etc/mdadm.conf
+[root@centos-raid60 admin]# cat /etc/mdadm.conf
+ARRAY /dev/md0 metadata=1.2 name=centos-raid60:0 UUID=b1012e14:748a6e87:29616044:ec26446b
+ARRAY /dev/md1 metadata=1.2 name=centos-raid60:1 UUID=9655bd08:ccdd888c:2168978e:2b7d7a6c
+ARRAY /dev/md2 metadata=1.2 name=centos-raid60:2 UUID=7e5a48a1:1099a7bf:406f870a:57343ab0
+
+#And finally adding /dev/md2 in /etc/fstab:
+
+[root@centos-raid60 admin]# echo "/dev/md2 /data ext4 defaults,noatime,nodiratime 0 0" >> /etc/fstab
+[root@centos-raid60 admin]# mount /data
+
+#After surviving a reboot just for test:
+
+[admin@centos-raid60 ~]$ sudo hdparm -tT /dev/md2
+[sudo] password for admin:
+
+/dev/md2:
+ Timing cached reads:   8580 MB in  2.00 seconds = 4292.23 MB/sec
+ Timing buffered disk reads:  622 MB in  3.02 seconds = 206.04 MB/sec
+
+#Thanks for reading this! :)
+END
+
+=========================================================================================
+
+ В домашното не съм дал източник ,защото прочетох много линкове и реално го направих,но мисля това ми помогна
+http://webapp5.rrz.uni-hamburg.de/SuSe-Dokumentation/manual/sles-manuals_en/manual/biuymaa.html#biuzt6g
+
+
+                19. Describe the procedure of resizing ReiserFS
+
+    За тази процедура идва на помощ resize_reiserfs (Reiserfs filesystem resizer).Файловата система ReiserFS може да се увеличава и намалява.
+
+
+ ---------------------------------------------------------------------------------------------------
+ |     FILE SYSTEM    |          UTILITY         | Increase Size (Grow) | Decrease Size    |                
+ ---------------------------------------------------------------------------------------------------
+ |       ReiserFS     |     resize_reiserfs      | Online or offline    |    Offline only  | 
+----------------------------------------------------------------------------------------------------
+
+  Намаляване размера на ReiserFS файлова система.
+ 
+  Стъпка 1: Проверяваме партишън статус.
+
+            root@Svetlyo:~# df -h
+
+            Filesystem     Type      Size  Used Avail Use% Mounted on
+            /dev/sda2      reiserfs   11G  6.6G  3.7G  65% /
+            tmpfs          tmpfs     249M     0  249M   0% /dev/shm
+
+  Стъпка 2: Намаляването на ReiserFS изисква системата да е offline.Следва да стартираме от флопи,флашка или CD/DVD,например със SystemRescueCD.Избираме partition и го unmout-ваме.
+
+            root@sysresccd:~# umount /dev/sda2
+
+  Стъпка 3: Намаляваме размера на файловата система.
+            resize_reiserfs [ -s [+|-]size[K|M|G] ] [ -j dev ] [ -fqv ] device
+            Избираме размер и - за намаляване като размерът може да бъде указан в         кило-, мега-, съответно гигабайта.
+            Новият размер трябва да бъде по-голям или равен на размера на
+            наличните данни,в противен случай ще имаме загуба на данни.
+
+            root@sysresccd:~# resize_reiserfs -s -1024М /dev/sda2
+
+            Изчакваме процесът да завърши и вече имаме намалена файлова система с 1ГБ.
+           
+            Намаляването на файловата система не намалява размера на partition-а.За целта може да използваме fdsik,cfdisk sfdisk.Изтриваме и създаваме нов partition с нов размер,като е много важно той да бъде на един и същ стартов цилиндър.  
+
+  Увеличаване размера на ReiserFS файлова система
+           
+            Тук процедурата е идентична,но просто първоначално увеличаваме размера на partition-а с fdsik,cfdisk sfdisk,като изтриваме и създаваме нов.След това увеличаваме и самата файлова система:  
+
+  Стъпка 1: Логваме се като root user или еквивалентен.
+  Стъпка 2: Проверяваме партишън статус.
+
+            root@Svetlyo:~# df -h
+
+            Filesystem     Type      Size  Used Avail Use% Mounted on
+            /dev/sda2      reiserfs   11G  6.6G  3.7G  65% /
+            tmpfs          tmpfs     249M     0  249M   0% /dev/shm
+
+  Стъпка 3: ReiserFS файловата система може да бъде увеличена mount-ната и unmount-ната.Ако unmount-ваме изполваме командата "umount" ,ако не е необходимо просто пропускаме стъпка 3.
+
+  Стъпка 4: Увеличаваме размера на файловата система.
+            resize_reiserfs [ -s [+|-]size[K|M|G] ] [ -j dev ] [ -fqv ] device
+            Задаваме увеличение като поставим стойност със знак плюс +  .Размерът  може да бъде указан в кило-, мега-, съответно гигабайта.
+
+            root@Svetlyo:~# resize_reiserfs -s +1024M /dev/sda2
+
+  Стъпка 5: Ако файловата система е unmont-ната,сега трябва да бъде mount-ната с командата mount.
+  Стъпка 6: Проверяваме ефекта от увеличаването на файловата система
+
+            root@Svetlyo:~# df -h
+
+            filesystem     Type      Size  Used Avail Use% Mounted on
+            /dev/sda2      reiserfs   12G  6.6G  4.7G  65% /
+            tmpfs          tmpfs     249M     0  249M   0% /dev/shm
+
+=========================================================================================
+
+Ето и моето:
+3. Write down the commands needed to create, mount and unmount an encrypted partition. Why have you selected the technology you have used?
+
+1. Първо добавяме ново устройство към машината. Аз го правя на VirtualBox и си добавям ново SATA устройство към сегашния масив с големина 2G.
+В папка /dev/ новият масив се вижда като sdb. 
+
+2. За създаване на криптирано устройство ползвам пакета  cryptsetup-luks-1.2.0-7.el6.x86_64 в операционната система CentOS 6.4:
+[root@localhost ~]# cryptsetup luksFormat /dev/sd
+sda   sda1  sda2  sdb
+[root@localhost ~]# cryptsetup luksFormat /dev/sdb
+WARNING!
+========
+This will overwrite data on /dev/sdb irrevocably.
+ 
+Are you sure? (Type uppercase yes): YES
+Enter LUKS passphrase:
+Verify passphrase:
+ 
+тук пиша паролата за декриптиране.
+ 
+3. Достъпвам криптирания масив:
+[root@localhost ~]# cryptsetup luksOpen /dev/sdb new
+Enter passphrase for /dev/sdb:
+ 
+Вкарвам паролата за декриптиране и съм в масива.
+-new е име, което аз съм си избрал. С това име масива се показва в /dev/mapper/ папката на ОС.
+ 
+4. Създавам файлова система на новия криптиран масив:
+[root@localhost ~]# mkfs.ext4 /dev/mapper/
+control            new                VolGroup-LogVol00  VolGroup-LogVol01
+[root@localhost ~]# mkfs.ext4 /dev/mapper/new
+Writing inode tables: done
+Creating journal (8192 blocks): done
+Writing superblocks and filesystem accounting information: done
+ 
+This filesystem will be automatically checked every 39 mounts or
+180 days, whichever comes first.  Use tune2fs -c or -i to override.
+ 
+-аз съм избрал файловата система да е ext4, но може и друга.
+ 
+5. Монтирам новия масив в папка /mnt , като предварително съм си създал там папка за новия масив : [root@localhost]#mkdir /mnt/encrypted
+[root@localhost ~]# cd /mnt/
+[root@localhost mnt]# ll
+total 4
+drwxr-xr-x. 2 root root 4096 Jul  4 14:08 encrypted
+[root@localhost mnt]# mount -o rw -t ext4 /dev/mapper/new encrypted/
+ 
+-rw опцията е за read/write върху новия масив.
+ 
+[root@localhost mnt]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup-LogVol01
+                      8.4G  1.9G  6.2G  23% /
+tmpfs                 499M     0  499M   0% /dev/shm
+/dev/sda1             485M   33M  427M   8% /boot
+/dev/mapper/new       2.0G   35M  1.9G   2% /mnt/encrypted
+ 
+6. масива се демонтира с:
+[root@localhost mnt]# umount encrypted/
+[root@localhost mnt]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup-LogVol01
+                      8.4G  1.9G  6.2G  23% /
+tmpfs                 499M     0  499M   0% /dev/shm
+/dev/sda1             485M   33M  427M   8% /boot
+ 
+7. Защо използвах тази система?
+-LUKS бе първия резултат, който изкочи след като google-нах create an encrypted partition on Linux, пакета беше инсталиран с CentOS-a и процедурата е лесна и кратка.
+не помня кой е източника, но от 2-3 места откъедто гледах, общо взето се свеждаше до едно и също.
+
+=========================================================================================
+
+13. Find a tool that can be used to monitor and configure DELL(PERC) RAID controller. Give one example command for monitoring and one for configuration. 
+ 
+Dell OpenManage Server Administrator (OMSA) is a software agent that provides a comprehensive, one-to-one systems management solution in two ways: from an integrated, Web browser-based graphical user interface (GUI) and from a command line interface (CLI) through the operating system. 
+ 
+OMSA is designed so that system administrators can manage server systems both locally and remotely on a network. It also interfaces with OpenManage Essentials (OME) console, which allows for monitoring of the systems in your data center from a single interface.
+  
+Example command for monitoring:
+ 
+02:~# omreport storage pdisk controller=0
+List of Physical Disks on Controller PERC 6/i Integrated (Embedded)
+ 
+Controller PERC 6/i Integrated (Embedded)
+ID                        : 0:0:0
+Status                    : Ok
+Name                      : Physical Disk 0:0:0
+State                     : Online
+Failure Predicted         : No
+Progress                  : Not Applicable
+Type                      : SATA
+Capacity                  : 148.50 GB (159450660864 bytes)
+Used RAID Disk Space      : 148.50 GB (159450660864 bytes)
+Available RAID Disk Space : 0.00 GB (0 bytes)
+Hot Spare                 : No
+Vendor ID                 : DELL
+Product ID                : SAMSUNG HE160HJ
+Revision                  : JF800-24
+Serial No.                : S16NJDWQ327896327896
+Negotiated Speed          : Not Available
+Capable Speed             : Not Available
+Manufacture Day           : Not Available
+Manufacture Week          : Not Available
+Manufacture Year          : Not Available
+SAS Address               : 1221000000000000
+ 
+ID                        : 0:0:1
+Status                    : Ok
+Name                      : Physical Disk 0:0:1
+State                     : Online
+Failure Predicted         : No
+Progress                  : Not Applicable
+Type                      : SATA
+Capacity                  : 148.50 GB (159450660864 bytes)
+Used RAID Disk Space      : 148.50 GB (159450660864 bytes)
+Available RAID Disk Space : 0.00 GB (0 bytes)
+Hot Spare                 : No
+Vendor ID                 : DELL
+Product ID                : SAMSUNG HE160HJ
+Revision                  : JF800-24
+Serial No.                : S16NJDWQ327898327898
+Negotiated Speed          : Not Available
+Capable Speed             : Not Available
+Manufacture Day           : Not Available
+Manufacture Week          : Not Available
+Manufacture Year          : Not Available
+SAS Address               : 1221000001000000
+ 
+<<< 
+ 
+Example command for configuration 
+omconfig storage vdisk action=reconfigure controller=1 vdisk=4 raid=r5size=800m pdisk=0:0,0:1,0:2,0:3
+
+<<<
+Link: http://goo.gl/8iT55
+
+=========================================================================================
+
+4. Write down the commands needed to create, mount and unmount an encrypted directory. Why have you selected the technology you have used?
+ 
+For the purpose of encypting partition and directories we use the crytographic filesystem for Linux called eCryptfs. eCryptfs is a cryptographic stacked Linux filesystem. 
+eCryptfs stores cryptographic metadata in the header of each file written, so that encrypted files can be copied between hosts; the file will be decrypted with the proper key in the Linux kernel keyring. 
+There is no need to keep track of any additional information aside from what is already in the encrypted file itself. 
+eCryptfs is widely used, as the basis for Ubuntu's Encrypted Home Directory, natively within Google's ChromeOS, and transparently embedded in several network attached storage (NAS) devices.
+ 
+First of all we have to install eCryptfs with the following command:
+ 
+apt-get install ecrytfs-utils
+ 
+I will encrypt my home directory /home/polya/ which is located . There are some files in that directory, so we have to make a backup of them in order to restore them to the encrypted /home/polya/ directory later on.
+ 
+cp -pfr /home/polya/ /tmp/
+ 
+In order to encrypt the directory /home/polya/ I mount it with the file system type ecryptfs
+ 
+mount -t ecryptfs /home/polya /home/polya
+ 
+After that follows a few questions:
+ 
+root@polina:~# mount -t ecryptfs /home/polya /home/polya
+Passphrase: <-- some_passphrase
+Select cipher:
+ 1) aes: blocksize = 16; min keysize = 16; max keysize = 32 (not loaded)
+ 2) blowfish: blocksize = 16; min keysize = 16; max keysize = 56 (not loaded)
+ 3) des3_ede: blocksize = 8; min keysize = 24; max keysize = 24 (not loaded)
+ 4) twofish: blocksize = 16; min keysize = 16; max keysize = 32 (not loaded)
+ 5) cast6: blocksize = 16; min keysize = 16; max keysize = 32 (not loaded)
+ 6) cast5: blocksize = 8; min keysize = 5; max keysize = 16 (not loaded)
+Selection [aes]: <-- ENTER
+Select key bytes:
+ 1) 16
+ 2) 32
+ 3) 24
+Selection [16]: <-- ENTER
+Enable plaintext passthrough (y/n) [n]: <-- ENTER
+Enable filename encryption (y/n) [n]: <-- ENTER
+Attempting to mount with the following options:
+  ecryptfs_unlink_sigs
+  ecryptfs_key_bytes=16
+  ecryptfs_cipher=aes
+  ecryptfs_sig=bd28c38da9fc938b
+WARNING: Based on the contents of [/root/.ecryptfs/sig-cache.txt],
+it looks like you have never mounted with this key
+before. This could mean that you have typed your
+passphrase wrong.
+ 
+Would you like to proceed with the mount (yes/no)? : <-- yes
+Would you like to append sig [bd28c38da9fc938b] to
+[/root/.ecryptfs/sig-cache.txt]
+in order to avoid this warning in the future (yes/no)? : <-- yes
+Successfully appended new sig to user sig cache file
+Mounted eCryptfs
+root@polina:~#
+ 
+We see that the the directory is now encrypted :
+ 
+root@polina:~# mount
+/dev/sda1 on / type ext3 (rw,errors=remount-ro)
+tmpfs on /lib/init/rw type tmpfs (rw,nosuid,mode=0755)
+proc on /proc type proc (rw,noexec,nosuid,nodev)
+sysfs on /sys type sysfs (rw,noexec,nosuid,nodev)
+udev on /dev type tmpfs (rw,mode=0755)
+tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
+devpts on /dev/pts type devpts (rw,noexec,nosuid,gid=5,mode=620)
+/home/polya on /home/polya type ecryptfs (rw,ecryptfs_sig=bd28c38da9fc938b,ecryptfs_cipher=aes,ecryptfs_key_bytes=16,ecryptfs_unlink_sigs)
+root@polina:~#
+
+After that we restore the backup to the encrypted directory /home/polya/ and delete the backup afterwards:
+ 
+cp -pfr /tmp/polya/ /home
+rm -fr /tmp/polya/
+ 
+For testing purposes we copy another file, for example /etc/proba , to /home/polya to check if it really gets encrypted:
+ 
+cp /etc/proba /home/polya
+ 
+While /home/polya/ is mounted with the ecryptfs file system type, it should be possible to read the contents of /home/polya/proba
+ 
+Now unmount /home/polya/
+ 
+umount /home/polya
+ 
+When you try to read /home/polya/proba you get an encrypted text:
+ 
+cat /home/polya/proba
+ 
+??EEAu5)i}O`§wE?.AcµOyiIezz°Nd¦R,`Ei,0n*u?%^-']YNj?#6??Y-]«e?uo<f$oRo'<O·"io®9UQ?yAscOA@%E?®y?VOCx'A?O?(t±oO?XIxihI3pe±t
+S[Taj?0KhoOA  IUYcaEu~ZA#?;ma?Ii]u??
+d#??Y??u?e???¦%ImK+?y)o?GA?A©
+                             <na_Yy1ZA+?u¶RE}? !??_(-)CzAO?OU?¦?«?AH=Ui?        Hu.`{??aEw
+qu
+  C(?©V?oAN?E?T%E9»?v?o?5S
+©9¶e-
+
+http://www.howtoforge.com/how-to-encrypt-directories-partitions-with-ecryptfs-on-debian-squeeze
+
+=========================================================================================
+
+5. Write down the commands needed to create, mount and unmount
+an encrypted file system within a file.
+Why have you selected the technology you have used?
+--------------------------------
+ 
+I used cryptmount.
+Because its fast and easy to use.
+--------------------------------
+ 
+For creating:
+$ sudo cryptmount-setup
+> and then answer the questions.
+ 
+For mounting:
+$ cryptmount -m name
+ 
+For unmounting:
+$ cryptmount -u name
+ 
+After mounting you can open the encrypted
+file system within a file as a directory /name.
+--------------------------------
+ 
+To do it manualy there are many ways.
+Example:
+-
+$ dd if=/dev/zero of=/home/user/name.fs bs=1M count=100  
+> making file full of zeroes. That one will be 100mb.
+-
+> Then open "/etc/cryptmount/cmtab" and add entry:
+ name {
+     dev=/media/data/name 
+     dir=/home/user/name
+     fstype=ext4 
+     mountoptions=defaults 
+     cipher=twofish
+     keyfile=/etc/cryptmount/name.key
+     keyformat=builtin
+ }
+> Here /media/data/name is the support file created by dd 
+> and /home/user/name is the desired mountpoint.
+--
+$ sudo cryptmount --generate-key 32 name
+> Generating key.
+--
+$ sudo cryptmount --prepare name
+> This prepares the file somehow.
+--
+$ sudo mkfs.ext4 /dev/mapper/name
+> Make file system.
+--
+$ sudo cryptmount --release name
+> Execute
+--
+$ mkdir /home/user/name
+> Create the directory.
+--
+And its ready for mounting.
+
+http://linux.die.net/man/8/cryptmount
+
+=========================================================================================
+*****
+4. Write down the commands needed to create, mount and unmount an encrypted directory. 
+Why have you selected the technology you have used?
+*****
+I. EncFS
+	1. Инсталираме необходимия сoфтуер
+angie@angie-desktop:~$ sudo -i
+[sudo] password for angie:
+root@angie-desktop:~# apt-get install encfs fuse-utils
+root@angie-desktop:~# modprobe fuse
+
+	2. Добавяме себе си (и евентуално други потребители) към fuse групата, създадена от инсталатора
+root@angie-desktop:~# adduser angie fuse
+The user `angie' is already a member of `fuse'.
+
+	3. Създаваме криптираната директория, в която ще се съхранява конфиденциалната информация. Тя може да се намира в домашната директория или на друго място, вкл. на външен сървър.
+root@angie-desktop:~# exit
+logout
+angie@angie-desktop:~$ mkdir ~/encrypted
+
+	4. Създаваме входна точка в домашната си директория
+angie@angie-desktop:~$ mkdir ~/tmp_enc
+
+	5. Създаваме криптирана файлова система и я монтираме. При първия опит за използване encfs създава криптирана файлова система, като командата, подобно на mount, е:
+encfs <folder to mount> <mount point>
+Ако се използва опцията -i time (напр. -i 5). директорията със съдържанието ще се отмонтира автоматично след престой time (напр. 5 мин).
+Използва се пълния път до целевата директория. В нашия случай това е:
+angie@angie-desktop:~$ encfs /angie/home/encrypted /home/angie/tmp_enc
+Creating new encrypted volume.
+Please choose from one of the following options:
+ enter "x" for expert configuration mode,
+ enter "p" for pre-configured paranoia mode,
+ anything else, or an empty line will select standardhttp://www.arg0.net/encfs mode.
+?> x
+
+Manual configuration mode selected.
+The following cipher algorithms are available:
+1. AES : 16 byte block cipher
+ -- Supports key lengths of 128 to 256 bits
+ -- Supports block sizes of 64 to 4096 bytes
+2. Blowfish : 8 byte block cipher
+ -- Supports key lengths of 128 to 256 bits
+ -- Supports block sizes of 64 to 4096 bytes
+
+Enter the number corresponding to your choice: 1
+
+Selected algorithm "AES"
+
+Please select a key size in bits.  The cipher you have chosen
+supports sizes from 128 to 256 bits in increments of 64 bits.
+For example:
+128, 192, 256
+Selected key size: 128
+
+Using key size of 128 bits
+
+Select a block size in bytes.  The cipher you have chosen
+supports sizes from 64 to 4096 bytes in increments of 16.
+Or just hit enter for the default (1024 bytes)
+
+filesystem block size: 1024
+
+Using filesystem block size of 1024 bytes
+
+The following filename encoding algorithms are available:
+1. Block : Block encoding, hides file name size somewhat
+2. Null : No encryption of filenames
+3. Stream : Stream encoding, keeps filenames as short as possible
+
+Enter the number corresponding to your choice: 1
+
+Selected algorithm "Block""
+
+Enable filename initialization vector chaining?
+This makes filename encoding dependent on the complete path,
+rather then encoding each path element individually.
+The default here is Yes.
+Any response that does not begin with 'n' will mean Yes:
+
+Enable per-file initialization vectors?
+This adds about 8 bytes per file to the storage requirements.
+It should not affect performance except possibly with applications
+which rely on block-aligned file io for performance.
+The default here is Yes.
+Any response that does not begin with 'n' will mean Yes: yes
+
+Enable filename to IV header chaining?
+This makes file data encoding dependent on the complete file path.
+If a file is renamed, it will not decode sucessfully unless it
+was renamed by encfs with the proper key.
+If this option is enabled, then hard links will not be supported
+in the filesystem.
+The default here is No.
+Any response that does not begin with 'y' will mean No: n
+
+Enable block authentication code headers
+on every block in a file?  This adds about 12 bytes per block
+to the storage requirements for a file, and significantly affects
+performance but it also means [almost] any modifications or errors
+within a block will be caught and will cause a read error.
+The default here is No.
+Any response that does not begin with 'y' will mean No:
+
+Enable file-hole pass-through?
+This avoids writing encrypted blocks when file holes are created.
+The default here is Yes.
+Any response that does not begin with 'n' will mean Yes: yes
+
+Configuration finished.  The filesystem to be created has
+the following properties:
+Filesystem cipher: "ssl/aes", version 2:2:1
+Filename encoding: "nameio/block", version 3:0:1
+Key Size: 128 bits
+Block Size: 1024 bytes
+Each file contains 8 byte header with unique IV data.
+Filenames encoded using IV chaining mode.
+File holes passed through to ciphertext.
+
+Now you will need to enter a password for your filesystem.
+You will need to remember this password, as there is absolutely
+no recovery mechanism.  However, the password can be changed
+later using encfsctl.
+
+New Encfs Password:
+Verify Encfs Password:
+
+Тук избираме дали ръчно да конфигурираме криптирането (х) или автоматично (р). Избираме експертния подход, за да разгледаме кои параметри могат да се настройват - начина на криптиране на информацията, размер на блоковете и т. н. Накрая завършваме с двукратно въвеждане на парола, като взимаме под внимание, че тази парола не може да бъде възстановена при забравяне.
+Ако изберем опцията р (paranoia) всички настройки се извършват автоматично и ние трябва да въведем само паролата.
+
+Резултатът е:
+angie@angie-desktop:~/tmp_enc$ ls -al
+total 20
+drwxr-xr-x   2 angie angie  4096 2013-07-01 17:28 .
+drwxr-xr-x 122 angie angie 12288 2013-07-01 17:28 ..
+-rw-r--r--   1 angie angie    49 2013-07-01 17:28 proba.txt
+angie@angie-desktop:~/tmp_enc$ cat proba.txt
+Това е проба за криптиране
+
+angie@angie-desktop:~/encrypted$ ls -al
+total 24
+drwxr-xr-x   2 angie angie  4096 2013-07-01 17:28 .
+drwxr-xr-x 122 angie angie 12288 2013-07-01 17:28 ..
+-rw-r--r--   1 angie angie    65 2013-07-01 17:28 c-,Mm9JScTePJVjOn538VxkQ
+-rw-r--r--   1 angie angie  1086 2013-07-01 17:14 .encfs6.xml
+angie@angie-desktop:~/encrypted$ cat c-,Mm9JScTePJVjOn538VxkQ
+�p�!CmG�|��*���RZ2�l���;�IexQ�b!ƕw�l���ni'����ِ���K�(Y
+
+	7. Отмонтирането е с командата:
+angie@angie-desktop:~/encrypted$ fusermount -u /home/angie/tmp_enc
+Възможно е да се използва и командата:
+angie@angie-desktop:$ umount /home/angie/tmp_enc
+
+След това криптираните файлове си остават (криптирани!) в ~/encrypted, докато временната директория ~/tmp_enc е празна. При повторно монтиране трябва да въведем установената парола, след което виждаме криптираната директория като допълнителен диск (напр. в Nautilus), с който можем да работим като с всяко друго устройство.
+
+Това може да се извършва и в графична среда с инсталирането на gnome-encfs-manager или Cryptmount.
+
+II. eCryptfs
+	1. Инсталираме необходимият софтуер
+angie@angie-desktop:~/tmp_enc$ sudo apt-get install ecryptfs-utils
+
+	2. Създаваме си парола и я съхраняваме
+angie@angie-desktop:~$ ecryptfs-manager
+
+eCryptfs key management menu
+-------------------------------
+    1. Add passphrase key to keyring
+    2. Add public key to keyring
+    3. Generate new public/private keypair
+    4. Exit
+
+Make selection: 1
+
+    Mount-wide passphrase:
+    Confirm passphrase:
+    Using the default salt value
+
+Added key to keyring with signature [f20f53f528e29369].
+
+	3. Създаваме си криптирана директория ~/Private:
+ecryptfs-setup-private
+На този етап получихме съобщение за грешка, че нашата парола не е правилна. Откриваме в Мрежата, че това е грешка (бъг), който се среща при различни дистрибуции.
+Затова продължаваме според указанията на IBM:
+
+	4. Създаваме нова директория:
+angie@angie-desktop:~$ mkdir /home/angie/confidential
+
+	5. Монтираме и конфигурираме новата директория:
+angie@angie-desktop:~$ sudo mount -t ecryptfs /home/angie/confidential /home/angie/confidential
+Passphrase:
+Select cipher:
+ 1) aes: blocksize = 16; min keysize = 16; max keysize = 32 (not loaded)
+ 2) blowfish: blocksize = 16; min keysize = 16; max keysize = 56 (not loaded)
+ 3) des3_ede: blocksize = 8; min keysize = 24; max keysize = 24 (not loaded)
+ 4) twofish: blocksize = 16; min keysize = 16; max keysize = 32 (not loaded)
+ 5) cast6: blocksize = 16; min keysize = 16; max keysize = 32 (not loaded)
+ 6) cast5: blocksize = 8; min keysize = 5; max keysize = 16 (not loaded)
+Selection [aes]: 1
+Select key bytes:
+ 1) 16
+ 2) 32
+ 3) 24
+Selection [16]: 16
+Enable plaintext passthrough (y/n) [n]:
+Enable filename encryption (y/n) [n]: y
+Filename Encryption Key (FNEK) Signature [f20f53f528e29369]:
+Attempting to mount with the following options:
+  ecryptfs_unlink_sigs
+  ecryptfs_fnek_sig=f20f53f528e29369
+  ecryptfs_key_bytes=16
+  ecryptfs_cipher=aes
+  ecryptfs_sig=f20f53f528e29369
+WARNING: Based on the contents of [/root/.ecryptfs/sig-cache.txt],
+it looks like you have never mounted with this key
+before. This could mean that you have typed your
+passphrase wrong.
+
+Would you like to proceed with the mount (yes/no)? : yes
+Would you like to append sig [f20f53f528e29369] to
+[/root/.ecryptfs/sig-cache.txt]
+in order to avoid this warning in the future (yes/no)? : yes
+Successfully appended new sig to user sig cache file
+Mounted eCryptfs
+
+	6. Проверяваме какви са опциите, с които е монтирана тази директория:
+angie@angie-desktop:~$ grep '/home/angie/confidential' /etc/mtab
+/home/angie/confidential /home/angie/confidential ecryptfs rw,ecryptfs_sig=f20f53f528e29369,ecryptfs_cipher=aes,ecryptfs_key_bytes=16,ecryptfs_fnek_sig=f20f53f528e29369,ecryptfs_unlink_sigs 0 0
+
+	7. Ако желаем тази криптирана директория да бъде монтирана със стартиране на компютъра, отваряме като root /etc/fstab и добавяме получение по-горе ред, като добавяме опциите user и noauto:
+/home/angie/confidential /home/angie/confidential ecryptfs noauto,user,rw,ecryptfs_sig=f20f53f528e29369,ecryptfs_cipher=aes,ecryptfs_key_bytes=16,ecryptfs_fnek_sig=f20f53f528e29369,ecryptfs_unlink_sigs 0 0
+
+	8. Проверяваме какво има в криптираната директория
+angie@angie-desktop:~$ ls -al /home/angie/confidential/
+total 28
+drwxr-xr-x   2 angie angie  4096 2013-07-01 19:50 .
+drwxr-xr-x 124 angie angie 12288 2013-07-01 19:50 ..
+-rw-r--r--   1 angie angie    23 2013-07-01 19:50 proba.txt
+angie@angie-desktop:~$ cat /home/angie/confidential/proba.txt
+това е проба
+
+	9. След отмонтиране на директорията
+angie@angie-desktop:~$ sudo umount /home/angie/confidential/
+[sudo] password for angie:
+angie@angie-desktop:~$ ls -al /home/angie/confidential/
+total 28
+drwxr-xr-x   2 angie angie  4096 2013-07-01 19:50 .
+drwxr-xr-x 124 angie angie 12288 2013-07-01 19:51 ..
+-rw-r--r--   1 angie angie 12288 2013-07-01 19:50 ECRYPTFS_FNEK_ENCRYPTED.FWbm1pDp8C8HOERkIA.B-cqqWmu49XPvJ1RoXXUAWVaJFagarRCfL53Q2E--
+angie@angie-desktop:~$ cat /home/angie/confidential/ECRYPTFS_FNEK_ENCRYPTED.FWbm1pDp8C8HOERkIA.B-cqqWmu49XPvJ1RoXXUAWVaJFagarRCfL53Q2E--
+C�s#�    �
+�"3DUfw`����<�f��k���=L�_CONSOLES�(��i�]Q�*<.�����~�
+......
+              ����v���Kj�Pp�S�����ΰ^47ʐ�g'��]�n�h�60�r=�4(52
+                                                               ��`Y0Y��j
+
+III. Изводи
+Разглеждаме само продукти с отворен код, които не се инсталират задължително през графичен интерфейс, затова TrueCrypt не е инсталиран и тестван, въпреки че, по данни от Мрежата (http://www.linuxuser.co.uk/wp-content/uploads/2011/08/performance-graph-1024x538.png), показва много добри резултати.
+Също така не е тестван LUKS, който криптира цял дял, а не директория (/Home на отделен дял е частен случай), въпреки че показва най-добра производителност.
+1. Инсталирането и настройката на EncFS не създадоха никакви проблеми. 
+Неудобство е създаването на две отделни директории - входна точка и такава ка криптираното съдържание. 
+Данните показват, че съществуват и проблеми, когато криптираните файлове са в Мрежата, напр. Dropbox.
+2. eCryptfs първоначално създаде проблем с инсталирането, но после нещата тръгнаха нормално. 
+Предимства: по-голяма производителност, по-надеждно криптиране, възможност за използване на една и съща директория за входна точка и данни, безпроблемна работа с облачни услуги.
+И двата продукта ползват стека на системата, което при определени условия може да доведе до препълването му.
+Като по-нов и по-продуктивен софтуер за нормално ползване можем да изберем eCryptfs.
+
+IV. Литература:
+HOWTO: Encrypted directory with EncFS (http://ubuntuforums.org/showthread.php?t=148600)
+How to Easily Create An Encrypted Directory in Ubuntu (http://www.maketecheasier.com/create-encrypted-directory-in-ubuntu/2013/05/30)
+EncFS Encrypted Filesystem (http://www.arg0.net/encfs)
+Disk Encryption (http://www.hackingmachines.com/wiki/Disk_Encryption)
+eCryptfs (http://ecryptfs.org/)
+eCryptfs (https://help.ubuntu.com/10.04/serverguide/ecryptfs.html)
+Create a single user eCryptfs mount (http://pic.dhe.ibm.com/infocenter/lnxinfo/v3r0m0/index.jsp?topic=%2Fliaai.securerhel%2Fliaaisecuresusermount.htm)
+Create or mount an encrypted directory using encfs (http://www.bashoneliners.com/main/oneliner/109/)
+How to Create an Automatic Encrypted Folder in Ubuntu (http://www.fourleaftechnology.com/index.php/HowTo/how-to-create-an-automatic-encrypted-folder-in-ubuntu.html)
+Create Encrypted Volumes With Cryptmount and Linux (http://www.enterprisenetworkingplanet.com/netsecur/article.php/3742191/Create-Encrypted-Volumes-With-Cryptmount-and-Linux.htm)
+How to put Encrypted Contents on Cloud Storages (http://haridas.in/how-to-put-encrypted-contents-on-cloud-storages.html)
+The best file encryption software in open source – group test (http://www.linuxuser.co.uk/reviews/the-best-file-encryption-software-in-open-source)
+HowTo: Linux Hard Disk Encryption With LUKS [ cryptsetup Command ] (http://www.cyberciti.biz/hardware/howto-linux-hard-disk-encryption-with-luks-cryptsetup-command/)
+
+=========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

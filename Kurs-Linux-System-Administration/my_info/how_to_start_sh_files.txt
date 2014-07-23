@@ -1,0 +1,9 @@
+﻿HowTo: Run the .sh File Shell Script In Linux / UNIX
+
+sh file.sh
+
+OR
+
+bash file.sh
+
+sudo bash filename.sh

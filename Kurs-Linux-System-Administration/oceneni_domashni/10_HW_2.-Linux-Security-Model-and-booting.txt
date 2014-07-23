@@ -1,0 +1,19 @@
+﻿4. Write down at least 3 Linux file systems optimized especially for Flash drives(SD cards, USB Drives, SSD disks).
+JFFS/JFFS2/YAFFS:
+JFFS was the first flash-specific file system for Linux, but it was quickly superseded by JFFS2, originally developed for NOR flash. Then YAFFS was released in 2002, dealing specifically with NAND flash, and JFFS2 was updated to support NAND flash too.
+
+UBIFS:
+UBIFS has been merged since Linux 2.6.22 [7] in 2008. UBIFS has been actively developed from its initial merge.[8] UBIFS has documentation hosted at infradead.org along with JFFS2 and MTD drivers. Some initial comparison show UBIFS with compression faster than F2FS.[9]
+
+LogFS:
+LogFS, another Linux flash-specific file system, is currently being developed to address the scalability issues of JFFS2.
+
+F2FS:
+F2FS was added to the Linux kernel 3.8.[10]
+
+ЗАБЕЛЕЖКА:
+Добро домашно. Представени са повече от 3 файлови системи, оптимизирани за работа с (SD cards, USB Drives, SSD disks). 
+Не са представени източници, но предполагам е използвана Уикипедия :)
+Успех
+
+

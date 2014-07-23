@@ -1,0 +1,61 @@
+4. Describe the SELinux security model.
+
+	History of SELinux
+SELinux was originally released under the GPL in late 2000 by the National Security Agency's Office of Information Assurance. Since then it has been developed by the open source community in collaboration with the NSA.
+SELinux currently ships as a part of Fedora Core, and it supported by Red Hat as a part of Red Hat Enterprise Linux. Packages also exist for Debian, SuSe, and Gentoo, though these are unsupported by anyone at the time of this writing.
+
+	The SELinux Security Model
+
+SELinux is based on the concept of Mandatory Access Control. Under MAC, administrators control all interactions of software on the system. The concept of least privilege is used, by default applications and users have no rights, as all rights must be granted by an administrator as part of the system's security policy.
+This contrasts with the Discretionary Access Control concept that is the standard Linux security model. Under DAC, files are owned by a user and that user has full control over them. An attacker who penetrates an account can do anything with the files owned by that user. For example, an attacker penetration a web server has full control over all files owned by the webserver account. Worse, if an application runs under the context of the root user, an attacker penetrating it now has full control over the entire system.
+MAC in effect provides each application with a virtual sandbox that only allows the application to perform the tasks it is designed for and explicitly allowed in the security policy to perform. For example, the webserver process may only be able to read web published files and serve them on a specified network port. An attacker penetrating it will not be able to perform any activities not expressly permitted to the process by the security policy, even if the process is running as the root user.
+Standard Unix permissions are still present on the system, and will be consulted before the SELinux policy when access attempts are made. If the standard permissions would deny access, access is simply denied and SELinux is not involved. If the standard file permissions would allow access, the SELinux policy is consulted and access is either allowed or denied based on the security contexts of the source process and the targeted object.
+
+	Security Contexts
+
+SELinux makes access decisions by checking the security context of the subject (a process associated with a user) against the action attempted (e.g. a file read) and the security context of the object (such as a file or network port).
+A security context consists of three components: a user identity, a role, and a type (also known as a domain).
+ - User Identities
+A user identity indicates the SELinux user account associated with a subject or object. These should not be confused with the standard Linux user accounts in /etc/passwd, the Linux accounts are mapped to a corresponding SELinux account but this does not need to be a one-to-one relationship.
+The standard strict policy does not specifically restrict access based on user accounts, but thie functionality exists and could be added as custom policy for specialized installations that require it. User accounts are however used to determine what roles a specific user is permitted to assume.
+ - Roles
+A role defines a set of permissions granted to a user. Users can change roles to any role permitted to their user identity by using the newrole command. Roles are conventionally named with an "_r" suffix.
+The strict policy assigns all users to the user_r role. Administrators are given the staff_r role, and are allowed to transition from that role to the sysadm_r role. Under SeLinux, the root account alone gives no special privileges, instead the sysadm_r role is used to perform administration duties. The SELinux implementation in Fedora Core modifies the su command to automatically transition to the sysadm_r role when assuming the root identity without requiring a specific newrole command to be issued.
+Most files on the system do not require a role, but every object must have all three parts of a security context. These files are assigned the role of object_r as a default.
+ - Domains and Types
+Domains and types are synonyms, typically the term "domain" is used when referring to processes and the term "type" is used referring to objects. Types are denoted by a "_t" suffix to distinguish them from user identites and roles.
+Types are the primary method used by SELinux to make authorization decisions. The strict policy defines relatively few users and roles, but contains hundreds of types.
+
+	Security Policies
+
+The heart of SELinux is the security policy. The policy assigns files to a security context, declares what processes are given what rights to these contexts, and handles transitions between security contexts. For example, when the init_t context launches Apache, the policy forces a transition to the httpd_t security domain.
+Fedora Core ships with two distinct security policies, known as targeted and strict.
+The targeted policy confines only certain daemons known to be security issues, such as httpd and named, with the rest of the system running in an unconfined security context. This is the only policy supported by Red Hat for use on Red Hat Enterprise Linux.
+The strict policy is intended to fully implement SELinux controls on the entire system. Currently use of this policy is unsupported and considered developmental.
+This document focuses on the strict policy, unless otherwise noted.
+- Access Decisions
+Access decisions are made when a process running in a specified domain attempts to perform an action on a subject of a specified type. Policy is checked to determine if the desired operation is permitted.
+- Transition Decisions
+Transition decisions determine what domain or type newly created processes or files are assigned to.
+Executing a program in a child process may result in the new process running under a different domain than the parent process, if the program is defined as a domain entry point in the policy.
+Newly created files are by default assigned the same type as their parent directory, but policy can override this behavior and specify a type to be assigned to specified files upon their creation.
+
+	Requirements
+
+Due to the way SELinux must be embedded and directly affect the internal workings of any system it is installed on, it has many software requirements that must function together as a unified whole.
+- Kernel
+SELinux requires a kernel component known as LSM, Linux Security Modules. This component is available as a patch to the 2.4 series of the Linux kernel, but is included in the main kernel tree of the 2.6 series.
+- Shared Library
+The SELinux API is contained in a shared library which must be present on the system.
+- Filesystems and Extended Attributes
+SELinux uses extended attributes to store security labels on each file. These extended attributes require the use of the ext2 or ext3 filesystems. The XFS filesystem is also known to work, but notably reiserfs is not compatible with these extended attributes.
+- User Utilities
+Many common utilities need to be updated to either provide security context information or to take the filesystem extended attributes into account.
+- SELinux Policy
+A functional compiled policy is required, since the default behavior of SELinux is to deny access unless an action is specifically allowed by the security policy. 
+
+
+ЗАБЕЛЕЖКА:
+Добро домашно според мен. Доста изчерпателно.
+Успех.
+

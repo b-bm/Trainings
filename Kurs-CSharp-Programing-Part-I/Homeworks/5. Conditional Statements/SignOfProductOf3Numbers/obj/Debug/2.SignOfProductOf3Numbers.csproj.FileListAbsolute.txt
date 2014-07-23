@@ -1,0 +1,6 @@
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\SignOfProductOf3Numbers\bin\Debug\SignOfProductOf3Numbers.exe.config
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\SignOfProductOf3Numbers\obj\Debug\2.SignOfProductOf3Numbers.csprojResolveAssemblyReference.cache
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\SignOfProductOf3Numbers\bin\Debug\SignOfProductOf3Numbers.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\SignOfProductOf3Numbers\bin\Debug\SignOfProductOf3Numbers.pdb
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\SignOfProductOf3Numbers\obj\Debug\SignOfProductOf3Numbers.exe
+C:\Users\ghost\Documents\Visual Studio 2012\Projects\5. Conditional Statements\SignOfProductOf3Numbers\obj\Debug\SignOfProductOf3Numbers.pdb

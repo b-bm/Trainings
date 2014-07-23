@@ -1,0 +1,5 @@
+﻿Команда показваща пълният път до търсена директория ако знаем само нейното име !
+ 
+[BM_boyan@grizzly /]$ find / -type d -name "lectures" 2> /dev/null
+/var/www/lectures
+[BM_boyan@grizzly /]$

@@ -1,0 +1,42 @@
+﻿WSA - HW – 7 :
+
+1. Describe the idea of the Group Policy feature. Try to find any non-Microsoft softwares that provide Group Policy Administrative Templates.
+
+	*** Describe the idea of the Group Policy feature *** :
+Group Policy is simply the easiest way to reach out and configure computer and user settings on networks based on Active Directory Domain Services (AD DS). 
+If your business is not using Group Policy, you are missing a huge opportunity to reduce costs, control configurations, keep users productive and happy, and harden security. 
+Think of Group Policy as “touch once, configure many.”
+The requirements for using Group Policy and following the instructions that this white paper provides are straightforward:
+
+	- The network must be based on AD DS (that is, at least one server must have the AD DS role installed). 
+	  To learn more about AD DS, see Active Directory Domain Services Overview on TechNet.
+
+	- Computers that you want to manage must be joined to the domain, and users that you want to manage must use domain credentials to log on to their computers.
+
+	- You must have permission to edit Group Policy in the domain.
+
+Although this white paper focuses on using Group Policy in AD DS, you can also configure Group Policy settings locally on each computer. 
+This capability is great for one-off scenarios or workgroup computers, but using local Group Policy is not recommended for business networks based on AD DS. 
+The reason is simple: Domain-based Group Policy centralizes management, so you can touch many computers from one place. 
+Local Group Policy requires that you touch each computer—not an ideal scenario in a large environment. 
+For more information about configuring local Group Policy, see Local Group Policy Editor (http://technet.microsoft.com/library/cc725970.aspx?ITPID=article) on TechNet. 
+
+info:
+http://technet.microsoft.com/en-us/library/bb742376.aspx
+http://technet.microsoft.com/en-us/library/hh147307%28v=ws.10%29.aspx
+http://searchwindowsserver.techtarget.com/definition/Group-Policy-Object
+http://en.wikipedia.org/wiki/Group_Policy
+http://en.wikipedia.org/wiki/Administrative_Templates
+
+
+	*** Try to find any non-Microsoft softwares that provide Group Policy Administrative Templates *** :
+http://www.quest.com/gpoadmin
+http://www.condreycorp.com/groupsymmetry  - http://www.youtube.com/watch?v=tIUCQbmL12E
+http://www.novell.com/products/zenworks/
+http://www.condreycorp.com/fsf
+http://www.windowsecurity.com/software/Group-Policy-Management/
+
+http://documents.software.dell.com/book/2377
+http://documents.software.dell.com/DOC154810
+
+
